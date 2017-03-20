@@ -5,3 +5,4 @@ Design&Development by "Group B"
 
 Katharina Grein
 Walter Jensch
+Peter Pipp
