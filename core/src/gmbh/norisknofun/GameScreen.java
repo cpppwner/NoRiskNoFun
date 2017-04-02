@@ -1,5 +1,6 @@
 package gmbh.norisknofun;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,7 +17,7 @@ import java.util.Iterator;
  * Created by pippp on 01.04.2017.
  */
 
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, InputProcessor {
 
     
     private OrthographicCamera camera;
@@ -31,19 +32,24 @@ public class GameScreen implements Screen {
 
     public GameScreen(final NoRiskNoFun game){
       this.game=game;
-        img = new Texture(Gdx.files.internal("waterdrop.png"));
+        try {
+            img = new Texture(Gdx.files.internal("waterdrop.png"));
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-        
-        touchpos= new Vector3();
-        raindrops = new Array<Rectangle>();
-        bucket = new Rectangle();
-        bucket.x = 800 / 2 - 64 / 2;
-        bucket.y = 20;
-        bucket.width = 64;
-        bucket.height = 64;
-        spawnRaindrop();
+            camera = new OrthographicCamera();
+            camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+            touchpos = new Vector3();
+            raindrops = new Array<Rectangle>();
+            bucket = new Rectangle();
+            bucket.x = 800 / 2 - 64 / 2;
+            bucket.y = 20;
+            bucket.width = 64;
+            bucket.height = 64;
+            spawnRaindrop();
+            Gdx.input.setInputProcessor(this);
+        }catch (Exception e){
+            Gdx.app.error("Error",e.getMessage(),e);
+        }
     }
     @Override
     public void show() {
@@ -63,11 +69,7 @@ public class GameScreen implements Screen {
         }
         game.batch.end();
 
-        if(Gdx.input.isTouched()){
-            touchpos.set(Gdx.input.getX(),Gdx.input.getY(),0);
-            camera.unproject(touchpos);
-            bucket.x = touchpos.x -64/2;
-        }
+
 
         if(TimeUtils.nanoTime() - lastDropTime > 1000000000) spawnRaindrop();
 
@@ -103,16 +105,63 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        img.dispose();
 
     }
 
     private void spawnRaindrop(){
         Rectangle raindrop = new Rectangle();
-        raindrop.x = MathUtils.random(0, 800-64);
-        raindrop.y = 480;
+        raindrop.x = MathUtils.random(0, Gdx.graphics.getWidth()-64);
+        raindrop.y = Gdx.graphics.getHeight();
         raindrop.width = 64;
         raindrop.height = 64;
         raindrops.add(raindrop);
         lastDropTime = TimeUtils.nanoTime();
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+            touchpos.set(screenX,screenY,0);
+            camera.unproject(touchpos);
+            bucket.x = touchpos.x -64/2;
+
+
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 }

@@ -10,11 +10,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class NoRiskNoFun extends Game {
 	public  SpriteBatch batch;
-	public  BitmapFont font;
+
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
 	}
 	@Override
@@ -24,6 +23,6 @@ public class NoRiskNoFun extends Game {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		font.dispose();
+
 	}
 }
