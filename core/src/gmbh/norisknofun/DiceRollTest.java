@@ -24,6 +24,7 @@ public class DiceRollTest implements Screen {
     private float xGrav;
     private float yGrav;
     private float zGrav;
+    private float gForce;
 
 
     public DiceRollTest(NoRiskNoFun game) {
@@ -37,7 +38,7 @@ public class DiceRollTest implements Screen {
         zGrav = Gdx.input.getAccelerometerZ() / GRAVITY_EARTH;
 
         // gForce will be close to 1 when there is no movement.
-        float gForce = (float) Math.sqrt((xGrav * xGrav) + (yGrav * yGrav) + (zGrav * zGrav));
+        gForce = (float) Math.sqrt((xGrav * xGrav) + (yGrav * yGrav) + (zGrav * zGrav));
 
         if (gForce > SHAKE_GRAVITY_THRESHOLD) {
             return true;
@@ -61,6 +62,7 @@ public class DiceRollTest implements Screen {
 
     }
 
+    float gForceAtShake = 0;
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -72,6 +74,7 @@ public class DiceRollTest implements Screen {
             // only update if it hasn't been shaken in the last 2 seconds
             if (TimeUtils.millis() - lastShakeTime > 2000) {
                 diceRoll();
+                gForceAtShake = gForce;
                 diceRollText = "HAS BEEN SHAKEN!";
                 lastShakeTime = TimeUtils.millis();
             }
@@ -86,11 +89,13 @@ public class DiceRollTest implements Screen {
         game.font.draw(game.batch, "Gravity X: " + xGrav, SCREEN_WIDTH/2, SCREEN_HEIGHT);
         game.font.draw(game.batch, "Gravity Y: " + yGrav, SCREEN_WIDTH/2, SCREEN_HEIGHT - 200);
         game.font.draw(game.batch, "Gravity Z: " + zGrav, SCREEN_WIDTH/2, SCREEN_HEIGHT - 400);
+        game.font.draw(game.batch, "gForce: " + gForce, SCREEN_WIDTH/2, SCREEN_HEIGHT - 600);
 
         // show roll results
         game.font.draw(game.batch, "1st Roll: " + rollResults[0], 0, SCREEN_HEIGHT - 200);
         game.font.draw(game.batch, "2nd Roll: " + rollResults[1], 0, SCREEN_HEIGHT - 400);
         game.font.draw(game.batch, "3rd Roll: " + rollResults[2], 0, SCREEN_HEIGHT - 600);
+        game.font.draw(game.batch, "Shakeforce: " + gForceAtShake, 0, SCREEN_HEIGHT - 800);
 
         game.batch.end();
     }

@@ -47,6 +47,7 @@ public class NoRiskNoFun extends Game {
     @Override
     public void dispose() {
         batch.dispose();
+        font.dispose();
     }
 
 
