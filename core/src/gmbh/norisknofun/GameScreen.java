@@ -2,14 +2,26 @@ package gmbh.norisknofun;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Iterator;
 
@@ -29,6 +41,11 @@ public class GameScreen implements Screen, InputProcessor {
 
     final NoRiskNoFun game;
 
+    private Stage stage;
+    private Viewport viewport;
+    private MyActor actor;
+
+
 
     public GameScreen(final NoRiskNoFun game){
       this.game=game;
@@ -37,23 +54,39 @@ public class GameScreen implements Screen, InputProcessor {
 
             camera = new OrthographicCamera();
             camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            viewport= new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),camera);
+            stage = new Stage(viewport);
 
+            actor = new MyActor();
+            actor.setBounds(800/2,20,64,64);
             touchpos = new Vector3();
-            raindrops = new Array<Rectangle>();
-            bucket = new Rectangle();
-            bucket.x = 800 / 2 - 64 / 2;
-            bucket.y = 20;
-            bucket.width = 64;
-            bucket.height = 64;
-            spawnRaindrop();
-            Gdx.input.setInputProcessor(this);
+//            raindrops = new Array<Rectangle>();
+//            bucket = new Rectangle();
+//            bucket.x = 800 / 2 - 64 / 2;
+//            bucket.y = 20;
+//            bucket.width = 64;
+//            bucket.height = 64;
+//            spawnRaindrop();
+            stage.addActor(actor);
+            stage.addListener(new InputListener(){
+                @Override
+                public boolean touchDown (InputEvent event, float x, float y, int pointer, int button){
+                    System.out.println("hallo");
+
+
+                    stage.getActors().get(0).addAction(Actions.moveTo(x-32,y-32,1));
+                    return true;
+                }
+            });
+
+
         }catch (Exception e){
             Gdx.app.error("Error",e.getMessage(),e);
         }
     }
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -61,7 +94,7 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+       /* game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(img,bucket.x,bucket.y,64,64);
         for(Rectangle raindrop: raindrops){
@@ -79,7 +112,9 @@ public class GameScreen implements Screen, InputProcessor {
             raindrop.y-= 200 * Gdx.graphics.getDeltaTime();
             if(raindrop.y <0 ) iter.remove();
             if(raindrop.overlaps(bucket)) iter.remove();
-        }
+        }*/
+       stage.act();
+       stage.draw();
 
     }
 
@@ -106,6 +141,7 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void dispose() {
         img.dispose();
+        stage.dispose();
 
     }
 
@@ -137,12 +173,10 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-            touchpos.set(screenX,screenY,0);
-            camera.unproject(touchpos);
-            bucket.x = touchpos.x -64/2;
-
-
-        return true;
+//           touchpos.set(screenX,screenY,0);
+//            camera.unproject(touchpos);
+//            bucket.x = touchpos.x -64/2;
+        return false;
     }
 
     @Override
