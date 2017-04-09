@@ -1,10 +1,10 @@
-package gmbh.norisknofun.gmbh.norisknofun.assets.gmbh.norisknofun.assets.impl;
+package gmbh.norisknofun.assets.impl;
 
-import gmbh.norisknofun.gmbh.norisknofun.assets.Asset;
-import gmbh.norisknofun.gmbh.norisknofun.assets.AssetLoader;
-import gmbh.norisknofun.gmbh.norisknofun.assets.AssetLoaderFactory;
-import gmbh.norisknofun.gmbh.norisknofun.assets.AssetType;
-import gmbh.norisknofun.gmbh.norisknofun.assets.gmbh.norisknofun.assets.impl.gmbh.norisknofun.assets.impl.map.AssetLoaderMap;
+import gmbh.norisknofun.assets.Asset;
+import gmbh.norisknofun.assets.AssetLoader;
+import gmbh.norisknofun.assets.AssetLoaderFactory;
+import gmbh.norisknofun.assets.AssetType;
+import gmbh.norisknofun.assets.impl.map.AssetLoaderMap;
 
 /**
  * Default implementation of {@link AssetLoaderFactory}.

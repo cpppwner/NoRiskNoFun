@@ -1,10 +1,10 @@
-package gmbh.norisknofun.gmbh.norisknofun.assets.gmbh.norisknofun.assets.impl.gmbh.norisknofun.assets.impl.map;
+package gmbh.norisknofun.assets.impl.map;
 
 import java.io.InputStream;
 
-import gmbh.norisknofun.gmbh.norisknofun.assets.Asset;
-import gmbh.norisknofun.gmbh.norisknofun.assets.AssetLoader;
-import gmbh.norisknofun.gmbh.norisknofun.assets.AssetType;
+import gmbh.norisknofun.assets.Asset;
+import gmbh.norisknofun.assets.AssetLoader;
+import gmbh.norisknofun.assets.AssetType;
 
 /**
  * Asset loader for loading game maps.

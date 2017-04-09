@@ -1,4 +1,4 @@
-package gmbh.norisknofun.gmbh.norisknofun.assets;
+package gmbh.norisknofun.assets;
 
 /**
  * Enum specifying different asset types which are used in the game "No Risk No Fun".

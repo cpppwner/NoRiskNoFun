@@ -1,4 +1,4 @@
-package gmbh.norisknofun.gmbh.norisknofun.assets;
+package gmbh.norisknofun.assets;
 
 /**
  * Asset interface.
