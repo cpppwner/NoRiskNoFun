@@ -11,11 +11,25 @@ import java.util.Collections;
 
 import gmbh.norisknofun.GdxTestRunner;
 import gmbh.norisknofun.assets.Asset;
+import gmbh.norisknofun.assets.AssetType;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class AssetLoaderMapTests extends GdxTestRunner {
+
+    @Test
+    public void getAssetType() {
+
+        // given
+        AssetLoaderMap target = new AssetLoaderMap();
+
+        // when
+        AssetType obtained = target.getAssetType();
+
+        // then
+        assertThat(obtained, is(AssetType.ASSET_TYPE_MAP));
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void loadingMapWithNullInputStreamThrowsAnException() {
@@ -176,6 +190,52 @@ public class AssetLoaderMapTests extends GdxTestRunner {
         assertThat(obtained, is(nullValue()));
     }
 
+
+    @Test
+    public void loadingMapWithRegionWhichIsNotClosedGivesNull() {
+
+        // given
+        AssetLoaderMap target = new AssetLoaderMap();
+        GameMap map = createGameMap();
+
+        // when
+        map.regions.get(0).vertexIndices = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
+        Asset obtained = target.load(new ByteArrayInputStream(new Gson().toJson(map).getBytes()));
+
+        // then
+        assertThat(obtained, is(nullValue()));
+    }
+
+    @Test
+    public void loadingMapWithRegionHavingVertexIndexLessThanZeroGivesNull() {
+
+        // given
+        AssetLoaderMap target = new AssetLoaderMap();
+        GameMap map = createGameMap();
+
+        // when
+        map.regions.get(0).vertexIndices = new ArrayList<>(Arrays.asList(0, 1, -1, 0));
+        Asset obtained = target.load(new ByteArrayInputStream(new Gson().toJson(map).getBytes()));
+
+        // then
+        assertThat(obtained, is(nullValue()));
+    }
+
+    @Test
+    public void loadingMapWithRegionHavingVertexIndexAboveAllowedIndicesGivesNull() {
+
+        // given
+        AssetLoaderMap target = new AssetLoaderMap();
+        GameMap map = createGameMap();
+
+        // when
+        map.regions.get(0).vertexIndices = new ArrayList<>(Arrays.asList(0, 1, map.vertices.size(), 0));
+        Asset obtained = target.load(new ByteArrayInputStream(new Gson().toJson(map).getBytes()));
+
+        // then
+        assertThat(obtained, is(nullValue()));
+    }
+
     @Test
     public void loadingMapWithValidDataGivesMap() {
 
@@ -192,7 +252,25 @@ public class AssetLoaderMapTests extends GdxTestRunner {
 
         AssetMap obtainedMap = (AssetMap)obtained;
         assertThat(obtainedMap.getName(), is(map.name));
+
+        // validate all regions
         assertThat(obtainedMap.getRegions().size(), is(map.regions.size()));
+        for (AssetMap.Region region : obtainedMap.getRegions()) {
+            GameMap.Region mapRegion = null;
+            for (GameMap.Region r : map.regions) {
+                if (r.name.equals(region.getName())) {
+                    mapRegion = r;
+                    break;
+                }
+            }
+            assertThat(mapRegion, is(not(nullValue())));
+            assertThat(region.getVertices().length, is(mapRegion.vertexIndices.size() * 2));
+            for (int i = 0; i < mapRegion.vertexIndices.size(); i++) {
+                // no need to compare within epsilon range, since they must be the same value
+                assertThat(region.getVertices()[i * 2], is(map.vertices.get(mapRegion.vertexIndices.get(i)).x));
+                assertThat(region.getVertices()[i * 2 + 1], is(map.vertices.get(mapRegion.vertexIndices.get(i)).y));
+            }
+        }
     }
 
     private static GameMap createGameMap() {
