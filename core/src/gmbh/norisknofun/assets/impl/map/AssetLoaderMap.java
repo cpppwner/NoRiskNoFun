@@ -73,7 +73,9 @@ public class AssetLoaderMap implements AssetLoader {
         if (!region.vertexIndices.get(0).equals(region.vertexIndices.get(region.vertexIndices.size() - 1)))
             throw new IllegalStateException("first and last vertex must be the same for region \"" + region.name + "\"");
 
-        if (region.vertexIndices.stream().filter(index -> index < 0 || index >= map.vertices.size()).count() != 0)
-            throw new IllegalStateException("invalid vertex index for region \"" + region.name + "\"");
+        for (int index : region.vertexIndices) {
+            if (index < 0 || index >= map.vertices.size())
+                throw new IllegalStateException("invalid vertex index for region \"" + region.name + "\"");
+        }
     }
 }

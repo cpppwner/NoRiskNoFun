@@ -193,9 +193,6 @@ public class AssetLoaderMapTests extends GdxTestRunner {
         AssetMap obtainedMap = (AssetMap)obtained;
         assertThat(obtainedMap.getName(), is(map.name));
         assertThat(obtainedMap.getRegions().size(), is(map.regions.size()));
-        assertThat(obtainedMap.getRegions().stream().map(AssetMap.Region::getName).toArray(),
-                    equalTo(map.regions.stream().map(r -> r.name).toArray()));
-
     }
 
     private static GameMap createGameMap() {

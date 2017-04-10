@@ -17,7 +17,8 @@ public class AssetMap implements Asset {
     AssetMap(GameMap map) {
         this.name = map.name;
         this.regions = new ArrayList<>(map.regions.size());
-        map.regions.forEach(region -> this.regions.add(createRegion(region, map)));
+        for (GameMap.Region region : map.regions)
+            this.regions.add(createRegion(region, map));
     }
 
     private Region createRegion(GameMap.Region region, GameMap map) {
