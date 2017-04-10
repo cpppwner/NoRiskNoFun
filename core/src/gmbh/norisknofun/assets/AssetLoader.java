@@ -17,7 +17,7 @@ public interface AssetLoader<A extends Asset> {
      *
      * @param stream The asset's input stream.
      *
-     * @return Loaded asset.
+     * @return Loaded asset or {@code null} if an error occurs.
      */
     A load(InputStream stream);
 }

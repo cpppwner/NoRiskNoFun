@@ -1,6 +1,7 @@
 package gmbh.norisknofun.assets.impl;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import gmbh.norisknofun.assets.AssetLoader;
 import gmbh.norisknofun.assets.AssetLoaderFactory;
