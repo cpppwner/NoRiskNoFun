@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import gmbh.norisknofun.GdxTestRunner;
+import gmbh.norisknofun.GdxTest;
 import gmbh.norisknofun.assets.Asset;
 import gmbh.norisknofun.assets.AssetType;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-public class AssetLoaderMapTests extends GdxTestRunner {
+public class AssetLoaderMapTests extends GdxTest {
 
     @Test
     public void getAssetType() {

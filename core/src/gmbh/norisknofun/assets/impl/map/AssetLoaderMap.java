@@ -16,7 +16,7 @@ import gmbh.norisknofun.assets.AssetType;
 /**
  * Asset loader for loading game maps.
  */
-public class AssetLoaderMap implements AssetLoader {
+public class AssetLoaderMap implements AssetLoader<AssetMap> {
 
     @Override
     public AssetType getAssetType() {
@@ -25,7 +25,7 @@ public class AssetLoaderMap implements AssetLoader {
     }
 
     @Override
-    public Asset load(InputStream stream) {
+    public AssetMap load(InputStream stream) {
 
         if (stream == null)
             throw new IllegalArgumentException("stream");

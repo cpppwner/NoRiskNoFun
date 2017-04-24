@@ -12,7 +12,7 @@ import gmbh.norisknofun.assets.impl.map.AssetLoaderMap;
 public class AssetLoaderFactoryImpl implements AssetLoaderFactory {
 
     @Override
-    public AssetLoader<Asset> createAssetLoader(AssetType type) {
+    public AssetLoader<? extends Asset> createAssetLoader(AssetType type) {
 
         switch(type) {
 

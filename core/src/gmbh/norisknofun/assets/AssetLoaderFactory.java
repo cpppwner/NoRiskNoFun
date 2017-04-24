@@ -7,7 +7,7 @@ import gmbh.norisknofun.assets.impl.map.AssetLoaderMap;
  */
 public interface AssetLoaderFactory {
 
-    AssetLoader<Asset> createAssetLoader(AssetType type);
+    AssetLoader<? extends Asset> createAssetLoader(AssetType type);
 
     AssetLoaderMap createAssetLoaderMap();
 }

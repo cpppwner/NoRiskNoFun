@@ -37,7 +37,7 @@ import com.badlogic.gdx.graphics.GL20;
 /**
  * GdxTestRunner borrowed from https://github.com/TomGrill/gdx-testing/blob/master/tests/src/de/tomgrill/gdxtesting/GdxTestRunner.java
  */
-public class GdxTestRunner {
+public class GdxTest {
 
     // This is our "test" application
     private static Application application;
