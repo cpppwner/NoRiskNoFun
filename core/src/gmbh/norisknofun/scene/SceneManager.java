@@ -1,7 +1,6 @@
 package gmbh.norisknofun.scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.util.Collections;
@@ -157,7 +156,8 @@ public class SceneManager implements Disposable {
         activeScene.hide();
         activeScene = new NullScene(); // set back to null scene
 
-        scenes.values().forEach(Screen::dispose);
+        for (Scene scene : scenes.values())
+            scene.dispose();
         scenes.clear();
     }
 
