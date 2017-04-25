@@ -46,8 +46,6 @@ public class NoRiskNoFun extends Game implements Screen{
 			}
 		});
 
-
-
 		imgbtn = new Texture(Gdx.files.internal("button_join_game_eng.png"));
 		imgbtnregion= new TextureRegion(imgbtn);
 		textureRegionDrawable = new TextureRegionDrawable(imgbtnregion);
@@ -62,10 +60,7 @@ public class NoRiskNoFun extends Game implements Screen{
 			}
 		});
 
-
-
 	}
-
 
 	@Override
 	public void show() {
@@ -102,7 +97,5 @@ public class NoRiskNoFun extends Game implements Screen{
 		menu.dispose();
 		img.dispose();
 	}
-
-
 
 }
