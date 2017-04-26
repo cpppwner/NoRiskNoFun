@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.TimeUtils;
 import java.util.Random;
 
-import static gmbh.norisknofun.NoRiskNoFun.SCREEN_HEIGHT;
-import static gmbh.norisknofun.NoRiskNoFun.SCREEN_WIDTH;
+import static gmbh.norisknofun.NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT;
+import static gmbh.norisknofun.NoRiskNoFun_DiceRollTest.SCREEN_WIDTH;
 
 public class DiceRollTest implements Screen {
 
-    private NoRiskNoFun game;
+    private NoRiskNoFun_DiceRollTest game;
 
     private long lastShakeTime;
     private String diceRollText;
@@ -27,7 +27,7 @@ public class DiceRollTest implements Screen {
     private float gForce;
 
 
-    public DiceRollTest(NoRiskNoFun game) {
+    public DiceRollTest(NoRiskNoFun_DiceRollTest game) {
         this.game = game;
     }
 
