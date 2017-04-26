@@ -14,15 +14,25 @@ public final class GameScene extends SceneBase {
 
     private final GameData data;
 
+    private GameObjectMap map;
+
     public GameScene(GameData data) {
 
-        super(SceneNames.GAME_SCENE, new Color(0xFF));
+        super(SceneNames.GAME_SCENE, Color.BLACK);
         this.data = data;
     }
 
     @Override
     public void show() {
 
-        AssetMap asset = data.getMapAsset();
+        getStage().clear();
+        getStage().addActor(new GameObjectMap(data.getMapAsset()));
     }
+
+    @Override
+    public void dispose() {
+
+
+    }
+
 }

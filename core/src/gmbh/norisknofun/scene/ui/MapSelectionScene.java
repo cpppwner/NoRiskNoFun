@@ -28,7 +28,7 @@ public final class MapSelectionScene extends SceneBase {
 
     public MapSelectionScene(GameData gameData) {
 
-        super(SceneNames.MAP_SELECTION_SCENE, new Color(-1));
+        super(SceneNames.MAP_SELECTION_SCENE, Color.WHITE);
 
         initFont();
         initMapSelectionButtons();
