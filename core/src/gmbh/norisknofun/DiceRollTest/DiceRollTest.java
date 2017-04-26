@@ -1,13 +1,10 @@
-package gmbh.norisknofun;
+package gmbh.norisknofun.DiceRollTest;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.TimeUtils;
 import java.util.Random;
-
-import static gmbh.norisknofun.NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT;
-import static gmbh.norisknofun.NoRiskNoFun_DiceRollTest.SCREEN_WIDTH;
 
 public class DiceRollTest implements Screen {
 
@@ -83,19 +80,19 @@ public class DiceRollTest implements Screen {
             diceRollText = "SHAKE ME!";
         }
 
-        game.font.draw(game.batch, diceRollText ,0 , SCREEN_HEIGHT);
+        game.font.draw(game.batch, diceRollText ,0 , NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT);
 
         // show gravity values
-        game.font.draw(game.batch, "Gravity X: " + xGrav, SCREEN_WIDTH/2, SCREEN_HEIGHT);
-        game.font.draw(game.batch, "Gravity Y: " + yGrav, SCREEN_WIDTH/2, SCREEN_HEIGHT - 200);
-        game.font.draw(game.batch, "Gravity Z: " + zGrav, SCREEN_WIDTH/2, SCREEN_HEIGHT - 400);
-        game.font.draw(game.batch, "gForce: " + gForce, SCREEN_WIDTH/2, SCREEN_HEIGHT - 600);
+        game.font.draw(game.batch, "Gravity X: " + xGrav, NoRiskNoFun_DiceRollTest.SCREEN_WIDTH/2, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT);
+        game.font.draw(game.batch, "Gravity Y: " + yGrav, NoRiskNoFun_DiceRollTest.SCREEN_WIDTH/2, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT - 200);
+        game.font.draw(game.batch, "Gravity Z: " + zGrav, NoRiskNoFun_DiceRollTest.SCREEN_WIDTH/2, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT - 400);
+        game.font.draw(game.batch, "gForce: " + gForce, NoRiskNoFun_DiceRollTest.SCREEN_WIDTH/2, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT - 600);
 
         // show roll results
-        game.font.draw(game.batch, "1st Roll: " + rollResults[0], 0, SCREEN_HEIGHT - 200);
-        game.font.draw(game.batch, "2nd Roll: " + rollResults[1], 0, SCREEN_HEIGHT - 400);
-        game.font.draw(game.batch, "3rd Roll: " + rollResults[2], 0, SCREEN_HEIGHT - 600);
-        game.font.draw(game.batch, "Shakeforce: " + gForceAtShake, 0, SCREEN_HEIGHT - 800);
+        game.font.draw(game.batch, "1st Roll: " + rollResults[0], 0, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT - 200);
+        game.font.draw(game.batch, "2nd Roll: " + rollResults[1], 0, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT - 400);
+        game.font.draw(game.batch, "3rd Roll: " + rollResults[2], 0, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT - 600);
+        game.font.draw(game.batch, "Shakeforce: " + gForceAtShake, 0, NoRiskNoFun_DiceRollTest.SCREEN_HEIGHT - 800);
 
         game.batch.end();
     }

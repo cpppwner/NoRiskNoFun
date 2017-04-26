@@ -1,4 +1,4 @@
-package gmbh.norisknofun;
+package gmbh.norisknofun.DiceRollTest;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
