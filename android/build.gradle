@@ -21,7 +21,9 @@ android {
         applicationId "gmbh.norisknofun"
         minSdkVersion 21
         targetSdkVersion 25
-        jackOptions.enabled = true
+        jackOptions {
+            enabled = true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

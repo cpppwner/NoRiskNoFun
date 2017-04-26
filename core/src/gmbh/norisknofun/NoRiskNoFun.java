@@ -1,72 +1,69 @@
 package gmbh.norisknofun;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-import gmbh.norisknofun.Figures.Artillery;
-import gmbh.norisknofun.Figures.Cavalry;
-import gmbh.norisknofun.Figures.Figure;
-import gmbh.norisknofun.Figures.Infantry;
+import gmbh.norisknofun.assets.impl.AssetLoaderFactoryImpl;
+import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.scene.Scene;
+import gmbh.norisknofun.scene.SceneManager;
+import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.game.GameScene;
+import gmbh.norisknofun.scene.ui.MapSelectionScene;
 
-public class NoRiskNoFun extends ApplicationAdapter {
-    private OrthographicCamera camera;
-    private Stage stage;
-    private int counter=0;
-
+public class NoRiskNoFun implements ApplicationListener  {
 
     @Override
-    public void create () {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        stage = new Stage();
-        addFigurestoStage();
-        stage.addListener(new InputListener(){
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button){
+    public void create() {
 
-                stage.getActors().get(counter).addAction(Actions.moveTo(x-50,y-50,1));
-                counter++;
-                if(counter==stage.getActors().size) counter=0;
-                return true;
-            }
-        });
-        Gdx.input.setInputProcessor(stage);
+        registerScenes();
+        showStartupScene();
+    }
+
+    private void registerScenes() {
+
+        GameData gameData = new GameData(new AssetLoaderFactoryImpl());
+        SceneManager.getInstance().registerScene(new MapSelectionScene(gameData));
+        SceneManager.getInstance().registerScene(new GameScene(gameData));
+    }
+
+    private void showStartupScene() {
+
+        SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
     }
 
     @Override
-    public void render () {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.update();
-        stage.getBatch().setProjectionMatrix(camera.combined);
-        stage.act();
-        stage.draw();
+    public void resize(int width, int height) {
+
+        getActiveScene().resize(width, height);
     }
 
     @Override
-    public void dispose () {
-        stage.dispose();
+    public void render() {
+
+        getActiveScene().render(Gdx.graphics.getDeltaTime());
     }
 
-    private void addFigurestoStage(){
-        Figure figure;
-        for(int i=0; i<3; i++){
-            figure=new Infantry(200,200,100,100);
-            stage.addActor(figure);
+    @Override
+    public void pause() {
 
-            figure=new Cavalry(200,200,100,100);
-            stage.addActor(figure);
+        getActiveScene().pause();
+    }
 
-            figure=new Artillery(200,200,100,100);
-            stage.addActor(figure);
-        }
+    @Override
+    public void resume() {
 
+        getActiveScene().resume();
+    }
 
+    @Override
+    public void dispose() {
+
+        SceneManager.getInstance().dispose();
+    }
+
+    private Scene getActiveScene() {
+
+        return SceneManager.getInstance().getActiveScene();
     }
 }
