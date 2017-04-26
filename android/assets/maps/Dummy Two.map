@@ -1,0 +1,105 @@
+{
+  "name": "Dummy Two",
+  "vertices": [
+    {
+      "x": 0.1,
+      "y": 0.1
+    },
+    {
+      "x": 0.5,
+      "y": 0.2
+    },
+    {
+      "x": 0.5,
+      "y": 0.5
+    },
+    {
+      "x": 0.25,
+      "y": 0.3
+    },
+    {
+      "x": 0.1,
+      "y": 0.5
+    },
+    {
+      "x": 0.25,
+      "y": 0.9
+    },
+    {
+      "x": 0.9,
+      "y": 0.6
+    },
+    {
+      "x": 0.8,
+      "y": 0.9
+    },
+    {
+      "x": 0.7,
+      "y": 0.7
+    },
+    {
+      "x": 0.9,
+      "y": 0.2
+    },
+    {
+      "x": 0.9,
+      "y": 0.4
+    }
+  ],
+  "regions": [
+    {
+      "name": "Region One",
+      "vertexIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "neighbouringRegions": [
+        "Region Two", "Region Four"
+      ]
+    },
+    {
+      "name": "Region Two",
+      "vertexIndices": [
+        4,
+        3,
+        2,
+        5,
+        4
+      ],
+      "neighbouringRegions": [
+        "Region One", "Region Three"
+      ]
+    },
+    {
+      "name": "Region Three",
+      "vertexIndices": [
+        2,
+        6,
+        7,
+        8,
+        5,
+        2
+      ],
+      "neighbouringRegions": [
+        "Region Two"
+      ]
+    },
+    {
+      "name": "Region Four",
+      "vertexIndices": [
+        1,
+        9,
+        10,
+        2,
+        1
+      ],
+      "neighbouringRegions": [
+        "Region One"
+      ]
+    }
+  ]
+}

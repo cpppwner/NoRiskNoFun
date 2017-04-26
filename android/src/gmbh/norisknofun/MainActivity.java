@@ -1,26 +1,23 @@
 package gmbh.norisknofun;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.app.Activity;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;import at.werkstatt.philipp.networktest.R;
+import android.widget.Toast;
 
-public class MainActivity extends Activity implements DataDisplay {
+import java.net.Socket;
+
+public class MainActivity extends Activity  {
 
     private Socket clientSocket;
     private EditText etIp;
     private MyServer server;
     private Button startServerButton;
+    private Client client;
 
 
     @Override
@@ -31,42 +28,37 @@ public class MainActivity extends Activity implements DataDisplay {
         etIp.setText("127.0.0.1");
         startServerButton = (Button) findViewById(R.id.btnstartserver);
     }
-    public void startClient(View view)
+    public void onClickstartClient(View view)
     {
-         Thread  m_objThreadClient=new Thread(new Runnable() {
-            public void run()
-            {
-                try
-                {
 
-
-                    //Create ClientSocket and sends/recieves Stuff
-
-                    InetAddress addr = InetAddress.getByName(etIp.getText().toString());
-                    clientSocket= new Socket(addr,2001);
-                    ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
-                    oos.writeObject("CLient says Hello!");
-                    Message serverMessage= Message.obtain();
-                    ObjectInputStream ois =new ObjectInputStream(clientSocket.getInputStream());
-                    serverMessage.obj = (String)ois.readObject();
-
-                    mHandler.sendMessage(serverMessage);
-                    oos.close();
-                    ois.close();
-                    clientSocket.close();
-                }
-                catch (Exception e)
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-        m_objThreadClient.start();
+        String addr =etIp.getText().toString();
+        startClient(addr);
 
     }
+    public void onClickSendMessage(View view)
+    {
+        if(client!=null) {
+            client.sendMessage(" Hallo");
+        }
+    }
+
+
+    public void startClient(final String ip) {
+        if(client==null) {
+
+            client = new Client();
+            Thread m_objThread = new Thread(new Runnable() {
+                public void run() {
+                    client.startCLient(getApplicationContext(),ip);
+                }
+            });
+
+            m_objThread.start();
+        }
+
+
+    }
+
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -81,23 +73,26 @@ public class MainActivity extends Activity implements DataDisplay {
     }
 
 
-    public void startServer(View view)
+    public void onClickstartServer(View view)
     {
 
+        startServer();
         startServerButton.setEnabled(false); //avoids to start 2 Servers
-        server= new MyServer();
-        server.setEventListener(this);
+
+
+    }
+
+    public void startServer() {
+
+        server= new MyServer(getApplicationContext());
         server.startListening();
-
-
-
     }
-    public void Display(String message)
-    {
-        Toast.makeText(getBaseContext(),"Server: "+message,Toast.LENGTH_SHORT).show();
-    }
+
+
     public void stopServer(View view){
-        server.stop();
+        if(server!=null) {
+            server.stop();
+        }
         startServerButton.setEnabled(true);
     }
 
