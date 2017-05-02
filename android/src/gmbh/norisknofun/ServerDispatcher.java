@@ -2,13 +2,11 @@ package gmbh.norisknofun;
 
 
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
 
-import java.net.*;
-import java.util.*;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.Vector;
+
 /**
  * Created by philipp on 06.04.2017.
  */
@@ -16,10 +14,10 @@ public class ServerDispatcher extends Thread
 {
     private Vector mMessageQueue = new Vector();
     private Vector mClients = new Vector();
-    private Context c;
 
-    public  ServerDispatcher(Context c){
-        this.c = c;
+
+    public  ServerDispatcher(){
+
     }
 
     /**
@@ -94,7 +92,7 @@ public class ServerDispatcher extends Thread
     public void run()
     {
         try {
-            while (true) {
+            while (!isInterrupted()) {
                 String message = getNextMessageFromQueue();
                 sendMessageToAllClients(message);
             }
@@ -108,18 +106,22 @@ public class ServerDispatcher extends Thread
     public void display(final String message)
     {
 
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        handler.post(new Runnable() {
-
-            @Override
-            public void run() {
-                //Your UI code here
-                Toast.makeText(c,"Que send: "+message,Toast.LENGTH_SHORT).show();
-            }
-        });
+        System.out.println("SERVER_DISPATCHER: "+message);
 
 
     }
 
+    public void stopAll() {
+        for (int i=0; i<mClients.size(); i++) {
+            ClientInfo clientInfo = (ClientInfo) mClients.get(i);
+            clientInfo.mClientSender.interrupt();
+            clientInfo.mClientListener.interrupt();
+            try {
+                clientInfo.mSocket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            deleteClient(clientInfo);
+        }
+    }
 }

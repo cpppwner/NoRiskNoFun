@@ -49,7 +49,7 @@ public class MainActivity extends Activity  {
             client = new Client();
             Thread m_objThread = new Thread(new Runnable() {
                 public void run() {
-                    client.startCLient(getApplicationContext(),ip);
+                    client.startCLient(ip);
                 }
             });
 
@@ -84,7 +84,7 @@ public class MainActivity extends Activity  {
 
     public void startServer() {
 
-        server= new MyServer(getApplicationContext());
+        server= new MyServer();
         server.startListening();
     }
 

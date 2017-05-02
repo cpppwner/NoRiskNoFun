@@ -1,122 +1,90 @@
+
 package gmbh.norisknofun;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
- * Created by philipp on 06.04.2017.
+ * Created by philipp on 06.04.2017.+
  */
 
-public class Client {
-    public static  String SERVER_HOSTNAME = "localhost";
-    public static final int SERVER_PORT = 2002;
-    static PrintWriter out = null;
+ class Client {
+    static  String SERVER_HOSTNAME = "localhost";
+    private static final int SERVER_PORT = 2002;
 
-    public static void startCLient(Context c,String ip)
+    private  static Socket socket = null;
+
+    private static boolean connected = false;
+
+    public static void startCLient(String ip)
     {
-
+        //System.out.println("startCLient:");
         SERVER_HOSTNAME=ip;
         BufferedReader in = null;
 
+
+
         try {
-            // Connect to Nakov Chat Server
-            Socket socket = new Socket(SERVER_HOSTNAME, SERVER_PORT);
+
+            //System.out.println("Try to Connect:");
+            socket = new Socket(SERVER_HOSTNAME, SERVER_PORT);
             in = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(
-                    new OutputStreamWriter(socket.getOutputStream()));
+
+
+
 
             display("Connected to server " +
-                    SERVER_HOSTNAME + ":" + SERVER_PORT,c);
-
-
-        } catch (Exception ioe) {
-            System.err.println("Can not establish connection to " +
                     SERVER_HOSTNAME + ":" + SERVER_PORT);
-            ioe.printStackTrace();
-            //System.exit(-1);
+            connected = true;
+
+        } catch (Exception e) {
+            System.err.println("Can not establish connection to " +
+                    SERVER_HOSTNAME + ":" + SERVER_PORT+" Exception: "+e);
+            connected = false;
+
+
         }
 
-        // Create and start Sender thread
 
-
+        System.out.println("Check Message start:");
         try {
             // Read messages from the server and print them
             String message;
             while ((message=in.readLine()) != null) {
                 System.out.println("+++++++++++++++++++++++++++++++++");
                 System.out.println(""+message);
-                display(message,c);
+                display(message);
                 System.out.println("+++++++++++++++++++++++++++++++++");
             }
-        } catch (IOException ioe) {
+        } catch (Exception e) {
             System.err.println("Connection to server broken.");
-            ioe.printStackTrace();
+            connected = false;
+            e.printStackTrace();
         }
 
     }
     public static void sendMessage(String message)
     {
-        Sender sender = new Sender(out, message);
+        Sender sender = new Sender(message,socket);
         sender.setDaemon(true);
         sender.start();
 
     }
-    public static void display(final String message, final Context c)
+
+    public boolean isConnected(){
+        return this.connected;
+    }
+
+
+    public static void display(final String message)
     {
 
-        Handler handler = new Handler(Looper.getMainLooper());
 
-        handler.post(new Runnable() {
-
-            @Override
-            public void run() {
-                //Your UI code here
-                Toast.makeText(c,"Client get: "+message,Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        System.out.println("SENDER: "+message);
 
     }
 }
 
-class Sender extends Thread
-{
-    private PrintWriter mOut;
-    private String mMessage;
-
-
-    public Sender(PrintWriter aOut, String message)
-    {
-        mOut = aOut;
-        mMessage = message;
-
-    }
-
-    /**
-     * Until interrupted reads messages from the standard input (keyboard)
-     * and sends them to the chat server through the socket.
-     */
-    public void run()
-    {
-        try {
-
-
-
-                mOut.println(mMessage);
-                mOut.flush();
-
-        } catch (Exception io) {
-            // Communication is broken
-        }
-    }
-}
