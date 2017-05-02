@@ -1,9 +1,6 @@
-package gmbh.norisknofun;
+package gmbh.norisknofun.Network;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +18,7 @@ public class Client {
     public static final int SERVER_PORT = 2002;
     static PrintWriter out = null;
 
-    public static void startCLient(Context c,String ip)
+    public static void startCLient(String ip)
     {
 
         SERVER_HOSTNAME=ip;
@@ -36,7 +33,7 @@ public class Client {
                     new OutputStreamWriter(socket.getOutputStream()));
 
             display("Connected to server " +
-                    SERVER_HOSTNAME + ":" + SERVER_PORT,c);
+                    SERVER_HOSTNAME + ":" + SERVER_PORT);
 
 
         } catch (Exception ioe) {
@@ -55,7 +52,7 @@ public class Client {
             while ((message=in.readLine()) != null) {
                 System.out.println("+++++++++++++++++++++++++++++++++");
                 System.out.println(""+message);
-                display(message,c);
+                display(message);
                 System.out.println("+++++++++++++++++++++++++++++++++");
             }
         } catch (IOException ioe) {
@@ -71,19 +68,10 @@ public class Client {
         sender.start();
 
     }
-    public static void display(final String message, final Context c)
+    public static void display(final String message)
     {
 
-        Handler handler = new Handler(Looper.getMainLooper());
 
-        handler.post(new Runnable() {
-
-            @Override
-            public void run() {
-                //Your UI code here
-                Toast.makeText(c,"Client get: "+message,Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
     }
