@@ -17,7 +17,7 @@ public class MainActivity extends Activity  {
     private EditText etIp;
     private MyServer server;
     private Button startServerButton;
-    private Client client;
+    public  static Client client;
 
 
     @Override
@@ -25,7 +25,7 @@ public class MainActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         etIp = (EditText) findViewById(R.id.etIp);
-        etIp.setText("127.0.0.1");
+        etIp.setText("192.168.1.164");
         startServerButton = (Button) findViewById(R.id.btnstartserver);
     }
     public void onClickstartClient(View view)
@@ -47,14 +47,21 @@ public class MainActivity extends Activity  {
         if(client==null) {
 
             client = new Client();
-            Thread m_objThread = new Thread(new Runnable() {
-                public void run() {
-                    client.startCLient(ip);
-                }
-            });
-
-            m_objThread.start();
         }
+            if(!client.isConnected()) {
+                Thread m_objThread = new Thread(new Runnable() {
+                    public void run() {
+                        client.startCLient(ip);
+
+                    }
+                });
+                m_objThread.start();
+
+            } else {
+                //already Connected
+            }
+
+
 
 
     }
@@ -75,17 +82,20 @@ public class MainActivity extends Activity  {
 
     public void onClickstartServer(View view)
     {
+        String addr =etIp.getText().toString();
+        startServer(addr);
 
-        startServer();
         startServerButton.setEnabled(false); //avoids to start 2 Servers
 
 
     }
 
-    public void startServer() {
+    public void startServer(String ip) {
+
 
         server= new MyServer();
         server.startListening();
+        startClient(ip);
     }
 
 
@@ -94,6 +104,7 @@ public class MainActivity extends Activity  {
             server.stop();
         }
         startServerButton.setEnabled(true);
+        client.setConnected(false);
     }
 
 }

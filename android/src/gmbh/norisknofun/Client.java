@@ -18,7 +18,7 @@ import java.net.Socket;
 
     private static boolean connected = false;
 
-    public static void startCLient(String ip)
+    public void startCLient(String ip)
     {
         //System.out.println("startCLient:");
         SERVER_HOSTNAME=ip;
@@ -53,10 +53,10 @@ import java.net.Socket;
         try {
             // Read messages from the server and print them
             String message;
-            while ((message=in.readLine()) != null) {
+            while ((message=in.readLine()) != null && this.isConnected()) {
                 System.out.println("+++++++++++++++++++++++++++++++++");
-                System.out.println(""+message);
                 display(message);
+                ClientMessageHandler.handleMessage(message);
                 System.out.println("+++++++++++++++++++++++++++++++++");
             }
         } catch (Exception e) {
@@ -66,11 +66,15 @@ import java.net.Socket;
         }
 
     }
-    public static void sendMessage(String message)
+    public  void sendMessage(String message)
     {
-        Sender sender = new Sender(message,socket);
-        sender.setDaemon(true);
-        sender.start();
+        if(this.isConnected()) {
+            Sender sender = new Sender(message, socket);
+            sender.setDaemon(true);
+            sender.start();
+        }else{
+            System.err.println("Client isn´t connected");
+        }
 
     }
 
@@ -78,8 +82,14 @@ import java.net.Socket;
         return this.connected;
     }
 
+    public void setConnected( boolean connected){
+         this.connected=connected;
+    }
 
-    public static void display(final String message)
+
+
+
+    public void display(final String message)
     {
 
 

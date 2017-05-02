@@ -55,7 +55,7 @@ public class MyServer {
 
 
                     } catch (Exception ioe) {
-                        ioe.printStackTrace();
+                       System.err.println("Error Connection: "+ioe);
                     }
                 }
 
@@ -74,6 +74,7 @@ public class MyServer {
         // System.out.println("Try to close Server:");
 
         try {
+            serverDispatcher.dispatchMessage(null,NetworkMessages.SERVER_MESSAGE_CLOSED);
             serverDispatcher.stopAll();
             serverDispatcher.interrupt();
             this.m_server.close();
