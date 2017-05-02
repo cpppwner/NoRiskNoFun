@@ -15,6 +15,7 @@ public class MyServer {
     private boolean error=false;
     private  Thread m_objThread;
     private ServerDispatcher serverDispatcher;
+    private int ID=0;
 
 
 
@@ -42,16 +43,24 @@ public class MyServer {
                         Socket socket = m_server.accept();
                         ClientInfo clientInfo = new ClientInfo();
                         clientInfo.mSocket = socket;
+                        clientInfo.ID = ID;
                         ClientListener clientListener =
                                 new ClientListener(clientInfo, serverDispatcher);
                         ClientSender clientSender =
                                 new ClientSender(clientInfo, serverDispatcher);
+                       CheckConnection checkConnection=
+                                new CheckConnection(clientInfo,serverDispatcher);
                         clientInfo.mClientListener = clientListener;
                         clientInfo.mClientSender = clientSender;
+                        clientInfo.mCheckConnection = checkConnection;
+
                         clientListener.start();
                         clientSender.start();
+                        checkConnection.start();
+
                         serverDispatcher.addClient(clientInfo);
 
+                        ID++;
 
 
                     } catch (Exception ioe) {

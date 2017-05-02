@@ -120,6 +120,7 @@ public class ServerDispatcher extends Thread
             ClientInfo clientInfo = (ClientInfo) mClients.get(i);
             clientInfo.mClientSender.interrupt();
             clientInfo.mClientListener.interrupt();
+            clientInfo.mCheckConnection.interrupt=true;
             try {
                 clientInfo.mSocket.close();
             } catch (Exception e) {

@@ -3,6 +3,7 @@ package gmbh.norisknofun;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
@@ -17,6 +18,11 @@ import java.net.Socket;
     private  static Socket socket = null;
 
     private static boolean connected = false;
+    public static String CLIENT_ID;
+
+    public Client() {
+        CLIENT_ID ="???";
+    }
 
     public void startCLient(String ip)
     {
@@ -30,6 +36,7 @@ import java.net.Socket;
 
             //System.out.println("Try to Connect:");
             socket = new Socket(SERVER_HOSTNAME, SERVER_PORT);
+
             in = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
 
@@ -56,7 +63,7 @@ import java.net.Socket;
             while ((message=in.readLine()) != null && this.isConnected()) {
                 System.out.println("+++++++++++++++++++++++++++++++++");
                 display(message);
-                ClientMessageHandler.handleMessage(message);
+                handleMessage(message);
                 System.out.println("+++++++++++++++++++++++++++++++++");
             }
         } catch (Exception e) {
@@ -84,6 +91,11 @@ import java.net.Socket;
 
     public void setConnected( boolean connected){
          this.connected=connected;
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -93,7 +105,31 @@ import java.net.Socket;
     {
 
 
-        System.out.println("SENDER: "+message);
+        System.out.println("CLIENT: "+message);
+
+    }
+
+    public  void handleMessage(String message) {
+        // HandleMessages GameLogic ...etc
+
+        if (message.equals(NetworkMessages.SERVER + ":" + NetworkMessages.SERVER_MESSAGE_CLOSED)) {
+            //SERVER Closed
+            System.out.println("Server was closed");
+
+
+
+
+            //TODO: Close Game etc Close Client etc
+
+
+            setConnected(false);
+
+
+        }else if(message.equals(NetworkMessages.SERVER + ":" + NetworkMessages.SERVER_MESSAGE_Here)){
+          // display(message);
+           this.sendMessage(NetworkMessages.CLIENT_MESSAGE_Here);
+        }
+
 
     }
 }

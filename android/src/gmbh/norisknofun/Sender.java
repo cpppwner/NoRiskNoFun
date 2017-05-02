@@ -1,5 +1,7 @@
 package gmbh.norisknofun;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -13,7 +15,7 @@ class Sender extends Thread
     private PrintWriter mOut;
     private String mMessage;
     private Socket mSocket;
-
+    private BufferedReader in;
 
 
     public Sender(String message, Socket socket)
@@ -34,8 +36,11 @@ class Sender extends Thread
 
 
 
+            in = new BufferedReader(
+                    new InputStreamReader(mSocket.getInputStream()));
 
-            System.out.println("Try to send messsage to Server get Stream: ");
+
+            System.out.println("Try to send messsage to Server: "+mMessage);
             mOut = new PrintWriter(
                     new OutputStreamWriter(mSocket.getOutputStream()));
 
@@ -45,9 +50,13 @@ class Sender extends Thread
             mOut.flush();
 
 
+
+
+
+
         } catch (Exception io) {
             // Communication is broken
-            System.err.println("Cannot send message to Server Exception");
+            System.err.println("Cannot send message to Server Exception: "+io);
         }
     }
 }

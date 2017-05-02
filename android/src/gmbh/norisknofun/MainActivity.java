@@ -17,7 +17,7 @@ public class MainActivity extends Activity  {
     private EditText etIp;
     private MyServer server;
     private Button startServerButton;
-    public  static Client client;
+    public  Client client;
 
 
     @Override
