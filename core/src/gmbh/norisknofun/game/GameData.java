@@ -8,6 +8,7 @@ import java.io.InputStream;
 
 import gmbh.norisknofun.assets.AssetLoaderFactory;
 import gmbh.norisknofun.assets.impl.map.AssetMap;
+import gmbh.norisknofun.assets.impl.texture.AssetTexture;
 
 /**
  * Class containing game related data.
@@ -21,6 +22,10 @@ public class GameData {
 
     public GameData(AssetLoaderFactory assetLoaderFactory) {
         this.assetLoaderFactory = assetLoaderFactory;
+    }
+
+    AssetLoaderFactory getAssetLoaderFactory() {
+        return assetLoaderFactory;
     }
 
     public void setMapFile(String mapFilename) {

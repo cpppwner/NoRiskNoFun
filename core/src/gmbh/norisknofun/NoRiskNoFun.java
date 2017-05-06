@@ -33,8 +33,7 @@ public class NoRiskNoFun implements ApplicationListener  {
 
     private void showStartupScene() {
 
-        SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE
-        );
+        SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
     }
 
     @Override

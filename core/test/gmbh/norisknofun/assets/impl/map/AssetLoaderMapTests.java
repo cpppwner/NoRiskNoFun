@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,7 +39,7 @@ public class AssetLoaderMapTests extends GdxTest {
         AssetLoaderMap target = new AssetLoaderMap();
 
         // when/then
-        target.load(null);
+        target.load((InputStream)null);
     }
 
     @Test
@@ -271,6 +272,15 @@ public class AssetLoaderMapTests extends GdxTest {
                 assertThat(region.getVertices()[i * 2 + 1], is(map.vertices.get(mapRegion.vertexIndices.get(i)).y));
             }
         }
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void loadingMapFromInternalPathWithNullArgument() {
+
+        // given
+        AssetLoaderMap target = new AssetLoaderMap();
+
+
     }
 
     private static GameMap createGameMap() {

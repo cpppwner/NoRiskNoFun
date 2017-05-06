@@ -156,7 +156,7 @@ public class SceneManager implements Disposable {
         activeScene.hide();
         activeScene = new NullScene(); // set back to null scene
 
-        for (Scene scene : scenes.values())
+        for (Scene scene : scenes.values()) // don't replace with lambda expression
             scene.dispose();
         scenes.clear();
     }
@@ -174,6 +174,9 @@ public class SceneManager implements Disposable {
         public String getName() {
             return "";
         }
+
+        @Override
+        public void addSceneObject(SceneObject sceneObject) { }
 
         @Override
         public void preload() { }

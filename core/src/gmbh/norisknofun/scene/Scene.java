@@ -14,6 +14,13 @@ public interface Scene extends Screen {
     String getName();
 
     /**
+     * Add {@link SceneObject} to this {@link Scene}.
+     *
+     * @param sceneObject The scene object to add.
+     */
+    void addSceneObject(SceneObject sceneObject);
+
+    /**
      * Called by {@link SceneManager} when this scene gets registered.
      */
     void preload();

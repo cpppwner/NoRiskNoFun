@@ -18,22 +18,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmbh.norisknofun.assets.impl.map.AssetMap;
+import gmbh.norisknofun.scene.SceneObject;
 
 /**
  * Map game object.
  */
-class GameObjectMap extends Actor {
+class GameObjectMap extends SceneObject {
 
     private final AssetMap assetMap;
     private PolygonSpriteBatch batch;
     private Texture texture;
+    private ShapeRenderer shapeRenderer;
 
     private List<PolygonRegion> polygonRegions;
+
+    private static final Color[] COLLOR_POOL = new Color[]
+    {
+        Color.BLUE,
+        Color.YELLOW,
+        Color.ORANGE,
+        Color.CYAN
+    };
+
+    private
 
     GameObjectMap(AssetMap assetMap) {
 
         this.assetMap = assetMap;
         batch = new PolygonSpriteBatch();
+        shapeRenderer = new ShapeRenderer();
 
         Pixmap pix = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pix.setColor(Color.WHITE);
@@ -71,14 +84,22 @@ class GameObjectMap extends Actor {
             Polyline line = new Polyline(region.getVertices());
             line.setScale(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-            ShapeRenderer renderer = new ShapeRenderer();
-            renderer.begin(ShapeRenderer.ShapeType.Line);
-            renderer.setProjectionMatrix(batch.getProjectionMatrix());
-            renderer.setColor(1.0f, 0.0f, 0.0f, 1.0f);
-            renderer.polyline(line.getTransformedVertices());
-            renderer.end();
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
+            shapeRenderer.setColor(1.0f, 0.0f, 0.0f, 1.0f);
+            shapeRenderer.polyline(line.getTransformedVertices());
+            shapeRenderer.end();
+
         }
 
         batch.begin();
+    }
+
+    @Override
+    public void dispose() {
+
+        batch.dispose();
+        shapeRenderer.dispose();
+
     }
 }

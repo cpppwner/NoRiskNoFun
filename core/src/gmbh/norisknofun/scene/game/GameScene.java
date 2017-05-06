@@ -22,11 +22,16 @@ public final class GameScene extends SceneBase {
         this.data = data;
     }
 
+    private void registerSceneObjects() {
+
+        addSceneObject(new GameObjectMap(data.getMapAsset()));
+    }
+
     @Override
     public void show() {
 
-        getStage().clear();
-        getStage().addActor(new GameObjectMap(data.getMapAsset()));
+        addSceneObject(new GameObjectMap(data.getMapAsset()));
+
     }
 
     @Override

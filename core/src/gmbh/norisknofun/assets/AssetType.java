@@ -5,6 +5,7 @@ package gmbh.norisknofun.assets;
  */
 public enum AssetType {
 
-    ASSET_TYPE_MAP
+    ASSET_TYPE_MAP,
+    ASSET_TYPE_TEXTURE
 }
 
