@@ -11,6 +11,7 @@ import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.ui.CreateGameScene;
 import gmbh.norisknofun.scene.game.GameScene;
 import gmbh.norisknofun.scene.ui.JoinGameScene;
+import gmbh.norisknofun.scene.ui.MainMenuScene;
 import gmbh.norisknofun.scene.ui.MapSelectionScene;
 
 public class NoRiskNoFun implements ApplicationListener  {
@@ -29,11 +30,12 @@ public class NoRiskNoFun implements ApplicationListener  {
         SceneManager.getInstance().registerScene(new GameScene(gameData));
         SceneManager.getInstance().registerScene(new CreateGameScene(gameData));
         SceneManager.getInstance().registerScene(new JoinGameScene(gameData));
+        SceneManager.getInstance().registerScene(new MainMenuScene(gameData));
     }
 
     private void showStartupScene() {
 
-        SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
+        SceneManager.getInstance().setActiveScene(SceneNames.Main_Menu_SCENE);
     }
 
     @Override

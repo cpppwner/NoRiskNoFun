@@ -13,6 +13,7 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
 /**
  * Map selection scene.
@@ -21,8 +22,8 @@ public final class MapSelectionScene extends SceneBase {
 
     private BitmapFont font;
 
-    private TextButton buttonMapOne;
-    private TextButton buttonMapTwo;
+    private TextButtonSceneObject buttonMapOne;
+    private TextButtonSceneObject buttonMapTwo;
 
     private final GameData gameData;
 
@@ -48,6 +49,7 @@ public final class MapSelectionScene extends SceneBase {
         buttonMapOne = createButton("Map One");
         buttonMapTwo = createButton("Map Two");
 
+
         buttonMapOne.setBounds(490,500,500,120);
         buttonMapTwo.setBounds(490,250,500,120);
 
@@ -55,6 +57,7 @@ public final class MapSelectionScene extends SceneBase {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                System.out.println("hallo");
                 gameData.setMapFile("maps/Dummy One.map");
                 SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
             }
@@ -64,16 +67,17 @@ public final class MapSelectionScene extends SceneBase {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
                 gameData.setMapFile("maps/Dummy Two.map");
                 SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
             }
         });
 
-        getStage().addActor(buttonMapOne);
-        getStage().addActor(buttonMapTwo);
+        addSceneObject(buttonMapOne);
+        addSceneObject(buttonMapTwo);
     }
 
-    private TextButton createButton(String buttonText) {
+    private TextButtonSceneObject createButton(String buttonText) {
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
@@ -82,7 +86,7 @@ public final class MapSelectionScene extends SceneBase {
         style.fontColor = new Color(0.9f, 0.5f, 0.5f, 1);
         style.downFontColor = new Color(0, 0.4f, 0, 1);
 
-        return new TextButton(buttonText, style);
+        return new TextButtonSceneObject(new TextButton(buttonText, style));
     }
 
     @Override
