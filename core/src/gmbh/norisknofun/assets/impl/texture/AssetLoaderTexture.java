@@ -8,7 +8,6 @@ import java.io.InputStream;
 import gmbh.norisknofun.assets.AssetLoader;
 import gmbh.norisknofun.assets.AssetType;
 import gmbh.norisknofun.assets.impl.map.AssetLoaderMap;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Asset loader responsible for loading textures.
@@ -32,6 +31,6 @@ public class AssetLoaderTexture implements AssetLoader<AssetTexture> {
 
     @Override
     public AssetTexture load(InputStream stream) {
-        throw new NotImplementedException(); // for now
+        throw new UnsupportedOperationException("Not implemented"); // for now
     }
 }

@@ -40,8 +40,6 @@ class GameObjectMap extends SceneObject {
         Color.CYAN
     };
 
-    private
-
     GameObjectMap(AssetMap assetMap) {
 
         this.assetMap = assetMap;
