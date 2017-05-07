@@ -1,5 +1,7 @@
 package gmbh.norisknofun.assets.impl.map;
 
+import com.badlogic.gdx.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,6 +49,7 @@ public class AssetMap implements Asset {
         private final float[] vertices;
         private String regionOwner;
         private int numberTroops;
+        private Color regionColor;
 
         Region(String name, float[] vertices) {
             this.name = name;
@@ -54,6 +57,7 @@ public class AssetMap implements Asset {
 
             regionOwner = "none";
             numberTroops = 0;
+            regionColor = Color.WHITE;
         }
 
         public String getName() {
@@ -70,6 +74,14 @@ public class AssetMap implements Asset {
 
         public void setOwner(String newOwner) {
             regionOwner = newOwner;
+        }
+
+        public void setColor(Color color) {
+            regionColor = color;
+        }
+
+        public Color getColor() {
+            return regionColor;
         }
 
         public int getTroops() {

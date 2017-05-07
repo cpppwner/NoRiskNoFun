@@ -4,15 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.game.figures.Artillery;
+import gmbh.norisknofun.scene.game.figures.Cavalry;
+import gmbh.norisknofun.scene.game.figures.Figure;
 import gmbh.norisknofun.scene.game.figures.Infantry;
 
 /**
@@ -26,8 +31,9 @@ public final class GameScene extends SceneBase {
 
     private BitmapFont font;
     private Label fontActor;
-
     private String currentRegion;
+
+    private List<Figure> figures = new ArrayList<>();
 
 
     public GameScene(GameData data) {
@@ -38,9 +44,10 @@ public final class GameScene extends SceneBase {
 
     private void addFiguresToStage() {
         addSceneObject(createInfantry());
-        addSceneObject(createInfantry());
-        addSceneObject(createInfantry());
-        addSceneObject(createInfantry());
+
+        addSceneObject(createCavalry());
+
+        addSceneObject(createArtillery());
     }
 
 
@@ -52,26 +59,23 @@ public final class GameScene extends SceneBase {
 
         addSceneObject(new GameObjectMap(data.getMapAsset()));
         addFiguresToStage();
-
         addInputListener();
 
         super.show();
     }
 
     private void addInputListener() {
-        getStage().addListener(new InputListener() {
+   addSceneListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                for (int i = 0; i < getSceneObjects().size(); i++) {
-                    Actor actor = getSceneObjects().get(i);
-                    if (actor.getClass() == Infantry.class) {
-                        if (((Infantry) actor).isHighlighted() && isPointInRegion(x, y)) {
-                            actor.addAction(Actions.moveTo(x, y, 0.2f));
-                            ((Infantry) actor).setHighlighted(false); // remove highlight after move
-                            fontActor.setText("Region: " + currentRegion);
-                        }
+                for (int i = 0; i < figures.size(); i++) {
+                    Figure actor = figures.get(i);
+
+                    if (actor.isHighlighted() && isPointInRegion(x, y)) {
+                        actor.addAction(Actions.moveTo(x, y, 0.2f));
+                        actor.setHighlighted(false); // remove highlight after move
                     }
                 }
 
@@ -83,33 +87,35 @@ public final class GameScene extends SceneBase {
     }
 
     private Infantry createInfantry() {
-        Infantry infantry = new Infantry((int) (Gdx.graphics.getWidth() * 0.5), (int) (Gdx.graphics.getHeight() * 0.1), 200, 200);
-        final Infantry infantry1 = infantry;
-        infantry.addListener(new InputListener() {
+        Infantry infantry = new Infantry((int) (Gdx.graphics.getWidth() * 0.3), (int) (Gdx.graphics.getHeight() * 0.1), 200, 200);
+        infantry.addTouchListener();
 
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
-                if (infantry1.isHighlighted()) {
-                    infantry1.setHighlighted(false);
-                } else {
-                    infantry1.setHighlighted(true);
-                }
-                event.stop();
-                System.out.println("hallo actor");
-                return true;
-            }
-        });
-        infantry = infantry1;
+        figures.add(infantry);
         return infantry;
+    }
+
+    private Cavalry createCavalry() {
+        Cavalry cavalry = new Cavalry((int) (Gdx.graphics.getWidth() * 0.5), (int) (Gdx.graphics.getHeight() * 0.1), 200, 200);
+        cavalry.addTouchListener();
+
+        figures.add(cavalry);
+        return cavalry;
+    }
+
+    private Artillery createArtillery() {
+        Artillery artillery = new Artillery((int) (Gdx.graphics.getWidth() * 0.7), (int) (Gdx.graphics.getHeight() * 0.1), 200, 200);
+        artillery.addTouchListener();
+
+        figures.add(artillery);
+        return artillery;
     }
 
     /**
      * Same functionality as isPointInRegion, but with String return for debugging purposes
      *
-     * @param pointx
-     * @param pointy
-     * @return
+     * @param pointx x coordinate
+     * @param pointy y coordinate
+     * @return Region name
      */
     private String checkifPointisInoneRegion(float pointx, float pointy) {
         String result = "Not in a Region";
@@ -121,7 +127,6 @@ public final class GameScene extends SceneBase {
                 currentRegion = data.getMapAsset().getRegions().get(i).getName();
                 return result;
             }
-
         }
         currentRegion = "No Region.";
         return result;
@@ -140,10 +145,14 @@ public final class GameScene extends SceneBase {
         for (int i = 0; i < data.getMapAsset().getRegions().size(); i++) {
             float[] vertices = data.getMapAsset().getRegions().get(i).getVertices();
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
+                fontActor.setText("Region: " + data.getMapAsset().getRegions().get(i).getName());
+                data.getMapAsset().getRegions().get(i).setOwner("Player");
+                data.getMapAsset().getRegions().get(i).setColor(Color.CYAN);
                 return true;
             }
 
         }
+        fontActor.setText("Region: None");
         return false;
     }
 

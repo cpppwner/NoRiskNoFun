@@ -7,16 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list id="cd7300c6-a375-4218-9c1e-3d370bdaca9c" name="Default" comment="Try to Merge&#10;" />
-    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="New changelist">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/Figures/Artillery.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Artillery.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/Figures/Cavalry.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Cavalry.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/Figures/Figure.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Figure.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/Figures/Infantry.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Infantry.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/Figures/NoRiskNoFun_DrawFigures.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/NoRiskNoFun_DrawFigures.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/gmbh/norisknofun/AndroidLauncher.java" afterPath="$PROJECT_DIR$/android/src/gmbh/norisknofun/AndroidLauncher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneBase.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneBase.java" />
+    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="Adjust Figures and GameScene to new SceneObject">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetMap.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameObjectMap.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameObjectMap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.ipr" afterPath="$PROJECT_DIR$/repo.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Figure.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Figure.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.iws" afterPath="$PROJECT_DIR$/repo.iws" />
     </list>
     <ignored path="repo.iws" />
@@ -111,13 +106,11 @@
       <file leaf-file-name="GameScene.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2329">
-              <caret line="159" column="0" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+            <state relative-caret-position="1904">
+              <caret line="130" column="37" selection-start-line="130" selection-start-column="37" selection-end-line="130" selection-end-column="37" />
               <folding>
-                <element signature="e#1585#2469#0" expanded="true" />
-                <element signature="e#2468#2469#0" expanded="true" />
-                <element signature="e#2724#3200#0" expanded="true" />
-                <element signature="e#3199#3200#0" expanded="true" />
+                <element signature="e#1750#2415#0" expanded="true" />
+                <element signature="e#2414#2415#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2443,36 +2436,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scene" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="game" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2514,7 +2477,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/SceneObjectRefactor.patch" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Refactor_Figure_actor_and_add_different_figure_types_to_game_map.patch" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -2867,12 +2830,19 @@
       <option name="project" value="LOCAL" />
       <updated>1491574885576</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Adjust Figures and GameScene to new SceneObject">
+      <created>1494162274811</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1494162274811</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2887,7 +2857,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25323623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25323623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2957,7 +2927,8 @@
     <MESSAGE value="Server communication added branch: NetworkTest" />
     <MESSAGE value="Server communication added Test" />
     <MESSAGE value="Server communication added Que + Multithreaded&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Server communication added Que + Multithreaded&#10;" />
+    <MESSAGE value="Adjust Figures and GameScene to new SceneObject" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjust Figures and GameScene to new SceneObject" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3277,13 +3248,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2329">
-          <caret line="159" column="0" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+        <state relative-caret-position="1904">
+          <caret line="130" column="37" selection-start-line="130" selection-start-column="37" selection-end-line="130" selection-end-column="37" />
           <folding>
-            <element signature="e#1585#2469#0" expanded="true" />
-            <element signature="e#2468#2469#0" expanded="true" />
-            <element signature="e#2724#3200#0" expanded="true" />
-            <element signature="e#3199#3200#0" expanded="true" />
+            <element signature="e#1750#2415#0" expanded="true" />
+            <element signature="e#2414#2415#0" expanded="true" />
           </folding>
         </state>
       </provider>
