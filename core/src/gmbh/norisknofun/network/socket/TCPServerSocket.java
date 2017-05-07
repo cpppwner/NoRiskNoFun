@@ -6,7 +6,7 @@ import java.nio.channels.SelectableChannel;
 /**
  * Server socket interface.
  */
-interface TCPServerSocket extends AutoCloseable {
+public interface TCPServerSocket extends AutoCloseable {
 
     /**
      * Accept a new connection from a client.

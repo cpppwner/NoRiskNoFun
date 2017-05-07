@@ -14,7 +14,7 @@ import java.nio.channels.SocketChannel;
  *     Note: The whole socket implementation is using non-blocking sockets.
  * </p>
  */
-public class TCPClientSocketImpl implements TCPClientSocket {
+class TCPClientSocketImpl implements TCPClientSocket {
 
     private SocketChannel socketChannel;
 

@@ -21,4 +21,9 @@ public class SocketFactoryImpl implements SocketFactory {
     public TCPClientSocket openClientSocket(String address, int port) throws IOException {
         return TCPClientSocketImpl.open(address, port);
     }
+
+    @Override
+    public SocketSelector openSocketSelector() throws IOException {
+        return SocketSelectorImpl.open();
+    }
 }

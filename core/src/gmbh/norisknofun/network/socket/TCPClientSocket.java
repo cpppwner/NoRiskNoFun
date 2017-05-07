@@ -8,8 +8,7 @@ import java.nio.channels.SelectableChannel;
 /**
  * Client socket interface.
  */
-
-interface TCPClientSocket extends AutoCloseable {
+public interface TCPClientSocket extends AutoCloseable {
 
     /**
      * Read data from socket into given byte buffer.

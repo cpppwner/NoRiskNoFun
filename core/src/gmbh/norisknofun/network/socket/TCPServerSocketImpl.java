@@ -13,7 +13,7 @@ import java.nio.channels.SocketChannel;
  *     Note: the whole socket implementation is using non-blocking sockets.
  * </p>
  */
-public class TCPServerSocketImpl implements TCPServerSocket {
+class TCPServerSocketImpl implements TCPServerSocket {
 
     private final ServerSocketChannel serverSocketChannel;
 

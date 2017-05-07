@@ -17,5 +17,5 @@ public interface SocketFactory {
 
     TCPClientSocket openClientSocket(String address, int port) throws IOException;
 
-
+    SocketSelector openSocketSelector() throws IOException;
 }

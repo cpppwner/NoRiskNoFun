@@ -1,30 +1,15 @@
 package gmbh.norisknofun.network.socket;
 
 import java.io.IOException;
-import java.nio.channels.Selector;
+import java.nio.channels.SelectableChannel;
+import java.nio.channels.SelectionKey;
 
 /**
- * Socket Selector class.
+ * Selector interface.
  */
-public class SocketSelector implements AutoCloseable {
+interface SocketSelector extends AutoCloseable {
 
-    private final Selector selector;
+    SelectionKey register(SelectableChannel channel, int interrestOps) throws IOException;
 
-    private SocketSelector(Selector selector) {
-
-        this.selector = selector;
-    }
-
-    public static SocketSelector open() throws IOException {
-        return new SocketSelector(Selector.open());
-    }
-
-    Selector getSelector() {
-        return selector;
-    }
-
-    @Override
-    public void close() throws Exception {
-        selector.close();
-    }
+    SelectionKey register(SelectableChannel channel, int interrestOps, Object o) throws IOException;
 }
