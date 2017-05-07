@@ -1,4 +1,4 @@
-package gmbh.norisknofun.Network;
+package gmbh.norisknofun.network;
 
 import java.io.BufferedReader;
 import java.io.IOException;

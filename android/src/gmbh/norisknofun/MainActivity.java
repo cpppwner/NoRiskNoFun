@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import java.net.Socket;
 
-import gmbh.norisknofun.Network.Client;
-import gmbh.norisknofun.Network.MyServer;
+import gmbh.norisknofun.network.Client;
+import gmbh.norisknofun.network.MyServer;
 
 public class MainActivity extends Activity  {
 
