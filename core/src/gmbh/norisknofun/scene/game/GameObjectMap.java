@@ -32,12 +32,12 @@ class GameObjectMap extends SceneObject {
 
     private List<PolygonRegion> polygonRegions;
 
-    private static final Color[] COLLOR_POOL = new Color[]
+    private static final Color[] COLOR_POOL = new Color[]
     {
         Color.BLUE,
         Color.YELLOW,
         Color.ORANGE,
-        Color.CYAN
+        Color.CYAN,
     };
 
     GameObjectMap(AssetMap assetMap) {
@@ -58,10 +58,16 @@ class GameObjectMap extends SceneObject {
 
         polygonRegions = new ArrayList<>(assetMap.getRegions().size());
 
+/*        Pixmap pix = new Pixmap(1,1, Pixmap.Format.RGBA8888);
+        pix.setColor(Color.FIREBRICK);
+        pix.fill();
+        Texture regionTexture = new Texture(pix);*/
+
         for (AssetMap.Region region : assetMap.getRegions()) {
             PolygonRegion polyReg = new PolygonRegion(new TextureRegion(texture),
                     region.getVertices(),
                     new EarClippingTriangulator().computeTriangles(region.getVertices()).toArray());
+            /*polyReg.getRegion().setTexture(regionTexture);*/
 
             polygonRegions.add(polyReg);
         }
@@ -72,8 +78,13 @@ class GameObjectMap extends SceneObject {
         batch.end();
 
         Gdx.gl.glLineWidth(3);
+/*        Pixmap pix = new Pixmap(1,1, Pixmap.Format.RGBA8888);
+        pix.setColor(Color.BROWN);
+        pix.fill();
+        Texture regionTexture = new Texture(pix);*/
 
         for (PolygonRegion region : polygonRegions) {
+            /*region.getRegion().setTexture(regionTexture);*/
 
             this.batch.begin();
             this.batch.draw(region, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

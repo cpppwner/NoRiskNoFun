@@ -45,10 +45,15 @@ public class AssetMap implements Asset {
     {
         private final String name;
         private final float[] vertices;
+        private String regionOwner;
+        private int numberTroops;
 
         Region(String name, float[] vertices) {
             this.name = name;
             this.vertices = vertices;
+
+            regionOwner = "none";
+            numberTroops = 0;
         }
 
         public String getName() {
@@ -57,6 +62,22 @@ public class AssetMap implements Asset {
 
         public float[] getVertices() {
             return vertices;
+        }
+
+        public String getOwner() {
+            return regionOwner;
+        }
+
+        public void setOwner(String newOwner) {
+            regionOwner = newOwner;
+        }
+
+        public int getTroops() {
+            return numberTroops;
+        }
+
+        public void setTroops(int amount) {
+            numberTroops = amount;
         }
     }
 }
