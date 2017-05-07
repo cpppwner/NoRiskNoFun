@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.LinkedList;
@@ -47,6 +49,15 @@ public abstract class SceneBase implements Scene {
 
         sceneObjects.add(sceneObject);
         stage.addActor(sceneObject);
+    }
+
+
+    public void addSceneListener(EventListener listener) {
+        stage.addListener(listener);
+    }
+
+    public List<SceneObject> getSceneObjects() {
+        return sceneObjects;
     }
 
     @Override

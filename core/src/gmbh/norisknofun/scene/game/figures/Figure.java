@@ -1,19 +1,20 @@
-package gmbh.norisknofun.Figures;
+package gmbh.norisknofun.scene.game.figures;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import gmbh.norisknofun.scene.SceneObject;
 
 /**
  * Created by Katharina on 10.04.2017.
  */
 
-public class Figure extends Actor {
+public class Figure extends SceneObject {
 
     protected Texture img;
     protected Sprite sprite;
+    boolean highlighted = false;
 
 
 
@@ -42,5 +43,17 @@ public class Figure extends Actor {
     protected void positionChanged() {
         sprite.setPosition(getX(),getY());
         super.positionChanged();
+    }
+
+    public void setHighlighted(Boolean highlighted){
+        this.highlighted=highlighted;
+        if(highlighted){
+            sprite.setRegion(new Texture("badlogic.jpg"));
+        }else{
+            sprite.setRegion(new Texture("infanterie.png"));
+        }
+    }
+    public boolean isHighlighted(){
+        return highlighted;
     }
 }
