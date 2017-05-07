@@ -13,7 +13,9 @@ import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.badlogic.gdx.math.Polyline;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gmbh.norisknofun.assets.impl.map.AssetMap;
 import gmbh.norisknofun.scene.SceneObject;
@@ -29,6 +31,7 @@ class GameObjectMap extends SceneObject {
     private ShapeRenderer shapeRenderer;
 
     private List<PolygonRegion> polygonRegions;
+    private Map<AssetMap.Region, PolygonRegion> regionMap;
 
     private static final Color[] COLOR_POOL = new Color[]
     {
@@ -49,6 +52,8 @@ class GameObjectMap extends SceneObject {
         pix.fill();
         texture = new Texture(pix);
 
+        regionMap = new HashMap<>();
+
         initPolygonRegions(assetMap);
     }
 
@@ -67,8 +72,17 @@ class GameObjectMap extends SceneObject {
                     new EarClippingTriangulator().computeTriangles(region.getVertices()).toArray());
             /*polyReg.getRegion().setTexture(regionTexture);*/
 
+            regionMap.put(region, polyReg);
             polygonRegions.add(polyReg);
         }
+    }
+
+    public Map<AssetMap.Region, PolygonRegion> getRegionMap() {
+        return regionMap;
+    }
+
+    public List<PolygonRegion> getPolygonRegions() {
+        return polygonRegions;
     }
 
     @Override

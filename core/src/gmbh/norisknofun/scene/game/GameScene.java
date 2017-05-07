@@ -2,7 +2,10 @@ package gmbh.norisknofun.scene.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.PolygonRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -11,7 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import gmbh.norisknofun.assets.impl.map.AssetMap;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneNames;
@@ -33,7 +38,10 @@ public final class GameScene extends SceneBase {
     private Label fontActor;
     private String currentRegion;
 
+    private GameObjectMap gameObjectMap;
+
     private List<Figure> figures = new ArrayList<>();
+    private Map<AssetMap.Region, PolygonRegion> regionMap;
 
 
     public GameScene(GameData data) {
@@ -57,7 +65,10 @@ public final class GameScene extends SceneBase {
         fontActor.setBounds(0, 0, 500, 100);
         getStage().addActor(fontActor);
 
-        addSceneObject(new GameObjectMap(data.getMapAsset()));
+        gameObjectMap = new GameObjectMap(data.getMapAsset());
+        regionMap = gameObjectMap.getRegionMap();
+
+        addSceneObject(gameObjectMap);
         addFiguresToStage();
         addInputListener();
 
@@ -140,14 +151,16 @@ public final class GameScene extends SceneBase {
      * @return true if in a region, false if not.
      */
     private boolean isPointInRegion(float pointX, float pointY) {
+        AssetMap.Region region;
 
         // for Intersector, we have to convert to percentual x/y coordinates. Simply divide by screen width/height
         for (int i = 0; i < data.getMapAsset().getRegions().size(); i++) {
-            float[] vertices = data.getMapAsset().getRegions().get(i).getVertices();
+            region = data.getMapAsset().getRegions().get(i);
+            float[] vertices =region.getVertices();
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
-                fontActor.setText("Region: " + data.getMapAsset().getRegions().get(i).getName());
-                data.getMapAsset().getRegions().get(i).setOwner("Player");
-                data.getMapAsset().getRegions().get(i).setColor(Color.CYAN);
+                fontActor.setText("Region: " + region.getName());
+                region.setOwner("Player");
+                setRegionColor(Color.GREEN, region);
                 return true;
             }
 
@@ -167,6 +180,17 @@ public final class GameScene extends SceneBase {
         style.fontColor = Color.WHITE;
 
         return new Label("Region: ", style);
+    }
+
+    private void setRegionColor(Color color, AssetMap.Region region) {
+        Pixmap pix = new Pixmap(1,1, Pixmap.Format.RGBA8888);
+        pix.setColor(Color.GREEN);
+        pix.fill();
+        Texture regionTexture = new Texture(pix);
+
+        //gameObjectMap.getPolygonRegions().get(0).getRegion().setTexture(regionTexture);
+        PolygonRegion polygonRegion = regionMap.get(region);
+        polygonRegion.getRegion().setTexture(regionTexture);
     }
 
     @Override
