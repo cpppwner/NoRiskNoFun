@@ -19,6 +19,7 @@ public class GameData {
 
     private String mapFilename = null;
     private AssetMap mapAsset = null;
+    private int[] diceRoll;
 
     public GameData(AssetLoaderFactory assetLoaderFactory) {
         this.assetLoaderFactory = assetLoaderFactory;
@@ -46,5 +47,12 @@ public class GameData {
         }
 
         return mapAsset;
+    }
+
+    public void setDiceRoll(int[] roll) {
+        diceRoll = roll;
+    }
+    public int[] getDiceRoll() {
+        return diceRoll;
     }
 }

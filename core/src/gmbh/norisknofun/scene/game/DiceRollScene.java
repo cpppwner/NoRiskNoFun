@@ -37,7 +37,7 @@ public class DiceRollScene extends SceneBase {
     private static final float SHAKE_GRAVITY_THRESHOLD = 2.0f;
 
     private long lastShakeTime;
-    private int[] rollResults = {1, 1, 1};
+    private int[] rollResults = {0, 0, 0};
     private int cheatsAvailable;
     private boolean hasBeenShaken;
     private boolean canRoll;
@@ -96,6 +96,7 @@ public class DiceRollScene extends SceneBase {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                writeRollResult(); // write roll result only now as we're done when we press back
                 // clear stage here as we have to redraw it on next press anyway
                 getStage().clear();
                 SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
@@ -274,6 +275,13 @@ public class DiceRollScene extends SceneBase {
      */
     public void setDieAmount(int dieAmount) {
         this.dieAmount = dieAmount;
+    }
+
+    /**
+     * Write the roll result back to GameData after the roll is done
+     */
+    private void writeRollResult() {
+        data.setDiceRoll(rollResults);
     }
 
 
