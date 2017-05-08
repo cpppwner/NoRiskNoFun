@@ -6,11 +6,15 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +23,9 @@ import java.util.Map;
 import gmbh.norisknofun.assets.impl.map.AssetMap;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
+import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 import gmbh.norisknofun.scene.game.figures.Artillery;
 import gmbh.norisknofun.scene.game.figures.Cavalry;
 import gmbh.norisknofun.scene.game.figures.Figure;
@@ -32,11 +38,11 @@ public final class GameScene extends SceneBase {
 
     private final GameData data;
 
-    private GameObjectMap map;
-
     private BitmapFont font;
     private Label fontActor;
     private String currentRegion;
+    private TextButtonSceneObject rollButton;
+    private boolean renderScene = true;
 
     private GameObjectMap gameObjectMap;
 
@@ -61,17 +67,24 @@ public final class GameScene extends SceneBase {
 
     @Override
     public void show() {
-        fontActor = initLabel();
-        fontActor.setBounds(0, 0, 500, 100);
-        getStage().addActor(fontActor);
+        // make sure the stage is not drawn again when coming back from another scene
+        // FIXME: proper implementation in scene manager?
+        if (renderScene) {
+            fontActor = initLabel();
+            fontActor.setBounds(0, 0, 500, 100);
+            getStage().addActor(fontActor);
 
-        gameObjectMap = new GameObjectMap(data.getMapAsset());
-        regionMap = gameObjectMap.getRegionMap();
+            gameObjectMap = new GameObjectMap(data.getMapAsset());
+            regionMap = gameObjectMap.getRegionMap();
 
-        addSceneObject(gameObjectMap);
-        addFiguresToStage();
-        addInputListener();
+            addSceneObject(gameObjectMap);
+            addFiguresToStage();
+            addInputListener();
 
+            addRollButton();
+
+            renderScene = false;
+        }
         super.show();
     }
 
@@ -191,6 +204,32 @@ public final class GameScene extends SceneBase {
         //gameObjectMap.getPolygonRegions().get(0).getRegion().setTexture(regionTexture);
         PolygonRegion polygonRegion = regionMap.get(region);
         polygonRegion.getRegion().setTexture(regionTexture);
+    }
+
+    private TextButtonSceneObject createButton(String buttonText) {
+
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = font;
+        style.up = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
+        style.fontColor = new Color(0.9f, 0.5f, 0.5f, 1);
+        style.downFontColor = new Color(0, 0.4f, 0, 1);
+
+        return new TextButtonSceneObject(new TextButton(buttonText, style));
+    }
+
+    private void addRollButton() {
+        rollButton = createButton("Dice Roll");
+        rollButton.setBounds(1000, 100, 500, 100);
+        rollButton.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                SceneManager.getInstance().setActiveScene(SceneNames.DICE_SCENE);
+            }
+        });
+        addSceneObject(rollButton);
     }
 
     @Override

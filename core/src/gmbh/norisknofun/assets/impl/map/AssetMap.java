@@ -2,9 +2,6 @@ package gmbh.norisknofun.assets.impl.map;
 
 import com.badlogic.gdx.graphics.Color;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.PolygonRegion;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

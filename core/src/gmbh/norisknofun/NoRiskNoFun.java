@@ -8,6 +8,7 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.Scene;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.game.DiceRollScene;
 import gmbh.norisknofun.scene.ui.CreateGameScene;
 import gmbh.norisknofun.scene.game.GameScene;
 import gmbh.norisknofun.scene.ui.JoinGameScene;
@@ -31,6 +32,7 @@ public class NoRiskNoFun implements ApplicationListener  {
         SceneManager.getInstance().registerScene(new CreateGameScene(gameData));
         SceneManager.getInstance().registerScene(new JoinGameScene(gameData));
         SceneManager.getInstance().registerScene(new MainMenuScene(gameData));
+        SceneManager.getInstance().registerScene(new DiceRollScene(gameData));
     }
 
     private void showStartupScene() {
