@@ -25,6 +25,7 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 import gmbh.norisknofun.scene.game.figures.Artillery;
 import gmbh.norisknofun.scene.game.figures.Cavalry;
@@ -39,9 +40,7 @@ public final class GameScene extends SceneBase {
     private final GameData data;
 
     private BitmapFont font;
-    private Label fontActor;
-    private String currentRegion;
-    private TextButtonSceneObject rollButton;
+    private LabelSceneObject label;
     private boolean renderScene = true;
 
     private GameObjectMap gameObjectMap;
@@ -70,9 +69,9 @@ public final class GameScene extends SceneBase {
         // make sure the stage is not drawn again when coming back from another scene
         // FIXME: proper implementation in scene manager?
         if (renderScene) {
-            fontActor = initLabel();
-            fontActor.setBounds(0, 0, 500, 100);
-            getStage().addActor(fontActor);
+            label = initLabel();
+            label.setBounds(0, 0, 500, 100);
+            addSceneObject(label);
 
             gameObjectMap = new GameObjectMap(data.getMapAsset());
             regionMap = gameObjectMap.getRegionMap();
@@ -89,7 +88,7 @@ public final class GameScene extends SceneBase {
     }
 
     private void addInputListener() {
-   addSceneListener(new InputListener() {
+        addSceneListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -98,12 +97,12 @@ public final class GameScene extends SceneBase {
                     Figure actor = figures.get(i);
 
                     if (actor.isHighlighted() && isPointInRegion(x, y)) {
-                        actor.addAction(Actions.moveTo(x, y, 0.2f));
+                        actor.addAction(Actions.moveTo(x - (actor.getWidth() / 2), y - (actor.getHeight() / 2), 0.2f));
                         actor.setHighlighted(false); // remove highlight after move
                     }
                 }
 
-                System.out.println("hallo stage :" + checkifPointisInoneRegion(x, y));
+                System.out.println("hallo stage :" + checkIfPointIsInOneRegion(x, y));
                 return true;
             }
 
@@ -137,22 +136,21 @@ public final class GameScene extends SceneBase {
     /**
      * Same functionality as isPointInRegion, but with String return for debugging purposes
      *
-     * @param pointx x coordinate
-     * @param pointy y coordinate
+     * @param pointX x coordinate
+     * @param pointY y coordinate
      * @return Region name
      */
-    private String checkifPointisInoneRegion(float pointx, float pointy) {
-        String result = "Not in a Region";
+    private String checkIfPointIsInOneRegion(float pointX, float pointY) {
+        String result;
 
         for (int i = 0; i < data.getMapAsset().getRegions().size(); i++) {
             float[] vertices = data.getMapAsset().getRegions().get(i).getVertices();
-            if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointx / Gdx.graphics.getWidth(), pointy / Gdx.graphics.getHeight())) {
-                result = "Region name:" + data.getMapAsset().getRegions().get(i).getName();
-                currentRegion = data.getMapAsset().getRegions().get(i).getName();
+            if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
+                result = data.getMapAsset().getRegions().get(i).getName();
                 return result;
             }
         }
-        currentRegion = "No Region.";
+        result = "No Region.";
         return result;
     }
 
@@ -169,20 +167,20 @@ public final class GameScene extends SceneBase {
         // for Intersector, we have to convert to percentual x/y coordinates. Simply divide by screen width/height
         for (int i = 0; i < data.getMapAsset().getRegions().size(); i++) {
             region = data.getMapAsset().getRegions().get(i);
-            float[] vertices =region.getVertices();
+            float[] vertices = region.getVertices();
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
-                fontActor.setText("Region: " + region.getName());
+                label.getLabel().setText("Region: " + region.getName());
                 region.setOwner("Player");
                 setRegionColor(Color.GREEN, region);
                 return true;
             }
 
         }
-        fontActor.setText("Region: None");
+        label.getLabel().setText("Region: None");
         return false;
     }
 
-    private Label initLabel() {
+    private LabelSceneObject initLabel() {
 
         font = new BitmapFont();
         font.setColor(Color.WHITE);
@@ -192,18 +190,34 @@ public final class GameScene extends SceneBase {
         style.font = font;
         style.fontColor = Color.WHITE;
 
-        return new Label("Region: ", style);
+        return new LabelSceneObject(new Label("Region: ", style));
     }
 
     private void setRegionColor(Color color, AssetMap.Region region) {
-        Pixmap pix = new Pixmap(1,1, Pixmap.Format.RGBA8888);
-        pix.setColor(Color.GREEN);
+        Pixmap pix = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pix.setColor(color);
         pix.fill();
         Texture regionTexture = new Texture(pix);
 
         //gameObjectMap.getPolygonRegions().get(0).getRegion().setTexture(regionTexture);
         PolygonRegion polygonRegion = regionMap.get(region);
         polygonRegion.getRegion().setTexture(regionTexture);
+    }
+
+    private void addRollButton() {
+        TextButtonSceneObject rollButton;
+
+        rollButton = createButton("Dice Roll");
+        rollButton.setBounds(1000, 100, 500, 100);
+        rollButton.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                SceneManager.getInstance().setActiveScene(SceneNames.DICE_SCENE);
+            }
+        });
+        addSceneObject(rollButton);
     }
 
     private TextButtonSceneObject createButton(String buttonText) {
@@ -218,19 +232,6 @@ public final class GameScene extends SceneBase {
         return new TextButtonSceneObject(new TextButton(buttonText, style));
     }
 
-    private void addRollButton() {
-        rollButton = createButton("Dice Roll");
-        rollButton.setBounds(1000, 100, 500, 100);
-        rollButton.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager.getInstance().setActiveScene(SceneNames.DICE_SCENE);
-            }
-        });
-        addSceneObject(rollButton);
-    }
 
     @Override
     public void dispose() {

@@ -73,10 +73,11 @@ public class DiceRollScene extends SceneBase {
 
     /**
      * Initialize a DiceSceneObject and add it to the scene
+     *
      * @param number dice image to show
-     * @param index place in the dieObjects list
-     * @param x coordinate
-     * @param y coordinate
+     * @param index  place in the dieObjects list
+     * @param x      coordinate
+     * @param y      coordinate
      */
     private void initDie(int number, int index, int x, int y) {
         DiceSceneObject dieObject;
@@ -107,6 +108,7 @@ public class DiceRollScene extends SceneBase {
 
     /**
      * Create a generic text button with the given text
+     *
      * @param buttonText Text on the button
      * @return created TextButtonSceneObject
      */
@@ -124,6 +126,7 @@ public class DiceRollScene extends SceneBase {
 
     /**
      * Create a label
+     *
      * @return created LabelSceneObject
      */
     private LabelSceneObject initLabel() {
@@ -136,7 +139,7 @@ public class DiceRollScene extends SceneBase {
         style.font = font;
         style.fontColor = Color.WHITE;
 
-        return new LabelSceneObject(new Label(""+cheatsAvailable, style));
+        return new LabelSceneObject(new Label("" + cheatsAvailable, style));
     }
 
     /**
@@ -225,7 +228,7 @@ public class DiceRollScene extends SceneBase {
             diceRoll(index);
             showRollResult(index);
             cheatsAvailable--;
-            cheatLabel.getLabel().setText(""+cheatsAvailable);
+            cheatLabel.getLabel().setText("" + cheatsAvailable);
             System.out.println("[DEBUG] Cheat successful. " + cheatsAvailable + " remaining.");
         } else {
             System.out.println("[DEBUG] No cheats remaining.");
@@ -240,13 +243,13 @@ public class DiceRollScene extends SceneBase {
     private void setDiceClickListener() {
 
         dieObjects.get(0).addListener(new ClickListener() {
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    System.out.println("FIRST DIE PRESSED!");
-                    tryCheat(0);
-                    System.out.printf("[DEBUG] %d, %d, %d\n", rollResults[0], rollResults[1], rollResults[2]);
-                    return true;
-                }
-            });
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("FIRST DIE PRESSED!");
+                tryCheat(0);
+                System.out.printf("[DEBUG] %d, %d, %d\n", rollResults[0], rollResults[1], rollResults[2]);
+                return true;
+            }
+        });
 
         dieObjects.get(1).addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -271,6 +274,7 @@ public class DiceRollScene extends SceneBase {
     /**
      * Set the amount of dice available in the scene.
      * This changes according to the Risiko rules
+     *
      * @param dieAmount amount of dice available
      */
     public void setDieAmount(int dieAmount) {
