@@ -1,4 +1,5 @@
 apply plugin: "java"
+apply plugin: "jacoco"
 apply plugin: 'android-reporting'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -7,6 +8,21 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 sourceSets.test.java.srcDirs = [ "test/" ]
+
+jacocoTestReport {
+    dependsOn tasks.test
+
+    //noinspection GroovyAssignabilityCheck
+    sourceSets sourceSets.main
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+}
+
+tasks.check.dependsOn tasks.jacocoTestReport
+rootProject.tasks.jacocoTestReport.dependsOn tasks.test
 
 eclipse.project {
     name = appName + "-core"
