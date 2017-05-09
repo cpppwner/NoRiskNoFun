@@ -32,10 +32,6 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
-
-    jacoco {
-        toolVersion = '0.7.1.201405082137'
-    }
 }
 
 project(":android") {
