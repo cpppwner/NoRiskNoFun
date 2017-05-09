@@ -274,15 +274,6 @@ public class AssetLoaderMapTests extends GdxTest {
         }
     }
 
-    @Test(expected = NullPointerException.class)
-    public void loadingMapFromInternalPathWithNullArgument() {
-
-        // given
-        AssetLoaderMap target = new AssetLoaderMap();
-
-
-    }
-
     private static GameMap createGameMap() {
 
         GameMap map = new GameMap();
