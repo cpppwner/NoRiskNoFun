@@ -29,6 +29,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    // FIXME stefan.eberl - 2017-05-09 - do not abort on lint errors
+    lintOptions {
+        abortOnError false
+    }
 }
 
 
