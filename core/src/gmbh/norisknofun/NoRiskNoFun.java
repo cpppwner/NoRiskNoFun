@@ -37,7 +37,7 @@ public class NoRiskNoFun implements ApplicationListener  {
 
     private void showStartupScene() {
 
-        SceneManager.getInstance().setActiveScene(SceneNames.Main_Menu_SCENE);
+        SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
     }
 
     @Override

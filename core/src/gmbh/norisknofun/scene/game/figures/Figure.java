@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+import gmbh.norisknofun.assets.impl.map.AssetMap;
 import gmbh.norisknofun.scene.SceneObject;
 
 /**
@@ -17,6 +18,8 @@ public class Figure extends SceneObject {
     protected Texture img;
     protected Sprite sprite;
     boolean highlighted = false;
+    AssetMap.Region region = null;
+    private boolean firstMove = true;
 
 
     public Figure( int x, int y, int width, int height){
@@ -30,9 +33,6 @@ public class Figure extends SceneObject {
 
         sprite= new Sprite();
     }
-
-
-
 
     @Override
     public void draw(Batch batch, float parentAlpha){
@@ -71,9 +71,23 @@ public class Figure extends SceneObject {
                     setHighlighted(true);
                 }
                 event.stop();
-                System.out.println("hallo actor");
                 return true;
             }
         });
     }
+
+    public AssetMap.Region getCurrentRegion() {
+        return region;
+    }
+    public void setCurrentRegion(AssetMap.Region region) {
+        this.region = region;
+    }
+
+    public boolean isFirstMove() {
+        return firstMove;
+    }
+    public void setFirstMove(boolean firstMove) {
+        this.firstMove = firstMove;
+    }
+
 }

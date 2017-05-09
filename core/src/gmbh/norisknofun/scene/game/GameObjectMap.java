@@ -33,14 +33,6 @@ class GameObjectMap extends SceneObject {
     private List<PolygonRegion> polygonRegions;
     private Map<AssetMap.Region, PolygonRegion> regionMap;
 
-    private static final Color[] COLOR_POOL = new Color[]
-    {
-        Color.BLUE,
-        Color.YELLOW,
-        Color.ORANGE,
-        Color.CYAN,
-    };
-
     GameObjectMap(AssetMap assetMap) {
 
         this.assetMap = assetMap;
@@ -84,7 +76,7 @@ class GameObjectMap extends SceneObject {
     public void draw (Batch batch, float parentAlpha) {
         batch.end();
 
-        Gdx.gl.glLineWidth(3);
+        Gdx.gl.glLineWidth(200);
 
         for (PolygonRegion region : polygonRegions) {
 

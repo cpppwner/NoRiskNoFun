@@ -41,9 +41,7 @@ public final class GameScene extends SceneBase {
 
     private BitmapFont font;
     private LabelSceneObject label;
-    private boolean renderScene = true;
-
-    private GameObjectMap gameObjectMap;
+    private boolean initializeScene = true;
 
     private List<Figure> figures = new ArrayList<>();
     private Map<AssetMap.Region, PolygonRegion> regionMap;
@@ -67,8 +65,9 @@ public final class GameScene extends SceneBase {
     @Override
     public void show() {
         // make sure the stage is not drawn again when coming back from another scene
-        // FIXME: proper implementation in scene manager?
-        if (renderScene) {
+        if (initializeScene) {
+            GameObjectMap gameObjectMap;
+
             label = initLabel();
             label.setBounds(0, 0, 500, 100);
             addSceneObject(label);
@@ -82,7 +81,7 @@ public final class GameScene extends SceneBase {
 
             addRollButton();
 
-            renderScene = false;
+            initializeScene = false;
         }
         super.show();
     }
@@ -99,10 +98,30 @@ public final class GameScene extends SceneBase {
                     if (actor.isHighlighted() && isPointInRegion(x, y)) {
                         actor.addAction(Actions.moveTo(x - (actor.getWidth() / 2), y - (actor.getHeight() / 2), 0.2f));
                         actor.setHighlighted(false); // remove highlight after move
+
+                        // if it's the actors first move, explicitly set the region
+                        if (actor.isFirstMove()) {
+                            actor.setCurrentRegion(currentRegion);
+                            currentRegion.setTroops(currentRegion.getTroops() + 1);
+                            actor.setFirstMove(false);
+                        }
+
+                        // check if the actor moves out of its current region and set troops accordingly
+                        if (currentRegion != actor.getCurrentRegion()) {
+                            int troops = actor.getCurrentRegion().getTroops() - 1;
+                            actor.getCurrentRegion().setTroops(troops);
+                            currentRegion.setTroops(currentRegion.getTroops() + 1);
+
+                            // re-color the old region, if there are no more troops it will become white
+                            setRegionColor(actor.getCurrentRegion().getColor(), actor.getCurrentRegion());
+                            actor.setCurrentRegion(currentRegion);
+                        }
+
+                        // also update the color of the new region as we moved onto it
+                        currentRegion.setColor(Color.GREEN);
+                        setRegionColor(currentRegion.getColor(), currentRegion);
                     }
                 }
-
-                System.out.println("hallo stage :" + checkIfPointIsInOneRegion(x, y));
                 return true;
             }
 
@@ -161,17 +180,22 @@ public final class GameScene extends SceneBase {
      * @param pointY absolute value of Y coordinate
      * @return true if in a region, false if not.
      */
+    AssetMap.Region currentRegion;
+
     private boolean isPointInRegion(float pointX, float pointY) {
         AssetMap.Region region;
 
         // for Intersector, we have to convert to percentual x/y coordinates. Simply divide by screen width/height
         for (int i = 0; i < data.getMapAsset().getRegions().size(); i++) {
             region = data.getMapAsset().getRegions().get(i);
+            currentRegion = region;
             float[] vertices = region.getVertices();
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
                 label.getLabel().setText("Region: " + region.getName());
                 region.setOwner("Player");
-                setRegionColor(Color.GREEN, region);
+
+                System.out.println("Region Owner: " + region.getOwner());
+                System.out.println("Region Troops: " + region.getTroops());
                 return true;
             }
 
@@ -199,11 +223,13 @@ public final class GameScene extends SceneBase {
         pix.fill();
         Texture regionTexture = new Texture(pix);
 
-        //gameObjectMap.getPolygonRegions().get(0).getRegion().setTexture(regionTexture);
         PolygonRegion polygonRegion = regionMap.get(region);
         polygonRegion.getRegion().setTexture(regionTexture);
     }
 
+    /**
+     * Create a button to switch to the dice roll scene
+     */
     private void addRollButton() {
         TextButtonSceneObject rollButton;
 
@@ -220,6 +246,7 @@ public final class GameScene extends SceneBase {
         addSceneObject(rollButton);
     }
 
+
     private TextButtonSceneObject createButton(String buttonText) {
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
@@ -231,13 +258,4 @@ public final class GameScene extends SceneBase {
 
         return new TextButtonSceneObject(new TextButton(buttonText, style));
     }
-
-
-    @Override
-    public void dispose() {
-
-
-    }
-
-
 }

@@ -29,7 +29,7 @@ public class MainMenuScene extends SceneBase{
     private final GameData gameData;
 
     public MainMenuScene(GameData gameData){
-        super(SceneNames.Main_Menu_SCENE, Color.WHITE);
+        super(SceneNames.MAIN_MENU_SCENE, Color.WHITE);
         this.gameData=gameData;
         try {
 

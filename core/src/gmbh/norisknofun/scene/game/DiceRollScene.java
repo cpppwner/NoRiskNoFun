@@ -21,7 +21,7 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
-import gmbh.norisknofun.scene.common.DiceSceneObject;
+import gmbh.norisknofun.scene.game.dice.DiceSceneObject;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
@@ -139,7 +139,7 @@ public class DiceRollScene extends SceneBase {
         style.font = font;
         style.fontColor = Color.WHITE;
 
-        return new LabelSceneObject(new Label("" + cheatsAvailable, style));
+        return new LabelSceneObject(new Label(Integer.toString(cheatsAvailable), style));
     }
 
     /**
@@ -156,10 +156,7 @@ public class DiceRollScene extends SceneBase {
         // gForce will be close to 1 when there is no movement.
         float gForce = (float) Math.sqrt((xGrav * xGrav) + (yGrav * yGrav) + (zGrav * zGrav));
 
-        if (gForce > SHAKE_GRAVITY_THRESHOLD) {
-            return true;
-        }
-        return false;
+        return (gForce > SHAKE_GRAVITY_THRESHOLD);
     }
 
     /**
@@ -228,43 +225,33 @@ public class DiceRollScene extends SceneBase {
             diceRoll(index);
             showRollResult(index);
             cheatsAvailable--;
-            cheatLabel.getLabel().setText("" + cheatsAvailable);
-            System.out.println("[DEBUG] Cheat successful. " + cheatsAvailable + " remaining.");
-        } else {
-            System.out.println("[DEBUG] No cheats remaining.");
+            cheatLabel.getLabel().setText(Integer.toString(cheatsAvailable));
         }
     }
 
     /**
      * Set ClickListener to all die.
      * Used for cheat function.
-     * TODO: Dynamically depending on the amount of dice available
      */
     private void setDiceClickListener() {
 
         dieObjects.get(0).addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("FIRST DIE PRESSED!");
                 tryCheat(0);
-                System.out.printf("[DEBUG] %d, %d, %d\n", rollResults[0], rollResults[1], rollResults[2]);
                 return true;
             }
         });
 
         dieObjects.get(1).addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("SECOND DIE PRESSED!");
                 tryCheat(1);
-                System.out.printf("[DEBUG] %d, %d, %d\n", rollResults[0], rollResults[1], rollResults[2]);
                 return true;
             }
         });
 
         dieObjects.get(2).addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("THIRD DIE PRESSED!");
                 tryCheat(2);
-                System.out.printf("[DEBUG] %d, %d, %d\n", rollResults[0], rollResults[1], rollResults[2]);
                 return true;
             }
         });
@@ -292,13 +279,14 @@ public class DiceRollScene extends SceneBase {
     @Override
     public void render(float delta) {
 
+        // set hasBeenShaken to true once hasShaken() registered, so the if statement
+        // continues to the animation/result even if device isn't moving anymore
         if ((hasShaken() || hasBeenShaken) && canRoll) {
 
 
             // only update if it hasn't been shaken in the last 2 seconds
             if (TimeUtils.millis() - lastShakeTime > 5000) {
                 diceRoll();
-                System.out.printf("[DEBUG] %d, %d, %d\n", rollResults[0], rollResults[1], rollResults[2]);
                 lastShakeTime = TimeUtils.millis();
                 hasBeenShaken = true;
             }

@@ -88,8 +88,16 @@ public class AssetMap implements Asset {
             return numberTroops;
         }
 
+        /**
+         * Set the amount of troops on this region
+         * If there are none left, color it white again
+         * @param amount new number of troops
+         */
         public void setTroops(int amount) {
             numberTroops = amount;
+            if (numberTroops < 1) {
+                regionColor = Color.WHITE;
+            }
         }
     }
 }
