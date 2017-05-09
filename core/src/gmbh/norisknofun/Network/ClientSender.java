@@ -1,4 +1,4 @@
-package gmbh.norisknofun;
+package gmbh.norisknofun.Network;
 
 
 import java.io.IOException;

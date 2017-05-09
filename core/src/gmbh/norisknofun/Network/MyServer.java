@@ -1,12 +1,10 @@
-package gmbh.norisknofun;
-
-import android.content.Context;
+package gmbh.norisknofun.Network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-class MyServer {
+public class MyServer {
 
    private ServerSocket m_server;
 
@@ -14,25 +12,25 @@ class MyServer {
    private boolean error=false;
     private  Thread m_objThread;
 
-    Context c;
 
-   MyServer(Context c)
+
+   public MyServer()
    {
        try {
            m_server = new ServerSocket(2002);
-           this.c=c;
+
        } catch (IOException e) {
            error=true;
            e.printStackTrace();
        }
    }
 
-   void startListening()
+   public void startListening()
    {
         m_objThread = new Thread(new Runnable() {
            public void run() {
                // Start ServerDispatcher thread
-               ServerDispatcher serverDispatcher = new ServerDispatcher(c);
+               ServerDispatcher serverDispatcher = new ServerDispatcher();
                serverDispatcher.start();
 
                while (!isStopped) {
