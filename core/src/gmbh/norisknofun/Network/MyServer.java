@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-class MyServer {
+public class MyServer {
 
    private ServerSocket m_server;
 
@@ -14,7 +14,7 @@ class MyServer {
 
 
 
-   MyServer()
+   public MyServer()
    {
        try {
            m_server = new ServerSocket(2002);
@@ -25,7 +25,7 @@ class MyServer {
        }
    }
 
-   void startListening()
+   public void startListening()
    {
         m_objThread = new Thread(new Runnable() {
            public void run() {
