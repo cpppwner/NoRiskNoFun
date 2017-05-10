@@ -1,21 +1,24 @@
 package gmbh.norisknofun.Network.NetworkMessages;
 
-import java.io.Serializable;
-
 /**
  * Created by Philipp Mödritscher on 10.05.2017.
  */
 
 /**
- * After Playernameselected
+ *
+ * After moved a Troup
  *
  * Client -> Server
  */
 
 
-public class PlayerJoined extends BasicMessageImpl{
+public class MoveTroop extends  BasicMessageImpl {
 
     String playername;
+    //Troop
+    //region
+
+
 
 
 }

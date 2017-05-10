@@ -1,21 +1,23 @@
 package gmbh.norisknofun.Network.NetworkMessages;
 
-import java.io.Serializable;
-
 /**
  * Created by Philipp Mödritscher on 10.05.2017.
  */
 
 /**
- * After Playernameselected
+ *
+ * If Spread is finished player can Attack
  *
  * Client -> Server
  */
 
 
-public class PlayerJoined extends BasicMessageImpl{
+public class AttackPlayer extends  BasicMessageImpl {
 
     String playername;
+    String attackecPlayername;
+
+    boolean attack;
 
 
 }
