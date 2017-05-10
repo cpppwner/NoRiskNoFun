@@ -1,11 +1,10 @@
-package gmbh.norisknofun;
+package gmbh.norisknofun.Network;
 
 
 
 
-import java.net.Socket;
-import java.util.Vector;
-
+import java.net.*;
+import java.util.*;
 /**
  * Created by philipp on 06.04.2017.
  */
@@ -15,8 +14,7 @@ public class ServerDispatcher extends Thread
     private Vector mClients = new Vector();
 
 
-    public  ServerDispatcher(){
-
+    public  ServerDispatcher() {
     }
 
     /**
@@ -47,15 +45,10 @@ public class ServerDispatcher extends Thread
      */
     public synchronized void dispatchMessage(ClientInfo aClientInfo, String aMessage)
     {
-
-        if(aClientInfo==null) {
-            aMessage = NetworkMessages.SERVER+":" + aMessage;
-        }else{
-            Socket socket = aClientInfo.mSocket;
-            String senderIP = socket.getInetAddress().getHostAddress();
-            String senderPort = "" + socket.getPort();
-            aMessage = senderIP + ":" + senderPort + " : " + aMessage;
-        }
+        Socket socket = aClientInfo.mSocket;
+        String senderIP = socket.getInetAddress().getHostAddress();
+        String senderPort = "" + socket.getPort();
+        aMessage = senderIP + ":" + senderPort + " : " + aMessage;
         mMessageQueue.add(aMessage);
         notify();
     }
@@ -96,7 +89,7 @@ public class ServerDispatcher extends Thread
     public void run()
     {
         try {
-            while (!isInterrupted()) {
+            while (true) {
                 String message = getNextMessageFromQueue();
                 sendMessageToAllClients(message);
             }
@@ -110,23 +103,8 @@ public class ServerDispatcher extends Thread
     public void display(final String message)
     {
 
-        System.out.println("SERVER_DISPATCHER: "+message);
 
 
     }
 
-    public void stopAll() {
-        for (int i=0; i<mClients.size(); i++) {
-            ClientInfo clientInfo = (ClientInfo) mClients.get(i);
-            clientInfo.mClientSender.interrupt();
-            clientInfo.mClientListener.interrupt();
-            clientInfo.mCheckConnection.interrupt=true;
-            try {
-                clientInfo.mSocket.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            deleteClient(clientInfo);
-        }
-    }
 }
