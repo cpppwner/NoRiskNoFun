@@ -210,8 +210,8 @@ public final class GameScene extends SceneBase {
         Pixmap pix = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pix.setColor(color);
         pix.fill();
-        Texture regionTexture = new Texture(pix);
 
+        Texture regionTexture = new Texture(pix);
         PolygonRegion polygonRegion = regionMap.get(region);
         polygonRegion.getRegion().setTexture(regionTexture);
     }
