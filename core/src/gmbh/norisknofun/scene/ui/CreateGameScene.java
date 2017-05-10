@@ -22,28 +22,21 @@ import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
 
 public class CreateGameScene extends SceneBase {
 
-    private ImageButtonSceneObject createGameButton;
-    private final GameData data;
-
-    public CreateGameScene(GameData data) {
+    public CreateGameScene() {
 
         super(SceneNames.CREATE_GAME_SCENE, Color.WHITE);
-        this.data = data;
         setBackground();
         initImageButtons();
     }
 
 
-    @Override
-    public void dispose(){
-       super.dispose();
-    }
 
     private void setBackground(){
         addSceneObject(new BackgroundSceneObject());
     }
 
     private void initImageButtons() {
+        ImageButtonSceneObject createGameButton;
 
         createGameButton = createImageButton("button_create_game_eng.png");
         createGameButton.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);

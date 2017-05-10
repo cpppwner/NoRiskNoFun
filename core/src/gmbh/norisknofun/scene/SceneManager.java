@@ -179,27 +179,27 @@ public class SceneManager implements Disposable {
         public void addSceneObject(SceneObject sceneObject) { }
 
         @Override
-        public void preload() { }
+        public void preload() { /*NullObject pattern*/ }
 
         @Override
-        public void show() { }
+        public void show() { /*NullObject pattern*/ }
 
         @Override
-        public void render(float delta) { }
+        public void render(float delta) { /*NullObject pattern*/ }
 
         @Override
-        public void resize(int width, int height) { }
+        public void resize(int width, int height) { /*NullObject pattern*/ }
 
         @Override
-        public void pause() { }
+        public void pause() { /*NullObject pattern*/ }
 
         @Override
-        public void resume() { }
+        public void resume() { /*NullObject pattern*/ }
 
         @Override
-        public void hide() { }
+        public void hide() { /*NullObject pattern*/ }
 
         @Override
-        public void dispose() { }
+        public void dispose() { /*NullObject pattern*/ }
     }
 }

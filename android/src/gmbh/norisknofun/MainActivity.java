@@ -16,7 +16,6 @@ import gmbh.norisknofun.Network.MyServer;
 
 public class MainActivity extends Activity  {
 
-    private Socket clientSocket;
     private EditText etIp;
     private MyServer server;
     private Button startServerButton;

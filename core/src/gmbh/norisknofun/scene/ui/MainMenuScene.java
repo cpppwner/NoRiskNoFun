@@ -20,34 +20,26 @@ import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
  * Created by pippp on 06.05.2017.
  */
 
-public class MainMenuScene extends SceneBase{
+public class MainMenuScene extends SceneBase {
 
 
-    private ImageButtonSceneObject imageButtonCreate;
-    private ImageButtonSceneObject imageButtonJoin;
 
-    private final GameData gameData;
-
-    public MainMenuScene(GameData gameData){
+    public MainMenuScene() {
         super(SceneNames.MAIN_MENU_SCENE, Color.WHITE);
-        this.gameData=gameData;
-        try {
-
-            setBackground();
-            initMenuButtons();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        setBackground();
+        initMenuButtons();
     }
 
 
     private void initMenuButtons() {
 
+        ImageButtonSceneObject imageButtonCreate;
+        ImageButtonSceneObject imageButtonJoin;
+
         imageButtonCreate = createImageButton("button_create_game_eng.png");
         imageButtonJoin = createImageButton("button_join_game_eng.png");
 
-        imageButtonCreate.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);
+        imageButtonCreate.setBounds((Gdx.graphics.getWidth() / 6) - 5, (Gdx.graphics.getHeight() / 3), 553, 480);
         imageButtonJoin.setBounds((Gdx.graphics.getWidth() / 2) + 10, (Gdx.graphics.getHeight() / 3), 553, 480);
 
 
@@ -73,14 +65,14 @@ public class MainMenuScene extends SceneBase{
 
     }
 
-    private ImageButtonSceneObject createImageButton (String file){
+    private ImageButtonSceneObject createImageButton(String file) {
         Texture txt = new Texture(Gdx.files.internal(file));
         ImageButton imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(txt)));
         return new ImageButtonSceneObject(imageButton);
     }
 
 
-    private void setBackground(){
+    private void setBackground() {
         addSceneObject(new BackgroundSceneObject());
     }
 

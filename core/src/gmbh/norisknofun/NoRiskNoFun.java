@@ -29,9 +29,9 @@ public class NoRiskNoFun implements ApplicationListener  {
         GameData gameData = new GameData(new AssetLoaderFactoryImpl());
         SceneManager.getInstance().registerScene(new MapSelectionScene(gameData));
         SceneManager.getInstance().registerScene(new GameScene(gameData));
-        SceneManager.getInstance().registerScene(new CreateGameScene(gameData));
-        SceneManager.getInstance().registerScene(new JoinGameScene(gameData));
-        SceneManager.getInstance().registerScene(new MainMenuScene(gameData));
+        SceneManager.getInstance().registerScene(new CreateGameScene());
+        SceneManager.getInstance().registerScene(new JoinGameScene());
+        SceneManager.getInstance().registerScene(new MainMenuScene());
         SceneManager.getInstance().registerScene(new DiceRollScene(gameData));
     }
 

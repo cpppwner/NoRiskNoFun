@@ -23,12 +23,9 @@ import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
  */
 public class JoinGameScene extends SceneBase {
 
-    private ImageButtonSceneObject joinGameButton;
-    private final GameData data;
 
-    public JoinGameScene(GameData data){
+    public JoinGameScene(){
         super(SceneNames.JOIN_GAME_SCENE, Color.WHITE);
-        this.data = data;
         setBackground();
         initImageButtons();
     }
@@ -40,6 +37,7 @@ public class JoinGameScene extends SceneBase {
     }
 
     private void initImageButtons() {
+        ImageButtonSceneObject joinGameButton;
 
         joinGameButton = createImageButton("button_join_game_eng.png");
         joinGameButton.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);
@@ -62,11 +60,6 @@ public class JoinGameScene extends SceneBase {
         Texture txt = new Texture(Gdx.files.internal(file));
         ImageButton imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(txt)));
         return new ImageButtonSceneObject(imageButton);
-    }
-
-    @Override
-    public void dispose(){
-        super.dispose();
     }
 
 }

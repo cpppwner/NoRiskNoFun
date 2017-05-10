@@ -22,9 +22,6 @@ public final class MapSelectionScene extends SceneBase {
 
     private BitmapFont font;
 
-    private TextButtonSceneObject buttonMapOne;
-    private TextButtonSceneObject buttonMapTwo;
-
     private final GameData gameData;
 
     public MapSelectionScene(GameData gameData) {
@@ -45,6 +42,8 @@ public final class MapSelectionScene extends SceneBase {
     }
 
     private void initMapSelectionButtons() {
+        TextButtonSceneObject buttonMapOne;
+        TextButtonSceneObject buttonMapTwo;
 
         buttonMapOne = createButton("Map One");
         buttonMapTwo = createButton("Map Two");
@@ -57,7 +56,6 @@ public final class MapSelectionScene extends SceneBase {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("hallo");
                 gameData.setMapFile("maps/Dummy One.map");
                 SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
             }

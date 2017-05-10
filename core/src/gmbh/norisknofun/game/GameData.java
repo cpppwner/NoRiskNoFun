@@ -2,13 +2,10 @@ package gmbh.norisknofun.game;
 
 import com.badlogic.gdx.Gdx;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import gmbh.norisknofun.assets.AssetLoaderFactory;
 import gmbh.norisknofun.assets.impl.map.AssetMap;
-import gmbh.norisknofun.assets.impl.texture.AssetTexture;
 
 /**
  * Class containing game related data.

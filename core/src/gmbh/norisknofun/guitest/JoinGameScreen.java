@@ -1,4 +1,4 @@
-package gmbh.norisknofun.GUI_Test;
+package gmbh.norisknofun.guitest;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -14,54 +14,43 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
  * Created by Sputzi0815 on 24.04.2017.
  */
 
-public class CreateGameScreen extends Game implements Screen {
-    Stage createGame;
-    Texture img;
-    Texture imgbtn;
-    TextureRegion imgbtnregion;
-    TextureRegionDrawable textureRegionDrawable;
-    ImageButton imageButton;
+public class JoinGameScreen extends Game implements Screen{
+    private Stage joinGame;
+    private Texture img;
 
-    public CreateGameScreen(NoRiskNoFun_GUI_Test game) {
+
+    public JoinGameScreen(){
 
     }
 
-
     @Override
-    public void create(){
-        createGame = new Stage();
+    public void create() {
+        joinGame = new Stage();
         img = new Texture("menu.png");
-
-    }
-
-    @Override
-    public void render(){
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        createGame.getBatch().begin();
-        createGame.getBatch().draw(img,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        createGame.getBatch().end();
-        createGame.draw();
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        joinGame.getBatch().begin();
+        joinGame.getBatch().draw(img,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        joinGame.getBatch().end();
+        joinGame.draw();
+    }
 
+    @Override
+    public void show() {
+        // null
     }
 
     @Override
     public void hide() {
-
+        // null
     }
 
-    @Override
     public void dispose(){
-        createGame.dispose();
+        joinGame.dispose();
         img.dispose();
     }
 

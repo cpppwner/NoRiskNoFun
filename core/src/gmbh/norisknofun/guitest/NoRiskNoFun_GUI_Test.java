@@ -1,4 +1,4 @@
-package gmbh.norisknofun.GUI_Test;
+package gmbh.norisknofun.guitest;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,19 +13,21 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class NoRiskNoFun_GUI_Test extends Game implements Screen{
-    Stage menu;
-    Texture img;
-    Texture imgbtn;
-    TextureRegion imgbtnregion;
-    TextureRegionDrawable textureRegionDrawable;
-    ImageButton imageButtonCreate;
-    ImageButton imageButtonJoin;
-
-    private final NoRiskNoFun_GUI_Test game;
+    private Stage menu;
+    private Texture img;
 
 
-    public NoRiskNoFun_GUI_Test(){
-        game = this;
+
+
+    @Override
+    public void show() {
+
+        Texture imgbtn;
+        TextureRegion imgbtnregion;
+        TextureRegionDrawable textureRegionDrawable;
+        ImageButton imageButtonCreate;
+        ImageButton imageButtonJoin;
+
         menu = new Stage();
         Gdx.input.setInputProcessor(menu);
 
@@ -40,7 +42,7 @@ public class NoRiskNoFun_GUI_Test extends Game implements Screen{
         imageButtonCreate.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setScreen(new CreateGameScreen(game));
+                setScreen(new CreateGameScreen());
             }
         });
 
@@ -54,15 +56,9 @@ public class NoRiskNoFun_GUI_Test extends Game implements Screen{
         imageButtonJoin.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setScreen(new JoinGameScreen(game));
+                setScreen(new JoinGameScreen());
             }
         });
-
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
@@ -77,17 +73,17 @@ public class NoRiskNoFun_GUI_Test extends Game implements Screen{
 
     @Override
     public void create() {
-
+        //null
     }
 
     @Override
     public void resize(int width, int height) {
-
+        //null
     }
 
     @Override
     public void hide() {
-
+        //null
     }
 
     @Override
