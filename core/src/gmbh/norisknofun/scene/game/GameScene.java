@@ -45,6 +45,8 @@ public final class GameScene extends SceneBase {
 
     private List<Figure> figures = new ArrayList<>();
     private Map<AssetMap.Region, PolygonRegion> regionMap;
+    private AssetMap.Region currentRegion;
+
 
 
     public GameScene(GameData data) {
@@ -92,40 +94,50 @@ public final class GameScene extends SceneBase {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                for (int i = 0; i < figures.size(); i++) {
-                    Figure actor = figures.get(i);
+                moveActor(x, y);
 
-                    if (actor.isHighlighted() && isPointInRegion(x, y)) {
-                        actor.addAction(Actions.moveTo(x - (actor.getWidth() / 2), y - (actor.getHeight() / 2), 0.2f));
-                        actor.setHighlighted(false); // remove highlight after move
-
-                        // if it's the actors first move, explicitly set the region
-                        if (actor.isFirstMove()) {
-                            actor.setCurrentRegion(currentRegion);
-                            currentRegion.setTroops(currentRegion.getTroops() + 1);
-                            actor.setFirstMove(false);
-                        }
-
-                        // check if the actor moves out of its current region and set troops accordingly
-                        if (currentRegion != actor.getCurrentRegion()) {
-                            int troops = actor.getCurrentRegion().getTroops() - 1;
-                            actor.getCurrentRegion().setTroops(troops);
-                            currentRegion.setTroops(currentRegion.getTroops() + 1);
-
-                            // re-color the old region, if there are no more troops it will become white
-                            setRegionColor(actor.getCurrentRegion().getColor(), actor.getCurrentRegion());
-                            actor.setCurrentRegion(currentRegion);
-                        }
-
-                        // also update the color of the new region as we moved onto it
-                        currentRegion.setColor(Color.GREEN);
-                        setRegionColor(currentRegion.getColor(), currentRegion);
-                    }
-                }
                 return true;
             }
 
         });
+    }
+
+    /**
+     * Called by scene input listener to move highlighted actors to the click position
+     * @param x coordinate
+     * @param y coordinate
+     */
+    private void moveActor(float x, float y) {
+        for (int i = 0; i < figures.size(); i++) {
+            Figure actor = figures.get(i);
+
+            if (actor.isHighlighted() && isPointInRegion(x, y)) {
+                actor.addAction(Actions.moveTo(x - (actor.getWidth() / 2), y - (actor.getHeight() / 2), 0.2f));
+                actor.setHighlighted(false); // remove highlight after move
+
+                // if it's the actors first move, explicitly set the region
+                if (actor.isFirstMove()) {
+                    actor.setCurrentRegion(currentRegion);
+                    currentRegion.setTroops(currentRegion.getTroops() + 1);
+                    actor.setFirstMove(false);
+                }
+
+                // check if the actor moves out of its current region and set troops accordingly
+                if (currentRegion != actor.getCurrentRegion()) {
+                    int troops = actor.getCurrentRegion().getTroops() - 1;
+                    actor.getCurrentRegion().setTroops(troops);
+                    currentRegion.setTroops(currentRegion.getTroops() + 1);
+
+                    // re-color the old region, if there are no more troops it will become white
+                    setRegionColor(actor.getCurrentRegion().getColor(), actor.getCurrentRegion());
+                    actor.setCurrentRegion(currentRegion);
+                }
+
+                // also update the color of the new region as we moved onto it
+                currentRegion.setColor(Color.GREEN);
+                setRegionColor(currentRegion.getColor(), currentRegion);
+            }
+        }
     }
 
     private Infantry createInfantry() {
@@ -153,34 +165,12 @@ public final class GameScene extends SceneBase {
     }
 
     /**
-     * Same functionality as isPointInRegion, but with String return for debugging purposes
-     *
-     * @param pointX x coordinate
-     * @param pointY y coordinate
-     * @return Region name
-     */
-    private String checkIfPointIsInOneRegion(float pointX, float pointY) {
-        String result;
-
-        for (int i = 0; i < data.getMapAsset().getRegions().size(); i++) {
-            float[] vertices = data.getMapAsset().getRegions().get(i).getVertices();
-            if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
-                result = data.getMapAsset().getRegions().get(i).getName();
-                return result;
-            }
-        }
-        result = "No Region.";
-        return result;
-    }
-
-    /**
      * Checks if two specific coordinates are within a PolygonRegion
      *
      * @param pointX absolute value of X coordinate
      * @param pointY absolute value of Y coordinate
      * @return true if in a region, false if not.
      */
-    AssetMap.Region currentRegion;
 
     private boolean isPointInRegion(float pointX, float pointY) {
         AssetMap.Region region;
@@ -194,8 +184,6 @@ public final class GameScene extends SceneBase {
                 label.getLabel().setText("Region: " + region.getName());
                 region.setOwner("Player");
 
-                System.out.println("Region Owner: " + region.getOwner());
-                System.out.println("Region Troops: " + region.getTroops());
                 return true;
             }
 
@@ -247,6 +235,11 @@ public final class GameScene extends SceneBase {
     }
 
 
+    /**
+     * Create a button scene object with the given text
+     * @param buttonText Text on the button
+     * @return new TextButtonSceneObject
+     */
     private TextButtonSceneObject createButton(String buttonText) {
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();

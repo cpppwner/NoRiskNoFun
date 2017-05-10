@@ -7,9 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import gmbh.norisknofun.scene.SceneObject;
 
-/**
- * Created by user on 08.05.17.
- */
 
 public class DiceSceneObject extends SceneObject {
 
@@ -21,7 +18,7 @@ public class DiceSceneObject extends SceneObject {
 
     private int index;
     private Texture[] dieTextures;
-    private final int MAX_DIE_NUMBER = 6;
+    private static final int MAX_DIE_NUMBER = 6;
 
     public DiceSceneObject(int dieNumber, int index, float x, float y, float width, float height) {
         this.x = x;

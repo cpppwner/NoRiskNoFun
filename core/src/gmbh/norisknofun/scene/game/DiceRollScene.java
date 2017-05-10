@@ -231,7 +231,7 @@ public class DiceRollScene extends SceneBase {
 
     /**
      * Set ClickListener to all die.
-     * Used for cheat function.
+     * Used for cheat function. This doesn't work properly in a loop
      */
     private void setDiceClickListener() {
 
