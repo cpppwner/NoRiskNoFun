@@ -180,6 +180,7 @@ public final class GameScene extends SceneBase {
             region = data.getMapAsset().getRegions().get(i);
             currentRegion = region;
             float[] vertices = region.getVertices();
+
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
                 label.getLabel().setText("Region: " + region.getName());
                 region.setOwner("Player");
