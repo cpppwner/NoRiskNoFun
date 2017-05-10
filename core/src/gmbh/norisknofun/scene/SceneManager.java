@@ -176,7 +176,7 @@ public class SceneManager implements Disposable {
         }
 
         @Override
-        public void addSceneObject(SceneObject sceneObject) { }
+        public void addSceneObject(SceneObject sceneObject) { /*NullObject pattern*/ }
 
         @Override
         public void preload() { /*NullObject pattern*/ }

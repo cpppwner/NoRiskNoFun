@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.net.Socket;
-
 import gmbh.norisknofun.Network.Client;
 import gmbh.norisknofun.Network.MyServer;
 

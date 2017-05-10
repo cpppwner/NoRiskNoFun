@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class NoRiskNoFun_GUI_Test extends Game implements Screen{
+public class NoRiskNoFunGUITest extends Game implements Screen{
     private Stage menu;
     private Texture img;
 
