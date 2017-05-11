@@ -156,7 +156,7 @@ public class SceneManager implements Disposable {
         activeScene.hide();
         activeScene = new NullScene(); // set back to null scene
 
-        for (Scene scene : scenes.values())
+        for (Scene scene : scenes.values()) // don't replace with lambda expression
             scene.dispose();
         scenes.clear();
     }
@@ -176,27 +176,30 @@ public class SceneManager implements Disposable {
         }
 
         @Override
-        public void preload() { }
+        public void addSceneObject(SceneObject sceneObject) { /*NullObject pattern*/ }
 
         @Override
-        public void show() { }
+        public void preload() { /*NullObject pattern*/ }
 
         @Override
-        public void render(float delta) { }
+        public void show() { /*NullObject pattern*/ }
 
         @Override
-        public void resize(int width, int height) { }
+        public void render(float delta) { /*NullObject pattern*/ }
 
         @Override
-        public void pause() { }
+        public void resize(int width, int height) { /*NullObject pattern*/ }
 
         @Override
-        public void resume() { }
+        public void pause() { /*NullObject pattern*/ }
 
         @Override
-        public void hide() { }
+        public void resume() { /*NullObject pattern*/ }
 
         @Override
-        public void dispose() { }
+        public void hide() { /*NullObject pattern*/ }
+
+        @Override
+        public void dispose() { /*NullObject pattern*/ }
     }
 }

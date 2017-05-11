@@ -2,8 +2,6 @@ package gmbh.norisknofun.game;
 
 import com.badlogic.gdx.Gdx;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import gmbh.norisknofun.assets.AssetLoaderFactory;
@@ -18,9 +16,14 @@ public class GameData {
 
     private String mapFilename = null;
     private AssetMap mapAsset = null;
+    private int[] diceRoll;
 
     public GameData(AssetLoaderFactory assetLoaderFactory) {
         this.assetLoaderFactory = assetLoaderFactory;
+    }
+
+    AssetLoaderFactory getAssetLoaderFactory() {
+        return assetLoaderFactory;
     }
 
     public void setMapFile(String mapFilename) {
@@ -41,5 +44,12 @@ public class GameData {
         }
 
         return mapAsset;
+    }
+
+    public void setDiceRoll(int[] roll) {
+        diceRoll = roll;
+    }
+    public int[] getDiceRoll() {
+        return diceRoll;
     }
 }

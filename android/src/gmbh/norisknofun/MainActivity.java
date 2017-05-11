@@ -9,16 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.net.Socket;
-
 import gmbh.norisknofun.network.Client;
-import gmbh.norisknofun.network.MyServer;
+import gmbh.norisknofun.network.NetworkServer;
 
 public class MainActivity extends Activity  {
 
-    private Socket clientSocket;
     private EditText etIp;
-    private MyServer server;
+    private NetworkServer server;
     private Button startServerButton;
     private Client client;
 
@@ -52,7 +49,7 @@ public class MainActivity extends Activity  {
             client = new Client();
             Thread m_objThread = new Thread(new Runnable() {
                 public void run() {
-                    client.startCLient(getApplicationContext(),ip);
+                    client.startCLient(ip);
                 }
             });
 
@@ -87,7 +84,7 @@ public class MainActivity extends Activity  {
 
     public void startServer() {
 
-        server= new MyServer(getApplicationContext());
+        server= new NetworkServer();
         server.startListening();
     }
 

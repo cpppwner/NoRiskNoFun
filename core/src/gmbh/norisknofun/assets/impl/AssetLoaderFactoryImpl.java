@@ -5,6 +5,7 @@ import gmbh.norisknofun.assets.AssetLoader;
 import gmbh.norisknofun.assets.AssetLoaderFactory;
 import gmbh.norisknofun.assets.AssetType;
 import gmbh.norisknofun.assets.impl.map.AssetLoaderMap;
+import gmbh.norisknofun.assets.impl.texture.AssetLoaderTexture;
 
 /**
  * Default implementation of {@link AssetLoaderFactory}.
@@ -18,6 +19,8 @@ public class AssetLoaderFactoryImpl implements AssetLoaderFactory {
 
             case ASSET_TYPE_MAP:
                 return createAssetLoaderMap();
+            case ASSET_TYPE_TEXTURE:
+                return createAssetLoaderTexture();
             default:
                 throw new IllegalArgumentException("Unknown asset type");
         }
@@ -27,5 +30,11 @@ public class AssetLoaderFactoryImpl implements AssetLoaderFactory {
     public AssetLoaderMap createAssetLoaderMap() {
 
         return new AssetLoaderMap();
+    }
+
+    @Override
+    public AssetLoaderTexture createAssetLoaderTexture() {
+
+        return new AssetLoaderTexture();
     }
 }

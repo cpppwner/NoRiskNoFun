@@ -1,4 +1,4 @@
-package gmbh.norisknofun.Figures;
+package gmbh.norisknofun.scene.game.figures;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -9,12 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-import gmbh.norisknofun.Figures.Artillery;
-import gmbh.norisknofun.Figures.Cavalry;
-import gmbh.norisknofun.Figures.Figure;
-import gmbh.norisknofun.Figures.Infantry;
-
-public class NoRiskNoFun_DrawFigures extends ApplicationAdapter {
+public class NoRiskNoFunDrawFigures extends ApplicationAdapter {
     private OrthographicCamera camera;
     private Stage stage;
     private int counter=0;
@@ -25,14 +20,15 @@ public class NoRiskNoFun_DrawFigures extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage = new Stage();
-        addFigurestoStage();
         stage.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button){
 
                 stage.getActors().get(counter).addAction(Actions.moveTo(x-50,y-50,1));
                 counter++;
-                if(counter==stage.getActors().size) counter=0;
+                if(counter==stage.getActors().size) {
+                    counter=0;
+                }
                 return true;
             }
         });
@@ -54,19 +50,4 @@ public class NoRiskNoFun_DrawFigures extends ApplicationAdapter {
         stage.dispose();
     }
 
-    private void addFigurestoStage(){
-        Figure figure;
-        for(int i=0; i<3; i++){
-            figure=new Infantry(200,200,100,100);
-            stage.addActor(figure);
-
-            figure=new Cavalry(200,200,100,100);
-            stage.addActor(figure);
-
-            figure=new Artillery(200,200,100,100);
-            stage.addActor(figure);
-        }
-
-
-    }
 }

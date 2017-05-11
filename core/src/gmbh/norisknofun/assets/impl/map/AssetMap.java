@@ -1,5 +1,7 @@
 package gmbh.norisknofun.assets.impl.map;
 
+import com.badlogic.gdx.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,10 +47,17 @@ public class AssetMap implements Asset {
     {
         private final String name;
         private final float[] vertices;
+        private String regionOwner;
+        private int numberTroops;
+        private Color regionColor;
 
         Region(String name, float[] vertices) {
             this.name = name;
             this.vertices = vertices;
+
+            regionOwner = "none";
+            numberTroops = 0;
+            regionColor = Color.WHITE;
         }
 
         public String getName() {
@@ -57,6 +66,38 @@ public class AssetMap implements Asset {
 
         public float[] getVertices() {
             return vertices;
+        }
+
+        public String getOwner() {
+            return regionOwner;
+        }
+
+        public void setOwner(String newOwner) {
+            regionOwner = newOwner;
+        }
+
+        public void setColor(Color color) {
+            regionColor = color;
+        }
+
+        public Color getColor() {
+            return regionColor;
+        }
+
+        public int getTroops() {
+            return numberTroops;
+        }
+
+        /**
+         * Set the amount of troops on this region
+         * If there are none left, color it white again
+         * @param amount new number of troops
+         */
+        public void setTroops(int amount) {
+            numberTroops = amount;
+            if (numberTroops < 1) {
+                regionColor = Color.WHITE;
+            }
         }
     }
 }

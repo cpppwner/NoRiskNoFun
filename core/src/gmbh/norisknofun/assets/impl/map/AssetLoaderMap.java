@@ -25,6 +25,16 @@ public class AssetLoaderMap implements AssetLoader<AssetMap> {
     }
 
     @Override
+    public AssetMap load(String internalPath) {
+        try (InputStream stream = Gdx.files.internal(internalPath).read()) {
+            return load(stream);
+        } catch (Exception e) {
+            Gdx.app.error(AssetLoaderMap.class.getSimpleName(), "Loading map failed", e);
+            return null;
+        }
+    }
+
+    @Override
     public AssetMap load(InputStream stream) {
 
         if (stream == null)

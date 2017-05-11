@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,7 +39,7 @@ public class AssetLoaderMapTests extends GdxTest {
         AssetLoaderMap target = new AssetLoaderMap();
 
         // when/then
-        target.load(null);
+        target.load((InputStream)null);
     }
 
     @Test

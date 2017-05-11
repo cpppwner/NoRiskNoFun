@@ -1,30 +1,20 @@
-package gmbh.norisknofun.GUI_Test;
+package gmbh.norisknofun.guitest;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
 
 /**
  * Created by Sputzi0815 on 24.04.2017.
  */
 
 public class CreateGameScreen extends Game implements Screen {
-    Stage createGame;
-    Texture img;
-    Texture imgbtn;
-    TextureRegion imgbtnregion;
-    TextureRegionDrawable textureRegionDrawable;
-    ImageButton imageButton;
-
-    public CreateGameScreen(NoRiskNoFun_GUI_Test game) {
-
-    }
+    private Stage createGame;
+    private Texture img;
 
 
     @Override
@@ -46,17 +36,17 @@ public class CreateGameScreen extends Game implements Screen {
 
     @Override
     public void show() {
-
+        //null
     }
 
     @Override
     public void render(float delta) {
-
+        //null
     }
 
     @Override
     public void hide() {
-
+        //null
     }
 
     @Override
