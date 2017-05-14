@@ -15,6 +15,8 @@ import java.nio.channels.SocketChannel;
  */
 class TCPServerSocketImpl implements TCPServerSocket {
 
+
+
     private final ServerSocketChannel serverSocketChannel;
 
     /**
@@ -52,22 +54,22 @@ class TCPServerSocketImpl implements TCPServerSocket {
      * @throws IOException If an I/O error occurs.
      */
     static TCPServerSocket open(String address, int port) throws IOException {
-        ServerSocketChannel serverSocketChannel = null;
+        TCPServerSocketImpl serverSocket = null;
         try {
-            serverSocketChannel = ServerSocketChannel.open();
-            serverSocketChannel.configureBlocking(false);
+            serverSocket = new TCPServerSocketImpl(ServerSocketChannel.open());
+            serverSocket.serverSocketChannel.configureBlocking(false);
 
             // set SO_REUSEADDR socket option & bind socket
-            serverSocketChannel.socket().setReuseAddress(true);
-            serverSocketChannel.socket().bind(new InetSocketAddress(address, port));
-        } catch (IOException e) {
-            if (serverSocketChannel != null) {
-                serverSocketChannel.close();
+            serverSocket.serverSocketChannel.socket().setReuseAddress(true);
+            serverSocket.serverSocketChannel.socket().bind(address == null ? new InetSocketAddress(port) : new InetSocketAddress(address, port));
+        } catch (Exception e) {
+            if (serverSocket != null) {
+                serverSocket.close();
             }
             throw e;
         }
 
-        return new TCPServerSocketImpl(serverSocketChannel);
+        return serverSocket;
     }
 
     @Override
