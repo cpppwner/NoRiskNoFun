@@ -1,12 +1,13 @@
 package gmbh.norisknofun.network.socket;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.nio.channels.SelectableChannel;
 
 /**
  * Server socket interface.
  */
-public interface TCPServerSocket extends AutoCloseable {
+public interface TCPServerSocket extends Closeable {
 
     /**
      * Accept a new connection from a client.

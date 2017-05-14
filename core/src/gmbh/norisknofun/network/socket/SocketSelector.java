@@ -1,15 +1,35 @@
 package gmbh.norisknofun.network.socket;
 
+import java.io.Closeable;
 import java.io.IOException;
-import java.nio.channels.SelectableChannel;
-import java.nio.channels.SelectionKey;
 
 /**
- * Selector interface.
+ * Selector used to handle non-blocking I/O.
  */
-interface SocketSelector extends AutoCloseable {
+public interface SocketSelector extends Closeable {
 
-    SelectionKey register(SelectableChannel channel, int interrestOps) throws IOException;
+    /**
+     * Register a {@link TCPServerSocket} with this Selector.
+     *
+     * <p>
+     *     Registering a {@link TCPServerSocket} means to register it only
+     *     accept operations.
+     * </p>
+     *
+     * @param serverSocket The server socket to register.
+     * @throws IOException If an I/O error occurs.
+     */
+    void register(TCPServerSocket serverSocket) throws IOException;
 
-    SelectionKey register(SelectableChannel channel, int interrestOps, Object o) throws IOException;
+    void unregister(TCPServerSocket serverSocket);
+
+    void register(TCPClientSocket clientSocket, boolean writable) throws IOException;
+
+    void unregister(TCPClientSocket clientSocket);
+
+    void modify(TCPClientSocket clientSocket, boolean writable) throws IOException;
+
+    SelectionResult select() throws IOException;
+
+    void wakeup();
 }

@@ -17,16 +17,41 @@ class TCPServerSocketImpl implements TCPServerSocket {
 
     private final ServerSocketChannel serverSocketChannel;
 
+    /**
+     * Private constructor taking the wrapped {@link ServerSocketChannel}.
+     *
+     * <p>
+     *     Use the static {@link TCPServerSocketImpl#open(int)} or {@link TCPServerSocketImpl#open(String, int)}
+     *     methods to bind a server socket.
+     * </p>
+     *
+     * @param serverSocketChannel The underlying {@link ServerSocketChannel}.
+     */
     private TCPServerSocketImpl(ServerSocketChannel serverSocketChannel) {
 
         this.serverSocketChannel = serverSocketChannel;
     }
 
-    public static TCPServerSocket open(int port) throws IOException {
+    /**
+     * Open a server socket.
+     *
+     * @param port The port to bind to.
+     * @return Wrapper around the {@link ServerSocketChannel}.
+     * @throws IOException If an I/O error occurs.
+     */
+    static TCPServerSocket open(int port) throws IOException {
         return open(null, port);
     }
 
-    public static TCPServerSocket open(String address, int port) throws IOException {
+    /**
+     * Open a server socket.
+     *
+     * @param address The address to bind to.
+     * @param port The port to bind to.
+     * @return Wrapper around the {@link ServerSocketChannel}.
+     * @throws IOException If an I/O error occurs.
+     */
+    static TCPServerSocket open(String address, int port) throws IOException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.configureBlocking(false);
 
@@ -55,7 +80,7 @@ class TCPServerSocketImpl implements TCPServerSocket {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
 
         if (serverSocketChannel != null && serverSocketChannel.isOpen()) {
             serverSocketChannel.close();

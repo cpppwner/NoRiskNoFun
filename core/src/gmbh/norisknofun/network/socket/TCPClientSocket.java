@@ -1,5 +1,6 @@
 package gmbh.norisknofun.network.socket;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
@@ -8,7 +9,7 @@ import java.nio.channels.SelectableChannel;
 /**
  * Client socket interface.
  */
-public interface TCPClientSocket extends AutoCloseable {
+public interface TCPClientSocket extends Closeable {
 
     /**
      * Read data from socket into given byte buffer.

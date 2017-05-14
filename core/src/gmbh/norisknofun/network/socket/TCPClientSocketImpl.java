@@ -35,7 +35,7 @@ class TCPClientSocketImpl implements TCPClientSocket {
      * @return {@link TCPClientSocket}
      * @throws IOException If an I/O error occurs.
      */
-    public static TCPClientSocketImpl open(String address, int port) throws IOException {
+    static TCPClientSocketImpl open(String address, int port) throws IOException {
 
         SocketChannel socketChannel = SocketChannel.open();
         socketChannel.connect(new InetSocketAddress(address, port));
@@ -68,8 +68,8 @@ class TCPClientSocketImpl implements TCPClientSocket {
     }
 
     @Override
-    public void close() throws Exception {
-        if (socketChannel != null) {
+    public void close() throws IOException {
+        if (socketChannel != null && socketChannel.isOpen()) {
             socketChannel.close();
             socketChannel = null;
         }
