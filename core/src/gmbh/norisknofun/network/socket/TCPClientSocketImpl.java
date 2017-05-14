@@ -37,9 +37,17 @@ class TCPClientSocketImpl implements TCPClientSocket {
      */
     static TCPClientSocketImpl open(String address, int port) throws IOException {
 
-        SocketChannel socketChannel = SocketChannel.open();
-        socketChannel.connect(new InetSocketAddress(address, port));
-        socketChannel.configureBlocking(false);
+        SocketChannel socketChannel = null;
+        try {
+            socketChannel = SocketChannel.open();
+            socketChannel.connect(new InetSocketAddress(address, port));
+            socketChannel.configureBlocking(false);
+        } catch(IOException e) {
+            if (socketChannel != null) {
+                socketChannel.close();
+            }
+            throw e;
+        }
 
         return new TCPClientSocketImpl(socketChannel);
     }

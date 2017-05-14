@@ -52,12 +52,20 @@ class TCPServerSocketImpl implements TCPServerSocket {
      * @throws IOException If an I/O error occurs.
      */
     static TCPServerSocket open(String address, int port) throws IOException {
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.configureBlocking(false);
+        ServerSocketChannel serverSocketChannel = null;
+        try {
+            serverSocketChannel = ServerSocketChannel.open();
+            serverSocketChannel.configureBlocking(false);
 
-        // set SO_REUSEADDR socket option & bind socket
-        serverSocketChannel.socket().setReuseAddress(true);
-        serverSocketChannel.socket().bind(new InetSocketAddress(address, port));
+            // set SO_REUSEADDR socket option & bind socket
+            serverSocketChannel.socket().setReuseAddress(true);
+            serverSocketChannel.socket().bind(new InetSocketAddress(address, port));
+        } catch (IOException e) {
+            if (serverSocketChannel != null) {
+                serverSocketChannel.close();
+            }
+            throw e;
+        }
 
         return new TCPServerSocketImpl(serverSocketChannel);
     }
