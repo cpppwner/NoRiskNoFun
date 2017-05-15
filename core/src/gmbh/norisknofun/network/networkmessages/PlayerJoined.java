@@ -1,6 +1,4 @@
-package gmbh.norisknofun.Network.NetworkMessages;
-
-import java.io.Serializable;
+package gmbh.norisknofun.network.networkmessages;
 
 /**
  * Created by Philipp Mödritscher on 10.05.2017.

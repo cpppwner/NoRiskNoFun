@@ -1,4 +1,4 @@
-package gmbh.norisknofun.Network.NetworkMessages;
+package gmbh.norisknofun.network.networkmessages;
 
 import java.io.Serializable;
 
