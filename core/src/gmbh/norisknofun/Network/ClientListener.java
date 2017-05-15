@@ -32,12 +32,20 @@ public class ClientListener extends  Thread{
         try {
             while (!isInterrupted()) {
                 String message = mIn.readLine();
-                if (message == null)
+                //System.out.println("+++++++++ "+message+" ++++++++");
+                if (message == null){
                     break;
-                mServerDispatcher.dispatchMessage(mClientInfo, message);
+                }else if(message.equals(NetworkMessages.CLIENT_MESSAGE_Here)){
+                    // CLient XY response
+                   mClientInfo.mCheckConnection.isAlive=true;
+
+                }else{
+                    mServerDispatcher.dispatchMessage(mClientInfo, message);
+                }
             }
-        } catch (IOException ioex) {
+        } catch (Exception ex) {
             // Problem reading from socket (communication is broken)
+            System.err.println("ERROR: "+ex);
         }
 
         // Communication is broken. Interrupt both listener and sender threads
