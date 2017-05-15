@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -34,6 +35,7 @@ public class SocketSelectorImplTests {
 
     private ServerSocket serverSocket;
     private Thread serverThread;
+    private CountDownLatch serverReadyLatch;
 
     @Rule
     public Timeout globalTimeout= new Timeout(1, TimeUnit.MINUTES); // each test gets a timeout of 1 min
@@ -44,16 +46,19 @@ public class SocketSelectorImplTests {
         selector = SocketSelectorImpl.open();
 
         serverSocket = null;
+        serverReadyLatch = new CountDownLatch(1);
         serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    List<Socket> clients = new LinkedList<>();
+
                     serverSocket = new ServerSocket();
                     serverSocket.setReuseAddress(true);
                     serverSocket.setSoTimeout(SERVER_SOCKET_TIMEOUT_IN_MILLISECONDS);
                     serverSocket.bind(new InetSocketAddress(HOST, PORT));
 
-                    List<Socket> clients = new LinkedList<>();
+                    serverReadyLatch.countDown();
 
                     while (!Thread.currentThread().isInterrupted()) {
 
@@ -151,7 +156,7 @@ public class SocketSelectorImplTests {
 
         // startup server
         serverThread.start();
-        Thread.sleep(500); // give server some time
+        serverReadyLatch.await();
 
         TCPClientSocketImpl clientSocketOne = null;
         TCPClientSocketImpl clientSocketTwo = null;
@@ -225,7 +230,7 @@ public class SocketSelectorImplTests {
 
         // startup server
         serverThread.start();
-        Thread.sleep(500); // give server some time
+        serverReadyLatch.await();
 
         TCPClientSocketImpl clientSocketOne = null;
         TCPClientSocketImpl clientSocketTwo = null;
@@ -324,7 +329,7 @@ public class SocketSelectorImplTests {
 
         // startup server
         serverThread.start();
-        Thread.sleep(500); // give server some time
+        serverReadyLatch.await();
 
         TCPClientSocketImpl clientSocketOne = null;
         TCPClientSocketImpl clientSocketTwo = null;
