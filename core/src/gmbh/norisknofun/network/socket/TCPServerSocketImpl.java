@@ -2,6 +2,7 @@ package gmbh.norisknofun.network.socket;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
@@ -75,9 +76,6 @@ class TCPServerSocketImpl implements TCPServerSocket {
     @Override
     public TCPClientSocketImpl accept() throws IOException {
 
-        if (serverSocketChannel == null)
-            throw new IllegalStateException("channel not opened");
-
         SocketChannel socketChannel = serverSocketChannel.accept();
         socketChannel.configureBlocking(false);
 
@@ -87,6 +85,12 @@ class TCPServerSocketImpl implements TCPServerSocket {
     @Override
     public SelectableChannel getChannel() {
         return serverSocketChannel;
+    }
+
+    @Override
+    public SocketAddress getLocalAddress() throws IOException {
+
+        return serverSocketChannel.socket().getLocalSocketAddress();
     }
 
     @Override
