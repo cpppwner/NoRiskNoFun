@@ -1,4 +1,4 @@
-package gmbh.norisknofun.network.networkmessages;
+package gmbh.norisknofun.network.networkmessages.spread;
 
 /**
  * Created by Philipp Mödritscher on 10.05.2017.

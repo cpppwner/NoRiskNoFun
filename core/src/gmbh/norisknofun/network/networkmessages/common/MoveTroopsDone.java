@@ -1,0 +1,12 @@
+package gmbh.norisknofun.network.networkmessages.common;
+
+import gmbh.norisknofun.network.networkmessages.BasicMessageImpl;
+
+/**
+ * Created by pippp on 15.05.2017.
+ */
+
+public class MoveTroopsDone extends BasicMessageImpl {
+
+    String playername;
+}

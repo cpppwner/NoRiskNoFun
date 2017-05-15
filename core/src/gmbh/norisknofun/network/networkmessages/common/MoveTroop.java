@@ -1,8 +1,10 @@
-package gmbh.norisknofun.network.networkmessages;
+package gmbh.norisknofun.network.networkmessages.common;
 
 /**
  * Created by Philipp Mödritscher on 10.05.2017.
  */
+
+import gmbh.norisknofun.network.networkmessages.BasicMessageImpl;
 
 /**
  *
@@ -12,7 +14,7 @@ package gmbh.norisknofun.network.networkmessages;
  */
 
 
-public class MoveTroop extends  BasicMessageImpl {
+public class MoveTroop extends BasicMessageImpl {
 
     String playername;
     //Troop
