@@ -1,6 +1,9 @@
 package gmbh.norisknofun;
 
 
+import gmbh.norisknofun.Network.ClientInfo;
+import gmbh.norisknofun.Network.ServerDispatcher;
+
 /**
  * Created by Philipp Mödritscher on 02.05.2017.+
  */

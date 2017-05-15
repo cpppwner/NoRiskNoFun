@@ -35,9 +35,9 @@ public class ClientListener extends  Thread{
                 //System.out.println("+++++++++ "+message+" ++++++++");
                 if (message == null){
                     break;
-                }else if(message.equals(NetworkMessages.CLIENT_MESSAGE_Here)){
+                }else if(message.equals(/*NetworkMessages.CLIENT_MESSAGE_Here*/ "DOES NOT BUILD")){
                     // CLient XY response
-                   mClientInfo.mCheckConnection.isAlive=true;
+                   //mClientInfo.mCheckConnection.isAlive=true;
 
                 }else{
                     mServerDispatcher.dispatchMessage(mClientInfo, message);

@@ -6,7 +6,7 @@ package gmbh.norisknofun.Network.NetworkMessages;
 
 /**
  *
- * After Player moved a Troup
+ * After Player moved a Troop
  *
  * Server -> Client
  */

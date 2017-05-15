@@ -20,7 +20,7 @@ public class ClientMessageHandler {
             //TODO: Close Game etc Close Client etc
             // remove MainActivity with Core Client
 
-            MainActivity.client.setConnected(false);
+           // MainActivity.client.setConnected(false);
 
 
         }

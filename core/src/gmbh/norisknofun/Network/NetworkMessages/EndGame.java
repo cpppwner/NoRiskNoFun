@@ -5,7 +5,7 @@ package gmbh.norisknofun.Network.NetworkMessages;
  */
 
 /**
- * If Troups Left == No start Phase 1
+ * If Troops Left == No start Phase 1
  *
  * Start of Phase 1 check if somebody has won
  *

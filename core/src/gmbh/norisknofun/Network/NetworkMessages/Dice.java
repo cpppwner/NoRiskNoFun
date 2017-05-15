@@ -5,7 +5,7 @@ package gmbh.norisknofun.Network.NetworkMessages;
  */
 /**
  *
- * If attackedPLayer is reachable and player has chosen amount of Troups and rolled the Dice
+ * If attackedPLayer is reachable and player has chosen amount of Troops and rolled the Dice
  *
  * Client -> Server
  */
