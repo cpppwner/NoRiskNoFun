@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import gmbh.norisknofun.Network.Client;
-import gmbh.norisknofun.Network.MyServer;
+import gmbh.norisknofun.network.Client;
+import gmbh.norisknofun.network.MyServer;
 
 public class MainActivity extends Activity  {
 
