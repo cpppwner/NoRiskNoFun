@@ -35,10 +35,13 @@ public class JoinGameScene extends SceneBase {
 
     private void initImageButtons() {
         ImageButtonSceneObject joinGameButton;
+        ImageButtonSceneObject imageButtonBack;
 
         joinGameButton = createImageButton("button_join_game_eng.png");
-        joinGameButton.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);
+        imageButtonBack = createImageButton("button_back.png");
 
+        joinGameButton.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);
+        imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
 
         joinGameButton.addListener(new ClickListener() {
 
@@ -49,8 +52,17 @@ public class JoinGameScene extends SceneBase {
             }
         });
 
-        addSceneObject(joinGameButton);
+        imageButtonBack.addListener(new ClickListener() {
 
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+            }
+        });
+
+        addSceneObject(joinGameButton);
+        addSceneObject(imageButtonBack);
     }
 
     private ImageButtonSceneObject createImageButton (String file){

@@ -21,14 +21,11 @@ import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
 
 public class MainMenuScene extends SceneBase {
 
-
-
     public MainMenuScene() {
         super(SceneNames.MAIN_MENU_SCENE, Color.WHITE);
         setBackground();
         initMenuButtons();
     }
-
 
     private void initMenuButtons() {
 
@@ -59,6 +56,7 @@ public class MainMenuScene extends SceneBase {
                 SceneManager.getInstance().setActiveScene(SceneNames.JOIN_GAME_SCENE);
             }
         });
+
         addSceneObject(imageButtonCreate);
         addSceneObject(imageButtonJoin);
 
@@ -69,7 +67,6 @@ public class MainMenuScene extends SceneBase {
         ImageButton imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(txt)));
         return new ImageButtonSceneObject(imageButton);
     }
-
 
     private void setBackground() {
         addSceneObject(new BackgroundSceneObject());

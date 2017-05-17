@@ -1,58 +1,47 @@
 package gmbh.norisknofun.scene.ui;
 
+/**
+ * Created by Sputzi0815 on 17.05.2017.
+ */
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
-/**
- * Created by Sputzi0815 on 24.04.2017.
- */
 
-public class CreateGameScene extends SceneBase {
+public class ServerBrowserScene extends SceneBase{
 
-    public CreateGameScene() {
-
-        super(SceneNames.CREATE_GAME_SCENE, Color.WHITE);
+    protected ServerBrowserScene() {
+        super(SceneNames.SERVER_BROWSER_SCENE, Color.WHITE);
         setBackground();
         initImageButtons();
     }
-
-
 
     private void setBackground(){
         addSceneObject(new BackgroundSceneObject());
     }
 
     private void initImageButtons() {
-        ImageButtonSceneObject createGameButton;
         ImageButtonSceneObject imageButtonBack;
 
-        createGameButton = createImageButton("button_create_game_eng.png");
         imageButtonBack = createImageButton("button_back.png");
 
-        createGameButton.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
-
-
-        createGameButton.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
-            }
-        });
 
         imageButtonBack.addListener(new ClickListener() {
 
@@ -63,13 +52,14 @@ public class CreateGameScene extends SceneBase {
             }
         });
 
-        addSceneObject(createGameButton);
         addSceneObject(imageButtonBack);
     }
+
 
     private ImageButtonSceneObject createImageButton (String file){
         Texture txt = new Texture(Gdx.files.internal(file));
         ImageButton imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(txt)));
         return new ImageButtonSceneObject(imageButton);
     }
+
 }
