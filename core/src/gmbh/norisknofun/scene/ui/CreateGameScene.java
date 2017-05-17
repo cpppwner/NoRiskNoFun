@@ -36,9 +36,13 @@ public class CreateGameScene extends SceneBase {
 
     private void initImageButtons() {
         ImageButtonSceneObject createGameButton;
+        ImageButtonSceneObject imageButtonBack;
 
         createGameButton = createImageButton("button_create_game_eng.png");
+        imageButtonBack = createImageButton("button_back.png");
+
         createGameButton.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);
+        imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
 
 
         createGameButton.addListener(new ClickListener() {
@@ -50,8 +54,17 @@ public class CreateGameScene extends SceneBase {
             }
         });
 
-        addSceneObject(createGameButton);
+        imageButtonBack.addListener(new ClickListener() {
 
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+            }
+        });
+
+        addSceneObject(createGameButton);
+        addSceneObject(imageButtonBack);
     }
 
     private ImageButtonSceneObject createImageButton (String file){
