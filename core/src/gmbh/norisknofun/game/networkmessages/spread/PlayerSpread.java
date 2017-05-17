@@ -18,7 +18,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class PlayerSpread extends BasicMessageImpl {
 
-    String playername;
-    boolean playersTurn = true;
+    public String playername;
+    public boolean playersTurn = true;
 
 }

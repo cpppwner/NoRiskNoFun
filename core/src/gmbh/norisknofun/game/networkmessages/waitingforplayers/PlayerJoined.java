@@ -15,7 +15,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class PlayerJoined extends BasicMessageImpl {
 
-    String playername;
+    public String playername;
 
 
 }

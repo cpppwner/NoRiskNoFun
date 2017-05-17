@@ -8,6 +8,12 @@ import gmbh.norisknofun.game.statemachine.State;
  */
 
 public class EvaluateDiceResultState implements State {
+
+    private ServerContext context;
+    public EvaluateDiceResultState(ServerContext context){
+        this.context=context;
+    }
+
     @Override
     public void enter() {
 

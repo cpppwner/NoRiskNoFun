@@ -16,9 +16,10 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class MoveTroop extends BasicMessageImpl {
 
-    String playername;
-    //Troop
-    //region
+    public String playername;
+    public int troopamount;
+    public String destinationregion;
+    public String originregion;
 
 
 

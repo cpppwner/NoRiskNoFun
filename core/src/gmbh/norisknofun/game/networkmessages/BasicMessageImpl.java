@@ -11,6 +11,6 @@ public class BasicMessageImpl implements Message,Serializable {
 
     @Override
     public Class<? extends Message> getType() {
-        return null;
+        return getClass();
     }
 }

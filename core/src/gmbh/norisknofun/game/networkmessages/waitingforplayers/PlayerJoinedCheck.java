@@ -13,7 +13,7 @@ package gmbh.norisknofun.game.networkmessages.waitingforplayers;
 
 public class PlayerJoinedCheck extends PlayerJoined {
 
-    boolean allowedtojoin;
+    public boolean allowedtojoin;
 
 
 }

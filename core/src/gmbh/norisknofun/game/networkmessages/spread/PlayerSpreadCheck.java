@@ -5,6 +5,8 @@ package gmbh.norisknofun.game.networkmessages.spread;
  */
 
 
+import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+
 /**
  * If Spread of Player was correct tell him
  *
@@ -12,10 +14,10 @@ package gmbh.norisknofun.game.networkmessages.spread;
  * Server -> Client
  */
 
-public class PlayerSpreadCheck {
+public class PlayerSpreadCheck extends BasicMessageImpl {
 
-    String playername;
-    boolean check;
+    public String playername;
+    public boolean check;
     //region
 
 }

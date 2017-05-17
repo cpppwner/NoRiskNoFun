@@ -16,10 +16,10 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class MoveTroopCheck extends BasicMessageImpl {
 
-    String playername;
+    public String playername;
     //Troop
     //region
-    boolean movePossible;
+    public boolean movePossible;
 
    
 

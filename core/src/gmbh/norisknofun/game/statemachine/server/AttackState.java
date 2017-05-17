@@ -9,6 +9,10 @@ import gmbh.norisknofun.game.statemachine.State;
 
 public class AttackState implements State {
 
+    private ServerContext context;
+    public AttackState(ServerContext context){
+        this.context=context;
+    }
    private State state;
     @Override
     public void enter() {

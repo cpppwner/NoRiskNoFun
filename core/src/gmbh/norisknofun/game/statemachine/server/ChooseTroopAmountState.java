@@ -8,6 +8,12 @@ import gmbh.norisknofun.game.statemachine.State;
  */
 
 public class ChooseTroopAmountState implements State {
+
+    private ServerContext context;
+    public ChooseTroopAmountState(ServerContext context){
+        this.context=context;
+    }
+
     @Override
     public void enter() {
 

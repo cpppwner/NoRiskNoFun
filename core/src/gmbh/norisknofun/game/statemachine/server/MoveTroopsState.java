@@ -8,6 +8,12 @@ import gmbh.norisknofun.game.statemachine.State;
  */
 
 public class MoveTroopsState implements State {
+
+    private ServerContext context;
+    public MoveTroopsState(ServerContext context){
+        this.context=context;
+    }
+
     @Override
     public void enter() {
 

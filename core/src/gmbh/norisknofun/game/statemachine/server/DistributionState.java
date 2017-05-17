@@ -1,6 +1,5 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import com.badlogic.gdx.Gdx;
 
 import java.util.List;
 
@@ -9,30 +8,22 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
-import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
-import gmbh.norisknofun.game.networkmessages.spread.PlayerSpreadCheck;
-import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoinedCheck;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
- * Created by pippp on 15.05.2017.
+ * Created by pippp on 17.05.2017.
  */
 
-public class SpreadTroopsState implements State {
+public class DistributionState implements State {
 
     private ServerContext context;
     private final GameData data;
-    private int currentplayerindex=0;
-    public SpreadTroopsState(ServerContext context){
 
+    public DistributionState(ServerContext context){
         this.context=context;
-        data=context.getGameData();
-        assignRegionsToPlayer();
-        assignTroopsToPlayer();
-        setCurrentPlayer(currentplayerindex);
-
+        this.data=this.context.getGameData();
+        addTroopsToPlayer();
     }
-
     @Override
     public void enter() {
 
@@ -46,19 +37,12 @@ public class SpreadTroopsState implements State {
     @Override
     public void handleMessage(BasicMessageImpl message) {
 
-
         if(message.getType().equals(MoveTroop.class)){
             moveTroop((MoveTroop)message);
         }
-//        else if (message.getType().equals(PlayerSpreadCheck.class)){
-//            setNextPlayer();
-//        }
-        else{
-            Gdx.app.log("SpreadTroopsState","message unknown");
-        }
     }
 
-    private void moveTroop(MoveTroop message){
+    private void moveTroop(MoveTroop message){ //todo Refactor later
         List<AssetMap.Region> regions=context.getGameData().getMapAsset().getRegions();
         int i=0;
         if(message.playername.equals(context.getGameData().getCurrentplayer())) {
@@ -73,7 +57,10 @@ public class SpreadTroopsState implements State {
                 moveTroop.troopamount = message.troopamount;
                 context.sendMessage(moveTroop);
 
-                setNextPlayer();
+                data.getCurrentplayer().setTroopToSpread(data.getCurrentplayer().getTroopToSpread()-1);
+                if(data.getCurrentplayer().getTroopToSpread()==0){
+                    context.setState(new ChooseTargetState(context));
+                }
 
             } else {
                 MoveTroopCheck response = new MoveTroopCheck();
@@ -84,30 +71,7 @@ public class SpreadTroopsState implements State {
         }
     }
 
-    private void setNextPlayer(){
-        if(currentplayerindex>data.getPlayers().size()-1){
-            currentplayerindex=0;
-        }else {
-            currentplayerindex++;
-        }
-        setCurrentPlayer(currentplayerindex);
-
-    }
-
-
-    private void setCurrentPlayer(int playerindex){
-        data.setCurrentplayer(data.getPlayers().get(playerindex).getPlayername());
-        PlayerSpread playerSpread = new PlayerSpread();
-        playerSpread.playername=data.getCurrentplayer().getPlayername();
-        playerSpread.playersTurn=true;
-        context.sendMessage(playerSpread); //todo send to specific client
-    }
-
-    private void assignRegionsToPlayer(){
-
-    }
-
-    private void assignTroopsToPlayer(){
-
+    private void addTroopsToPlayer(){
+        data.getCurrentplayer().setTroopToSpread(5);
     }
 }

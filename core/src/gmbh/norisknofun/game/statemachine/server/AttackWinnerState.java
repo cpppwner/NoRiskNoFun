@@ -8,6 +8,12 @@ import gmbh.norisknofun.game.statemachine.State;
  */
 
 public class AttackWinnerState implements State {
+
+    private ServerContext context;
+    public AttackWinnerState(ServerContext context){
+        this.context=context;
+    }
+
     @Override
     public void enter() {
 
