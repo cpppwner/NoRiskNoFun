@@ -56,7 +56,7 @@ public class WaitingForPlayersState implements State {
     private void addPlayer(PlayerJoined message){
         boolean check=false;
         PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck();
-        if(!data.getPlayers().containsKey(message.playername))
+        if(!checkIfPlayernameAlreadyExists(message.playername))
          {
             Player player = new Player();
             player.setPlayername(message.playername);
@@ -67,5 +67,15 @@ public class WaitingForPlayersState implements State {
             playerJoinedCheck.allowedtojoin=false;
         }
         context.sendMessage(playerJoinedCheck);
+    }
+
+    private boolean checkIfPlayernameAlreadyExists(String playername){
+        boolean check=false;
+        for(Player p: data.getPlayers()){
+            if(p.getPlayername().equals(playername)){
+                check=true;
+            }
+        }
+        return check;
     }
 }

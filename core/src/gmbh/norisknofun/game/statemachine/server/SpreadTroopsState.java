@@ -59,27 +59,18 @@ public class SpreadTroopsState implements State {
     }
 
     private void moveTroop(MoveTroop message){
-        List<AssetMap.Region> regions=context.getGameData().getMapAsset().getRegions();
+        List<AssetMap.Region> regions=data.getMapAsset().getRegions();
         int i=0;
-        if(message.playername.equals(context.getGameData().getCurrentplayer())) {
-            while (!regions.get(i).getName().equals(message.destinationregion) && i < regions.size()) {
-                i++;
-            }
-            if (regions.get(i).getOwner().equals(message.playername)) { // check if player is owner of selected region
-                MoveTroop moveTroop = new MoveTroop();
-                moveTroop.destinationregion = message.destinationregion;
-                moveTroop.originregion = message.originregion;
-                moveTroop.playername = message.playername;
-                moveTroop.troopamount = message.troopamount;
-                context.sendMessage(moveTroop);
+        if(message.playername.equals(data.getCurrentplayer().getPlayername())) {
+            AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.destinationregion);
 
+            if (destinationregion.getOwner().equals(message.playername)) { // check if player is owner of selected region
+
+                broadcastMoveTroopsMessage(message);
                 setNextPlayer();
 
             } else {
-                MoveTroopCheck response = new MoveTroopCheck();
-                response.playername = message.playername;
-                response.movePossible = false;
-                context.sendMessage(response); // todo how to send to specific client
+               sendMoveTroopCheckMessage(message.playername,false);
             }
         }
     }
@@ -109,5 +100,21 @@ public class SpreadTroopsState implements State {
 
     private void assignTroopsToPlayer(){
 
+    }
+
+    private void broadcastMoveTroopsMessage(MoveTroop message){
+        MoveTroop moveTroop = new MoveTroop();
+        moveTroop.destinationregion = message.destinationregion;
+        moveTroop.originregion = message.originregion;
+        moveTroop.playername = message.playername;
+        moveTroop.troopamount = message.troopamount;
+        context.sendMessage(moveTroop); // send to all clients
+    }
+
+    private void sendMoveTroopCheckMessage(String  playername, boolean movepossible){
+        MoveTroopCheck response = new MoveTroopCheck();
+        response.playername = playername;
+        response.movePossible = movepossible;
+        context.sendMessage(response); // todo how to send to specific client
     }
 }

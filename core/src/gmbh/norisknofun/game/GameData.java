@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import gmbh.norisknofun.assets.AssetLoaderFactory;
 import gmbh.norisknofun.assets.impl.map.AssetMap;
@@ -21,7 +22,7 @@ public class GameData {
     private int[] diceRoll;
     private String currentplayer;
 
-    private HashMap<String,Player> players = new HashMap<>();
+    private List<Player> players = new ArrayList<>();
 
     public GameData(AssetLoaderFactory assetLoaderFactory) {
         this.assetLoaderFactory = assetLoaderFactory;
@@ -52,10 +53,10 @@ public class GameData {
     }
 
     public void addPlayer(Player player){
-        players.put(player.getPlayername(),player);
+        players.add(player);
     }
 
-    public HashMap<String,Player> getPlayers(){
+    public List<Player> getPlayers(){
         return players;
     }
 
@@ -70,6 +71,12 @@ public class GameData {
         this.currentplayer=currentplayer;
     }
     public Player getCurrentplayer(){
-        return players.get(currentplayer);
+        Player player= null;
+        for(Player p: players){
+            if(p.getPlayername().equals(currentplayer)){
+                player=p;
+            }
+        }
+        return player;
     }
 }
