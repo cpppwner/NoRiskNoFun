@@ -10,6 +10,7 @@ import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
+import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.movetroops.FinishTurn;
 import gmbh.norisknofun.game.statemachine.State;
 
@@ -81,6 +82,14 @@ public class MoveTroopsState implements State {
             }
         }
 
+        broadcastNextPlayerMessage();
+
+    }
+
+    private void broadcastNextPlayerMessage(){
+        NextPlayer nextPlayer= new NextPlayer();
+        nextPlayer.playername=data.getCurrentplayer().getPlayername();
+        context.sendMessage(nextPlayer);  //send to all clients
     }
 
     private void broadcastMoveTroopsMessage(MoveTroop message){

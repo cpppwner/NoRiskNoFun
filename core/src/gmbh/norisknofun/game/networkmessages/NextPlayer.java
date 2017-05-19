@@ -15,8 +15,8 @@ package gmbh.norisknofun.game.networkmessages;
 
 public class NextPlayer extends BasicMessageImpl {
 
-    String playername;
-    boolean playersTurn = true;
+    public String playername;
+    public boolean playersTurn = true;
 
 
 
