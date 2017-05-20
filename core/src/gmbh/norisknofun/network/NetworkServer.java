@@ -1,79 +1,263 @@
 package gmbh.norisknofun.network;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import com.badlogic.gdx.Gdx;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import gmbh.norisknofun.network.socket.SelectionResult;
+import gmbh.norisknofun.network.socket.SocketFactory;
+import gmbh.norisknofun.network.socket.SocketSelector;
+import gmbh.norisknofun.network.socket.TCPClientSocket;
+import gmbh.norisknofun.network.socket.TCPServerSocket;
+
+/**
+ * Networking server used for the NoRiskNoFun game.
+ */
 public class NetworkServer {
 
-   private ServerSocket m_server;
+    private final SocketFactory socketFactory;
+    private final SessionEventHandler sessionEventHandler;
 
-   private boolean isStopped = false;
-   private boolean error=false;
-    private  Thread m_objThread;
+    private TCPServerSocket serverSocket = null;
+    private SocketSelector selector = null;
 
+    private Thread serverThread = null;
 
+    private final Map<TCPClientSocket, SessionImpl> socketSessionMap = new HashMap<>();
 
-   public NetworkServer()
-   {
-       try {
-           m_server = new ServerSocket(2002);
+    public NetworkServer(SocketFactory socketFactory, SessionEventHandler sessionEventHandler) {
+        this.socketFactory = socketFactory;
+        this.sessionEventHandler = sessionEventHandler;
+    }
 
-       } catch (IOException e) {
-           error=true;
-           e.printStackTrace();
-       }
-   }
+    public synchronized boolean start(int listeningPort) {
 
-   public void startListening()
-   {
-        m_objThread = new Thread(new Runnable() {
-           public void run() {
-               // Start ServerDispatcher thread
-               ServerDispatcher serverDispatcher = new ServerDispatcher();
-               serverDispatcher.start();
+        if (!initNetworking(listeningPort)) {
+            closeNetworking();
+            return false;
+        }
 
-               while (!isStopped) {
-                   try {
-                       Socket socket = m_server.accept();
-                       ClientInfo clientInfo = new ClientInfo();
-                       clientInfo.mSocket = socket;
-                       ClientListener clientListener =
-                               new ClientListener(clientInfo, serverDispatcher);
-                       ClientSender clientSender =
-                               new ClientSender(clientInfo, serverDispatcher);
-                       clientInfo.mClientListener = clientListener;
-                       clientInfo.mClientSender = clientSender;
-                       clientListener.start();
-                       clientSender.start();
-                       serverDispatcher.addClient(clientInfo);
+        serverThread = new Thread(this::serve);
+        serverThread.setName(this.getClass().getSimpleName());
+        serverThread.start();
 
+        return true;
+    }
 
+    private boolean initNetworking(int listeningPort) {
 
-                   } catch (IOException ioe) {
-                       ioe.printStackTrace();
-                   }
-               }
+        try {
+            selector = socketFactory.openSocketSelector();
+            serverSocket = socketFactory.openServerSocket(listeningPort);
+            selector.register(serverSocket);
+        } catch (IOException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "Failed to start network server", e);
+            return false;
+        }
 
-           }});
+        return true;
+    }
 
-           m_objThread.start();
-   }
+    private void closeNetworking() {
 
+        if (serverSocket != null) {
+            try {
+                serverSocket.close();
+                serverSocket = null;
+            } catch (Exception e) {
+                Gdx.app.log(this.getClass().getSimpleName(), "Failed to close server socket", e);
+            }
+        }
 
-   private synchronized boolean isStopped() {
-       return this.isStopped;
-   }
+        if (selector != null) {
+            try {
+                selector.close();
+                selector = null;
+            } catch (Exception e) {
+                Gdx.app.log(this.getClass().getSimpleName(), "Failed to close socket selector", e);
+            }
+        }
+    }
 
-   public synchronized void stop(){
-       this.isStopped = true;
+    private void serve() {
 
+        while (!Thread.interrupted()) {
+            modifyClientConnections();
+            SelectionResult result;
+            try {
+                result = selector.select();
+            } catch (IOException e) {
+                Gdx.app.log(this.getClass().getSimpleName(), "Error in select", e);
+                closeNetworking();
+                break;
+            }
 
-       try {
-           this.m_objThread.interrupt();
-           this.m_server.close();
-       } catch (IOException e) {
-           throw new RuntimeException("Error closing server", e);
-       }
-   }
+            acceptNewConnections(result);
+            handleRead(result);
+            handleWrite(result);
+        }
+
+        // last but not least terminate all accepted client sessions & server networking
+        terminateAllClientSessions();
+        closeNetworking();
+    }
+
+    private void modifyClientConnections() {
+
+        List<TCPClientSocket> sessionsToTerminate = new LinkedList<>();
+
+        for (Map.Entry<TCPClientSocket, SessionImpl> entry : socketSessionMap.entrySet()) {
+            if (!entry.getValue().isOpen() && !entry.getValue().hasDataToWrite()) {
+                sessionsToTerminate.add(entry.getKey()); // collect all sessions to termiante
+            }
+
+            try {
+                // modify interest ops
+                selector.modify(entry.getKey(), entry.getValue().hasDataToWrite());
+            } catch (IOException e) {
+                Gdx.app.log(this.getClass().getSimpleName(), "Error while modifying interest ops", e);
+                sessionsToTerminate.add(entry.getKey());
+            }
+        }
+
+        // terminate all previously collected connections/sessions
+        sessionsToTerminate.forEach(this::terminateSessionForSocket);
+    }
+
+    private void terminateAllClientSessions() {
+
+        for (Map.Entry<TCPClientSocket, SessionImpl> entry : socketSessionMap.entrySet()) {
+            entry.getValue().terminate();
+            selector.unregister(entry.getKey());
+            try {
+                entry.getKey().close();
+            } catch (IOException e) {
+                Gdx.app.log(this.getClass().getSimpleName(), "Error while closing client connection", e);
+            }
+            sessionEventHandler.sessionClosed(entry.getValue());
+        }
+
+        socketSessionMap.clear();
+    }
+
+    private void acceptNewConnections(SelectionResult result) {
+
+        for (TCPServerSocket serverSocket : result.getAcceptableSockets()) {
+            TCPClientSocket clientSocket = null;
+            try {
+                clientSocket = serverSocket.accept();
+            } catch (IOException e) {
+                Gdx.app.log(this.getClass().getSimpleName(), "Error in accept", e);
+            }
+
+            result.acceptHandled(serverSocket);
+            if (clientSocket == null)
+                continue;
+
+            try {
+                selector.register(clientSocket, false);
+            } catch (IOException e) {
+                Gdx.app.log(this.getClass().getSimpleName(), "Could not register client socket in selector", e);
+                try {
+                    clientSocket.close();
+                } catch(Exception ex) {
+                    // intentionally left empty
+                }
+                continue;
+            }
+
+            SessionImpl session = new SessionImpl(selector);
+            socketSessionMap.put(clientSocket, session);
+            sessionEventHandler.newSession(session);
+        }
+    }
+
+    private void handleRead(SelectionResult result) {
+
+        for (TCPClientSocket clientSocket : result.getReadableSockets()) {
+            handleRead(clientSocket);
+            result.readHandled(clientSocket);
+        }
+    }
+
+    private void handleRead(TCPClientSocket clientSocket) {
+        SessionImpl session = socketSessionMap.get(clientSocket);
+        int numBytesRead = 0;
+        try {
+            numBytesRead = session.doReadFromSocket(clientSocket);
+        } catch (IOException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket read", e);
+            terminateSessionForSocket(clientSocket);
+        }
+        if (numBytesRead < 0) {
+            // remote site closed the socket
+            terminateSessionForSocket(clientSocket);
+        }
+
+        if (numBytesRead > 0) {
+            sessionEventHandler.sessionDataReceived(session);
+        }
+    }
+
+    private void handleWrite(SelectionResult result) {
+
+        for (TCPClientSocket clientSocket : result.getWritableSockets()) {
+            handleWrite(clientSocket);
+            result.writeHandled(clientSocket);
+        }
+    }
+
+    private void handleWrite(TCPClientSocket clientSocket) {
+        SessionImpl session = socketSessionMap.get(clientSocket);
+        int numBytesWritten = 0;
+        try {
+            numBytesWritten = session.doWriteToSocket(clientSocket);
+        } catch (IOException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket write", e);
+            terminateSessionForSocket(clientSocket);
+        }
+        if (numBytesWritten < 0) {
+            // remote site closed the socket
+            terminateSessionForSocket(clientSocket);
+        }
+
+        if (numBytesWritten > 0) {
+            sessionEventHandler.sessionDataWritten(session);
+        }
+    }
+
+    private void terminateSessionForSocket(TCPClientSocket socket) {
+
+        SessionImpl session = socketSessionMap.remove(socket);
+        session.terminate();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "I/O while closing TCPClientSocket", e);
+        }
+        sessionEventHandler.sessionClosed(session);
+    }
+
+    public synchronized void stop() {
+
+        if (!isRunning()) {
+            return; // server was not started yet
+        }
+
+        serverThread.interrupt();
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            // intentionally left empty
+        }
+    }
+
+    public synchronized boolean isRunning() {
+
+        return serverThread != null && serverThread.isAlive();
+    }
 }
