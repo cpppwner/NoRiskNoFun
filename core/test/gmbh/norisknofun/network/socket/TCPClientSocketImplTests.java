@@ -212,7 +212,7 @@ public class TCPClientSocketImplTests {
 
         // verify selection result
         assertThat(result, is(not(nullValue())));
-        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
+        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
         assertThat(result.getReadableSockets(), is(equalTo(Collections.singleton(clientSocket))));
         assertThat(result.getWritableSockets(), is(equalTo(Collections.singleton(clientSocket))));
 
@@ -284,8 +284,8 @@ public class TCPClientSocketImplTests {
 
             // verify selection result
             assertThat(result, is(not(nullValue())));
-            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
-            assertThat(result.getReadableSockets(), is(equalTo(Collections.emptySet())));
+            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
+            assertThat(result.getReadableSockets(), is(equalTo(Collections.<TCPClientSocket>emptySet())));
             assertThat(result.getWritableSockets(), is(equalTo(Collections.singleton(clientSocket))));
 
             try {
@@ -317,9 +317,9 @@ public class TCPClientSocketImplTests {
 
             // verify selection result
             assertThat(result, is(not(nullValue())));
-            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
+            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
             assertThat(result.getReadableSockets(), is(equalTo(Collections.singleton(clientSocket))));
-            assertThat(result.getWritableSockets(), is(equalTo(Collections.emptySet())));
+            assertThat(result.getWritableSockets(), is(equalTo(Collections.<TCPClientSocket>emptySet())));
 
             try {
                 readResult += clientSocket.read(readBuffer);
@@ -400,8 +400,8 @@ public class TCPClientSocketImplTests {
 
             // verify selection result
             assertThat(result, is(not(nullValue())));
-            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
-            assertThat(result.getReadableSockets(), is(equalTo(Collections.emptySet())));
+            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
+            assertThat(result.getReadableSockets(), is(equalTo(Collections.<TCPClientSocket>emptySet())));
             assertThat(result.getWritableSockets(), is(equalTo(Collections.singleton(clientSocket))));
 
             ByteBuffer buffer = ByteBuffer.allocate(1);
@@ -437,9 +437,9 @@ public class TCPClientSocketImplTests {
 
             // verify selection result
             assertThat(result, is(not(nullValue())));
-            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
+            assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
             assertThat(result.getReadableSockets(), is(equalTo(Collections.singleton(clientSocket))));
-            assertThat(result.getWritableSockets(), is(equalTo(Collections.emptySet())));
+            assertThat(result.getWritableSockets(), is(equalTo(Collections.<TCPClientSocket>emptySet())));
 
             ByteBuffer buffer = ByteBuffer.allocate(1);
 
@@ -504,7 +504,12 @@ public class TCPClientSocketImplTests {
         private CountDownLatch acceptLatch = new CountDownLatch(1);
 
         EchoServer(EchoServerConfig config) {
-            serverThread = new Thread(this::serveOne);
+            serverThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    serveOne();
+                }
+            });
             this.config = config;
         }
 

@@ -90,7 +90,7 @@ class SocketSelectorImpl implements SocketSelector {
 
         int result = selector.select();
         if (result == 0) {
-            return new SelectionResultImpl(Collections.emptySet());
+            return new SelectionResultImpl(Collections.<SelectionKey>emptySet());
         }
 
         return new SelectionResultImpl(selector.selectedKeys());

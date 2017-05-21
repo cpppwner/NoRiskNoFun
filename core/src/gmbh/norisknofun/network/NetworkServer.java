@@ -154,33 +154,39 @@ public class NetworkServer {
     private void acceptNewConnections(SelectionResult result) {
 
         for (TCPServerSocket serverSocket : result.getAcceptableSockets()) {
-            TCPClientSocket clientSocket = null;
+            acceptNewConnections(serverSocket);
+            result.acceptHandled(serverSocket);
+        }
+    }
+
+    private void acceptNewConnections(TCPServerSocket serverSocket) {
+
+        TCPClientSocket clientSocket;
+        do {
             try {
                 clientSocket = serverSocket.accept();
             } catch (IOException e) {
                 Gdx.app.log(this.getClass().getSimpleName(), "Error in accept", e);
+                clientSocket = null;
             }
 
-            result.acceptHandled(serverSocket);
-            if (clientSocket == null)
-                continue;
-
-            try {
-                selector.register(clientSocket, false);
-            } catch (IOException e) {
-                Gdx.app.log(this.getClass().getSimpleName(), "Could not register client socket in selector", e);
+            if (clientSocket != null) {
                 try {
-                    clientSocket.close();
-                } catch(Exception ex) {
-                    // intentionally left empty
+                    selector.register(clientSocket, false);
+                } catch (IOException e) {
+                    Gdx.app.log(this.getClass().getSimpleName(), "Could not register client socket in selector", e);
+                    try {
+                        clientSocket.close();
+                    } catch (Exception ex) {
+                        // intentionally left empty
+                    }
                 }
-                continue;
-            }
 
-            SessionImpl session = new SessionImpl(selector);
-            socketSessionMap.put(clientSocket, session);
-            sessionEventHandler.newSession(session);
-        }
+                SessionImpl session = new SessionImpl(selector);
+                socketSessionMap.put(clientSocket, session);
+                sessionEventHandler.newSession(session);
+            }
+        } while (clientSocket != null);
     }
 
     private void handleRead(SelectionResult result) {
@@ -198,7 +204,7 @@ public class NetworkServer {
             numBytesRead = session.doReadFromSocket(clientSocket);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket read", e);
-            terminateSessionForSocket(clientSocket);
+            numBytesRead = -1; // so that session gets terminated
         }
         if (numBytesRead < 0) {
             // remote site closed the socket
@@ -220,12 +226,12 @@ public class NetworkServer {
 
     private void handleWrite(TCPClientSocket clientSocket) {
         SessionImpl session = socketSessionMap.get(clientSocket);
-        int numBytesWritten = 0;
+        int numBytesWritten;
         try {
             numBytesWritten = session.doWriteToSocket(clientSocket);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket write", e);
-            terminateSessionForSocket(clientSocket);
+            numBytesWritten = -1;
         }
         if (numBytesWritten < 0) {
             // remote site closed the socket
@@ -240,7 +246,9 @@ public class NetworkServer {
     private void terminateSessionForSocket(TCPClientSocket socket) {
 
         SessionImpl session = socketSessionMap.remove(socket);
-        session.terminate();
+        if (session.isOpen()) {
+            session.terminate();
+        }
         try {
             socket.close();
         } catch (IOException e) {
@@ -249,18 +257,14 @@ public class NetworkServer {
         sessionEventHandler.sessionClosed(session);
     }
 
-    public synchronized void stop() {
+    public synchronized void stop() throws InterruptedException {
 
         if (!isRunning()) {
             return; // server was not started yet
         }
 
         serverThread.interrupt();
-        try {
-            serverThread.join();
-        } catch (InterruptedException e) {
-            // intentionally left empty
-        }
+        serverThread.join();
     }
 
     public synchronized boolean isRunning() {

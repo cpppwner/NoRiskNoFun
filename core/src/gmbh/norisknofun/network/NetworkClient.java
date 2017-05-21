@@ -1,7 +1,6 @@
 package gmbh.norisknofun.network;
 
 
-
 import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
@@ -51,18 +50,21 @@ public class NetworkClient {
 
     private boolean initNetworking(String host, int port) {
 
+        boolean success = true;
         try {
             selector = socketFactory.openSocketSelector();
             clientSocket = socketFactory.openClientSocket(host, port);
             selector.register(clientSocket, false); // initial registration is read-only
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "Failed to connect", e);
-            return false;
+            success = false;
         }
 
-        session = new SessionImpl(selector);
+        if (success) {
+            session = new SessionImpl(selector);
+        }
 
-        return true;
+        return success;
     }
 
     private void closeNetworking() {
