@@ -156,6 +156,7 @@ public class NetworkServer {
             return;
 
         acceptNewConnections();
+        result.acceptHandled(serverSocket);
     }
 
     private void acceptNewConnections() {

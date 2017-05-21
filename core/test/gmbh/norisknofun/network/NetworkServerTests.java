@@ -293,6 +293,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -339,6 +344,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -387,6 +397,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -436,6 +451,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -483,6 +503,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(1)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -531,6 +556,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -581,6 +611,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -638,6 +673,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -697,6 +737,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(any(Session.class));
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -757,6 +802,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
         verify(selectorMock, times(1)).modify(clientSocketMockOne, true);
         verify(selectorMock, times(1)).modify(clientSocketMockTwo, true);
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -835,6 +885,11 @@ public class NetworkServerTests extends GdxTest {
         verify(selectorMock, times(1)).modify(clientSocketMockTwo, true);
         verify(selectorMock, times(1)).modify(clientSocketMockOne, false);
         verify(selectorMock, times(1)).modify(clientSocketMockTwo, false);
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(1)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(1)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -913,6 +968,11 @@ public class NetworkServerTests extends GdxTest {
         verify(selectorMock, times(1)).modify(clientSocketMockTwo, true);
         verify(selectorMock, times(1)).modify(clientSocketMockOne, false);
         verify(selectorMock, times(0)).modify(clientSocketMockTwo, false);
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(1)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(1)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -981,6 +1041,11 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
         verify(selectorMock, times(2)).modify(clientSocketMockOne, false);
         verify(selectorMock, times(2)).modify(clientSocketMockTwo, false);
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(1)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(1)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 
     @Test
@@ -1049,5 +1114,10 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
         verify(selectorMock, times(2)).modify(clientSocketMockOne, false);
         verify(selectorMock, times(1)).modify(clientSocketMockTwo, false);
+        verify(selectionResultMock, times(1)).acceptHandled(serverSocketMock);
+        verify(selectionResultMock, times(1)).readHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(1)).readHandled(clientSocketMockTwo);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockOne);
+        verify(selectionResultMock, times(0)).writeHandled(clientSocketMockTwo);
     }
 }

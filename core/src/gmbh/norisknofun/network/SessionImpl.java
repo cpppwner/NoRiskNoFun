@@ -214,7 +214,7 @@ class SessionImpl implements Session {
 
         ByteBuffer outBuffer;
         synchronized (syncObject) {
-            if (currentOutgoingMessage == null) {
+            if (currentOutgoingMessage == null || !currentOutgoingMessage.hasRemaining()) {
                 byte[] data = outQueue.poll();
                 currentOutgoingMessage = ByteBuffer.wrap(data == null ? new byte[0] : data);
             }
