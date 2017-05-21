@@ -130,7 +130,9 @@ public class NetworkServer {
         }
 
         // terminate all previously collected connections/sessions
-        sessionsToTerminate.forEach(this::terminateSessionForSocket);
+        for (TCPClientSocket session : sessionsToTerminate) {
+            terminateSessionForSocket(session);
+        }
     }
 
     private void terminateAllClientSessions() {
