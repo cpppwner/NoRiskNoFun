@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -276,10 +277,11 @@ public class SocketSelectorImplTests {
             fail("IOException not expected");
         }
 
+        Set<TCPClientSocket> expectedWritableSockets = new HashSet<TCPClientSocket>(Arrays.asList(clientSocketOne, clientSocketTwo));
         assertThat(result, is(notNullValue()));
-        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
-        assertThat(result.getReadableSockets(), is(equalTo(Collections.emptySet())));
-        assertThat(result.getWritableSockets(), is(equalTo(new HashSet<TCPClientSocket>(Arrays.asList(clientSocketOne, clientSocketTwo)))));
+        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
+        assertThat(result.getReadableSockets(), is(equalTo(Collections.<TCPClientSocket>emptySet())));
+        assertThat(result.getWritableSockets(), is(equalTo(expectedWritableSockets)));
 
         // modify client sockets to readonly
         try {
@@ -299,9 +301,9 @@ public class SocketSelectorImplTests {
         }
 
         assertThat(result, is(notNullValue()));
-        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
-        assertThat(result.getReadableSockets(), is(equalTo(Collections.emptySet())));
-        assertThat(result.getWritableSockets(), is(equalTo(Collections.emptySet())));
+        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
+        assertThat(result.getReadableSockets(), is(equalTo(Collections.<TCPClientSocket>emptySet())));
+        assertThat(result.getWritableSockets(), is(equalTo(Collections.<TCPClientSocket>emptySet())));
 
         // unregister sockets
         selector.unregister(socketOne);

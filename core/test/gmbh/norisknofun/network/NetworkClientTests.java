@@ -367,12 +367,12 @@ public class NetworkClientTests extends GdxTest {
         verify(selectorMock, times(2)).select();
         verify(selectorMock, times(1)).close();
         verify(socketMock, times(1)).close();
-        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionDataWritten(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
+        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionDataWritten(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any(Session.class));
         verify(selectionResultMock, times(1)).writeHandled(socketMock);
-        verify(selectionResultMock, times(0)).readHandled(any());
+        verify(selectionResultMock, times(0)).readHandled(any(TCPClientSocket.class));
     }
 
     @Test
@@ -423,12 +423,12 @@ public class NetworkClientTests extends GdxTest {
         verify(selectorMock, times(1)).select();
         verify(selectorMock, times(1)).close();
         verify(socketMock, times(1)).close();
-        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
+        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any(Session.class));
         verify(selectionResultMock, times(1)).writeHandled(socketMock);
-        verify(selectionResultMock, times(0)).readHandled(any());
+        verify(selectionResultMock, times(0)).readHandled(any(TCPClientSocket.class));
     }
 
     @Test
@@ -479,12 +479,12 @@ public class NetworkClientTests extends GdxTest {
         verify(selectorMock, times(2)).select();
         verify(selectorMock, times(1)).close();
         verify(socketMock, times(1)).close();
-        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
+        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any(Session.class));
         verify(selectionResultMock, times(1)).writeHandled(socketMock);
-        verify(selectionResultMock, times(0)).readHandled(any());
+        verify(selectionResultMock, times(0)).readHandled(any(TCPClientSocket.class));
     }
 
     @Test
@@ -547,12 +547,12 @@ public class NetworkClientTests extends GdxTest {
         verify(selectorMock, times(2)).select();
         verify(selectorMock, times(1)).close();
         verify(socketMock, times(1)).close();
-        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionDataReceived(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
+        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionDataReceived(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any(Session.class));
         verify(selectionResultMock, times(0)).writeHandled(socketMock);
-        verify(selectionResultMock, times(1)).readHandled(any());
+        verify(selectionResultMock, times(1)).readHandled(any(TCPClientSocket.class));
     }
 
     @Test
@@ -592,12 +592,12 @@ public class NetworkClientTests extends GdxTest {
         verify(selectorMock, times(1)).select();
         verify(selectorMock, times(1)).close();
         verify(socketMock, times(1)).close();
-        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
+        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any(Session.class));
         verify(selectionResultMock, times(0)).writeHandled(socketMock);
-        verify(selectionResultMock, times(1)).readHandled(any());
+        verify(selectionResultMock, times(1)).readHandled(any(TCPClientSocket.class));
     }
 
     @Test
@@ -637,12 +637,12 @@ public class NetworkClientTests extends GdxTest {
         verify(selectorMock, times(1)).select();
         verify(selectorMock, times(1)).close();
         verify(socketMock, times(1)).close();
-        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
+        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any(Session.class));
         verify(selectionResultMock, times(0)).writeHandled(socketMock);
-        verify(selectionResultMock, times(1)).readHandled(any());
+        verify(selectionResultMock, times(1)).readHandled(any(TCPClientSocket.class));
     }
 
     @Test
@@ -682,11 +682,11 @@ public class NetworkClientTests extends GdxTest {
         verify(selectorMock, times(2)).select();
         verify(selectorMock, times(1)).close();
         verify(socketMock, times(1)).close();
-        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
-        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
+        verify(sessionEventHandlerMock, times(1)).newSession(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any(Session.class));
         verify(selectionResultMock, times(0)).writeHandled(socketMock);
-        verify(selectionResultMock, times(1)).readHandled(any());
+        verify(selectionResultMock, times(1)).readHandled(any(TCPClientSocket.class));
     }
 }
