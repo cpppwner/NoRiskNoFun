@@ -77,6 +77,10 @@ class TCPServerSocketImpl implements TCPServerSocket {
     public TCPClientSocketImpl accept() throws IOException {
 
         SocketChannel socketChannel = serverSocketChannel.accept();
+        if (socketChannel == null) {
+            return null; // no connection available
+        }
+
         socketChannel.configureBlocking(false);
 
         return new TCPClientSocketImpl(socketChannel);

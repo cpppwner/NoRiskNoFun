@@ -122,6 +122,23 @@ public class TCPServerSocketImplTests {
     }
 
     @Test
+    public void acceptWhenThereIsNoAcceptableConnection() {
+
+        try {
+            serverSocket = socketFactory.openServerSocket(HOST, PORT);
+        } catch (IOException e) {
+            fail("IOException not expected when opening server socket");
+        }
+
+        try {
+            TCPClientSocket obtained = serverSocket.accept();
+            assertThat(obtained, is(nullValue()));
+        } catch (IOException e) {
+            fail("IOException not expected when calling accept");
+        }
+    }
+
+    @Test
     public void handleAcceptViaSelector() {
 
         try {
