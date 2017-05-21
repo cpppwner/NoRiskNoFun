@@ -68,9 +68,12 @@ class SessionImpl implements Session {
     @Override
     public byte[] read() {
 
+        byte[] data;
         synchronized (syncObject) {
-            return inQueue.poll();
+            data = inQueue.poll();
         }
+
+        return data;
     }
 
     @Override
@@ -114,23 +117,30 @@ class SessionImpl implements Session {
 
     @Override
     public boolean isOpen() {
-        synchronized (syncObject) {
-            return sessionState == SessionState.OPEN;
-        }
+
+        return isSessionState(SessionState.OPEN);
     }
 
     @Override
     public boolean isClosed() {
-        synchronized (syncObject) {
-            return sessionState == SessionState.CLOSED;
-        }
+
+        return isSessionState(SessionState.CLOSED);
     }
 
     @Override
     public boolean isTerminated() {
+
+        return isSessionState(SessionState.TERMINATED);
+    }
+
+    private boolean isSessionState(SessionState expectedState) {
+
+        boolean result;
         synchronized (syncObject) {
-            return sessionState == SessionState.TERMINATED;
+            result = sessionState == expectedState;
         }
+
+        return result;
     }
 
     /**
@@ -143,12 +153,15 @@ class SessionImpl implements Session {
      */
     private void wakeupSelectorIfRequired() {
 
-        if (currentOutgoingMessage == null
-                || !currentOutgoingMessage.hasRemaining()
-                || outQueue.size() <= 1) {
-
-            selector.wakeup();
+        if (currentOutgoingMessage != null && currentOutgoingMessage.hasRemaining()) {
+            return; // still something left in current outgoing buffer
         }
+
+        if (outQueue.size() > 1) {
+            return;
+        }
+
+        selector.wakeup();
     }
 
     /**
@@ -176,7 +189,11 @@ class SessionImpl implements Session {
         buffer.get(bytesRead);
 
         synchronized (syncObject) {
-            inQueue.add(bytesRead);
+            if (isOpen()) {
+                inQueue.add(bytesRead);
+            } else {
+                numBytesRead = 0;
+            }
         }
 
         return numBytesRead;
@@ -223,11 +240,14 @@ class SessionImpl implements Session {
      */
     boolean hasDataToWrite() {
 
+        boolean result;
         synchronized (syncObject) {
 
-            return ((currentOutgoingMessage != null && currentOutgoingMessage.hasRemaining())
+            result = ((currentOutgoingMessage != null && currentOutgoingMessage.hasRemaining())
                     || !outQueue.isEmpty());
         }
+
+        return result;
     }
 
     /**
@@ -243,16 +263,7 @@ class SessionImpl implements Session {
     private static ByteBuffer clone(ByteBuffer buffer)
     {
         ByteBuffer clone = ByteBuffer.allocate(buffer.remaining());
-
-        if (buffer.hasArray())
-        {
-            System.arraycopy(buffer.array(), buffer.arrayOffset() + buffer.position(), clone.array(), 0, buffer.remaining());
-        }
-        else
-        {
-            clone.put(buffer.duplicate());
-            clone.flip();
-        }
+        System.arraycopy(buffer.array(), buffer.arrayOffset() + buffer.position(), clone.array(), 0, buffer.remaining());
 
         return clone;
     }
