@@ -168,7 +168,7 @@ public class TCPServerSocketImplTests {
         }
 
         assertThat(result, is(notNullValue()));
-        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.emptySet())));
+        assertThat(result.getAcceptableSockets(), is(equalTo(Collections.<TCPServerSocket>emptySet())));
 
 
         SimpleClient clientOne = new SimpleClient();
