@@ -47,7 +47,7 @@ class SocketSelectorImpl implements SocketSelector {
     @Override
     public void unregister(TCPServerSocket serverSocket) {
 
-        unregister(serverSocket.getChannel());
+        unregisterChannel(serverSocket.getChannel());
     }
 
     @Override
@@ -65,7 +65,7 @@ class SocketSelectorImpl implements SocketSelector {
     @Override
     public void unregister(TCPClientSocket clientSocket) {
 
-        unregister(clientSocket.getChannel());
+        unregisterChannel(clientSocket.getChannel());
     }
 
     @Override
@@ -107,7 +107,7 @@ class SocketSelectorImpl implements SocketSelector {
         selector.close();
     }
 
-    private void unregister(SelectableChannel channel) {
+    private void unregisterChannel(SelectableChannel channel) {
 
         SelectionKey key = channel.keyFor(selector);
         if (key != null) {
