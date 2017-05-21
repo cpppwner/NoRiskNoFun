@@ -176,7 +176,7 @@ public class NetworkServerTests extends GdxTest {
                 selectorCloseLatch.countDown();
                 return null;
             }
-        });
+        }).when(selectorMock).close();
 
         // when
         boolean obtained = server.start(PORT);
