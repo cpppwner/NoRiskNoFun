@@ -41,7 +41,12 @@ public class NetworkServer {
             return false;
         }
 
-        serverThread = new Thread(this::serve);
+        serverThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                serve();
+            }
+        });
         serverThread.setName(this.getClass().getSimpleName());
         serverThread.start();
 

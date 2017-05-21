@@ -37,7 +37,12 @@ public class NetworkClient {
             return false;
         }
 
-        clientThread = new Thread(this::run);
+        clientThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                run();
+            }
+        });
         clientThread.setName(this.getClass().getSimpleName());
         clientThread.start();
 
