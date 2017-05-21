@@ -97,7 +97,6 @@ public class NetworkServer {
                 result = selector.select();
             } catch (IOException e) {
                 Gdx.app.log(this.getClass().getSimpleName(), "Error in select", e);
-                closeNetworking();
                 break;
             }
 
@@ -117,7 +116,7 @@ public class NetworkServer {
 
         for (Map.Entry<TCPClientSocket, SessionImpl> entry : socketSessionMap.entrySet()) {
             if (!entry.getValue().isOpen() && !entry.getValue().hasDataToWrite()) {
-                sessionsToTerminate.add(entry.getKey()); // collect all sessions to termiante
+                sessionsToTerminate.add(entry.getKey()); // collect all sessions to terminate
             }
 
             try {
@@ -153,13 +152,13 @@ public class NetworkServer {
 
     private void acceptNewConnections(SelectionResult result) {
 
-        for (TCPServerSocket serverSocket : result.getAcceptableSockets()) {
-            acceptNewConnections(serverSocket);
-            result.acceptHandled(serverSocket);
-        }
+        if (result.getAcceptableSockets().isEmpty())
+            return;
+
+        acceptNewConnections();
     }
 
-    private void acceptNewConnections(TCPServerSocket serverSocket) {
+    private void acceptNewConnections() {
 
         TCPClientSocket clientSocket;
         do {
@@ -173,6 +172,10 @@ public class NetworkServer {
             if (clientSocket != null) {
                 try {
                     selector.register(clientSocket, false);
+
+                    SessionImpl session = new SessionImpl(selector);
+                    socketSessionMap.put(clientSocket, session);
+                    sessionEventHandler.newSession(session);
                 } catch (IOException e) {
                     Gdx.app.log(this.getClass().getSimpleName(), "Could not register client socket in selector", e);
                     try {
@@ -181,10 +184,6 @@ public class NetworkServer {
                         // intentionally left empty
                     }
                 }
-
-                SessionImpl session = new SessionImpl(selector);
-                socketSessionMap.put(clientSocket, session);
-                sessionEventHandler.newSession(session);
             }
         } while (clientSocket != null);
     }
