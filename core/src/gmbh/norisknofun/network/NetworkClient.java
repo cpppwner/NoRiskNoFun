@@ -40,7 +40,7 @@ public class NetworkClient {
         clientThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                run();
+                runClient();
             }
         });
         clientThread.setName(this.getClass().getSimpleName());
@@ -86,7 +86,7 @@ public class NetworkClient {
         }
     }
 
-    private void run() {
+    private void runClient() {
 
         // first notify event handler about session creation
         sessionEventHandler.newSession(session);
@@ -125,7 +125,9 @@ public class NetworkClient {
     }
 
     private void terminateSession() {
-        session.terminate();
+        if (session.isOpen()) {
+            session.terminate();
+        }
         sessionEventHandler.sessionClosed(session);
     }
 
@@ -158,10 +160,6 @@ public class NetworkClient {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket write", e);
             return false;
         }
-        if (numBytesWritten < 0) {
-            // remote site closed the socket
-            return false;
-        }
 
         if (numBytesWritten > 0) {
             sessionEventHandler.sessionDataWritten(session);
@@ -170,18 +168,14 @@ public class NetworkClient {
         return true;
     }
 
-    public synchronized void stop() {
+    public synchronized void stop() throws InterruptedException {
 
         if (!isRunning()) {
             return; // server was not started yet
         }
 
         clientThread.interrupt();
-        try {
-            clientThread.join();
-        } catch (InterruptedException e) {
-            // intentionally left empty
-        }
+        clientThread.join();
     }
 
     public synchronized boolean isRunning() {
