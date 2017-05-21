@@ -5,6 +5,7 @@ package gmbh.norisknofun.network;
 import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
+import java.util.Set;
 
 import gmbh.norisknofun.network.socket.SelectionResult;
 import gmbh.norisknofun.network.socket.SocketFactory;
@@ -91,37 +92,49 @@ public class NetworkClient {
         // first notify event handler about session creation
         sessionEventHandler.newSession(session);
 
-        while (!Thread.interrupted()) {
-            if (!session.isOpen() && !session.hasDataToWrite()) {
-                break; // just break out and let the rest be handled
+        while (isRunnable()) {
+
+
+            SelectionResult selectionResult = select();
+            boolean success = selectionResult != null;
+
+            if (success && !selectionResult.getReadableSockets().isEmpty()) {
+                success = handleRead();
+                selectionResult.readHandled(clientSocket);
             }
-            SelectionResult result;
-            try {
-                selector.modify(clientSocket, session.hasDataToWrite());
-                result = selector.select();
-            } catch (IOException e) {
-                Gdx.app.log(this.getClass().getSimpleName(), "I/O error in client", e);
-                break;
+            if (success && !selectionResult.getWritableSockets().isEmpty()) {
+                success = handleWrite();
+                selectionResult.writeHandled(clientSocket);
             }
 
-            if (!result.getReadableSockets().isEmpty()) {
-                // contains only our single socket
-                if (!handleRead()) {
-                    break;
-                }
-                result.readHandled(clientSocket);
-            }
-            if (!result.getWritableSockets().isEmpty()) {
-                if (!handleWrite()) {
-                    break;
-                }
-                result.writeHandled(clientSocket);
-            }
+            if (!success)
+                break;
         }
 
         // last but not least terminate the session & close networking
         terminateSession();
         closeNetworking();
+    }
+
+    private SelectionResult select() {
+
+        SelectionResult result = null;
+        try {
+            selector.modify(clientSocket, session.hasDataToWrite());
+            result = selector.select();
+        } catch (IOException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "I/O error in client", e);
+        }
+
+        return result;
+    }
+
+    private boolean isRunnable() {
+
+        if (Thread.interrupted())
+            return false;
+
+        return session.isOpen() || session.hasDataToWrite();
     }
 
     private void terminateSession() {
@@ -133,23 +146,20 @@ public class NetworkClient {
 
 
     private boolean handleRead() {
+
         int numBytesRead;
         try {
             numBytesRead = session.doReadFromSocket(clientSocket);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket read", e);
-            return false;
-        }
-        if (numBytesRead < 0) {
-            // remote site closed the socket
-            return false;
+            numBytesRead = -1;
         }
 
         if (numBytesRead > 0) {
             sessionEventHandler.sessionDataReceived(session);
         }
 
-        return true;
+        return numBytesRead >= 0;
     }
 
     private boolean handleWrite() {
@@ -158,14 +168,14 @@ public class NetworkClient {
             numBytesWritten = session.doWriteToSocket(clientSocket);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket write", e);
-            return false;
+            numBytesWritten = -1;
         }
 
         if (numBytesWritten > 0) {
             sessionEventHandler.sessionDataWritten(session);
         }
 
-        return true;
+        return numBytesWritten >= 0;
     }
 
     public synchronized void stop() throws InterruptedException {

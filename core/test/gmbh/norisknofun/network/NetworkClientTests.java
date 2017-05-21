@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import gmbh.norisknofun.GdxTest;
@@ -428,7 +427,7 @@ public class NetworkClientTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataWritten(ArgumentMatchers.any());
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
         verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
-        verify(selectionResultMock, times(0)).writeHandled(socketMock);
+        verify(selectionResultMock, times(1)).writeHandled(socketMock);
         verify(selectionResultMock, times(0)).readHandled(any());
     }
 
@@ -598,7 +597,7 @@ public class NetworkClientTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
         verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
         verify(selectionResultMock, times(0)).writeHandled(socketMock);
-        verify(selectionResultMock, times(0)).readHandled(any());
+        verify(selectionResultMock, times(1)).readHandled(any());
     }
 
     @Test
@@ -643,7 +642,7 @@ public class NetworkClientTests extends GdxTest {
         verify(sessionEventHandlerMock, times(0)).sessionDataReceived(ArgumentMatchers.any());
         verify(sessionEventHandlerMock, times(1)).sessionClosed(ArgumentMatchers.any());
         verify(selectionResultMock, times(0)).writeHandled(socketMock);
-        verify(selectionResultMock, times(0)).readHandled(any());
+        verify(selectionResultMock, times(1)).readHandled(any());
     }
 
     @Test
