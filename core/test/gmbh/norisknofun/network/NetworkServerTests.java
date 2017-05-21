@@ -833,6 +833,8 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
         verify(selectorMock, times(1)).modify(clientSocketMockOne, true);
         verify(selectorMock, times(1)).modify(clientSocketMockTwo, true);
+        verify(selectorMock, times(1)).modify(clientSocketMockOne, false);
+        verify(selectorMock, times(1)).modify(clientSocketMockTwo, false);
     }
 
     @Test
@@ -909,6 +911,143 @@ public class NetworkServerTests extends GdxTest {
         verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
         verify(selectorMock, times(1)).modify(clientSocketMockOne, true);
         verify(selectorMock, times(1)).modify(clientSocketMockTwo, true);
+        verify(selectorMock, times(1)).modify(clientSocketMockOne, false);
+        verify(selectorMock, times(0)).modify(clientSocketMockTwo, false);
+    }
+
+    @Test
+    public void clientSocketHasDataToRead() throws IOException, InterruptedException {
+
+        // given
+        when(socketFactoryMock.openSocketSelector()).thenReturn(selectorMock);
+        when(socketFactoryMock.openServerSocket(anyInt())).thenReturn(serverSocketMock);
+        doReturn(selectionResultMock).doReturn(selectionResultMock).doThrow(IOException.class).when(selectorMock).select();
+        doReturn(Collections.singleton(serverSocketMock)).doReturn(Collections.emptySet()).when(selectionResultMock).getAcceptableSockets();
+        doReturn(Collections.emptySet()).when(selectionResultMock).getWritableSockets();
+        doReturn(Collections.emptySet())
+                .doReturn(new HashSet<>(Arrays.asList(clientSocketMockOne, clientSocketMockTwo)))
+                .when(selectionResultMock).getReadableSockets();
+        doReturn(clientSocketMockOne).doReturn(clientSocketMockTwo).doReturn(null).when(serverSocketMock).accept();
+
+        Answer readAnswer = new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                byte[] bytes = "Hello World!".getBytes();
+                ByteBuffer data = invocation.getArgument(0);
+                data.put(bytes);
+
+                return bytes.length;
+            }
+        };
+
+        doAnswer(readAnswer).when(clientSocketMockOne).read(any(ByteBuffer.class));
+        doAnswer(readAnswer).when(clientSocketMockTwo).read(any(ByteBuffer.class));
+
+        final CountDownLatch selectorCloseLatch = new CountDownLatch(1);
+
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+
+                selectorCloseLatch.countDown();
+                return null;
+            }
+        }).when(selectorMock).close();
+
+        // when
+        boolean obtained = server.start(PORT);
+        selectorCloseLatch.await();
+        server.stop();
+
+        // then
+        assertThat(obtained, is(true));
+        assertThat(server.isRunning(), is(false));
+
+        // verify method calls
+        verify(socketFactoryMock, times(1)).openSocketSelector();
+        verify(socketFactoryMock, times(1)).openServerSocket(anyInt());
+        verify(selectorMock, times(1)).register(serverSocketMock);
+        verify(selectorMock, times(3)).select();
+        verify(selectorMock, times(1)).close();
+        verify(serverSocketMock, times(3)).accept();
+        verify(serverSocketMock, times(1)).close();
+        verify(clientSocketMockOne, times(1)).close();
+        verify(clientSocketMockTwo, times(1)).close();
+        verify(clientSocketMockOne, times(1)).read(any(ByteBuffer.class));
+        verify(clientSocketMockTwo, times(1)).read(any(ByteBuffer.class));
+        verify(sessionEventHandlerMock, times(2)).newSession(any(Session.class));
+        verify(sessionEventHandlerMock, times(2)).sessionDataReceived(any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
+        verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
+        verify(selectorMock, times(2)).modify(clientSocketMockOne, false);
+        verify(selectorMock, times(2)).modify(clientSocketMockTwo, false);
+    }
+
+    @Test
+    public void clientSocketHasDataToReadButReadingFromSocketThrowsException() throws IOException, InterruptedException {
+
+        // given
+        when(socketFactoryMock.openSocketSelector()).thenReturn(selectorMock);
+        when(socketFactoryMock.openServerSocket(anyInt())).thenReturn(serverSocketMock);
+        doReturn(selectionResultMock).doReturn(selectionResultMock).doThrow(IOException.class).when(selectorMock).select();
+        doReturn(Collections.singleton(serverSocketMock)).doReturn(Collections.emptySet()).when(selectionResultMock).getAcceptableSockets();
+        doReturn(Collections.emptySet()).when(selectionResultMock).getWritableSockets();
+        doReturn(Collections.emptySet())
+                .doReturn(new HashSet<>(Arrays.asList(clientSocketMockOne, clientSocketMockTwo)))
+                .when(selectionResultMock).getReadableSockets();
+        doReturn(clientSocketMockOne).doReturn(clientSocketMockTwo).doReturn(null).when(serverSocketMock).accept();
+
+        Answer readAnswer = new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                byte[] bytes = "Hello World!".getBytes();
+                ByteBuffer data = invocation.getArgument(0);
+                data.put(bytes);
+
+                return bytes.length;
+            }
+        };
+
+        doAnswer(readAnswer).when(clientSocketMockOne).read(any(ByteBuffer.class));
+        doThrow(IOException.class).when(clientSocketMockTwo).read(any(ByteBuffer.class));
+
+        final CountDownLatch selectorCloseLatch = new CountDownLatch(1);
+
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+
+                selectorCloseLatch.countDown();
+                return null;
+            }
+        }).when(selectorMock).close();
+
+        // when
+        boolean obtained = server.start(PORT);
+        selectorCloseLatch.await();
+        server.stop();
+
+        // then
+        assertThat(obtained, is(true));
+        assertThat(server.isRunning(), is(false));
+
+        // verify method calls
+        verify(socketFactoryMock, times(1)).openSocketSelector();
+        verify(socketFactoryMock, times(1)).openServerSocket(anyInt());
+        verify(selectorMock, times(1)).register(serverSocketMock);
+        verify(selectorMock, times(3)).select();
+        verify(selectorMock, times(1)).close();
+        verify(serverSocketMock, times(3)).accept();
+        verify(serverSocketMock, times(1)).close();
+        verify(clientSocketMockOne, times(1)).close();
+        verify(clientSocketMockTwo, times(1)).close();
+        verify(clientSocketMockOne, times(1)).read(any(ByteBuffer.class));
+        verify(clientSocketMockTwo, times(1)).read(any(ByteBuffer.class));
+        verify(sessionEventHandlerMock, times(2)).newSession(any(Session.class));
+        verify(sessionEventHandlerMock, times(1)).sessionDataReceived(any(Session.class));
+        verify(sessionEventHandlerMock, times(0)).sessionDataWritten(any(Session.class));
+        verify(sessionEventHandlerMock, times(2)).sessionClosed(any(Session.class));
+        verify(selectorMock, times(2)).modify(clientSocketMockOne, false);
+        verify(selectorMock, times(1)).modify(clientSocketMockTwo, false);
     }
 }
-
