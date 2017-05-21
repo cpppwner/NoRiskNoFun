@@ -198,7 +198,7 @@ public class NetworkServer {
 
     private void handleRead(TCPClientSocket clientSocket) {
         SessionImpl session = socketSessionMap.get(clientSocket);
-        int numBytesRead = 0;
+        int numBytesRead;
         try {
             numBytesRead = session.doReadFromSocket(clientSocket);
         } catch (IOException e) {
