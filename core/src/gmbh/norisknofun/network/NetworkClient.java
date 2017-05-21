@@ -5,7 +5,6 @@ package gmbh.norisknofun.network;
 import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
-import java.util.Set;
 
 import gmbh.norisknofun.network.socket.SelectionResult;
 import gmbh.norisknofun.network.socket.SocketFactory;
