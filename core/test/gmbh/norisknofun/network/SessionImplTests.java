@@ -110,7 +110,7 @@ public class SessionImplTests {
     public void doReadFromSocketPutsDataIntoInQueueAfterSuccessfulRead() throws IOException {
 
         // given
-        String message = "Hello World!";
+        final String message = "Hello World!";
 
         when(socketMock.read(ArgumentMatchers.any(ByteBuffer.class))).then(new Answer<Object>() {
             @Override
@@ -138,7 +138,7 @@ public class SessionImplTests {
     public void readDataIsRemovedFromQueueAfterDataHasBeenConsumed() throws IOException {
 
         // given
-        String message = "Hello World!";
+        final String message = "Hello World!";
 
         when(socketMock.read(ArgumentMatchers.any(ByteBuffer.class))).then(new Answer<Object>() {
             @Override
@@ -227,7 +227,7 @@ public class SessionImplTests {
     public void doWriteToSocketReturnsNumberOfBytesWrittenAndAdjustsInternalBufferAccordingly() throws IOException {
 
         // given
-        List<byte[]> consumedData = new LinkedList<>();
+        final List<byte[]> consumedData = new LinkedList<>();
         when(socketMock.write(ArgumentMatchers.any(ByteBuffer.class))).then(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
@@ -335,7 +335,7 @@ public class SessionImplTests {
     public void aClosedSessionDoesNotStoreReadDataFromSocket() throws IOException {
 
         // given
-        String message = "Hello World!";
+        final String message = "Hello World!";
 
         when(socketMock.read(ArgumentMatchers.any(ByteBuffer.class))).then(new Answer<Object>() {
             @Override
@@ -456,7 +456,7 @@ public class SessionImplTests {
     public void aTerminatedSessionDoesNotStoreReadDataFromSocket() throws IOException {
 
         // given
-        String message = "Hello World!";
+        final String message = "Hello World!";
 
         when(socketMock.read(ArgumentMatchers.any(ByteBuffer.class))).then(new Answer<Object>() {
             @Override
@@ -482,7 +482,7 @@ public class SessionImplTests {
     public void aTerminatedSessionDiscardsPendingInputData() throws IOException {
 
         // given
-        String message = "Hello World!";
+        final String message = "Hello World!";
 
         when(socketMock.read(ArgumentMatchers.any(ByteBuffer.class))).then(new Answer<Object>() {
             @Override
