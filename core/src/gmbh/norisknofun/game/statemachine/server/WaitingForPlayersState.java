@@ -14,7 +14,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class WaitingForPlayersState implements State {
+public class WaitingForPlayersState extends State {
 
     private ServerContext context;
     private final GameData data;

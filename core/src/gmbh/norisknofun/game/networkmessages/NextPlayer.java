@@ -19,5 +19,4 @@ public class NextPlayer extends BasicMessageImpl {
     public boolean playersTurn = true;
 
 
-
 }

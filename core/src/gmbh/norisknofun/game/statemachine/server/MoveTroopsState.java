@@ -18,7 +18,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class MoveTroopsState implements State {
+public class MoveTroopsState extends State {
 
     private ServerContext context;
     private final GameData data;

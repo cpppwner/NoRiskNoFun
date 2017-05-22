@@ -7,12 +7,13 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class AttackLoserState implements State {
+public class AttackLoserState extends State {
 
     private ServerContext context;
     public AttackLoserState(ServerContext context){
         this.context=context;
     }
+
 
     @Override
     public void enter() {

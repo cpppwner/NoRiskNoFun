@@ -7,7 +7,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class AttackState implements State {
+public class AttackState extends State {
 
     private ServerContext context;
     public AttackState(ServerContext context){

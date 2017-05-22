@@ -7,7 +7,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class ChooseTargetState implements State {
+public class ChooseTargetState extends State {
 
     private ServerContext context;
     public ChooseTargetState(ServerContext context){

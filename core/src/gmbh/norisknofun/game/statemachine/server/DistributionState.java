@@ -14,7 +14,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 17.05.2017.
  */
 
-public class DistributionState implements State {
+public class DistributionState extends State {
 
     private ServerContext context;
     private final GameData data;

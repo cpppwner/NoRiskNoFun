@@ -7,7 +7,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class ChooseTroopAmountState implements State {
+public class ChooseTroopAmountState extends State {
 
     private ServerContext context;
     public ChooseTroopAmountState(ServerContext context){

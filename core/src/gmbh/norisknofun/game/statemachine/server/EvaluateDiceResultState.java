@@ -7,7 +7,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class EvaluateDiceResultState implements State {
+public class EvaluateDiceResultState extends State {
 
     private ServerContext context;
     public EvaluateDiceResultState(ServerContext context){
