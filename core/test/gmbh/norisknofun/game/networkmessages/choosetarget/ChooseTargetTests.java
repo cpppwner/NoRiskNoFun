@@ -10,14 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import gmbh.norisknofun.game.networkmessages.ChangeState;
-import gmbh.norisknofun.game.networkmessages.Dice;
-import gmbh.norisknofun.game.networkmessages.EndGame;
-import gmbh.norisknofun.game.networkmessages.NextPlayer;
-import gmbh.norisknofun.game.statemachine.server.WaitingForPlayersState;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 

@@ -3,12 +3,8 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
-import gmbh.norisknofun.game.networkmessages.ChangeState;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
-import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
-import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
-import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -35,9 +31,7 @@ public class MoveTroopsState extends State {
     @Override
     public void handleMessage(BasicMessageImpl message) {
 
-        if(message.getType().equals(ChangeState.class)){
-            context.setState(((ChangeState) message).state);
-        }else if(message.getType().equals(MoveTroop.class)){
+       if(message.getType().equals(MoveTroop.class)){
             // todo interface between statemachine and GUI
         }else if(message.getType().equals(MoveTroopCheck.class)){
             // todo interface between statemachine and GUI

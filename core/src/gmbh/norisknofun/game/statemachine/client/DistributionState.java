@@ -3,9 +3,6 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
-import gmbh.norisknofun.game.networkmessages.ChangeState;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
-import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
@@ -36,9 +33,7 @@ public class DistributionState extends State {
     @Override
     public void handleMessage(BasicMessageImpl message) {
 
-        if(message.getType().equals(ChangeState.class)){
-            context.setState(((ChangeState) message).state);
-        }else if(message.getType().equals(AddTroops.class)){
+        if(message.getType().equals(AddTroops.class)){
             addTroops(((AddTroops)message).amount);
         }else if(message.getType().equals(SpawnTroop.class)){
             // todo interface between statemachine and GUI

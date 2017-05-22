@@ -54,18 +54,7 @@ public class NetworkMessagesTests {
         assertEquals(nextPlayer1.getType(),NextPlayer.class);
 
     }
-    @Test
-    public void ChangeState() throws IOException, ClassNotFoundException {
 
-        WaitingForPlayersState stateMock = mock(WaitingForPlayersState.class);
-        ChangeState changeState = new ChangeState(stateMock);
-        oos.writeObject (changeState);
-        ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
-        ObjectInputStream ois = new ObjectInputStream (bais);
-        ChangeState changeState1 =(ChangeState) ois.readObject();
-        assertThat(changeState1.state,  instanceOf(WaitingForPlayersState.class));
-
-    }
     @Test
     public void dice() throws IOException, ClassNotFoundException {
 

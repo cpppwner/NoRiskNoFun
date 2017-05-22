@@ -3,15 +3,10 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
-import gmbh.norisknofun.game.networkmessages.ChangeState;
-import gmbh.norisknofun.game.networkmessages.EndGame;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.statemachine.State;
-import gmbh.norisknofun.scene.SceneManager;
-import gmbh.norisknofun.scene.SceneNames;
 
 /**
  * Created by Katharina on 19.05.2017.
@@ -38,9 +33,7 @@ public class SpreadTroopsState extends State {
     public void handleMessage(BasicMessageImpl message) {
 
 
-        if(message.getType().equals(ChangeState.class)){
-            context.setState(((ChangeState) message).state);
-        }else if(message.getType().equals(NextPlayer.class)){
+       if(message.getType().equals(NextPlayer.class)){
             setNextPlayer(((NextPlayer)message).playername);
         }else if(message.getType().equals(SpawnTroop.class)){
                 // todo interface between statemachine and GUI
