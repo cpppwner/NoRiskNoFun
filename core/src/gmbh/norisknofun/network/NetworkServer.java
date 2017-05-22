@@ -36,7 +36,10 @@ public class NetworkServer {
 
     public synchronized boolean start(int listeningPort) {
 
-        if (!initNetworking(listeningPort)) {
+        try {
+            initNetworking(listeningPort);
+        } catch (IOException e) {
+            Gdx.app.log(getClass().getSimpleName(), "Failed to start networking", e);
             closeNetworking();
             return false;
         }
@@ -53,18 +56,11 @@ public class NetworkServer {
         return true;
     }
 
-    private boolean initNetworking(int listeningPort) {
+    private void initNetworking(int listeningPort) throws IOException {
 
-        try {
-            selector = socketFactory.openSocketSelector();
-            serverSocket = socketFactory.openServerSocket(listeningPort);
-            selector.register(serverSocket);
-        } catch (IOException e) {
-            Gdx.app.log(this.getClass().getSimpleName(), "Failed to start network server", e);
-            return false;
-        }
-
-        return true;
+        selector = socketFactory.openSocketSelector();
+        serverSocket = socketFactory.openServerSocket(listeningPort);
+        selector.register(serverSocket);
     }
 
     private void closeNetworking() {
@@ -182,7 +178,7 @@ public class NetworkServer {
                     try {
                         clientSocket.close();
                     } catch (Exception ex) {
-                        // intentionally left empty
+                        Gdx.app.error(getClass().getSimpleName(), "Closing newly accepted client socket failed", e);
                     }
                 }
             }
@@ -192,12 +188,12 @@ public class NetworkServer {
     private void handleRead(SelectionResult result) {
 
         for (TCPClientSocket clientSocket : result.getReadableSockets()) {
-            handleRead(clientSocket);
+            handleSocketRead(clientSocket);
             result.readHandled(clientSocket);
         }
     }
 
-    private void handleRead(TCPClientSocket clientSocket) {
+    private void handleSocketRead(TCPClientSocket clientSocket) {
         SessionImpl session = socketSessionMap.get(clientSocket);
         int numBytesRead;
         try {
@@ -219,12 +215,12 @@ public class NetworkServer {
     private void handleWrite(SelectionResult result) {
 
         for (TCPClientSocket clientSocket : result.getWritableSockets()) {
-            handleWrite(clientSocket);
+            handleSocketWrite(clientSocket);
             result.writeHandled(clientSocket);
         }
     }
 
-    private void handleWrite(TCPClientSocket clientSocket) {
+    private void handleSocketWrite(TCPClientSocket clientSocket) {
         SessionImpl session = socketSessionMap.get(clientSocket);
         int numBytesWritten;
         try {

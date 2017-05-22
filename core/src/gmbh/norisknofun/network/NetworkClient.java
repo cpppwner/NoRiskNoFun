@@ -31,7 +31,10 @@ public class NetworkClient {
 
     public synchronized boolean connect(String host, int port) {
 
-        if (!initNetworking(host, port)) {
+        try {
+            initNetworking(host, port);
+        } catch (IOException e) {
+            Gdx.app.error(getClass().getSimpleName(), "Failed to initialize networking", e);
             closeNetworking();
             return false;
         }
@@ -48,23 +51,12 @@ public class NetworkClient {
         return true;
     }
 
-    private boolean initNetworking(String host, int port) {
+    private void initNetworking(String host, int port) throws IOException {
 
-        boolean success = true;
-        try {
-            selector = socketFactory.openSocketSelector();
-            clientSocket = socketFactory.openClientSocket(host, port);
-            selector.register(clientSocket, false); // initial registration is read-only
-        } catch (IOException e) {
-            Gdx.app.log(this.getClass().getSimpleName(), "Failed to connect", e);
-            success = false;
-        }
-
-        if (success) {
-            session = new SessionImpl(selector);
-        }
-
-        return success;
+        selector = socketFactory.openSocketSelector();
+        clientSocket = socketFactory.openClientSocket(host, port);
+        selector.register(clientSocket, false); // initial registration is read-only
+        session = new SessionImpl(selector);
     }
 
     private void closeNetworking() {
@@ -132,10 +124,8 @@ public class NetworkClient {
 
     private boolean isRunnable() {
 
-        if (Thread.interrupted())
-            return false;
+        return !Thread.interrupted() && (session.isOpen() || session.hasDataToWrite());
 
-        return session.isOpen() || session.hasDataToWrite();
     }
 
     private void terminateSession() {
