@@ -17,7 +17,7 @@ import gmbh.norisknofun.scene.SceneNames;
  * Created by Katharina on 19.05.2017.
  */
 
-public class SpreadTroopsState implements State {
+public class SpreadTroopsState extends State {
 
     private ClientContext context;
 

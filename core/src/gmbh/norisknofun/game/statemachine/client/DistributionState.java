@@ -16,7 +16,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 19.05.2017.
  */
 
-public class DistributionState implements State {
+public class DistributionState extends State {
 
     private ClientContext context;
 

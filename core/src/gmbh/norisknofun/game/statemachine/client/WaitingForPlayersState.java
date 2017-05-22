@@ -14,7 +14,7 @@ import gmbh.norisknofun.scene.ui.MainMenuScene;
  * Created by Katharina on 19.05.2017.
  */
 
-public class WaitingForPlayersState implements State {
+public class WaitingForPlayersState extends State {
     private ClientContext context;
     public WaitingForPlayersState( ClientContext context){
         this.context=context;

@@ -7,7 +7,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 19.05.2017.
  */
 
-public class ChooseTroopAmountState implements State {
+public class ChooseTroopAmountState extends State {
 
     @Override
     public void enter() {

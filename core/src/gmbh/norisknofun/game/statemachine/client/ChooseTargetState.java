@@ -11,7 +11,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 19.05.2017.
  */
 
-public class ChooseTargetState implements State {
+public class ChooseTargetState extends State {
 
     private ClientContext context;
 

@@ -7,7 +7,7 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 19.05.2017.
  */
 
-public class AttackState implements State {
+public class AttackState extends State {
     @Override
     public void enter() {
 
