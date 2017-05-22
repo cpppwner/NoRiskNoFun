@@ -11,7 +11,7 @@ import gmbh.norisknofun.network.socket.TCPClientSocket;
 /**
  * Implementation of the session interface.
  */
-class SessionImpl implements Session {
+public class SessionImpl implements Session {
 
     private static final int DEFAULT_IN_BUFFER_SIZE = 4096;
 
@@ -61,7 +61,7 @@ class SessionImpl implements Session {
      * Internal constructor taking the {@link SocketSelector}.
      * @param selector Selector to notify on certain conditions.
      */
-    SessionImpl(SocketSelector selector) {
+    public SessionImpl(SocketSelector selector) {
         this.selector = selector;
     }
 
