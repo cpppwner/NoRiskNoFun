@@ -7,6 +7,6 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class AddTroops extends BasicMessageImpl {
-    int amount;
+   public  int amount;
 
 }

@@ -240,6 +240,7 @@ public class SessionImplTests {
 
         SessionImpl target = new SessionImpl(selectorMock);
         target.write(new byte[]{ (byte)0xde, (byte)0xad, (byte)0xbe, (byte)0xef });
+        target.write(new byte[]{ (byte)0xde, (byte)0xad, (byte)0xba, (byte)0xbe });
 
         // when checking first time if data is available, then
         assertThat(target.hasDataToWrite(), is(true));
@@ -258,11 +259,29 @@ public class SessionImplTests {
         // then
         assertThat(obtained, is(2));
         assertThat(consumedData.size(), is(2));
+        assertThat(target.hasDataToWrite(), is(true));
+
+        // when sending data to socket again
+        obtained = target.doWriteToSocket(socketMock);
+
+        // then
+        assertThat(obtained, is(2));
+        assertThat(consumedData.size(), is(3));
+        assertThat(target.hasDataToWrite(), is(true));
+
+        // when sending data to socket again
+        obtained = target.doWriteToSocket(socketMock);
+
+        // then
+        assertThat(obtained, is(2));
+        assertThat(consumedData.size(), is(4));
         assertThat(target.hasDataToWrite(), is(false));
 
         // verify the data that was consumed
         assertThat(consumedData.get(0), is(equalTo(new byte[] { (byte)0xde, (byte)0xad })));
         assertThat(consumedData.get(1), is(equalTo(new byte[] { (byte)0xbe, (byte)0xef })));
+        assertThat(consumedData.get(2), is(equalTo(new byte[] { (byte)0xde, (byte)0xad })));
+        assertThat(consumedData.get(3), is(equalTo(new byte[] { (byte)0xba, (byte)0xbe })));
     }
 
     @Test

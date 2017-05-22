@@ -178,7 +178,7 @@ public class NetworkServer {
                     try {
                         clientSocket.close();
                     } catch (Exception ex) {
-                        Gdx.app.error(getClass().getSimpleName(), "Closing newly accepted client socket failed", e);
+                        Gdx.app.error(getClass().getSimpleName(), "Closing newly accepted client socket failed", ex);
                     }
                 }
             }
