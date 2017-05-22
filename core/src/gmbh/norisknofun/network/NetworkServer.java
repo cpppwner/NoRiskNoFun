@@ -36,7 +36,10 @@ public class NetworkServer {
 
     public synchronized boolean start(int listeningPort) {
 
-        if (!initNetworking(listeningPort)) {
+        try {
+            initNetworking(listeningPort);
+        } catch (IOException e) {
+            Gdx.app.log(getClass().getSimpleName(), "Failed to start networking", e);
             closeNetworking();
             return false;
         }
@@ -53,18 +56,11 @@ public class NetworkServer {
         return true;
     }
 
-    private boolean initNetworking(int listeningPort) {
+    private void initNetworking(int listeningPort) throws IOException {
 
-        try {
-            selector = socketFactory.openSocketSelector();
-            serverSocket = socketFactory.openServerSocket(listeningPort);
-            selector.register(serverSocket);
-        } catch (IOException e) {
-            Gdx.app.log(this.getClass().getSimpleName(), "Failed to start network server", e);
-            return false;
-        }
-
-        return true;
+        selector = socketFactory.openSocketSelector();
+        serverSocket = socketFactory.openServerSocket(listeningPort);
+        selector.register(serverSocket);
     }
 
     private void closeNetworking() {
