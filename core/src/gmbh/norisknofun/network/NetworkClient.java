@@ -34,7 +34,7 @@ public class NetworkClient {
         try {
             initNetworking(host, port);
         } catch (IOException e) {
-            Gdx.app.log(getClass().getSimpleName(), "Failed to initialize networking", e);
+            Gdx.app.error(getClass().getSimpleName(), "Failed to initialize networking", e);
             closeNetworking();
             return false;
         }
