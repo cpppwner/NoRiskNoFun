@@ -178,7 +178,7 @@ public class NetworkServer {
                     try {
                         clientSocket.close();
                     } catch (Exception ex) {
-                        // intentionally left empty
+                        Gdx.app.error(getClass().getSimpleName(), "Closing newly accepted client socket failed", e);
                     }
                 }
             }
@@ -188,12 +188,12 @@ public class NetworkServer {
     private void handleRead(SelectionResult result) {
 
         for (TCPClientSocket clientSocket : result.getReadableSockets()) {
-            handleRead(clientSocket);
+            handleSocketRead(clientSocket);
             result.readHandled(clientSocket);
         }
     }
 
-    private void handleRead(TCPClientSocket clientSocket) {
+    private void handleSocketRead(TCPClientSocket clientSocket) {
         SessionImpl session = socketSessionMap.get(clientSocket);
         int numBytesRead;
         try {
@@ -215,12 +215,12 @@ public class NetworkServer {
     private void handleWrite(SelectionResult result) {
 
         for (TCPClientSocket clientSocket : result.getWritableSockets()) {
-            handleWrite(clientSocket);
+            handleSocketWrite(clientSocket);
             result.writeHandled(clientSocket);
         }
     }
 
-    private void handleWrite(TCPClientSocket clientSocket) {
+    private void handleSocketWrite(TCPClientSocket clientSocket) {
         SessionImpl session = socketSessionMap.get(clientSocket);
         int numBytesWritten;
         try {
