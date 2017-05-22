@@ -16,6 +16,11 @@ package gmbh.norisknofun.game.networkmessages;
 
 public class EndGame extends BasicMessageImpl {
 
-    String winner;
-    boolean gameend;
+    public String winner;
+    public boolean gameend;
+
+    public EndGame(String winner, boolean gameend) {
+        this.winner = winner;
+        this.gameend = gameend;
+    }
 }

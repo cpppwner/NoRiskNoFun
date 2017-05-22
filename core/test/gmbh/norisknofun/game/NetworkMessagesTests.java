@@ -14,11 +14,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import gmbh.norisknofun.game.networkmessages.ChangeState;
+import gmbh.norisknofun.game.networkmessages.Dice;
+import gmbh.norisknofun.game.networkmessages.EndGame;
 import gmbh.norisknofun.game.networkmessages.NextPlayer;
 import gmbh.norisknofun.game.statemachine.server.WaitingForPlayersState;
 import gmbh.norisknofun.network.socket.SocketSelector;
 import gmbh.norisknofun.network.socket.TCPClientSocket;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
@@ -40,8 +44,8 @@ public class NetworkMessagesTests {
     public void nextPlayerFields() {
 
         String playername="Player1";
-        NextPlayer nextPlayer = new NextPlayer();
-        nextPlayer.playername=playername;
+        NextPlayer nextPlayer = new NextPlayer(playername);
+
 
        try{
             oos.writeObject (nextPlayer);
@@ -63,8 +67,8 @@ public class NetworkMessagesTests {
     public void nextPlayerTypes() {
 
         String playername="Player1";
-        NextPlayer nextPlayer = new NextPlayer();
-        nextPlayer.playername= playername;
+        NextPlayer nextPlayer = new NextPlayer(playername);
+
         try{
             oos.writeObject (nextPlayer);
         } catch (IOException e) {
@@ -84,11 +88,11 @@ public class NetworkMessagesTests {
     @Test
     public void ChangeState() {
 
-        String playername="Player1";
+
 
         WaitingForPlayersState stateMock = mock(WaitingForPlayersState.class);
-        ChangeState changeState = new ChangeState();
-        changeState.state = stateMock;
+        ChangeState changeState = new ChangeState(stateMock);
+
         try{
             oos.writeObject (changeState);
         } catch (IOException e) {
@@ -97,7 +101,7 @@ public class NetworkMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         try (ObjectInputStream ois = new ObjectInputStream (bais)) {
             ChangeState changeState1 =(ChangeState) ois.readObject();
-            assertEquals(changeState1.state.getClass(),WaitingForPlayersState.class);
+            assertThat(changeState1.state,  instanceOf(WaitingForPlayersState.class));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,6 +109,55 @@ public class NetworkMessagesTests {
 
 
     }
+    @Test
+    public void dice() {
+
+
+
+
+        Dice dice = new Dice("Player 1",10,6);
+
+        try{
+           oos.writeObject (dice);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
+        try (ObjectInputStream ois = new ObjectInputStream (bais)) {
+            Dice dice1 =(Dice) ois.readObject();
+            assertEquals(dice1.playername,  "Player 1");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    @Test
+    public void endGame() {
+
+
+
+
+        EndGame endGame = new EndGame("Player 1",true);
+
+        try{
+            oos.writeObject (endGame);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
+        try (ObjectInputStream ois = new ObjectInputStream (bais)) {
+            EndGame endGame1 =(EndGame) ois.readObject();
+            assertEquals(endGame1.winner,  "Player 1");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 
 }

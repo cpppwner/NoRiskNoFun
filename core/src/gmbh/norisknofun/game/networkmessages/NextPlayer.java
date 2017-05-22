@@ -18,5 +18,7 @@ public class NextPlayer extends BasicMessageImpl {
     public String playername;
     public boolean playersTurn = true;
 
-
+    public NextPlayer(String playername) {
+        this.playername = playername;
+    }
 }
