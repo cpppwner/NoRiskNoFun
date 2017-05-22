@@ -7,5 +7,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class AttackResult extends BasicMessageImpl {
-    String playername;
+    public String playername;
+
+    public AttackResult(String playername) {
+        this.playername = playername;
+    }
 }

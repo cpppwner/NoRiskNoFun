@@ -16,8 +16,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class AttackRegion extends BasicMessageImpl {
 
-    String regionname;
+    public String regionname;
 
-
-
+    public AttackRegion(String regionname) {
+        this.regionname = regionname;
+    }
 }

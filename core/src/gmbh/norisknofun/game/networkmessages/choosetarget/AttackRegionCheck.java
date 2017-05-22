@@ -17,7 +17,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class AttackRegionCheck extends BasicMessageImpl {
 
 
-    boolean attackreachable;
+    public boolean attackreachable;
 
-
+    public AttackRegionCheck(boolean attackreachable) {
+        this.attackreachable = attackreachable;
+    }
 }

@@ -7,5 +7,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class ContinueAttack extends BasicMessageImpl {
-    boolean decision;
+    public boolean decision;
+
+    public ContinueAttack(boolean decision) {
+        this.decision = decision;
+    }
 }

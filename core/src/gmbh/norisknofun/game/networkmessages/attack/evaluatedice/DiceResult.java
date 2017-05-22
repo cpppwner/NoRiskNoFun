@@ -7,5 +7,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class DiceResult extends BasicMessageImpl {
-    int [] diceResults;
+    public int [] diceResults;
+
+    public DiceResult(int[] diceResults) {
+        this.diceResults = diceResults;
+    }
 }

@@ -7,5 +7,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class ChooseTroopsAmount extends BasicMessageImpl {
-    int amount;
+    public int amount;
+
+    public ChooseTroopsAmount(int amount) {
+        this.amount = amount;
+    }
 }

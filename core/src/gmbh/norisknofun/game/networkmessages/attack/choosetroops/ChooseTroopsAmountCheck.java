@@ -7,5 +7,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class ChooseTroopsAmountCheck extends BasicMessageImpl {
-    boolean check;
+   public boolean check;
+
+    public ChooseTroopsAmountCheck(boolean check) {
+        this.check = check;
+    }
 }

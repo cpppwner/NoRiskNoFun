@@ -7,5 +7,6 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class NoAttack extends BasicMessageImpl{
-
+    public NoAttack() {
+    }
 }

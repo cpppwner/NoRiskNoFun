@@ -7,6 +7,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class DiceAmount extends BasicMessageImpl {
-    int amount;
+    public int amount;
 
+    public DiceAmount(int amount) {
+        this.amount = amount;
+    }
 }
