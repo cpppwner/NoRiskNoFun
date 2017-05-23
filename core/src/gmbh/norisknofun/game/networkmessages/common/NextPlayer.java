@@ -8,4 +8,8 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class NextPlayer extends BasicMessageImpl{
     public String playername;
+
+    public NextPlayer(String playername) {
+        this.playername = playername;
+    }
 }

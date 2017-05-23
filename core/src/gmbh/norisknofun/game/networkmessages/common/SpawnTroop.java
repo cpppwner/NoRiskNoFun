@@ -9,4 +9,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class SpawnTroop extends BasicMessageImpl {
     public String playername;
     public String regionname;
+
+    public SpawnTroop(String playername, String regionname) {
+        this.playername = playername;
+        this.regionname = regionname;
+    }
 }

@@ -9,4 +9,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class SpawnTroopCheck extends BasicMessageImpl {
     public boolean canspawn=false;
     public String errormessage="";
+
+    public SpawnTroopCheck(boolean canspawn, String errormessage) {
+        this.canspawn = canspawn;
+        this.errormessage = errormessage;
+    }
 }

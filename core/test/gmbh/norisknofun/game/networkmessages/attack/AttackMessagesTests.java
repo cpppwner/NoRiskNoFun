@@ -16,11 +16,7 @@ import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceAmount;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceResult;
 import gmbh.norisknofun.game.networkmessages.attack.loser.ContinueAttack;
-import gmbh.norisknofun.game.statemachine.server.WaitingForPlayersState;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 /**
  * Created by Philipp Mödritscher on 22.05.2017.
@@ -31,7 +27,7 @@ public class AttackMessagesTests {
 
     private ByteArrayOutputStream baos;
     private ObjectOutputStream oos;
-    final String PLAYER = "Player1";
+    private  final String PLAYER = "Player1";
 
     @Before
     public void setUp() throws IOException {

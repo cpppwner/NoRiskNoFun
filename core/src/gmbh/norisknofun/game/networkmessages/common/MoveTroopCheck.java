@@ -21,7 +21,8 @@ public class MoveTroopCheck extends BasicMessageImpl {
     //region
     public boolean movePossible;
 
-   
-
-
+    public MoveTroopCheck(String playername, boolean movePossible) {
+        this.playername = playername;
+        this.movePossible = movePossible;
+    }
 }

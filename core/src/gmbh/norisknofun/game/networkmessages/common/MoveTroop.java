@@ -21,6 +21,15 @@ public class MoveTroop extends BasicMessageImpl {
     public String destinationregion;
     public String originregion;
 
+    public MoveTroop(String playername, int troopamount, String destinationregion, String originregion) {
+        this.playername = playername;
+        this.troopamount = troopamount;
+        this.destinationregion = destinationregion;
+        this.originregion = originregion;
+    }
+
+
+
 
 
 

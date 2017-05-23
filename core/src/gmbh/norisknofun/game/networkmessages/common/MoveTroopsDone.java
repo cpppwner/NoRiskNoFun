@@ -8,5 +8,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class MoveTroopsDone extends BasicMessageImpl {
 
-    String playername;
+    public String playername;
+
+    public MoveTroopsDone(String playername) {
+        this.playername = playername;
+    }
 }

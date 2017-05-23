@@ -103,18 +103,12 @@ public class SpreadTroopsState extends State {
     }
 
     private void broadcastMoveTroopsMessage(MoveTroop message){
-        MoveTroop moveTroop = new MoveTroop();
-        moveTroop.destinationregion = message.destinationregion;
-        moveTroop.originregion = message.originregion;
-        moveTroop.playername = message.playername;
-        moveTroop.troopamount = message.troopamount;
+        MoveTroop moveTroop = new MoveTroop(message.playername,message.troopamount,message.destinationregion,message.originregion);
         context.sendMessage(moveTroop); // send to all clients
     }
 
     private void sendMoveTroopCheckMessage(String  playername, boolean movepossible){
-        MoveTroopCheck response = new MoveTroopCheck();
-        response.playername = playername;
-        response.movePossible = movepossible;
+        MoveTroopCheck response = new MoveTroopCheck(playername,movepossible);
         context.sendMessage(response); // todo how to send to specific client
     }
 }
