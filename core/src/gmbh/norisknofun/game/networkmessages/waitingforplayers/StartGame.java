@@ -17,6 +17,9 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  * Client (who created the Game)-> Server
  */
 public class StartGame extends BasicMessageImpl {
-    boolean startGame = true;
+    public boolean startGame = true;
 
+    public StartGame(boolean startGame) {
+        this.startGame = startGame;
+    }
 }

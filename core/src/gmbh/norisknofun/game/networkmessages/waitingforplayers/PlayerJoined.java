@@ -17,5 +17,7 @@ public class PlayerJoined extends BasicMessageImpl {
 
     public String playername;
 
-
+    public PlayerJoined(String playername) {
+        this.playername = playername;
+    }
 }

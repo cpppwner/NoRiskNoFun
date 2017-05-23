@@ -9,4 +9,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class AddTroops extends BasicMessageImpl {
    public  int amount;
 
+   public AddTroops(int amount) {
+      this.amount = amount;
+   }
 }

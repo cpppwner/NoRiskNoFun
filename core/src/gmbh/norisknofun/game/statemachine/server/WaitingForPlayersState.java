@@ -55,7 +55,7 @@ public class WaitingForPlayersState extends State {
 
     private void addPlayer(PlayerJoined message){
         boolean check=false;
-        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck();
+        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.playername);
         if(!checkIfPlayernameAlreadyExists(message.playername))
          {
             Player player = new Player();

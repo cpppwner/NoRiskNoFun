@@ -88,9 +88,10 @@ public class SpreadTroopsState extends State {
 
     private void setCurrentPlayer(int playerindex){
         data.setCurrentplayer(data.getPlayers().get(playerindex).getPlayername());
-        PlayerSpread playerSpread = new PlayerSpread();
-        playerSpread.playername=data.getCurrentplayer().getPlayername();
-        playerSpread.playersTurn=true;
+        String playername =data.getCurrentplayer().getPlayername();
+        PlayerSpread playerSpread = new PlayerSpread(playername,true);
+
+
         context.sendMessage(playerSpread); //todo send to specific client
     }
 

@@ -16,7 +16,11 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class PlayerSpreadFinished extends BasicMessageImpl {
 
-    String playername;
+    public String playername;
     // Region
 
+
+    public PlayerSpreadFinished(String playername) {
+        this.playername = playername;
+    }
 }

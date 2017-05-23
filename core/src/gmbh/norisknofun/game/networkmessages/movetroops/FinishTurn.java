@@ -7,5 +7,6 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class FinishTurn extends BasicMessageImpl {
-
+    public FinishTurn() {
+    }
 }

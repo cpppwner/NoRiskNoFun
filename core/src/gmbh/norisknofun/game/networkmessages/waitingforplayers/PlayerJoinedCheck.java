@@ -15,5 +15,8 @@ public class PlayerJoinedCheck extends PlayerJoined {
 
     public boolean allowedtojoin;
 
+    public PlayerJoinedCheck(String playername) {
+        super(playername);
 
+    }
 }

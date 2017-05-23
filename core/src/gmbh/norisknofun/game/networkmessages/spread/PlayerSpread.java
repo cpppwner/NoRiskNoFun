@@ -21,4 +21,8 @@ public class PlayerSpread extends BasicMessageImpl {
     public String playername;
     public boolean playersTurn = true;
 
+    public PlayerSpread(String playername, boolean playersTurn) {
+        this.playername = playername;
+        this.playersTurn = playersTurn;
+    }
 }

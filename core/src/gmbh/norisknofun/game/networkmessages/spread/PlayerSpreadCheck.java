@@ -18,6 +18,11 @@ public class PlayerSpreadCheck extends BasicMessageImpl {
 
     public String playername;
     public boolean check;
+
+    public PlayerSpreadCheck(String playername, boolean check) {
+        this.playername = playername;
+        this.check = check;
+    }
     //region
 
 }
