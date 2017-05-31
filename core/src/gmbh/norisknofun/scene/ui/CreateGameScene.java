@@ -35,14 +35,20 @@ public class CreateGameScene extends SceneBase {
     }
 
     private void initImageButtons() {
-        ImageButtonSceneObject createGameButton;
-        ImageButtonSceneObject imageButtonBack;
+        ImageButtonSceneObject createGameButton, imageButtonBack, twoPlayers, threePlayers, fourPlayers;
 
         createGameButton = createImageButton("button_create_game_eng.png");
         imageButtonBack = createImageButton("button_back.png");
+        twoPlayers = createImageButton("button_2_players.png");
+        threePlayers = createImageButton("button_3_players.png");
+        fourPlayers = createImageButton("button_4_players.png");
 
-        createGameButton.setBounds((Gdx.graphics.getWidth()/6)-5,(Gdx.graphics.getHeight()/3),553,480);
+
+        createGameButton.setBounds((Gdx.graphics.getWidth()/6)-5, (float) (Gdx.graphics.getHeight()/2.5),553,480);
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
+        twoPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10)),(Gdx.graphics.getHeight()/8),275,240);
+        threePlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 300),(Gdx.graphics.getHeight()/8),275,240);
+        fourPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 600),(Gdx.graphics.getHeight()/8),275,240);
 
 
         createGameButton.addListener(new ClickListener() {
@@ -63,8 +69,41 @@ public class CreateGameScene extends SceneBase {
             }
         });
 
+        twoPlayers.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
+            }
+        });
+
+        threePlayers.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
+            }
+        });
+
+        fourPlayers.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
+            }
+        });
+
+
+
+
         addSceneObject(createGameButton);
         addSceneObject(imageButtonBack);
+        addSceneObject(twoPlayers);
+        addSceneObject(threePlayers);
+        addSceneObject(fourPlayers);
     }
 
     private ImageButtonSceneObject createImageButton (String file){

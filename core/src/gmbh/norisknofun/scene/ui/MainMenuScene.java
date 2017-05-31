@@ -4,10 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.Attribute;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
+import javax.naming.Context;
 
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneManager;
@@ -35,8 +38,8 @@ public class MainMenuScene extends SceneBase {
         imageButtonCreate = createImageButton("button_create_game_eng.png");
         imageButtonJoin = createImageButton("button_join_game_eng.png");
 
-        imageButtonCreate.setBounds((Gdx.graphics.getWidth() / 6) - 5, (Gdx.graphics.getHeight() / 3), 553, 480);
-        imageButtonJoin.setBounds((Gdx.graphics.getWidth() / 2) + 10, (Gdx.graphics.getHeight() / 3), 553, 480);
+        imageButtonCreate.setBounds((Gdx.graphics.getWidth() / 6) - 5, (float) (Gdx.graphics.getHeight() / 2.5), 553, 480);
+        imageButtonJoin.setBounds((Gdx.graphics.getWidth() / 2) + 10, (float) (Gdx.graphics.getHeight() / 2.5), 553, 480);
 
 
         imageButtonCreate.addListener(new ClickListener() {
@@ -71,6 +74,7 @@ public class MainMenuScene extends SceneBase {
     private void setBackground() {
         addSceneObject(new BackgroundSceneObject());
     }
+
 
 
 }
