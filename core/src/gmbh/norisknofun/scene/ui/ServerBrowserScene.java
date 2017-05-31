@@ -11,9 +11,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
+import javax.swing.text.Element;
+import javax.swing.text.TableView;
 
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
@@ -26,7 +30,7 @@ import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
 public class ServerBrowserScene extends SceneBase{
 
-    protected ServerBrowserScene() {
+    public ServerBrowserScene() {
         super(SceneNames.SERVER_BROWSER_SCENE, Color.WHITE);
         setBackground();
         initImageButtons();
@@ -48,7 +52,7 @@ public class ServerBrowserScene extends SceneBase{
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+                SceneManager.getInstance().setActiveScene(SceneNames.JOIN_GAME_SCENE);
             }
         });
 
