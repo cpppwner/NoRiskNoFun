@@ -1,5 +1,6 @@
 package gmbh.norisknofun.network;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.LinkedList;
@@ -13,7 +14,7 @@ import gmbh.norisknofun.network.socket.TCPClientSocket;
  */
 public class SessionImpl implements Session {
 
-    private static final int DEFAULT_IN_BUFFER_SIZE = 4096;
+    public static final int DEFAULT_IN_BUFFER_SIZE = 4096;
 
     /**
      * Session's state.
@@ -81,7 +82,13 @@ public class SessionImpl implements Session {
 
         synchronized (syncObject) {
             if (sessionState == SessionState.OPEN) {
-                outQueue.add(data);
+                //first send byte length
+                byte[] length = ByteBuffer.allocate(4).putInt(data.length).array();
+                try {
+                    outQueue.add(concatArray(length, data));
+                }catch( IOException e){
+                    //// TODO: Exception 
+                }
             }
 
             wakeupSelectorIfRequired();
@@ -267,4 +274,24 @@ public class SessionImpl implements Session {
 
         return clone;
     }
+
+    /**
+     *
+     *Concatinate byte[] a with byte[] b
+     *
+     * @param a first byte[].
+     * @param b first byte[].
+     * @return concatet byte[].
+     */
+    public static byte[] concatArray(byte[] a,byte[] b)throws IOException{
+
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
+        outputStream.write(a);
+        outputStream.write(b);
+
+       return outputStream.toByteArray( );
+    }
+
+
 }
