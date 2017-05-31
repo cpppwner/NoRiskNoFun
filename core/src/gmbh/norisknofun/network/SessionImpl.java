@@ -1,6 +1,5 @@
 package gmbh.norisknofun.network;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.LinkedList;
@@ -12,9 +11,9 @@ import gmbh.norisknofun.network.socket.TCPClientSocket;
 /**
  * Implementation of the session interface.
  */
-public class SessionImpl implements Session {
+class SessionImpl implements Session {
 
-    public static final int DEFAULT_IN_BUFFER_SIZE = 4096;
+    private static final int DEFAULT_IN_BUFFER_SIZE = 4096;
 
     /**
      * Session's state.
@@ -62,7 +61,7 @@ public class SessionImpl implements Session {
      * Internal constructor taking the {@link SocketSelector}.
      * @param selector Selector to notify on certain conditions.
      */
-    public SessionImpl(SocketSelector selector) {
+    SessionImpl(SocketSelector selector) {
         this.selector = selector;
     }
 
@@ -82,13 +81,7 @@ public class SessionImpl implements Session {
 
         synchronized (syncObject) {
             if (sessionState == SessionState.OPEN) {
-                //first send byte length
-                byte[] length = ByteBuffer.allocate(4).putInt(data.length).array();
-                try {
-                    outQueue.add(concatArray(length, data));
-                }catch( IOException e){
-                    //// TODO: Exception 
-                }
+                outQueue.add(data);
             }
 
             wakeupSelectorIfRequired();
@@ -274,24 +267,4 @@ public class SessionImpl implements Session {
 
         return clone;
     }
-
-    /**
-     *
-     *Concatinate byte[] a with byte[] b
-     *
-     * @param a first byte[].
-     * @param b first byte[].
-     * @return concatet byte[].
-     */
-    public static byte[] concatArray(byte[] a,byte[] b)throws IOException{
-
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-        outputStream.write(a);
-        outputStream.write(b);
-
-       return outputStream.toByteArray( );
-    }
-
-
 }

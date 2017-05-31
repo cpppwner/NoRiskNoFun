@@ -9,7 +9,6 @@ import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoinedCheck;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.game.statemachine.State;
-import gmbh.norisknofun.network.SessionImpl;
 
 /**
  * Created by pippp on 15.05.2017.
@@ -59,7 +58,8 @@ public class WaitingForPlayersState extends State {
         PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.playername);
         if(!checkIfPlayernameAlreadyExists(message.playername))
          {
-            Player player = getPlayerWithSession(message.session);
+             // TODO - nope - the session is definitely not exposed public
+            Player player = null; //getPlayerWithSession(message.session);
             player.setPlayername(message.playername);
             playerJoinedCheck.allowedtojoin=true;
 
@@ -80,6 +80,9 @@ public class WaitingForPlayersState extends State {
     }
 
 
+    /*
+    ** TODO - whoever did this, nope the session is not exposed to the state
+    * and definitely not the implemenation, that's package internal stuff only
     private Player getPlayerWithSession(SessionImpl session){
         Player result=null;
         for(Player player: context.getGameData().getPlayers()){
@@ -89,4 +92,5 @@ public class WaitingForPlayersState extends State {
         }
         return result;
     }
+    */
 }

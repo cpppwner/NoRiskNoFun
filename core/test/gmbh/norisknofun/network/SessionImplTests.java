@@ -521,11 +521,4 @@ public class SessionImplTests {
         // then
         assertThat(target.read(), is(nullValue()));
     }
-    @Test
-    public void concatArray() throws IOException {
-        byte[]a="Hello ".getBytes();
-        byte[]b="World!".getBytes();
-
-        assertEquals("Hello World!".getBytes().length,SessionImpl.concatArray(a,b).length);
-    }
 }

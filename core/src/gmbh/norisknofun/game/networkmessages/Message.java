@@ -5,5 +5,6 @@ package gmbh.norisknofun.game.networkmessages;
  */
 
 interface Message {
+
     public Class<? extends Message> getType();
 }

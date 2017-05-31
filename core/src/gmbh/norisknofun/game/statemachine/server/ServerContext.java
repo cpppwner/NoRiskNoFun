@@ -4,12 +4,6 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 import gmbh.norisknofun.game.statemachine.State;
-import gmbh.norisknofun.network.NetworkServer;
-import gmbh.norisknofun.network.ServerSessionEventHandlerImpl;
-import gmbh.norisknofun.network.Session;
-import gmbh.norisknofun.network.SessionImpl;
-import gmbh.norisknofun.network.socket.SocketFactory;
-import gmbh.norisknofun.network.socket.SocketFactoryImpl;
 
 /**
  * Created by pippp on 17.05.2017.
@@ -19,15 +13,10 @@ public class ServerContext {
 
     private State state;
     private final GameData gameData;
-    private NetworkServer networkServer;
-    public ServerSessionEventHandlerImpl serverSessionEventHandler;
+    public ServerContext(GameData data){
 
-    public ServerContext(State state, GameData data){
-        this.state=state;
         this.gameData=data;
-        SocketFactory socketFactory = new SocketFactoryImpl();
-        serverSessionEventHandler = new ServerSessionEventHandlerImpl(this);
-        this.networkServer = new NetworkServer(socketFactory, serverSessionEventHandler);
+        this.state=new WaitingForPlayersState(this);
     }
 
     public void setState(State state){
@@ -50,4 +39,5 @@ public class ServerContext {
     public GameData getGameData(){
         return gameData;
     }
+
 }

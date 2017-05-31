@@ -1,7 +1,6 @@
 package gmbh.norisknofun.game;
 
 import gmbh.norisknofun.network.Session;
-import gmbh.norisknofun.network.SessionImpl;
 
 /**
  * Created by pippp on 17.05.2017.
