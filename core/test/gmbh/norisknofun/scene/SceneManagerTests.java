@@ -7,6 +7,7 @@ import org.mockito.InOrder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 import gmbh.norisknofun.GdxTest;
 
@@ -116,9 +117,9 @@ public class SceneManagerTests extends GdxTest {
         obtained &= SceneManager.getInstance().registerScene(sceneTwo);
 
         // then
+        Set<String> expectedSceneNames = new HashSet<>(Arrays.asList(sceneNameOne, sceneNameTwo));
         assertThat(obtained, is(true));
-        assertThat(SceneManager.getInstance().getRegisteredScenes(),
-                equalTo(new HashSet<>(Arrays.asList(sceneNameOne, sceneNameTwo))));
+        assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(expectedSceneNames));
 
     }
 
@@ -154,7 +155,7 @@ public class SceneManagerTests extends GdxTest {
 
         // then
         assertThat(obtained, is(true));
-        assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.emptySet()));
+        assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.<String>emptySet()));
         verify(scene, times(1)).dispose();
     }
 
@@ -187,7 +188,7 @@ public class SceneManagerTests extends GdxTest {
 
         // then
         assertThat(obtained, is(true));
-        assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.emptySet()));
+        assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.<String>emptySet()));
         verify(sceneOne, times(1)).dispose();
         verify(sceneTwo, times(1)).dispose();
     }
@@ -319,7 +320,7 @@ public class SceneManagerTests extends GdxTest {
         SceneManager.getInstance().dispose();
 
         // then
-        assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.emptySet()));
+        assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.<String>emptySet()));
         verify(sceneOne, times(1)).dispose();
         verify(sceneTwo, times(1)).dispose();
         assertThat(SceneManager.getInstance().getActiveScene(), is(not(nullValue())));
