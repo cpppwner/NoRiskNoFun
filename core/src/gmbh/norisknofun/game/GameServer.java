@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 
 import java.util.concurrent.TimeUnit;
 
+import gmbh.norisknofun.game.server.MessageBus;
+import gmbh.norisknofun.game.server.clients.Clients;
+import gmbh.norisknofun.game.server.messaging.MessageBusImpl;
 import gmbh.norisknofun.game.server.networking.NewSessionEvent;
 import gmbh.norisknofun.game.server.networking.SessionClosedEvent;
 import gmbh.norisknofun.game.server.networking.SessionDataReceivedEvent;
@@ -20,15 +23,19 @@ public class GameServer {
     private static final TimeUnit SESSION_EVENT_POLL_TIME_UNIT = TimeUnit.SECONDS;
 
     private final Thread gameServerThread;
-    private final ServerContext serverContext;
     private final SessionEventListener eventListener;
+    private final MessageBus messageBus;
+    private final Clients clients;
+    private final ServerContext serverContext;
 
     // TODO make server side GameData class to not confuse it with client side data.
     public GameServer(GameData data, SessionEventListener eventListener) {
 
         gameServerThread = createGameServerThread();
-        serverContext = new ServerContext(data);
         this.eventListener = eventListener;
+        messageBus = new MessageBusImpl();
+        clients = new Clients();
+        serverContext = new ServerContext(data, messageBus);
     }
 
     private Thread createGameServerThread() {
