@@ -8,8 +8,7 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
-import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
-import gmbh.norisknofun.network.SessionImpl;
+import gmbh.norisknofun.network.Session;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertEquals;
@@ -38,7 +37,7 @@ public class MoveTroopsStateTests {
 
         Player player;
         for(int i=0; i<players.length; i++){
-            player= new Player(mock(SessionImpl.class));
+            player= new Player(mock(Session.class));
             player.setIshost(false);
             player.setPlayername(players[i]);
             player.setTroopToSpread(0);
