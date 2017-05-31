@@ -15,6 +15,7 @@ public class BackgroundSceneObject extends SceneObject {
     private Texture texture;
 
     public BackgroundSceneObject(){
+        super();
         texture= new Texture("menu.png");
 
     }
