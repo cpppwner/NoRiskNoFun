@@ -5,6 +5,7 @@ package gmbh.norisknofun.game.networkmessages.waitingforplayers;
  */
 
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.network.SessionImpl;
 
 /**
  * After Playernameselected
@@ -16,8 +17,11 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class PlayerJoined extends BasicMessageImpl {
 
     public String playername;
+    public SessionImpl session=null;
 
     public PlayerJoined(String playername) {
         this.playername = playername;
     }
+
+
 }

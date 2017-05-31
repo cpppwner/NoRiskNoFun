@@ -20,13 +20,13 @@ public class ServerContext {
     private State state;
     private final GameData gameData;
     private NetworkServer networkServer;
-    private ServerSessionEventHandlerImpl serverSessionEventHandler;
+    public ServerSessionEventHandlerImpl serverSessionEventHandler;
 
     public ServerContext(State state, GameData data){
         this.state=state;
         this.gameData=data;
         SocketFactory socketFactory = new SocketFactoryImpl();
-        serverSessionEventHandler = new ServerSessionEventHandlerImpl();
+        serverSessionEventHandler = new ServerSessionEventHandlerImpl(this);
         this.networkServer = new NetworkServer(socketFactory, serverSessionEventHandler);
     }
 

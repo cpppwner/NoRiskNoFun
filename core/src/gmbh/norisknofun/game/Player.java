@@ -1,5 +1,8 @@
 package gmbh.norisknofun.game;
 
+import gmbh.norisknofun.network.Session;
+import gmbh.norisknofun.network.SessionImpl;
+
 /**
  * Created by pippp on 17.05.2017.
  */
@@ -10,6 +13,16 @@ public class Player {
     private boolean ishost=false;
     private int troopToSpread =0;
 
+    private Session session=null;
+
+
+    public Player(Session session){
+        this.session=session;
+    }
+
+    public Session getSession(){
+        return session;
+    }
     public String getPlayername() {
         return playername;
     }

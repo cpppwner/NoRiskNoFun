@@ -9,6 +9,7 @@ import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoinedCheck;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.game.statemachine.State;
+import gmbh.norisknofun.network.SessionImpl;
 
 /**
  * Created by pippp on 15.05.2017.
@@ -58,9 +59,8 @@ public class WaitingForPlayersState extends State {
         PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.playername);
         if(!checkIfPlayernameAlreadyExists(message.playername))
          {
-            Player player = new Player();
+            Player player = getPlayerWithSession(message.session);
             player.setPlayername(message.playername);
-            data.addPlayer(player);
             playerJoinedCheck.allowedtojoin=true;
 
         }else {
@@ -77,5 +77,16 @@ public class WaitingForPlayersState extends State {
             }
         }
         return check;
+    }
+
+
+    private Player getPlayerWithSession(SessionImpl session){
+        Player result=null;
+        for(Player player: context.getGameData().getPlayers()){
+            if(player.getSession().equals(session)){
+                result=player;
+            }
+        }
+        return result;
     }
 }
