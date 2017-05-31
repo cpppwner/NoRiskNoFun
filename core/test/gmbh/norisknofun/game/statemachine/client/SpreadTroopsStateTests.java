@@ -8,6 +8,9 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
+import gmbh.norisknofun.network.SessionImpl;
+
+import static org.mockito.Mockito.*;
 
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -35,7 +38,7 @@ public class SpreadTroopsStateTests {
 
         Player player;
         for(int i=0; i<players.length; i++){
-            player= new Player();
+            player= new Player(mock(SessionImpl.class));
             player.setIshost(false);
             player.setPlayername(players[i]);
             player.setTroopToSpread(0);

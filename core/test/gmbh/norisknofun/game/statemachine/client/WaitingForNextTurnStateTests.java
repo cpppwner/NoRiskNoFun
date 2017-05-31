@@ -8,10 +8,12 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
+import gmbh.norisknofun.network.SessionImpl;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Katharina on 30.05.2017.
@@ -35,7 +37,7 @@ public class WaitingForNextTurnStateTests {
 
         Player player;
         for(int i=0; i<players.length; i++){
-            player= new Player();
+            player= new Player(mock(SessionImpl.class));
             player.setIshost(false);
             player.setPlayername(players[i]);
             player.setTroopToSpread(0);

@@ -2,13 +2,14 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 import gmbh.norisknofun.assets.impl.AssetLoaderFactoryImpl;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
-import gmbh.norisknofun.game.networkmessages.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
+import gmbh.norisknofun.network.SessionImpl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,7 +26,7 @@ public class DistributionStateTests {
         data = new GameData(new AssetLoaderFactoryImpl());
         context = new ClientContext(data);
         context.setState(new DistributionState(context));
-        Player player = new Player ();
+        Player player = new Player (mock(SessionImpl.class));
         player.setIshost(false);
         player.setPlayername("Franz");
         player.setTroopToSpread(0);
