@@ -41,11 +41,12 @@ public class DistributionState extends State {
             // todo open dialog with error message
         }
         else {
-            Gdx.app.log("WaitingForPlayers","unknown message");
+            Gdx.app.log("DistributionState","unknown message");
         }
     }
 
     private void addTroops(int amount){
+        if(amount>=0)
         context.getGameData().getCurrentplayer().setTroopToSpread(amount);
     }
 }

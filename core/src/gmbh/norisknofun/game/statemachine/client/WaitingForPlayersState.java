@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.EndGame;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.game.statemachine.State;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
@@ -33,7 +34,10 @@ public class WaitingForPlayersState extends State {
 
         if(message.getType().equals(EndGame.class)){
             SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
-        }else{
+        }else if(message.getType().equals(StartGame.class)){
+            context.setState(new SpreadTroopsState(context));
+        }
+        else{
             Gdx.app.log("WaitingForPlayers","unknown message");
         }
     }

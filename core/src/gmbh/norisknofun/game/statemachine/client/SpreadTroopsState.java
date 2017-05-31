@@ -41,12 +41,13 @@ public class SpreadTroopsState extends State {
             // todo open dialog with error message
         }
         else {
-            Gdx.app.log("WaitingForPlayers","unknown message");
+            Gdx.app.log("SpreadTroopsState","unknown message");
         }
     }
 
 
     private void setNextPlayer(String playername){
+        if(playername!=null)
        context.getGameData().setCurrentplayer(playername);
     }
 }
