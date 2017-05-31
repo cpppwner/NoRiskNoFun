@@ -43,6 +43,16 @@ public class AssetMap implements Asset {
         return Collections.unmodifiableList(regions);
     }
 
+    public Region getRegion(String regionname){
+        Region region=null;
+        for(Region r: regions){
+            if(r.getName().equals(regionname)){
+                region=r;
+            }
+        }
+        return region;
+    }
+
     public class Region
     {
         private final String name;
