@@ -8,15 +8,6 @@ import java.nio.charset.Charset;
 public class ProtocolConstants {
 
     /**
-     * Default constructor.
-     *
-     * <p>
-     *     This CTOR is intentionally private, because no instance of this class should be created.
-     * </p>
-     */
-    private ProtocolConstants() { }
-
-    /**
      * The number of bytes specifying the total message length.
      *
      * <p>
@@ -44,4 +35,14 @@ public class ProtocolConstants {
      * Since types (classes) should be in ASCII range, UTF-8 serialization is used.
      */
     public static final Charset TYPE_SERIALIZATION_CHARSET = Charset.forName("UTF-8");
+
+    /**
+     * Default constructor.
+     *
+     * <p>
+     *     This constructor is intentionally private,
+     *     because no instance of this class should be created.
+     * </p>
+     */
+    private ProtocolConstants() { }
 }
