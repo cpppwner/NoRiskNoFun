@@ -1,8 +1,11 @@
 package gmbh.norisknofun.game.protocol;
 
 /**
- * Created by cpppwner on 02.06.17.
+ * Exception class thrown, if something is wrong with protocol.
  */
+public class ProtocolException extends Exception {
 
-public class ProtocolException {
+    public ProtocolException(String message) {
+        super(message);
+    }
 }
