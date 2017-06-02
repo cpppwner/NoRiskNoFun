@@ -1,7 +1,9 @@
 package gmbh.norisknofun.game.protocol.util;
 
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Random;
 
@@ -15,6 +17,9 @@ public class MessageBufferTests {
 
     private static byte[] bigData;
     private static byte[] smallData;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void setupFixture() {
@@ -50,6 +55,19 @@ public class MessageBufferTests {
 
         // then
         assertThat(obtained, is(0));
+    }
+
+    @Test
+    public void appendNullByteArrayThrowsException() {
+
+        // given
+        MessageBuffer target = new MessageBuffer();
+
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(is("data is null"));
+
+        // when calling append with null argument, then exception is thrown
+        target.append(null);
     }
 
     @Test
@@ -118,11 +136,14 @@ public class MessageBufferTests {
         assertThat(target.capacity() % MessageBuffer.INITIAL_BUFFER_LENGTH, is(0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void readingLessThanZeroBytesThrowsException() {
 
         // given
         MessageBuffer target = new MessageBuffer();
+
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(is("length is less than zero"));
 
         // when/then
         target.read(-1);
@@ -141,11 +162,14 @@ public class MessageBufferTests {
         assertThat(obtained.length, is(0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void readingFromAnEmptyBufferThrowsException() {
 
         // given
         MessageBuffer target = new MessageBuffer();
+
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(is("length is greater than length()"));
 
         // when/then
         target.read(1);
@@ -224,11 +248,14 @@ public class MessageBufferTests {
         assertThat(obtained, is(equalTo(expectedOutput)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peekingLessThanZeroBytesThrowsException() {
 
         // given
         MessageBuffer target = new MessageBuffer();
+
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(is("length is less than zero"));
 
         // when/then
         target.peek(-1);
@@ -247,11 +274,14 @@ public class MessageBufferTests {
         assertThat(obtained.length, is(0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peekingFromAnEmptyBufferThrowsException() {
 
         // given
         MessageBuffer target = new MessageBuffer();
+
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(is("length is greater than length()"));
 
         // when/then
         target.peek(1);
