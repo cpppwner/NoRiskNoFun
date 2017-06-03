@@ -36,7 +36,7 @@ public class WaitingForNextTurnState extends State {
     @Override
     public void handleMessage(BasicMessageImpl message) {
         if(message.getType().equals(NextPlayer.class)){
-            setNextPlayer(((NextPlayer)message).playername);
+            setNextPlayer(((NextPlayer)message).getPlayername());
         }else{
             Gdx.app.log("WaitingForNextTurnState","unknown messgae");
         }

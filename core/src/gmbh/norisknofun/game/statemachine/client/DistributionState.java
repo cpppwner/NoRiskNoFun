@@ -34,7 +34,7 @@ public class DistributionState extends State {
     public void handleMessage(BasicMessageImpl message) {
 
         if(message.getType().equals(AddTroops.class)){
-            addTroops(((AddTroops)message).amount);
+            addTroops(((AddTroops)message).getAmount());
         }else if(message.getType().equals(SpawnTroop.class)){
             // todo interface between statemachine and GUI
         }else if(message.getType().equals(SpawnTroopCheck.class)){

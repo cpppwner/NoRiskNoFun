@@ -55,16 +55,16 @@ public class WaitingForPlayersState extends State {
 
     private void addPlayer(PlayerJoined message){
         boolean check=false;
-        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.playername);
-        if(!checkIfPlayernameAlreadyExists(message.playername))
+        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.getPlayerName());
+        if(!checkIfPlayernameAlreadyExists(message.getPlayerName()))
          {
              // TODO - nope - the session is definitely not exposed public
             Player player = null; //getPlayerWithSession(message.session);
-            player.setPlayername(message.playername);
-            playerJoinedCheck.allowedtojoin=true;
+            player.setPlayername(message.getPlayerName());
+            playerJoinedCheck.setAllowedtojoin(true);
 
         }else {
-            playerJoinedCheck.allowedtojoin=false;
+            playerJoinedCheck.setAllowedtojoin(false);
         }
         context.sendMessage(playerJoinedCheck);
     }
@@ -80,17 +80,5 @@ public class WaitingForPlayersState extends State {
     }
 
 
-    /*
-    ** TODO - whoever did this, nope the session is not exposed to the state
-    * and definitely not the implemenation, that's package internal stuff only
-    private Player getPlayerWithSession(SessionImpl session){
-        Player result=null;
-        for(Player player: context.getGameData().getPlayers()){
-            if(player.getSession().equals(session)){
-                result=player;
-            }
-        }
-        return result;
-    }
-    */
+
 }

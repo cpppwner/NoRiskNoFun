@@ -56,15 +56,15 @@ public class MoveTroopsState extends State {
     private void moveTroop(MoveTroop message){
         List<AssetMap.Region> regions=data.getMapAsset().getRegions();
         int i=0;
-        if(message.playername.equals(data.getCurrentplayer().getPlayername())) {
-            AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.destinationregion);
+        if(message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
+            AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());
 
-            if (destinationregion.getOwner().equals(message.playername)) { // check if player is owner of selected region
+            if (destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region
 
                 broadcastMoveTroopsMessage(message);
 
             } else {
-                sendMoveTroopCheckMessage(message.playername,false);
+                sendMoveTroopCheckMessage(message.getPlayername(),false);
             }
         }
     }
@@ -92,7 +92,7 @@ public class MoveTroopsState extends State {
     }
 
     private void broadcastMoveTroopsMessage(MoveTroop message){
-        MoveTroop moveTroop = new MoveTroop(message.playername,message.troopamount,message.destinationregion,message.originregion);
+        MoveTroop moveTroop = new MoveTroop(message.getPlayername(),message.getTroopamount(),message.getDestinationregion(),message.getOriginregion());
         context.sendMessage(moveTroop); // send to all clients
     }
     private void sendMoveTroopCheckMessage(String  playername, boolean movepossible){

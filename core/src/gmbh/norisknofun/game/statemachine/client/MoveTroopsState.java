@@ -40,7 +40,7 @@ public class MoveTroopsState extends State {
         }else if(message.getType().equals(MoveTroopCheck.class)){
             // todo interface between statemachine and GUI
         }else if(message.getType().equals(NextPlayer.class)){
-            setNextPlayer(((NextPlayer)message).playername);
+            setNextPlayer(((NextPlayer)message).getPlayername());
 
         }
         else {
