@@ -4,6 +4,8 @@ package gmbh.norisknofun.game.networkmessages.common;
  * Created by Philipp Mödritscher on 10.05.2017.
  */
 
+import java.io.Serializable;
+
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 /**
@@ -14,12 +16,13 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 
-public class MoveTroop extends BasicMessageImpl {
+public class MoveTroop extends BasicMessageImpl implements Serializable{
 
-    public String playername;
-    public int troopamount;
-    public String destinationregion;
-    public String originregion;
+    private static final long serialVersionUID = 1L;
+    private String  playername;
+    private int     troopamount;
+    private String  destinationregion;
+    private String  originregion;
 
     public MoveTroop(String playername, int troopamount, String destinationregion, String originregion) {
         this.playername = playername;
@@ -28,9 +31,35 @@ public class MoveTroop extends BasicMessageImpl {
         this.originregion = originregion;
     }
 
+    public String getPlayername() {
+        return playername;
+    }
 
+    public void setPlayername(String playername) {
+        this.playername = playername;
+    }
 
+    public int getTroopamount() {
+        return troopamount;
+    }
 
+    public void setTroopamount(int troopamount) {
+        this.troopamount = troopamount;
+    }
 
+    public String getDestinationregion() {
+        return destinationregion;
+    }
 
+    public void setDestinationregion(String destinationregion) {
+        this.destinationregion = destinationregion;
+    }
+
+    public String getOriginregion() {
+        return originregion;
+    }
+
+    public void setOriginregion(String originregion) {
+        this.originregion = originregion;
+    }
 }

@@ -13,10 +13,18 @@ package gmbh.norisknofun.game.networkmessages.waitingforplayers;
 
 public class PlayerJoinedCheck extends PlayerJoined {
 
-    public boolean allowedtojoin;
+    private  boolean allowedtojoin;
 
     public PlayerJoinedCheck(String playername) {
         super(playername);
 
+    }
+
+    public boolean isAllowedtojoin() {
+        return allowedtojoin;
+    }
+
+    public void setAllowedtojoin(boolean allowedtojoin) {
+        this.allowedtojoin = allowedtojoin;
     }
 }

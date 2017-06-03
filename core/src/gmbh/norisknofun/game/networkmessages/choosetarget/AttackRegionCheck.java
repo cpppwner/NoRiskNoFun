@@ -4,6 +4,8 @@ package gmbh.norisknofun.game.networkmessages.choosetarget;
  * Created by Philipp Mödritscher on 10.05.2017.
  */
 
+import java.io.Serializable;
+
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 /**
@@ -14,12 +16,21 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 
-public class AttackRegionCheck extends BasicMessageImpl {
+public class AttackRegionCheck extends BasicMessageImpl implements Serializable{
 
+    private static final long serialVersionUID = 1L;
 
-    public boolean attackreachable;
+    private boolean attackreachable;
 
     public AttackRegionCheck(boolean attackreachable) {
+        this.attackreachable = attackreachable;
+    }
+
+    public boolean isAttackreachable() {
+        return attackreachable;
+    }
+
+    public void setAttackreachable(boolean attackreachable) {
         this.attackreachable = attackreachable;
     }
 }

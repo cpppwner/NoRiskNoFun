@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class BasicMessageImpl implements Message,Serializable {
 
 
+    private static final  long serialVersionUID = 1L;
     @Override
     public Class<? extends Message> getType() {
         return getClass();
