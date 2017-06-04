@@ -49,17 +49,12 @@ public final class MessageDeserializer {
      *
      * @return {@code true} If enough bytes are available in {@link MessageBuffer}
      * to deserialize a {@link Message}, {@code false} otherwise.
-     *
-     * @throws ProtocolException
      */
-    public boolean hasMessageToDeserialize() throws ProtocolException {
+    public boolean hasMessageToDeserialize() {
 
-        if (buffer.length() < ProtocolConstants.MESSAGE_LENGTH_BYTES + ProtocolConstants.TYPE_IDENTIFIER_LENGTH_BYTES) {
-            // minimum 3 bytes
-            return false;
-        }
-
-        return buffer.length() >= decodeMessageLength();
+        // minimum 3 bytes
+        return buffer.length() >= ProtocolConstants.MESSAGE_LENGTH_BYTES + ProtocolConstants.TYPE_IDENTIFIER_LENGTH_BYTES
+                && buffer.length() >= decodeMessageLength();
     }
 
     /**

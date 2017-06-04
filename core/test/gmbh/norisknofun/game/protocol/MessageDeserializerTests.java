@@ -35,7 +35,7 @@ public class MessageDeserializerTests {
     }
 
     @Test
-    public void whenMessageLengthIsNotInBufferThereIsNoMessageToDeserialize() throws ProtocolException {
+    public void whenMessageLengthIsNotInBufferThereIsNoMessageToDeserialize()  {
 
         // given
         MessageBuffer buffer  = new MessageBuffer();
@@ -56,7 +56,7 @@ public class MessageDeserializerTests {
     }
 
     @Test
-    public void hasMessageToDeserializeReturnsFalseWhenToFewBytesAreInBuffer() throws ProtocolException {
+    public void hasMessageToDeserializeReturnsFalseWhenToFewBytesAreInBuffer() {
 
         // given
         MessageBuffer buffer  = new MessageBuffer();
@@ -71,7 +71,7 @@ public class MessageDeserializerTests {
     }
 
     @Test
-    public void hasMessageToDeserializeReturnsTrueWhenBufferContainsEnoughBytes() throws ProtocolException {
+    public void hasMessageToDeserializeReturnsTrueWhenBufferContainsEnoughBytes() {
 
         // given
         MessageBuffer buffer = new MessageBuffer();
@@ -124,7 +124,7 @@ public class MessageDeserializerTests {
     public void deserializeThrowsExceptionWhenMessageIdentifierIsUnknownClass() throws IOException, ProtocolException {
 
         // given
-        byte[] messageType = "asdf.jklo.FooBar".getBytes(ProtocolConstants.TYPE_SERIALIZATION_CHARSET);
+        byte[] messageType = "foo.bar.FooBar".getBytes(ProtocolConstants.TYPE_SERIALIZATION_CHARSET);
         int totalLength = messageType.length + ProtocolConstants.MESSAGE_LENGTH_BYTES + ProtocolConstants.TYPE_IDENTIFIER_LENGTH_BYTES;
 
         MessageBuffer buffer = new MessageBuffer();
@@ -135,7 +135,7 @@ public class MessageDeserializerTests {
         MessageDeserializer target = new MessageDeserializer(buffer);
 
         expectedException.expect(ProtocolException.class);
-        expectedException.expectMessage(is("Class \"asdf.jklo.FooBar\" is unknown"));
+        expectedException.expectMessage(is("Class \"foo.bar.FooBar\" is unknown"));
 
         // when there is no type identifier, then
         target.deserialize();
@@ -233,7 +233,7 @@ public class MessageDeserializerTests {
     }
 
     @Test
-    public void deserializingMessageGivesCorrectMessage() throws IOException, ProtocolException {
+    public void deserializeMessageGivesCorrectMessage() throws IOException, ProtocolException {
 
         // given
         MessageClass originalMessage = new MessageClass();
