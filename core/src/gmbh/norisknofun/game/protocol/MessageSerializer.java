@@ -59,12 +59,7 @@ public final class MessageSerializer {
      */
     private byte[] serializeType() throws ProtocolException {
 
-        String typeName = message.getType().getCanonicalName();
-        if (typeName == null) {
-            throw new ProtocolException("Message type does not have canonical name");
-        }
-
-        byte[] typeIdentifier = typeName.getBytes(ProtocolConstants.TYPE_SERIALIZATION_CHARSET);
+        byte[] typeIdentifier = message.getType().getName().getBytes(ProtocolConstants.TYPE_SERIALIZATION_CHARSET);
         if (typeIdentifier.length > ProtocolConstants.MAX_TYPE_IDENTIFIER_LENGTH) {
             throw new IllegalStateException("Message type identifier is too long");
         }
@@ -88,8 +83,8 @@ public final class MessageSerializer {
         try (ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream()) {
             try (ObjectOutputStream objectStream = new ObjectOutputStream(arrayOutputStream)) {
                 objectStream.writeObject(message);
-                result = arrayOutputStream.toByteArray();
             }
+            result = arrayOutputStream.toByteArray();
         }
 
         return result;
