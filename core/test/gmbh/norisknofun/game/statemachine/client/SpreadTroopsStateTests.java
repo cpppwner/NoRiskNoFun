@@ -34,7 +34,7 @@ public class SpreadTroopsStateTests {
 
         Player player;
         for(int i=0; i<players.length; i++){
-            player= new Player(mock(Session.class));
+            player= new Player();
             player.setIshost(false);
             player.setPlayername(players[i]);
             player.setTroopToSpread(0);

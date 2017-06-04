@@ -14,7 +14,9 @@ public class Player {
     private String id;
 
 
+    public Player(){
 
+    }
 
     public Player(String playername, String id){
         this.playername=playername;

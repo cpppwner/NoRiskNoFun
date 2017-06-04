@@ -38,7 +38,7 @@ public class SpreadTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayerSpread playerSpread1 =(PlayerSpread) ois.readObject();
-        assertEquals(playerSpread1.playername,PLAYER);
+        assertEquals(playerSpread1.getPlayername(),PLAYER);
 
     }
     @Test
@@ -49,7 +49,7 @@ public class SpreadTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayerSpreadCheck playerSpreadCheck1 =(PlayerSpreadCheck) ois.readObject();
-        assertEquals(playerSpreadCheck1.playername,PLAYER);
+        assertEquals(playerSpreadCheck1.getPlayername(),PLAYER);
 
     }
     @Test
@@ -60,7 +60,7 @@ public class SpreadTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayerSpreadFinished playerSpreadFinished1 =(PlayerSpreadFinished) ois.readObject();
-        assertEquals(playerSpreadFinished1.playername,PLAYER);
+        assertEquals(playerSpreadFinished1.getPlayername(),PLAYER);
 
     }
 }

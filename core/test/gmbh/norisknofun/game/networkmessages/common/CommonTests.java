@@ -38,7 +38,7 @@ public class CommonTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         MoveTroop moveTroop1 =(MoveTroop) ois.readObject();
-        assertEquals(moveTroop1.playername,PLAYER);
+        assertEquals(moveTroop1.getPlayername(),PLAYER);
 
     }
     @Test
@@ -49,7 +49,7 @@ public class CommonTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         MoveTroopCheck moveTroopCheck1 =(MoveTroopCheck) ois.readObject();
-        assertEquals(moveTroopCheck1.playername,PLAYER);
+        assertEquals(moveTroopCheck1.getPlayername(),PLAYER);
 
     }
     @Test
@@ -60,7 +60,7 @@ public class CommonTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         MoveTroopsDone moveTroopDone1 =(MoveTroopsDone) ois.readObject();
-        assertEquals(moveTroopDone1.playername,  PLAYER);
+        assertEquals(moveTroopDone1.getPlayername(),  PLAYER);
 
     }
     @Test
@@ -71,7 +71,7 @@ public class CommonTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         NextPlayer nextPlayer1 =(NextPlayer) ois.readObject();
-        assertEquals(nextPlayer1.playername, PLAYER);
+        assertEquals(nextPlayer1.getPlayername(), PLAYER);
 
     }
     @Test
@@ -82,7 +82,7 @@ public class CommonTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         SpawnTroop spawnTroop1 =(SpawnTroop) ois.readObject();
-        assertEquals(spawnTroop1.playername,  PLAYER);
+        assertEquals(spawnTroop1.getPlayername(),  PLAYER);
 
     }
     @Test
@@ -93,7 +93,7 @@ public class CommonTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         SpawnTroopCheck spawnTroopCheck1 =(SpawnTroopCheck) ois.readObject();
-        assertEquals(spawnTroopCheck1.canspawn, false);
+        assertEquals(spawnTroopCheck1.isCanspawn(), false);
 
     }
 }

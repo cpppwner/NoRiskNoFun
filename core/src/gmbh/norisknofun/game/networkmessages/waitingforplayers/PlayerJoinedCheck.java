@@ -20,6 +20,9 @@ public class PlayerJoinedCheck extends PlayerJoined {
         super(playername);
         this.senderId=senderId;
 
+    } public PlayerJoinedCheck(String playername) {
+        super(playername);
+
     }
 
     public boolean isAllowedtojoin() {
