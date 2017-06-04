@@ -59,22 +59,31 @@ public final class MessageDeserializer {
             return false;
         }
 
-        int messageLength = decodeMessageLength(buffer.peek(ProtocolConstants.MESSAGE_LENGTH_BYTES));
-
-        return buffer.length() >= messageLength;
+        return buffer.length() >= decodeMessageLength();
     }
 
+    /**
+     * Deserialize a Message class from byte[].
+     *
+     * <p>
+     *     The byte[] data is taken from the {@link MessageBuffer} passed in the constructor.
+     * </p>
+     *
+     * @return Deserialized message.
+     * @throws ProtocolException In case of protocol error, meaning somethings wrong with the byte data.
+     * @throws IOException If an I/O error occurs.
+     */
     public Message deserialize() throws ProtocolException, IOException {
 
         if (!hasMessageToDeserialize()) {
             throw new IllegalStateException("No message to deserialize");
         }
 
-        int messageLength = decodeMessageLength(buffer.peek(ProtocolConstants.MESSAGE_LENGTH_BYTES));
+        int messageLength = decodeMessageLength();
         byte[] payload = buffer.read(messageLength);
 
         // ensure the message type is valid.
-        Class cls = getMessageClass(payload);
+        Class cls = deserializeType(payload);
 
         // get payload of message and deserialize it
         byte[] messagePayload = extractMessagePayload(payload);
@@ -87,12 +96,31 @@ public final class MessageDeserializer {
         return (Message)object;
     }
 
-    private int decodeMessageLength(byte[] data) {
+    /**
+     * Decode the message length.
+     *
+     * <p>
+     *     The message length is specified as the first two bytes in big-endian notation
+     *     as unsigned 16-bit value.
+     * </p>
+     *
+     * @return Decoded message length in bytes.
+     */
+    private int decodeMessageLength() {
 
+        byte[] data = buffer.peek(ProtocolConstants.MESSAGE_LENGTH_BYTES);
         return ((data[0] & 0xFF) << 8) | (data[1] & 0xFF);
     }
 
-    private static Class<? extends Message> getMessageClass(byte[] messageData) throws ProtocolException {
+    /**
+     * Deserialize the Message type from the raw message.
+     *
+     * @param messageData The raw message as byte[].
+     * @return Deserialized message type.
+     * @throws ProtocolException If no class can be loaded for type name
+     * or loaded class does not implement {@link Message} interface.
+     */
+    private static Class deserializeType(byte[] messageData) throws ProtocolException {
 
         int messageTypeLength = messageData[ProtocolConstants.MESSAGE_LENGTH_BYTES] & 0xFF;
 
@@ -118,6 +146,17 @@ public final class MessageDeserializer {
         return messageClass;
     }
 
+    /**
+     * Extract the message payload from raw data.
+     *
+     * <p>
+     *     The message payload is the serialized message data only,
+     *     with all protocol overhead already removed.
+     * </p>
+     *
+     * @param messageData The raw message data.
+     * @return Extracted message payload.
+     */
     private static byte[] extractMessagePayload(byte[] messageData) {
 
         int messageTypeLength = messageData[ProtocolConstants.MESSAGE_LENGTH_BYTES] & 0xFF;
@@ -129,6 +168,14 @@ public final class MessageDeserializer {
         return payload;
     }
 
+    /**
+     * Deserialize the message class.
+     *
+     * @param messagePayload The payload containing serialized class data.
+     * @return Deserialized object.
+     * @throws ProtocolException If payload is empty or deserialization fails.
+     * @throws IOException If an I/O error occurs.
+     */
     private static Object deserializeMessage(byte[] messagePayload) throws ProtocolException, IOException {
 
         if (messagePayload.length == 0) {
