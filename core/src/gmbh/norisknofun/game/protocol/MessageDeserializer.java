@@ -136,7 +136,7 @@ public final class MessageDeserializer {
         try {
             messageClass = Class.forName(messageClassName);
         } catch (ClassNotFoundException e) {
-            throw new ProtocolException("Class \"" + messageClassName + "\" is unknown");
+            throw new ProtocolException("Class \"" + messageClassName + "\" is unknown", e);
         }
 
         if (!Message.class.isAssignableFrom(messageClass)) {
@@ -187,7 +187,7 @@ public final class MessageDeserializer {
             try (ObjectInputStream objectInputStream = new ObjectInputStream(arrayInputStream)) {
                 result = objectInputStream.readObject();
             } catch (Exception e) {
-                throw new ProtocolException("decoding message payload yields invalid class");
+                throw new ProtocolException("decoding message payload yields invalid class", e);
             }
         }
 
