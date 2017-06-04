@@ -49,7 +49,7 @@ public interface MessageBus {
      *
      * @param handler The {@link OutboundMessageHandler} to unregister.
      */
-    void unregsiterOutboundMessageHandler(OutboundMessageHandler handler);
+    void unregisterOutboundMessageHandler(OutboundMessageHandler handler);
 
     /**
      * Distribute inbound message to all {@link InboundMessageHandler inbound message handlers}.

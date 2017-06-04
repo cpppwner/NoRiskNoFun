@@ -59,27 +59,6 @@ public class MessageSerializerTests {
     }
 
     @Test
-    public void serializeMessageNotHavingCanonicalName() throws IOException, ProtocolException {
-
-        // given
-        Message anonymousMessage = new Message() {
-            @Override
-            public Class<? extends Message> getType() {
-                return this.getClass();
-            }
-        };
-
-        // check, that there is no canonical class name
-        assertThat(anonymousMessage.getType().getCanonicalName(), is(nullValue()));
-
-        expectedException.expect(ProtocolException.class);
-        expectedException.expectMessage(is("Message type does not have canonical name"));
-
-        // when serializing, then expect protocol exception
-        new MessageSerializer(anonymousMessage).serialize();
-    }
-
-    @Test
     public void serializeMessageWhenMessagePayloadIsTooBig() throws IOException, ProtocolException {
 
         // given
@@ -110,7 +89,7 @@ public class MessageSerializerTests {
         assertThat(obtained.length, is(greaterThan(2)));
 
         // check serialization ourselves
-        byte[] expectedType = message.getClass().getCanonicalName().getBytes(Charset.forName("UTF-8"));
+        byte[] expectedType = message.getClass().getName().getBytes(Charset.forName("UTF-8"));
         byte[] expectedPayload;
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
