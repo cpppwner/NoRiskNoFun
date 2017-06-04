@@ -13,5 +13,5 @@ public abstract class State implements Serializable {
 
     public abstract void enter();
     public abstract void exit();
-    public abstract void handleMessage(BasicMessageImpl message);
+    public abstract void handleMessage(String senderId, BasicMessageImpl message);
 }

@@ -14,9 +14,11 @@ package gmbh.norisknofun.game.networkmessages.waitingforplayers;
 public class PlayerJoinedCheck extends PlayerJoined {
 
     private  boolean allowedtojoin;
+    private String senderId;
 
-    public PlayerJoinedCheck(String playername) {
+    public PlayerJoinedCheck(String playername, String senderId) {
         super(playername);
+        this.senderId=senderId;
 
     }
 
@@ -26,5 +28,13 @@ public class PlayerJoinedCheck extends PlayerJoined {
 
     public void setAllowedtojoin(boolean allowedtojoin) {
         this.allowedtojoin = allowedtojoin;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 }

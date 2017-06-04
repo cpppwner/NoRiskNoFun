@@ -34,7 +34,7 @@ public class WaitingForNextTurnState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId, BasicMessageImpl message) {
         if(message.getType().equals(NextPlayer.class)){
             setNextPlayer(((NextPlayer)message).getPlayername());
         }else{

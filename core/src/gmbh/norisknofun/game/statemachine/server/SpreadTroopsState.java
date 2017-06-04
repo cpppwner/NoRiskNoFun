@@ -6,6 +6,7 @@ import java.util.List;
 
 import gmbh.norisknofun.assets.impl.map.AssetMap;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
@@ -21,7 +22,7 @@ import gmbh.norisknofun.game.statemachine.State;
 public class SpreadTroopsState extends State {
 
     private ServerContext context;
-    private final GameData data;
+    private final GameDataServer data;
     private int currentplayerindex=0;
     public SpreadTroopsState(ServerContext context){
 
@@ -44,8 +45,7 @@ public class SpreadTroopsState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
-
+    public void handleMessage(String senderId, BasicMessageImpl message) {
 
         if(message.getType().equals(MoveTroop.class)){
             moveTroop((MoveTroop)message);
@@ -57,6 +57,7 @@ public class SpreadTroopsState extends State {
             Gdx.app.log("SpreadTroopsState","message unknown");
         }
     }
+
 
     private void moveTroop(MoveTroop message){
         List<AssetMap.Region> regions=data.getMapAsset().getRegions();
@@ -76,7 +77,7 @@ public class SpreadTroopsState extends State {
     }
 
     private void setNextPlayer(){
-        if(currentplayerindex>data.getPlayers().size()-1){
+        if(currentplayerindex>data.getPlayers().getPlayers().size()-1){
             currentplayerindex=0;
         }else {
             currentplayerindex++;
@@ -87,12 +88,12 @@ public class SpreadTroopsState extends State {
 
 
     private void setCurrentPlayer(int playerindex){
-        data.setCurrentplayer(data.getPlayers().get(playerindex).getPlayername());
+        data.setCurrentplayer(data.getPlayers().getPlayers().get(playerindex).getPlayername());
         String playername =data.getCurrentplayer().getPlayername();
         PlayerSpread playerSpread = new PlayerSpread(playername,true);
 
 
-        context.sendMessage(playerSpread); //todo send to specific client
+        context.sendMessage(playerSpread,data.getCurrentplayer().getId());
     }
 
     private void assignRegionsToPlayer(){

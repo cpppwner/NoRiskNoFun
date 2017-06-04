@@ -29,7 +29,7 @@ public class GameServer {
     private final ServerContext serverContext;
 
     // TODO make server side GameData class to not confuse it with client side data.
-    public GameServer(GameData data, SessionEventListener eventListener) {
+    public GameServer(GameDataServer data, SessionEventListener eventListener) {
 
         gameServerThread = createGameServerThread();
         this.eventListener = eventListener;

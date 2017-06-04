@@ -6,6 +6,7 @@ import java.util.List;
 
 import gmbh.norisknofun.assets.impl.map.AssetMap;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
@@ -21,7 +22,7 @@ import gmbh.norisknofun.game.statemachine.State;
 public class MoveTroopsState extends State {
 
     private ServerContext context;
-    private final GameData data;
+    private final GameDataServer data;
     public MoveTroopsState(ServerContext context){
 
 
@@ -41,7 +42,7 @@ public class MoveTroopsState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId,BasicMessageImpl message  ) {
         if(message.getType().equals(MoveTroop.class)){
             moveTroop((MoveTroop)message);
         }else if( message.getType().equals(FinishTurn.class)){
@@ -70,18 +71,8 @@ public class MoveTroopsState extends State {
     }
 
     private void setNextPlayer(){
-        List<Player> players=data.getPlayers();
-        for(int i=0; i<players.size(); i++){
-            if(players.get(i).getPlayername().equals(data.getCurrentplayer().getPlayername())){
-                i++;
-                if(i<players.size()){
-                    data.setCurrentplayer(players.get(i).getPlayername());
-                }else {
-                    data.setCurrentplayer(players.get(0).getPlayername());
-                }
-            }
-        }
 
+        data.setNextPlayer();
         broadcastNextPlayerMessage();
 
     }

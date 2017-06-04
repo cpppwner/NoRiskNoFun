@@ -28,7 +28,7 @@ public class ChooseTargetState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId, BasicMessageImpl message) {
 
        if(message.getType().equals(AttackRegionCheck.class)){
             //todo show dialog with error message
