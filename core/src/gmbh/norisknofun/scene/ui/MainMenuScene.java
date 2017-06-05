@@ -1,6 +1,7 @@
 package gmbh.norisknofun.scene.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -32,21 +33,23 @@ public class MainMenuScene extends SceneBase {
 
     private void initMenuButtons() {
 
-        ImageButtonSceneObject imageButtonCreate;
+        final ImageButtonSceneObject imageButtonCreate;
         ImageButtonSceneObject imageButtonJoin;
 
-        imageButtonCreate = createImageButton("button_create_game_eng.png");
-        imageButtonJoin = createImageButton("button_join_game_eng.png");
+        imageButtonCreate = createImageButton("img/button_create_game_eng.png");
+        imageButtonJoin = createImageButton("img/button_join_game_eng.png");
 
         imageButtonCreate.setBounds((Gdx.graphics.getWidth() / 6) - 5, (float) (Gdx.graphics.getHeight() / 2.5), 553, 480);
         imageButtonJoin.setBounds((Gdx.graphics.getWidth() / 2) + 10, (float) (Gdx.graphics.getHeight() / 2.5), 553, 480);
+
+        final Sound sound = Gdx.audio.newSound(Gdx.files.internal("audio/button_pressed.wav"));
 
 
         imageButtonCreate.addListener(new ClickListener() {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                sound.play();
                 SceneManager.getInstance().setActiveScene(SceneNames.CREATE_GAME_SCENE);
             }
         });
@@ -55,6 +58,7 @@ public class MainMenuScene extends SceneBase {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                sound.play();
                 SceneManager.getInstance().setActiveScene(SceneNames.JOIN_GAME_SCENE);
             }
         });

@@ -43,7 +43,7 @@ public class ServerBrowserScene extends SceneBase{
     private void initImageButtons() {
         ImageButtonSceneObject imageButtonBack;
 
-        imageButtonBack = createImageButton("button_back.png");
+        imageButtonBack = createImageButton("img/button_back.png");
 
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
 

@@ -48,7 +48,7 @@ public class LobbyScene extends SceneBase{
         });
         addSceneObject(imageButtonBack);
 */
-        imageButtonStartGame = createImageButton("start_game_button.png");
+        imageButtonStartGame = createImageButton("img/start_game_button.png");
         imageButtonStartGame.setBounds((float) ((Gdx.graphics.getWidth()/2)-137.5),(Gdx.graphics.getHeight()/10),275,240);
         imageButtonStartGame.addListener(new ClickListener() {
 

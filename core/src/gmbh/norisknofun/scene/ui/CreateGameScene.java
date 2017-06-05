@@ -40,11 +40,11 @@ public class CreateGameScene extends SceneBase {
         /*
         createGameButton = createImageButton("button_create_game_eng.png");
         */
-        imageButtonBack = createImageButton("button_back.png");
+        imageButtonBack = createImageButton("img/button_back.png");
 
-        twoPlayers = createImageButton("button_2_players.png");
-        threePlayers = createImageButton("button_3_players.png");
-        fourPlayers = createImageButton("button_4_players.png");
+        twoPlayers = createImageButton("img/button_2_players.png");
+        threePlayers = createImageButton("img/button_3_players.png");
+        fourPlayers = createImageButton("img/button_4_players.png");
 
         /*
         createGameButton.setBounds((Gdx.graphics.getWidth()/6)-5, (float) (Gdx.graphics.getHeight()/2.5),553,480);

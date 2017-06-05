@@ -97,8 +97,8 @@ public final class MapSelectionScene extends SceneBase {
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
-        style.up = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
+        style.up = new TextureRegionDrawable(new TextureRegion(new Texture("img/button.png")));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture("img/button.png")));
         style.fontColor = new Color(0f, 0f, 0f, 1);
         style.downFontColor = new Color(0, 0.4f, 0, 1);
 
