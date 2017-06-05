@@ -86,7 +86,7 @@ public final class MapSelectionScene extends SceneBase {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+                SceneManager.getInstance().setActiveScene(SceneNames.CREATE_GAME_SCENE);
             }
         });
 
