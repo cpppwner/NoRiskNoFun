@@ -26,7 +26,7 @@ public class ClientContext  {
     }
 
     public void delegateMessage(BasicMessageImpl message){
-        state.handleMessage(message);
+        state.handleMessage("",message);
     }
 
     public void sendMessage(BasicMessageImpl message){

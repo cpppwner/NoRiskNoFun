@@ -19,7 +19,7 @@ public class EvaluateDiceResultState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId, BasicMessageImpl message) {
 
     }
 }

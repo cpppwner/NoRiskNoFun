@@ -37,7 +37,7 @@ public class WaitingFoPlayersTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayerJoined playerJoined1 =(PlayerJoined) ois.readObject();
-        assertEquals(playerJoined1.playername,PLAYER);
+        assertEquals(playerJoined1.getPlayerName(),PLAYER);
 
     }
     @Test
@@ -48,7 +48,7 @@ public class WaitingFoPlayersTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayerJoinedCheck playerJoinedCheck1 =(PlayerJoinedCheck) ois.readObject();
-        assertEquals(playerJoinedCheck1.playername,PLAYER);
+        assertEquals(playerJoinedCheck1.getPlayerName(),PLAYER);
 
     }
     @Test
@@ -59,7 +59,7 @@ public class WaitingFoPlayersTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         StartGame startGame1 =(StartGame) ois.readObject();
-        assertEquals(startGame1.startGame,START);
+        assertEquals(startGame1.isStartGame(),START);
 
     }
 

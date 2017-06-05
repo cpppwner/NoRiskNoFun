@@ -29,7 +29,7 @@ public class AttackState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
-        state.handleMessage(message);
+    public void handleMessage(String senderId, BasicMessageImpl message) {
+        state.handleMessage(senderId,message);
     }
 }

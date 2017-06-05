@@ -5,6 +5,7 @@ import java.util.List;
 
 import gmbh.norisknofun.assets.impl.map.AssetMap;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
@@ -17,7 +18,7 @@ import gmbh.norisknofun.game.statemachine.State;
 public class DistributionState extends State {
 
     private ServerContext context;
-    private final GameData data;
+    private final GameDataServer data;
 
     public DistributionState(ServerContext context){
         this.context=context;
@@ -35,7 +36,7 @@ public class DistributionState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId, BasicMessageImpl message) {
 
         if(message.getType().equals(MoveTroop.class)){
             moveTroop((MoveTroop)message);
@@ -45,10 +46,10 @@ public class DistributionState extends State {
     private void moveTroop(MoveTroop message){ //todo Refactor later
         List<AssetMap.Region> regions=context.getGameData().getMapAsset().getRegions();
         int i=0;
-        if(message.playername.equals(data.getCurrentplayer().getPlayername())) {
+        if(message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
 
-            AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.destinationregion);
-            if (destinationregion.getOwner().equals(message.playername)) { // check if player is owner of selected region
+            AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());
+            if (destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region
 
                 broadcastMoveTroopsMessage(message);
                 data.getCurrentplayer().setTroopToSpread(data.getCurrentplayer().getTroopToSpread()-1);
@@ -57,7 +58,7 @@ public class DistributionState extends State {
                 }
 
             } else {
-                sendMoveTroopCheckMessage(message.playername,false);
+                sendMoveTroopCheckMessage(message.getPlayername(),false);
             }
         }
     }
@@ -67,7 +68,7 @@ public class DistributionState extends State {
     }
 
     private void broadcastMoveTroopsMessage(MoveTroop message){
-        MoveTroop moveTroop = new MoveTroop(message.playername,message.troopamount,message.destinationregion,message.originregion);
+        MoveTroop moveTroop = new MoveTroop(message.getPlayername(),message.getTroopamount(),message.getDestinationregion(),message.getOriginregion());
         context.sendMessage(moveTroop); // send to all clients
     }
     private void sendMoveTroopCheckMessage(String  playername, boolean movepossible){

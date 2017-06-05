@@ -11,17 +11,18 @@ public class Player {
     private  String playername="";
     private boolean ishost=false;
     private int troopToSpread =0;
+    private String id;
 
-    private Session session=null;
 
+    public Player(){
 
-    public Player(Session session){
-        this.session=session;
     }
 
-    public Session getSession(){
-        return session;
+    public Player(String playername, String id){
+        this.playername=playername;
+        this.id=id;
     }
+
     public String getPlayername() {
         return playername;
     }
@@ -44,5 +45,13 @@ public class Player {
 
     public void setTroopToSpread(int troopToSpread) {
         this.troopToSpread = troopToSpread;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
