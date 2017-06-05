@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import java.util.concurrent.TimeUnit;
 
 import gmbh.norisknofun.game.server.MessageBus;
+import gmbh.norisknofun.game.server.clients.Client;
 import gmbh.norisknofun.game.server.clients.Clients;
 import gmbh.norisknofun.game.server.messaging.MessageBusImpl;
 import gmbh.norisknofun.game.server.networking.NewSessionEvent;
@@ -67,17 +68,16 @@ public class GameServer {
 
         while(!Thread.interrupted()) {
 
-            SessionEvent event;
             try {
-                event = eventListener.pollSessionEvent(SESSION_EVENT_POLL_TIMEOUT, SESSION_EVENT_POLL_TIME_UNIT);
+                SessionEvent event = eventListener.pollSessionEvent(SESSION_EVENT_POLL_TIMEOUT, SESSION_EVENT_POLL_TIME_UNIT);
+                event.process(new SessionEventProcessor(clients, messageBus));
             } catch (InterruptedException e) {
-                Gdx.app.error(getClass().getSimpleName(), "polling was interrupted");
+                Gdx.app.error(getClass().getSimpleName(), "polling was interrupted", e);
                 break;
             }
-
-            // process received message
-            event.process(new SessionEventProcessor());
         }
+
+        clients.closeAll();
     }
 
     public synchronized boolean isRunning() {
@@ -94,25 +94,33 @@ public class GameServer {
         gameServerThread.join();
     }
 
-    private final class SessionEventProcessor implements gmbh.norisknofun.game.server.networking.SessionEventProcessor {
+    private static final class SessionEventProcessor implements gmbh.norisknofun.game.server.networking.SessionEventProcessor {
+
+        private final Clients clients;
+        private final MessageBus messageBus;
+
+        SessionEventProcessor(Clients clients, MessageBus messageBus) {
+
+            this.clients = clients;
+            this.messageBus = messageBus;
+        }
 
         @Override
         public void process(NewSessionEvent event) {
 
-            // newly connected session
+            clients.registerNewClient(event.getSession(), new Client(event.getSession(), messageBus));
         }
 
         @Override
         public void process(SessionClosedEvent event) {
 
-            // session was closed, either gracefully or forced
+            clients.processSessionClosed(event.getSession());
         }
 
         @Override
         public void process(SessionDataReceivedEvent event) {
 
-            // data received from network session.
-
+            clients.processDataReceived(event.getSession());
         }
     }
 }
