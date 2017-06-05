@@ -8,6 +8,7 @@ import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
+import gmbh.norisknofun.game.server.OutboundMessageHandler;
 import gmbh.norisknofun.network.Session;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +26,7 @@ public class SpreadTroopsStateTests {
     @Before
     public void setup() {
         data = new GameData(new AssetLoaderFactoryImpl());
-        context = new ClientContext(data);
+        context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new SpreadTroopsState(context));
         addPlayers();
     }

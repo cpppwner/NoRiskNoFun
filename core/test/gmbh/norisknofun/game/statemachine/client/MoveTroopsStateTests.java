@@ -27,7 +27,7 @@ public class MoveTroopsStateTests {
     @Before
     public void setup() {
         data = new GameData(new AssetLoaderFactoryImpl());
-        context = new ClientContext(data);
+        context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new MoveTroopsState(context));
         addPlayers();
 
