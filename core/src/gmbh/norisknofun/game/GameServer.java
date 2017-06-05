@@ -73,7 +73,7 @@ public class GameServer {
                 event.process(new SessionEventProcessor(clients, messageBus));
             } catch (InterruptedException e) {
                 Gdx.app.error(getClass().getSimpleName(), "polling was interrupted", e);
-                break;
+                Thread.currentThread().interrupt();
             }
         }
 
