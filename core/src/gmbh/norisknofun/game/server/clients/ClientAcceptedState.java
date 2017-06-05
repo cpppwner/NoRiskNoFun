@@ -40,7 +40,7 @@ final class ClientAcceptedState implements ClientState {
             byte[] data = new MessageSerializer(message).serialize();
             context.getSession().write(data);
         } catch (IOException | ProtocolException e) {
-            Gdx.app.error(getClass().getSimpleName(), "Failed to serialize message \"" + message.getType().getSimpleName() + "\"");
+            Gdx.app.error(getClass().getSimpleName(), "Failed to serialize message \"" + message.getType().getSimpleName() + "\"", e);
             terminateClient();
         }
     }

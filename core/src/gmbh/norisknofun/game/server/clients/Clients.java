@@ -13,7 +13,7 @@ public final class Clients {
     /**
      * Internally used container.
      */
-    private final Map<Session, Client> clients = new HashMap<>();
+    private final Map<Session, Client> registeredClients = new HashMap<>();
 
     /**
      * Register a new client for a session.
@@ -32,7 +32,7 @@ public final class Clients {
         if (client == null)
             throw new IllegalArgumentException("client is null");
 
-        clients.put(session, client);
+        registeredClients.put(session, client);
     }
 
     /**
@@ -44,12 +44,12 @@ public final class Clients {
      */
     public void closeAll() {
 
-        for (Map.Entry<Session, Client> entry : clients.entrySet()) {
+        for (Map.Entry<Session, Client> entry : registeredClients.entrySet()) {
             entry.getKey().close(); // don't wait for session closed event
             entry.getValue().sessionClosed();
         }
 
-        clients.clear();
+        registeredClients.clear();
     }
 
     /**
@@ -59,7 +59,7 @@ public final class Clients {
      */
     public void processDataReceived(Session session) {
 
-        Client client = clients.get(session);
+        Client client = registeredClients.get(session);
         if (client != null) {
             client.processDataReceived(session.read());
         }
@@ -72,7 +72,7 @@ public final class Clients {
      */
     public void processSessionClosed(Session session) {
 
-        Client client = clients.remove(session);
+        Client client = registeredClients.remove(session);
         if (client != null) {
             client.sessionClosed();
         }
@@ -83,6 +83,6 @@ public final class Clients {
      */
     public int getNumberOfRegisteredClients() {
 
-        return clients.size();
+        return registeredClients.size();
     }
 }
