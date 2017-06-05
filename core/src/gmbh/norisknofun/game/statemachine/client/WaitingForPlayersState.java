@@ -30,7 +30,7 @@ public class WaitingForPlayersState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId, BasicMessageImpl message) {
 
         if(message.getType().equals(EndGame.class)){
             SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);

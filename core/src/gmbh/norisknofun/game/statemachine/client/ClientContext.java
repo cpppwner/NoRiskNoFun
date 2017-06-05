@@ -1,7 +1,9 @@
 package gmbh.norisknofun.game.statemachine.client;
 
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.client.OutboundMessageHandler;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -10,10 +12,12 @@ import gmbh.norisknofun.game.statemachine.State;
 
 public class ClientContext  {
 
-    private GameData data;
+    private final OutboundMessageHandler outboundMessageHandler;
+    private final GameData data;
     private State state;
 
-    public ClientContext(GameData data){
+    public ClientContext(OutboundMessageHandler outboundMessageHandler, GameData data){
+        this.outboundMessageHandler = outboundMessageHandler;
         this.data=data;
     }
 
@@ -25,12 +29,14 @@ public class ClientContext  {
         return state;
     }
 
-    public void delegateMessage(BasicMessageImpl message){
-        state.handleMessage(message);
+    public void delegateMessage(Message message){
+
+        state.handleMessage("",(BasicMessageImpl)message); // work with interfaces
     }
 
     public void sendMessage(BasicMessageImpl message){
-        //todo serverdispatcher is still missing
+
+        outboundMessageHandler.handle(message);
     }
 
     public GameData getGameData(){

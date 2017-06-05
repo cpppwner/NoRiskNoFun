@@ -2,7 +2,7 @@ package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
@@ -17,7 +17,7 @@ import gmbh.norisknofun.game.statemachine.State;
 public class WaitingForPlayersState extends State {
 
     private ServerContext context;
-    private final GameData data;
+    private final GameDataServer data;
     public WaitingForPlayersState(ServerContext context){
 
         this.context=context;
@@ -36,10 +36,10 @@ public class WaitingForPlayersState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId, BasicMessageImpl message) {
 
         if(message.getType().equals(PlayerJoined.class)){
-            addPlayer((PlayerJoined) message);
+            addPlayer((PlayerJoined) message, senderId);
         }else if(message.getType().equals(StartGame.class) ){
             startGame((StartGame)message);
         }else{
@@ -53,44 +53,19 @@ public class WaitingForPlayersState extends State {
     }
 
 
-    private void addPlayer(PlayerJoined message){
+    private void addPlayer(PlayerJoined message, String senderId){
         boolean check=false;
-        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.playername);
-        if(!checkIfPlayernameAlreadyExists(message.playername))
-         {
-             // TODO - nope - the session is definitely not exposed public
-            Player player = null; //getPlayerWithSession(message.session);
-            player.setPlayername(message.playername);
-            playerJoinedCheck.allowedtojoin=true;
-
-        }else {
-            playerJoinedCheck.allowedtojoin=false;
+        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.getPlayerName(),senderId);
+        if(data.getPlayers().addPlayer(new Player(message.getPlayerName(),senderId))) {
+            playerJoinedCheck.setAllowedtojoin(true);
         }
-        context.sendMessage(playerJoinedCheck);
-    }
-
-    private boolean checkIfPlayernameAlreadyExists(String playername){
-        boolean check=false;
-        for(Player p: data.getPlayers()){
-            if(p.getPlayername().equals(playername)){
-                check=true;
-            }
+        else {
+            playerJoinedCheck.setAllowedtojoin(false);
         }
-        return check;
+        context.sendMessage(playerJoinedCheck,senderId);
     }
 
 
-    /*
-    ** TODO - whoever did this, nope the session is not exposed to the state
-    * and definitely not the implemenation, that's package internal stuff only
-    private Player getPlayerWithSession(SessionImpl session){
-        Player result=null;
-        for(Player player: context.getGameData().getPlayers()){
-            if(player.getSession().equals(session)){
-                result=player;
-            }
-        }
-        return result;
-    }
-    */
+
+
 }

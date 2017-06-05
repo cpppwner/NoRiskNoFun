@@ -38,7 +38,7 @@ public class AddTroopsTest {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         AddTroops addTroops1 =(AddTroops) ois.readObject();
-        assertEquals(addTroops1.amount,AMOUNT);
+        assertEquals(addTroops1.getAmount(),AMOUNT);
 
     }
 }

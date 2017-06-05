@@ -25,7 +25,7 @@ public class WaitingForNextTurnStateTests {
     @Before
     public void setup() {
         data = new GameData(new AssetLoaderFactoryImpl());
-        context = new ClientContext(data);
+        context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new WaitingForNextTurnState(context));
         addPlayers();
 
@@ -35,7 +35,7 @@ public class WaitingForNextTurnStateTests {
 
         Player player;
         for(int i=0; i<players.length; i++){
-            player= new Player(mock(Session.class));
+            player= new Player();
             player.setIshost(false);
             player.setPlayername(players[i]);
             player.setTroopToSpread(0);

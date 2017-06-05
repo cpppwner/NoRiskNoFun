@@ -5,6 +5,8 @@ package gmbh.norisknofun.game.networkmessages.spread;
  */
 
 
+import java.io.Serializable;
+
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 /**
@@ -14,10 +16,11 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  * Server -> Client
  */
 
-public class PlayerSpreadCheck extends BasicMessageImpl {
+public class PlayerSpreadCheck extends BasicMessageImpl implements Serializable{
 
-    public String playername;
-    public boolean check;
+    private static final long serialVersionUID = 1L;
+    private  String playername;
+    private  boolean check;
 
     public PlayerSpreadCheck(String playername, boolean check) {
         this.playername = playername;
@@ -25,4 +28,20 @@ public class PlayerSpreadCheck extends BasicMessageImpl {
     }
     //region
 
+
+    public String getPlayername() {
+        return playername;
+    }
+
+    public void setPlayername(String playername) {
+        this.playername = playername;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
 }

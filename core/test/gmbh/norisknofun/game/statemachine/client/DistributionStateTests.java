@@ -24,9 +24,9 @@ public class DistributionStateTests {
     @Before
     public void setup() {
         data = new GameData(new AssetLoaderFactoryImpl());
-        context = new ClientContext(data);
+        context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new DistributionState(context));
-        Player player = new Player (mock(Session.class));
+        Player player = new Player ();
         player.setIshost(false);
         player.setPlayername("Franz");
         player.setTroopToSpread(0);
