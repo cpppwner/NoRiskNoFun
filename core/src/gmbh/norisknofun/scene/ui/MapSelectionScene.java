@@ -54,12 +54,12 @@ public final class MapSelectionScene extends SceneBase {
 
         buttonMapOne = createButton("Map One");
         buttonMapTwo = createButton("Map Two");
-        imageButtonBack = createImageButton("button_back.png");
+        //imageButtonBack = createImageButton("button_back.png");
 
 
         buttonMapOne.setBounds(490,500,500,120);
         buttonMapTwo.setBounds(490,250,500,120);
-        imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
+        //imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
 
 
         buttonMapOne.addListener(new ClickListener() {
@@ -81,18 +81,16 @@ public final class MapSelectionScene extends SceneBase {
             }
         });
 
-        imageButtonBack.addListener(new ClickListener() {
-
+/*       imageButtonBack.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 SceneManager.getInstance().setActiveScene(SceneNames.CREATE_GAME_SCENE);
             }
         });
-
+*/
         addSceneObject(buttonMapOne);
         addSceneObject(buttonMapTwo);
-        addSceneObject(imageButtonBack);
+        //addSceneObject(imageButtonBack);
     }
 
     private TextButtonSceneObject createButton(String buttonText) {

@@ -55,7 +55,6 @@ public class MainMenuScene extends SceneBase {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 SceneManager.getInstance().setActiveScene(SceneNames.JOIN_GAME_SCENE);
             }
         });

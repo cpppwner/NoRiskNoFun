@@ -37,24 +37,29 @@ public class LobbyScene extends SceneBase{
     }
 
     private void initImageButtons() {
-        ImageButtonSceneObject imageButtonBack;
-
-        imageButtonBack = createImageButton("button_back.png");
-
+        ImageButtonSceneObject /*imageButtonBack,*/ imageButtonStartGame;
+/*        imageButtonBack = createImageButton("button_back.png");
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
-
         imageButtonBack.addListener(new ClickListener() {
-
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
             }
         });
-
         addSceneObject(imageButtonBack);
-    }
+*/
+        imageButtonStartGame = createImageButton("start_game_button.png");
+        imageButtonStartGame.setBounds((float) ((Gdx.graphics.getWidth()/2)-137.5),(Gdx.graphics.getHeight()/10),275,240);
+        imageButtonStartGame.addListener(new ClickListener() {
 
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
+            }
+        });
+        addSceneObject(imageButtonStartGame);
+
+    }
 
     private ImageButtonSceneObject createImageButton (String file){
         Texture txt = new Texture(Gdx.files.internal(file));

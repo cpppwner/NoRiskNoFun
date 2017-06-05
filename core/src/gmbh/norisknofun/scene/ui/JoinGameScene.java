@@ -40,14 +40,12 @@ public class JoinGameScene extends SceneBase {
         joinGameButton = createImageButton("button_join_game_eng.png");
         imageButtonBack = createImageButton("button_back.png");
 
-        joinGameButton.setBounds((Gdx.graphics.getWidth()/6)-5, (float) (Gdx.graphics.getHeight()/2.5),553,480);
+        joinGameButton.setBounds((float) ((Gdx.graphics.getWidth()/2)-137.5),(Gdx.graphics.getHeight()/10),275,240);
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
 
         joinGameButton.addListener(new ClickListener() {
-
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 SceneManager.getInstance().setActiveScene(SceneNames.SERVER_BROWSER_SCENE);
             }
         });
