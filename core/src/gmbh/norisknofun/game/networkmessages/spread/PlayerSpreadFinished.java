@@ -4,6 +4,8 @@ package gmbh.norisknofun.game.networkmessages.spread;
  * Created by Philipp Mödritscher on 10.05.2017.
  */
 
+import java.io.Serializable;
+
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 /**
@@ -14,13 +16,22 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  * Client -> Server
  */
 
-public class PlayerSpreadFinished extends BasicMessageImpl {
+public class PlayerSpreadFinished extends BasicMessageImpl implements Serializable {
 
-    public String playername;
+    private static final long serialVersionUID = 1L;
+    private  String playername;
     // Region
 
 
     public PlayerSpreadFinished(String playername) {
+        this.playername = playername;
+    }
+
+    public String getPlayername() {
+        return playername;
+    }
+
+    public void setPlayername(String playername) {
         this.playername = playername;
     }
 }

@@ -30,11 +30,11 @@ public class SpreadTroopsState extends State {
     }
 
     @Override
-    public void handleMessage(BasicMessageImpl message) {
+    public void handleMessage(String senderId, BasicMessageImpl message) {
 
 
        if(message.getType().equals(NextPlayer.class)){
-            setNextPlayer(((NextPlayer)message).playername);
+            setNextPlayer(((NextPlayer)message).getPlayername());
         }else if(message.getType().equals(SpawnTroop.class)){
                 // todo interface between statemachine and GUI
         }else if(message.getType().equals(SpawnTroopCheck.class)){

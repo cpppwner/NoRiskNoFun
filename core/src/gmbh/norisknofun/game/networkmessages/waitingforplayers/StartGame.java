@@ -6,6 +6,8 @@ package gmbh.norisknofun.game.networkmessages.waitingforplayers;
  */
 
 
+import java.io.Serializable;
+
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 /**
@@ -16,10 +18,20 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  *
  * Client (who created the Game)-> Server
  */
-public class StartGame extends BasicMessageImpl {
-    public boolean startGame = true;
+public class StartGame extends BasicMessageImpl implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    private boolean startGame = true;
 
     public StartGame(boolean startGame) {
+        this.startGame = startGame;
+    }
+
+    public boolean isStartGame() {
+        return startGame;
+    }
+
+    public void setStartGame(boolean startGame) {
         this.startGame = startGame;
     }
 }

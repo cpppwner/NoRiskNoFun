@@ -42,7 +42,7 @@ public class NetworkMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         NextPlayer nextPlayer1 =(NextPlayer) ois.readObject();
-        assertEquals(nextPlayer1.playername,PLAYER);
+        assertEquals(nextPlayer1.getPlayername(),PLAYER);
 
     }
     @Test
@@ -65,7 +65,7 @@ public class NetworkMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         Dice dice1 =(Dice) ois.readObject();
-        assertEquals(dice1.playername,  PLAYER);
+        assertEquals(dice1.getPlayername(),  PLAYER);
 
     }
     @Test
@@ -76,7 +76,7 @@ public class NetworkMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         EndGame endGame1 =(EndGame) ois.readObject();
-        assertEquals(endGame1.winner, PLAYER);
+        assertEquals(endGame1.getWinner(), PLAYER);
 
     }
 

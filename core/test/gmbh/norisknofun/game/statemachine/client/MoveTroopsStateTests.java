@@ -27,7 +27,7 @@ public class MoveTroopsStateTests {
     @Before
     public void setup() {
         data = new GameData(new AssetLoaderFactoryImpl());
-        context = new ClientContext(data);
+        context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new MoveTroopsState(context));
         addPlayers();
 
@@ -37,7 +37,7 @@ public class MoveTroopsStateTests {
 
         Player player;
         for(int i=0; i<players.length; i++){
-            player= new Player(mock(Session.class));
+            player= new Player();
             player.setIshost(false);
             player.setPlayername(players[i]);
             player.setTroopToSpread(0);
