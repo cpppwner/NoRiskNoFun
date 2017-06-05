@@ -43,7 +43,7 @@ public class AttackMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         ChooseTroopsAmount chooseTroopsAmount1 =(ChooseTroopsAmount) ois.readObject();
-        assertEquals(chooseTroopsAmount1.amount,6);
+        assertEquals(chooseTroopsAmount1.getAmount(),6);
 
 
 
@@ -58,7 +58,7 @@ public class AttackMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         ChooseTroopsAmountCheck chooseTroopsAmountCheck1 =(ChooseTroopsAmountCheck) ois.readObject();
-        assertEquals(chooseTroopsAmountCheck1.check,true);
+        assertEquals(chooseTroopsAmountCheck1.isCheck(),true);
 
 
     }
@@ -70,7 +70,7 @@ public class AttackMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         AttackResult attackResult1 =(AttackResult) ois.readObject();
-        assertEquals(attackResult1.playername,  PLAYER);
+        assertEquals(attackResult1.getPlayername(),  PLAYER);
 
     }
     @Test
@@ -81,7 +81,7 @@ public class AttackMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         DiceAmount diceAmount1 =(DiceAmount) ois.readObject();
-        assertEquals(diceAmount1.amount,  10);
+        assertEquals(diceAmount1.getAmount(),  10);
 
 
 
@@ -98,7 +98,7 @@ public class AttackMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         DiceResult diceResult1 =(DiceResult) ois.readObject();
-        assertEquals(diceResult1.diceResults[0],  10);
+        assertEquals(diceResult1.getDiceResults()[0],  10);
 
 
 
@@ -111,7 +111,7 @@ public class AttackMessagesTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         ContinueAttack continueAttack1 =(ContinueAttack) ois.readObject();
-        assertEquals(continueAttack1.decision, true);
+        assertEquals(continueAttack1.isDecision(), true);
 
 
 

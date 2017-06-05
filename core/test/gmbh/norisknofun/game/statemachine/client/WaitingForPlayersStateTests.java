@@ -3,6 +3,7 @@ package gmbh.norisknofun.game.statemachine.client;
 
         import static org.hamcrest.CoreMatchers.*;
         import static org.junit.Assert.*;
+        import static org.mockito.Mockito.mock;
 
         import org.junit.Before;
         import org.junit.Test;
@@ -26,7 +27,7 @@ public class WaitingForPlayersStateTests {
     @Before
     public void setup() {
         data = new GameData(new AssetLoaderFactoryImpl());
-        context = new ClientContext(data);
+        context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new WaitingForPlayersState(context));
     }
 

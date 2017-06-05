@@ -7,11 +7,29 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class SpawnTroop extends BasicMessageImpl {
-    public String playername;
-    public String regionname;
+
+    private static final long serialVersionUID = 1L;
+    private  String playername;
+    private String regionname;
 
     public SpawnTroop(String playername, String regionname) {
         this.playername = playername;
+        this.regionname = regionname;
+    }
+
+    public String getPlayername() {
+        return playername;
+    }
+
+    public void setPlayername(String playername) {
+        this.playername = playername;
+    }
+
+    public String getRegionname() {
+        return regionname;
+    }
+
+    public void setRegionname(String regionname) {
         this.regionname = regionname;
     }
 }

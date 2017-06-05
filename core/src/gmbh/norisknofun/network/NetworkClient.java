@@ -135,7 +135,6 @@ public class NetworkClient {
         sessionEventHandler.sessionClosed(session);
     }
 
-
     private boolean handleRead() {
 
         int numBytesRead;
