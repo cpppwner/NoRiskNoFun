@@ -3,13 +3,11 @@ package gmbh.norisknofun.game.statemachine.client;
 import org.junit.Before;
 import org.junit.Test;
 
-import gmbh.norisknofun.assets.impl.AssetLoaderFactoryImpl;
+import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
-import gmbh.norisknofun.game.server.OutboundMessageHandler;
-import gmbh.norisknofun.network.Session;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -25,7 +23,7 @@ public class SpreadTroopsStateTests {
     private String players[] ={"Franz","Hubert","Michael"};
     @Before
     public void setup() {
-        data = new GameData(new AssetLoaderFactoryImpl());
+        data = new GameData(mock(AssetFactory.class));
         context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new SpreadTroopsState(context));
         addPlayers();

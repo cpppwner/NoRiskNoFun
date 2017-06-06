@@ -2,11 +2,8 @@ package gmbh.norisknofun.game;
 
 import com.badlogic.gdx.Gdx;
 
-import java.io.InputStream;
-
-import gmbh.norisknofun.assets.AssetLoaderFactory;
-import gmbh.norisknofun.assets.impl.AssetLoaderFactoryImpl;
-import gmbh.norisknofun.assets.impl.map.AssetMap;
+import gmbh.norisknofun.assets.AssetFactory;
+import gmbh.norisknofun.assets.AssetMap;
 
 /**
  * Created by Peter on 04.06.2017.
@@ -19,11 +16,11 @@ public class GameDataServer {
     private int maxPlayer;
     private int[] diceRoll;
     private String currentplayer;
-    private AssetLoaderFactory assetLoaderFactory;
+    private AssetFactory assetFactory;
     private Players players;
 
-    public GameDataServer(){
-        this.assetLoaderFactory = new AssetLoaderFactoryImpl();
+    public GameDataServer(AssetFactory assetFactory){
+        this.assetFactory = assetFactory;
         players= new Players();
     }
 
@@ -38,10 +35,9 @@ public class GameDataServer {
             throw new IllegalStateException("mapFile was not set");
 
         if (mapAsset == null) {
-            try (InputStream stream = Gdx.files.internal(mapFilename).read()) {
-                mapAsset = assetLoaderFactory.createAssetLoaderMap().load(stream);
-            } catch (Exception e) {
-                Gdx.app.error("MAP", "Failed to load map asset", e);
+            mapAsset = assetFactory.createAssetMap(mapFilename);
+            if (mapAsset == null) {
+                Gdx.app.error("MAP", "Failed to load map asset");
             }
         }
 

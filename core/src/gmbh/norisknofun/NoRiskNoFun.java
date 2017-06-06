@@ -3,7 +3,7 @@ package gmbh.norisknofun;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.assets.impl.AssetLoaderFactoryImpl;
+import gmbh.norisknofun.assets.impl.AssetFactoryImpl;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.Scene;
 import gmbh.norisknofun.scene.SceneManager;
@@ -28,7 +28,7 @@ public class NoRiskNoFun implements ApplicationListener  {
 
     private void registerScenes() {
 
-        GameData gameData = new GameData(new AssetLoaderFactoryImpl());
+        GameData gameData = new GameData(new AssetFactoryImpl());
         SceneManager.getInstance().registerScene(new MapSelectionScene(gameData));
         SceneManager.getInstance().registerScene(new GameScene(gameData));
         SceneManager.getInstance().registerScene(new CreateGameScene());

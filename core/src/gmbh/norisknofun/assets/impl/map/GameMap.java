@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * POJO class used to deserialize a game map from JSON.
  */
-class GameMap {
+final class GameMap {
 
     /**
      * Vertex class representing a point in the map.

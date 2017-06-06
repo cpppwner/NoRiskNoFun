@@ -7,12 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import gmbh.norisknofun.scene.SceneObject;
 
 /**
- * Created by pippp on 06.05.2017.
+ * Special background scene object
  */
+public final class BackgroundSceneObject extends SceneObject {
 
-public class BackgroundSceneObject extends SceneObject {
-
-    private Texture texture;
+    private final Texture texture;
 
     public BackgroundSceneObject(){
         super();
@@ -23,5 +22,10 @@ public class BackgroundSceneObject extends SceneObject {
     @Override
     public void draw(Batch batch, float parentAlpha){
        batch.draw(texture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }
