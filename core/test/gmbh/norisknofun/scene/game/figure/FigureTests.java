@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 
-import gmbh.norisknofun.assets.impl.map.AssetMap;
+import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.scene.game.figures.Figure;
 
 public class FigureTests {

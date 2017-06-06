@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-import gmbh.norisknofun.assets.impl.map.AssetMap;
+import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.scene.SceneObject;
 
 /**

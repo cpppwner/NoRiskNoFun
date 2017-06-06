@@ -11,26 +11,14 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import gmbh.norisknofun.GdxTest;
-import gmbh.norisknofun.assets.Asset;
-import gmbh.norisknofun.assets.AssetType;
+import gmbh.norisknofun.assets.*;
+import gmbh.norisknofun.assets.AssetMap;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class AssetLoaderMapTests extends GdxTest {
 
-    @Test
-    public void getAssetType() {
-
-        // given
-        AssetLoaderMap target = new AssetLoaderMap();
-
-        // when
-        AssetType obtained = target.getAssetType();
-
-        // then
-        assertThat(obtained, is(AssetType.ASSET_TYPE_MAP));
-    }
 
     @Test(expected = IllegalArgumentException.class)
     public void loadingMapWithNullInputStreamThrowsAnException() {
@@ -249,9 +237,9 @@ public class AssetLoaderMapTests extends GdxTest {
 
         // then
         assertThat(obtained, is(not(nullValue())));
-        assertThat(obtained, is(instanceOf(AssetMap.class)));
+        assertThat(obtained, is(instanceOf(AssetMapImpl.class)));
 
-        AssetMap obtainedMap = (AssetMap)obtained;
+        AssetMapImpl obtainedMap = (AssetMapImpl)obtained;
         assertThat(obtainedMap.getName(), is(map.name));
 
         // validate all regions

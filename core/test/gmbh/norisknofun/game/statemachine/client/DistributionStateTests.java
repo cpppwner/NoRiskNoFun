@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
-import gmbh.norisknofun.assets.impl.AssetLoaderFactoryImpl;
+import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
-import gmbh.norisknofun.network.Session;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +22,7 @@ public class DistributionStateTests {
     ClientContext context;
     @Before
     public void setup() {
-        data = new GameData(new AssetLoaderFactoryImpl());
+        data = new GameData(mock(AssetFactory.class));
         context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new DistributionState(context));
         Player player = new Player ();
