@@ -4,20 +4,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.Attribute;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
-import javax.naming.Context;
 
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
 
 /**
  * Created by pippp on 06.05.2017.
@@ -25,10 +27,13 @@ import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
 
 public class MainMenuScene extends SceneBase {
 
+    private BitmapFont font;
+
     public MainMenuScene() {
         super(SceneNames.MAIN_MENU_SCENE, Color.WHITE);
         setBackground();
         initMenuButtons();
+        initLabel();
     }
 
     private void initMenuButtons() {
@@ -78,6 +83,26 @@ public class MainMenuScene extends SceneBase {
         addSceneObject(new BackgroundSceneObject());
     }
 
+    private void initLabel() {
 
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSansMono.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 110;
+        parameter.borderWidth = 2.0f;
+        font = generator.generateFont(parameter);
+        generator.dispose();
 
+        Label.LabelStyle style = new Label.LabelStyle();
+        style.font = font;
+
+        Label label = new Label(Texts.APPLICATION_TITLE, style);
+        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, 160.0f, label.getWidth(), label.getHeight());
+    }
+
+    @Override
+    public void dispose() {
+        font.dispose();
+    }
 }
