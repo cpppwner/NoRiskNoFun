@@ -38,11 +38,24 @@ public interface AssetFactory {
     /**
      * Create a label asset using the default font (see assets/font).
      *
+     * <p>
+     *     The label itself takes care about disposing of the font.
+     * </p>
+     *
      * @param text The label text.
+     * @param font The font asset.
+     *
+     * @return Newly created Label asset.
+     */
+    AssetLabel createAssetLabel(String text, AssetFont font);
+
+    /**
+     * Create font asset.
+     *
      * @param fontSize Font size.
      * @param color Color used for the text.
      * @param borderWidth Width of the border wrapping the text.
-     * @return Newly created Label asset.
+     * @return Newly created font asset.
      */
-    AssetLabel createAssetLabel(String text, int fontSize, Color color, float borderWidth);
+    AssetFont createAssetFont(int fontSize, Color color, float borderWidth);
 }

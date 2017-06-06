@@ -1,12 +1,9 @@
 package gmbh.norisknofun.assets.impl.label;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
+import gmbh.norisknofun.assets.AssetFont;
 import gmbh.norisknofun.assets.AssetLabel;
 
 /**
@@ -14,28 +11,13 @@ import gmbh.norisknofun.assets.AssetLabel;
  */
 public class AssetLabelImpl implements AssetLabel {
 
-    private static final String DEFAULT_FONT_FILENAME = "fonts/DroidSansMono.ttf";
-
     private final Label label;
-    private final BitmapFont labelFont;
+    private final AssetFont font;
 
-    public AssetLabelImpl(String text, int fontSize, Color color, float borderWidth) {
+    public AssetLabelImpl(String text, AssetFont font) {
 
-        labelFont = createLabelFont(fontSize, color, borderWidth);
-        label = new Label(text, new Label.LabelStyle(this.labelFont, color));
-    }
-
-    private static BitmapFont createLabelFont(int fontSize, Color color, float borderWidth) {
-
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(DEFAULT_FONT_FILENAME));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.color = color;
-        parameter.size = fontSize;
-        parameter.borderWidth = borderWidth;
-        BitmapFont font = generator.generateFont(parameter);
-        generator.dispose();
-
-        return font;
+        label = new Label(text, new Label.LabelStyle(font.toBitmapFont(), font.toBitmapFont().getColor()));
+        this.font = font;
     }
 
     @Override
@@ -71,7 +53,7 @@ public class AssetLabelImpl implements AssetLabel {
     @Override
     public void dispose() {
 
-        labelFont.dispose();
+        font.dispose();
     }
 
     @Override
