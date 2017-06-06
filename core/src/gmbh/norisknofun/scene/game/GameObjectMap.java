@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import gmbh.norisknofun.assets.impl.map.AssetMap;
+import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.scene.SceneObject;
 
 /**

@@ -2,20 +2,18 @@ package gmbh.norisknofun.game;
 
 import com.badlogic.gdx.Gdx;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import gmbh.norisknofun.assets.AssetLoaderFactory;
-import gmbh.norisknofun.assets.impl.map.AssetMap;
+import gmbh.norisknofun.assets.AssetFactory;
+import gmbh.norisknofun.assets.AssetMap;
 
 /**
  * Class containing game related data.
  */
 public class GameData {
 
-    private final AssetLoaderFactory assetLoaderFactory;
+    private final AssetFactory assetFactory;
 
     private String mapFilename = null;
     private AssetMap mapAsset = null;
@@ -24,12 +22,8 @@ public class GameData {
 
     private List<Player> players = new ArrayList<>();
 
-    public GameData(AssetLoaderFactory assetLoaderFactory) {
-        this.assetLoaderFactory = assetLoaderFactory;
-    }
-
-    AssetLoaderFactory getAssetLoaderFactory() {
-        return assetLoaderFactory;
+    public GameData(AssetFactory assetFactory) {
+        this.assetFactory = assetFactory;
     }
 
     public void setMapFile(String mapFilename) {
@@ -42,10 +36,9 @@ public class GameData {
             throw new IllegalStateException("mapFile was not set");
 
         if (mapAsset == null) {
-            try (InputStream stream = Gdx.files.internal(mapFilename).read()) {
-                mapAsset = assetLoaderFactory.createAssetLoaderMap().load(stream);
-            } catch (Exception e) {
-                Gdx.app.error("MAP", "Failed to load map asset", e);
+            mapAsset = assetFactory.createAssetMap(mapFilename);
+            if (mapAsset == null) {
+                Gdx.app.error("MAP", "Failed to load map asset");
             }
         }
 

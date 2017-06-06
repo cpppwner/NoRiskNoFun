@@ -4,15 +4,12 @@ import com.badlogic.gdx.Gdx;
 
 import java.util.List;
 
-import gmbh.norisknofun.assets.impl.map.AssetMap;
-import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
-import gmbh.norisknofun.game.networkmessages.spread.PlayerSpreadCheck;
-import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoinedCheck;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
