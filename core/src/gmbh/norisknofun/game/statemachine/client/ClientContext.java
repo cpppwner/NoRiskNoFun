@@ -18,7 +18,8 @@ public class ClientContext  {
 
     public ClientContext(OutboundMessageHandler outboundMessageHandler, GameData data){
         this.outboundMessageHandler = outboundMessageHandler;
-        this.data=data;
+        this.data = data;
+        state = new WaitingForPlayersState(this);
     }
 
     public void setState(State state){

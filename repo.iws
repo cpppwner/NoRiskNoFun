@@ -7,18 +7,22 @@
   </component>
   <component name="ChangeListManager">
     <list id="cd7300c6-a375-4218-9c1e-3d370bdaca9c" name="Default" comment="Try to Merge&#10;" />
-    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="Create client states and implemented basic logic.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java" />
+    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="Added Test for DistributionState, MoveTroopsState, SpreadTroopsState WaitingForNextTurnState and WaitingForPlayersState on Client and added WaitingForNextTurnState">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/GameDataServerTests.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/GameDataTests.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/PlayerTests.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/PlayersTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/ClientContextTests.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/ServerContextTests.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/SpreadTroopsStateTests.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/WaitingForPlayersStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameServer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Player.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Players.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Players.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/BasicMessageImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/BasicMessageImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/SpreadTroopsState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/SpreadTroopsState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.ipr" afterPath="$PROJECT_DIR$/repo.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.iws" afterPath="$PROJECT_DIR$/repo.iws" />
     </list>
@@ -87,102 +91,104 @@
     <favorites_list name="repo" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="DistributionState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ClientContext.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="129">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MoveTroopsState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpreadTroopsState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WaitingForNextTurnState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WaitingForPlayersState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java">
+      <file leaf-file-name="GameDataServerTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/GameDataServerTests.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DistributionStateTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
               <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MoveTroopsStateTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java">
+      <file leaf-file-name="GameDataTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/GameDataTests.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="129">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayersTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/PlayersTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/PlayerTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WaitingForPlayersStateTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerContextTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/ServerContextTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="SpreadTroopsStateTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/SpreadTroopsStateTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WaitingForNextTurnStateTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            <state relative-caret-position="102">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="WaitingForPlayersStateTests.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/WaitingForPlayersStateTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="85">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientContextTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/ClientContextTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -2346,6 +2352,8 @@
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroop.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroopCheck.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java" />
+        <option value="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java" />
+        <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Player.java" />
       </list>
     </option>
   </component>
@@ -2389,9 +2397,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2471,8 +2476,38 @@
               <option name="myItemId" value="game" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
+              <option name="myItemId" value="NoRiskNoFun" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NoRiskNoFun" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="norisknofun" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="statemachine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2501,122 +2536,17 @@
               <option name="myItemId" value="game" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="statemachine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="statemachine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
       <pane id="PackagesPane">
         <subPane />
       </pane>
@@ -2637,7 +2567,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Added_Test_for_DistributionState__MoveTroopsState__SpreadTroopsState__WaitingForNextTurnSt.patch" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/tests_and_some_code_fixes.patch" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -2668,9 +2598,16 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/build.gradle</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/NoRiskNoFun.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetLoaderMap.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/GameMap.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameData.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Player.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/BasicMessageImpl.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/Dice.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/EndGame.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/NextPlayer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/Message.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmount.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmountCheck.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/AttackResult.java</PATH>
@@ -2700,10 +2637,12 @@
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackWinnerState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTargetState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTroopAmountState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/EvaluateDiceResultState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackLoserState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackState.java</PATH>
@@ -2713,10 +2652,34 @@
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/DistributionState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/EvaluateDiceResultState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/MoveTroopsState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ServerContext.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/SpreadTroopsState.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/WaitingForPlayersState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/network/NetworkServer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/network/SessionImplTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/network/NetworkClient.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/network/SessionImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/BackgroundSceneObject.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameObjectMap.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Figure.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/CreateGameScene.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/JoinGameScene.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/MainMenuScene.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/MapSelectionScene.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/ServerBrowserScene.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/assets/impl/map/AssetLoaderMapTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/choosetarget/ChooseTargetTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/spread/SpreadTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/waitingforplayers/WaitingFoPlayersTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/game/figure/FigureTests.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -2724,14 +2687,58 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/choosetarget/ChooseTargetTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/movetroops/FinishedTurnTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/spread/SpreadTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/waitingforplayers/WaitingFoPlayersTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/android/assets/start_game_button.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetFactory.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetMap.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetSound.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetTexture.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/AssetFactoryImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetMapImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/RegionImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/sound/AssetSoundImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/texture/AssetTextureImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameClient.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameDataServer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameServer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Players.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/Client.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientConnectedState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientConnectingState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientDisconnectedState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/OutboundMessageHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/handshake/HandShake.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/MessageDeserializer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/MessageSerializer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/ProtocolConstants.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/ProtocolException.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/util/MessageBuffer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/InboundMessageHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/MessageBus.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/OutboundMessageHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/Client.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientAcceptedState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientClosedState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/Clients.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/messaging/MessageBusImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/messaging/NullOutboundMessageHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/NewSessionEvent.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/NullSessionEvent.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionClosedEvent.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionDataReceivedEvent.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEvent.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventListener.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventListenerImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventProcessor.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/MessageDeserializerTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/MessageSerializerTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/util/MessageBufferTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientAcceptedStateTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientClosedStateTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientsTests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/messaging/MessageBusImplTests.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -2739,7 +2746,16 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/ChangeState.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetLoader.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetLoaderFactory.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetType.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/AssetLoaderFactoryImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetMap.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/texture/AssetLoaderTexture.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/texture/AssetTexture.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/NextPlayer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/network/ServerSessionEventHandlerImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/assets/impl/AssetLoaderFactoryImplTests.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -3185,7 +3201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495451294649</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added Test for DistributionState, MoveTroopsState, SpreadTroopsState WaitingForNextTurnState and WaitingForPlayersState on Client and added WaitingForNextTurnState">
+      <created>1496219009106</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1496219009106</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3279,7 +3302,8 @@
     <MESSAGE value="Refactor Figures, added different types of Figures to the gamemap." />
     <MESSAGE value="Color region when a Figure moves on to it." />
     <MESSAGE value="Create client states and implemented basic logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create client states and implemented basic logic." />
+    <MESSAGE value="Added Test for DistributionState, MoveTroopsState, SpreadTroopsState WaitingForNextTurnState and WaitingForPlayersState on Client and added WaitingForNextTurnState" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Test for DistributionState, MoveTroopsState, SpreadTroopsState WaitingForNextTurnState and WaitingForPlayersState on Client and added WaitingForNextTurnState" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3293,59 +3317,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../NetworkTest/app/src/androidTest/java/at/werkstatt/philipp/networktest/ExampleUnitTest.java" />
-    <entry file="file://$PROJECT_DIR$/android/src/gmbh/norisknofun/MainActivity.java" />
-    <entry file="file://$PROJECT_DIR$/android/src/gmbh/norisknofun/ExampleUnitTest.java" />
-    <entry file="file://$PROJECT_DIR$/android/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/gmbh/norisknofun/MyServer.java" />
-    <entry file="file://$PROJECT_DIR$/android/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/NoRiskNoFun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../NetworkTest/app/src/androidTest/java/at/werkstatt/philipp/networktest/ExampleUnitTest.java" />
     <entry file="file://$PROJECT_DIR$/android/src/gmbh/norisknofun/MainActivity.java" />
     <entry file="file://$PROJECT_DIR$/android/src/gmbh/norisknofun/ExampleUnitTest.java" />
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
@@ -3446,14 +3417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroopCheck.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -3500,13 +3463,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
+        <state relative-caret-position="153">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
         </state>
@@ -3514,7 +3476,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="119">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
@@ -3522,7 +3484,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="170">
           <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding />
         </state>
@@ -3531,7 +3493,7 @@
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -3546,7 +3508,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
+        <state relative-caret-position="272">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding />
         </state>
@@ -3554,7 +3516,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
+        <state relative-caret-position="289">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
@@ -3562,24 +3524,130 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        <state relative-caret-position="255">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Players.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1145">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/BasicMessageImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/GameDataServerTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/GameDataTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/PlayersTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/PlayerTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/ClientContextTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="136">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/ServerContextTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/SpreadTroopsStateTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/server/WaitingForPlayersStateTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding />
         </state>
       </provider>

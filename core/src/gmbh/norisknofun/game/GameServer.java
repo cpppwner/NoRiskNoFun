@@ -29,7 +29,6 @@ public class GameServer {
     private final Clients clients;
     private final ServerContext serverContext;
 
-    // TODO make server side GameData class to not confuse it with client side data.
     public GameServer(GameDataServer data, SessionEventListener eventListener) {
 
         gameServerThread = createGameServerThread();
