@@ -2,21 +2,18 @@ package gmbh.norisknofun.scene.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.assets.AssetSound;
+import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
-import gmbh.norisknofun.scene.SceneManager;
+import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
 /**
@@ -24,102 +21,66 @@ import gmbh.norisknofun.scene.common.TextButtonSceneObject;
  */
 public final class MapSelectionScene extends SceneBase {
 
-    private BitmapFont font;
+    private static final String MAP_ONE_BUTTON_TEXT = "Map One";
+    private static final String MAP_TWO_BUTTON_TEXT = "Map Two";
 
-    private final GameData gameData;
+    private final SceneData sceneData;
+    private final AssetSound buttonPressedSound;
 
-    public MapSelectionScene(GameData gameData) {
+    public MapSelectionScene(SceneData sceneData) {
 
         super(SceneNames.MAP_SELECTION_SCENE, Color.WHITE);
+        this.sceneData = sceneData;
+        this.buttonPressedSound = sceneData.createSound(Assets.BUTTON_PRESSED_SOUND_FILENAME);
+
         setBackground();
-        initFont();
         initMapSelectionButtons();
-
-
-
-        this.gameData = gameData;
-    }
-
-    private void initFont() {
-
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
-        font.getData().setScale(3.5f);
-    }
-
-    private void initMapSelectionButtons() {
-        TextButtonSceneObject buttonMapOne;
-        TextButtonSceneObject buttonMapTwo;
-        ImageButtonSceneObject imageButtonBack;
-
-        buttonMapOne = createButton("Map One");
-        buttonMapTwo = createButton("Map Two");
-        //imageButtonBack = createImageButton("button_back.png");
-
-
-        buttonMapOne.setBounds(490,500,500,120);
-        buttonMapTwo.setBounds(490,250,500,120);
-        //imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
-
-
-        buttonMapOne.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                gameData.setMapFile("maps/Dummy One.map");
-                SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
-            }
-        });
-
-        buttonMapTwo.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                gameData.setMapFile("maps/Dummy Two.map");
-                SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
-            }
-        });
-
-/*       imageButtonBack.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                SceneManager.getInstance().setActiveScene(SceneNames.CREATE_GAME_SCENE);
-            }
-        });
-*/
-        addSceneObject(buttonMapOne);
-        addSceneObject(buttonMapTwo);
-        //addSceneObject(imageButtonBack);
-    }
-
-    private TextButtonSceneObject createButton(String buttonText) {
-
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
-        style.up = new TextureRegionDrawable(new TextureRegion(new Texture("img/button.png")));
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture("img/button.png")));
-        style.fontColor = new Color(0f, 0f, 0f, 1);
-        style.downFontColor = new Color(0, 0.4f, 0, 1);
-
-        return new TextButtonSceneObject(new TextButton(buttonText, style));
-    }
-
-
-    private ImageButtonSceneObject createImageButton (String file){
-        Texture txt = new Texture(Gdx.files.internal(file));
-        ImageButton imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(txt)));
-        return new ImageButtonSceneObject(imageButton);
     }
 
     private void setBackground() {
-        addSceneObject(new BackgroundSceneObject());
+        addSceneObject(new BackgroundSceneObject(sceneData.getAssetFactory()));
+    }
+
+    private void initMapSelectionButtons() {
+        TextButtonSceneObject buttonMapOne = new TextButtonSceneObject(sceneData.getAssetFactory(), MAP_ONE_BUTTON_TEXT, buttonPressedSound);
+        TextButtonSceneObject buttonMapTwo = new TextButtonSceneObject(sceneData.getAssetFactory(), MAP_TWO_BUTTON_TEXT, buttonPressedSound);
+        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createTexture(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+
+        buttonMapOne.setBounds(490,500,500,120);
+        buttonMapTwo.setBounds(490,250,500,120);
+        backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
+
+        EventListener switchToLobbySceneListener = new SwitchSceneClickListener(SceneNames.LOBBY_SCENE);
+        buttonMapOne.addListener(new SetSelectedMapClickListener("maps/Dummy One.map"));
+        buttonMapOne.addListener(switchToLobbySceneListener);
+        buttonMapTwo.addListener(new SetSelectedMapClickListener("maps/Dummy Two.map"));
+        buttonMapTwo.addListener(switchToLobbySceneListener);
+        backButton.addListener(new SetSelectedMapClickListener(null));
+        backButton.addListener(new SwitchSceneClickListener(SceneNames.CREATE_GAME_SCENE));
+
+        addSceneObject(buttonMapOne);
+        addSceneObject(buttonMapTwo);
+        addSceneObject(backButton);
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
+        buttonPressedSound.dispose();
         super.dispose();
-        font.dispose();
+    }
+
+    private final class SetSelectedMapClickListener extends ClickListener {
+
+        private final String mapFilename;
+
+        SetSelectedMapClickListener(String mapFilename) {
+
+            this.mapFilename = mapFilename;
+        }
+
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            sceneData.setMapFilename(mapFilename);
+        }
     }
 }

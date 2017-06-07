@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.assets.impl.AssetFactoryImpl;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.network.socket.SocketFactoryImpl;
 import gmbh.norisknofun.scene.Scene;
+import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.game.DiceRollScene;
@@ -15,7 +17,6 @@ import gmbh.norisknofun.scene.ui.JoinGameScene;
 import gmbh.norisknofun.scene.ui.LobbyScene;
 import gmbh.norisknofun.scene.ui.MainMenuScene;
 import gmbh.norisknofun.scene.ui.MapSelectionScene;
-import gmbh.norisknofun.scene.ui.ServerBrowserScene;
 
 public class NoRiskNoFun implements ApplicationListener  {
 
@@ -28,15 +29,14 @@ public class NoRiskNoFun implements ApplicationListener  {
 
     private void registerScenes() {
 
-        GameData gameData = new GameData(new AssetFactoryImpl());
-        SceneManager.getInstance().registerScene(new MapSelectionScene(gameData));
-        SceneManager.getInstance().registerScene(new GameScene(gameData));
-        SceneManager.getInstance().registerScene(new CreateGameScene());
-        SceneManager.getInstance().registerScene(new JoinGameScene());
-        SceneManager.getInstance().registerScene(new MainMenuScene());
-        SceneManager.getInstance().registerScene(new DiceRollScene(gameData));
-        SceneManager.getInstance().registerScene(new ServerBrowserScene());
-        SceneManager.getInstance().registerScene(new LobbyScene());
+        SceneData sceneData = new SceneData(new AssetFactoryImpl(), new SocketFactoryImpl());
+        SceneManager.getInstance().registerScene(new MapSelectionScene(sceneData));
+        SceneManager.getInstance().registerScene(new GameScene(sceneData));
+        SceneManager.getInstance().registerScene(new CreateGameScene(sceneData));
+        SceneManager.getInstance().registerScene(new JoinGameScene(sceneData));
+        SceneManager.getInstance().registerScene(new MainMenuScene(sceneData));
+        SceneManager.getInstance().registerScene(new DiceRollScene(sceneData));
+        SceneManager.getInstance().registerScene(new LobbyScene(sceneData));
     }
 
     private void showStartupScene() {

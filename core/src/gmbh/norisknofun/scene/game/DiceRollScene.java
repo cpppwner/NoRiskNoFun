@@ -3,30 +3,29 @@ package gmbh.norisknofun.scene.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import gmbh.norisknofun.assets.AssetFont;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
+import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
-import gmbh.norisknofun.scene.game.dice.DiceSceneObject;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
+import gmbh.norisknofun.scene.game.dice.DiceSceneObject;
 
 public class DiceRollScene extends SceneBase {
 
+    private final SceneData sceneData;
     private final GameData data;
 
     private BitmapFont font;
@@ -44,9 +43,10 @@ public class DiceRollScene extends SceneBase {
     private int dieAmount = 3;
 
 
-    public DiceRollScene(GameData data) {
+    public DiceRollScene(SceneData sceneData) {
         super(SceneNames.DICE_SCENE, Color.BLACK);
-        this.data = data;
+        this.sceneData = sceneData;
+        this.data = sceneData.getGameData();
     }
 
     @Override
@@ -91,7 +91,7 @@ public class DiceRollScene extends SceneBase {
      */
     private void initBackButton() {
         TextButtonSceneObject backButton;
-        backButton = createButton("Back");
+        backButton = new TextButtonSceneObject(sceneData.getAssetFactory(), "Back", null);
         backButton.setBounds(1000, 100, 500, 100);
         backButton.addListener(new ClickListener() {
 
@@ -104,24 +104,6 @@ public class DiceRollScene extends SceneBase {
             }
         });
         addSceneObject(backButton);
-    }
-
-    /**
-     * Create a generic text button with the given text
-     *
-     * @param buttonText Text on the button
-     * @return created TextButtonSceneObject
-     */
-    private TextButtonSceneObject createButton(String buttonText) {
-
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
-        style.up = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
-        style.fontColor = new Color(0.9f, 0.5f, 0.5f, 1);
-        style.downFontColor = new Color(0, 0.4f, 0, 1);
-
-        return new TextButtonSceneObject(new TextButton(buttonText, style));
     }
 
     /**
@@ -139,7 +121,8 @@ public class DiceRollScene extends SceneBase {
         style.font = font;
         style.fontColor = Color.WHITE;
 
-        return new LabelSceneObject(new Label(Integer.toString(cheatsAvailable), style));
+        AssetFont font = sceneData.createFont(36, Color.WHITE, 2.0f);
+        return new LabelSceneObject(sceneData.createLabel(Integer.toString(cheatsAvailable), font));
     }
 
     /**
@@ -225,7 +208,7 @@ public class DiceRollScene extends SceneBase {
             diceRoll(index);
             showRollResult(index);
             cheatsAvailable--;
-            cheatLabel.getLabel().setText(Integer.toString(cheatsAvailable));
+            cheatLabel.setText(Integer.toString(cheatsAvailable));
         }
     }
 

@@ -4,17 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +17,10 @@ import java.util.Map;
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.scene.SceneBase;
-import gmbh.norisknofun.scene.SceneManager;
+import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
+import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 import gmbh.norisknofun.scene.game.figures.Artillery;
 import gmbh.norisknofun.scene.game.figures.Cavalry;
@@ -37,9 +32,9 @@ import gmbh.norisknofun.scene.game.figures.Infantry;
  */
 public final class GameScene extends SceneBase {
 
+    private final SceneData sceneData;
     private final GameData data;
 
-    private BitmapFont font;
     private LabelSceneObject label;
     private boolean initializeScene = true;
 
@@ -48,10 +43,10 @@ public final class GameScene extends SceneBase {
     private AssetMap.Region currentRegion;
 
 
-
-    public GameScene(GameData data) {
+    public GameScene(SceneData sceneData) {
         super(SceneNames.GAME_SCENE, Color.BLUE);
-        this.data = data;
+        this.sceneData = sceneData;
+        this.data = sceneData.getGameData();
     }
 
 
@@ -70,7 +65,7 @@ public final class GameScene extends SceneBase {
         if (initializeScene) {
             GameObjectMap gameObjectMap;
 
-            label = initLabel();
+            label = new LabelSceneObject(sceneData.createLabel("Region: ", sceneData.createFont(36, Color.WHITE, 2.0f)));
             label.setBounds(0, 0, 500, 100);
             addSceneObject(label);
 
@@ -182,28 +177,15 @@ public final class GameScene extends SceneBase {
             float[] vertices = region.getVertices();
 
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
-                label.getLabel().setText("Region: " + region.getName());
+                label.setText("Region: " + region.getName());
                 region.setOwner("Player");
 
                 return true;
             }
 
         }
-        label.getLabel().setText("Region: None");
+        label.setText("Region: None");
         return false;
-    }
-
-    private LabelSceneObject initLabel() {
-
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
-        font.getData().setScale(3.5f);
-
-        Label.LabelStyle style = new Label.LabelStyle();
-        style.font = font;
-        style.fontColor = Color.WHITE;
-
-        return new LabelSceneObject(new Label("Region: ", style));
     }
 
     private void setRegionColor(Color color, AssetMap.Region region) {
@@ -221,35 +203,9 @@ public final class GameScene extends SceneBase {
      */
     private void addRollButton() {
         TextButtonSceneObject rollButton;
-
-        rollButton = createButton("Dice Roll");
+        rollButton = new TextButtonSceneObject(sceneData.getAssetFactory(), "Dice Roll", null);
         rollButton.setBounds(1000, 100, 500, 100);
-        rollButton.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager.getInstance().setActiveScene(SceneNames.DICE_SCENE);
-            }
-        });
+        rollButton.addListener(new SwitchSceneClickListener(SceneNames.DICE_SCENE));
         addSceneObject(rollButton);
-    }
-
-
-    /**
-     * Create a button scene object with the given text
-     * @param buttonText Text on the button
-     * @return new TextButtonSceneObject
-     */
-    private TextButtonSceneObject createButton(String buttonText) {
-
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
-        style.up = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture("button.png")));
-        style.fontColor = new Color(0.9f, 0.5f, 0.5f, 1);
-        style.downFontColor = new Color(0, 0.4f, 0, 1);
-
-        return new TextButtonSceneObject(new TextButton(buttonText, style));
     }
 }

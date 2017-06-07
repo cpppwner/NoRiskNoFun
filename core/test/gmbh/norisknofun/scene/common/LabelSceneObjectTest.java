@@ -5,23 +5,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import gmbh.norisknofun.assets.AssetLabel;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 
 public class LabelSceneObjectTest {
-    @Test
-    public void getButtonReturnsCorrectTextButton() {
-        Label label = Mockito.mock(Label.class);
-
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
-
-        assertSame(label, sceneObject.getLabel());
-    }
 
     @Test
     public void setBoundsSetsPositionCorrectly() {
-        Label label = Mockito.mock(Label.class);
+        AssetLabel label = Mockito.mock(AssetLabel.class);
 
         LabelSceneObject sceneObject = new LabelSceneObject(label);
 
@@ -32,7 +26,7 @@ public class LabelSceneObjectTest {
 
     @Test
     public void setBoundsSetsSizeCorrectly() {
-        Label label = Mockito.mock(Label.class);
+        AssetLabel label = Mockito.mock(AssetLabel.class);
 
         LabelSceneObject sceneObject = new LabelSceneObject(label);
 

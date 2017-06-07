@@ -25,7 +25,7 @@ public class MoveTroopsStateTests {
     String players[] = {"Franz","Michael","Hubert"};
     @Before
     public void setup() {
-        data = new GameData(mock(AssetFactory.class));
+        data = new GameData();
         context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new MoveTroopsState(context));
         addPlayers();

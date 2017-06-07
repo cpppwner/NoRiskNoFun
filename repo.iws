@@ -8,17 +8,204 @@
   <component name="ChangeListManager">
     <list id="cd7300c6-a375-4218-9c1e-3d370bdaca9c" name="Default" comment="Try to Merge&#10;" />
     <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="Create client states and implemented basic logic.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/maps/Dummy One.map" afterPath="$PROJECT_DIR$/android/assets/maps/Dummy One.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/maps/Dummy Two.map" afterPath="$PROJECT_DIR$/android/assets/maps/Dummy Two.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/build.gradle" afterPath="$PROJECT_DIR$/android/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/proguard-project.txt" afterPath="$PROJECT_DIR$/android/proguard-project.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/project.properties" afterPath="$PROJECT_DIR$/android/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/android/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/dimens.xml" afterPath="$PROJECT_DIR$/android/res/values/dimens.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/strings.xml" afterPath="$PROJECT_DIR$/android/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/styles.xml" afterPath="$PROJECT_DIR$/android/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/gmbh/norisknofun/AndroidLauncher.java" afterPath="$PROJECT_DIR$/android/src/gmbh/norisknofun/AndroidLauncher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build.gradle" afterPath="$PROJECT_DIR$/core/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/NoRiskNoFun.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/NoRiskNoFun.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/Asset.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/Asset.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetFactory.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetFont.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetFont.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetLabel.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetLabel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetMap.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetSound.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetSound.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetTexture.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetTexture.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/AssetFactoryImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/AssetFactoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/font/AssetFontImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/font/AssetFontImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/label/AssetLabelImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/label/AssetLabelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetLoaderMap.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetLoaderMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetMapImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/AssetMapImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/GameMap.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/GameMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/RegionImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/map/RegionImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/sound/AssetSoundImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/sound/AssetSoundImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/texture/AssetTextureImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/impl/texture/AssetTextureImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameClient.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameData.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameDataServer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameDataServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameServer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Player.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Players.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/Players.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/Client.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientConnectedState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientConnectedState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientConnectingState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientConnectingState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientDisconnectedState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientDisconnectedState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/ClientState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/OutboundMessageHandler.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/client/OutboundMessageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/BasicMessageImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/BasicMessageImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/Dice.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/Dice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/EndGame.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/EndGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/Message.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/Message.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmount.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmount.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmountCheck.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmountCheck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/AttackResult.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/AttackResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/DiceAmount.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/DiceAmount.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/DiceResult.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/DiceResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/loser/ContinueAttack.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/loser/ContinueAttack.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/AttackRegion.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/AttackRegion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/AttackRegionCheck.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/AttackRegionCheck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/NoAttack.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/NoAttack.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroop.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroop.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroopCheck.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroopCheck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroopsDone.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroopsDone.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/NextPlayer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/NextPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroop.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroop.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroopCheck.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroopCheck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/distribution/AddTroops.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/distribution/AddTroops.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/handshake/HandShake.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/handshake/HandShake.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/movetroops/FinishTurn.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/movetroops/FinishTurn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpread.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpreadCheck.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpreadCheck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpreadFinished.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpreadFinished.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerJoined.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerJoined.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerJoinedCheck.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerJoinedCheck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/StartGame.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/StartGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/MessageDeserializer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/MessageDeserializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/MessageSerializer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/MessageSerializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/ProtocolConstants.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/ProtocolConstants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/ProtocolException.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/ProtocolException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/util/MessageBuffer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/util/MessageBuffer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/InboundMessageHandler.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/InboundMessageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/MessageBus.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/MessageBus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/OutboundMessageHandler.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/OutboundMessageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/Client.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientAcceptedState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientAcceptedState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientClosedState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientClosedState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/ClientState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/Clients.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/clients/Clients.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/messaging/MessageBusImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/messaging/MessageBusImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/messaging/NullOutboundMessageHandler.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/messaging/NullOutboundMessageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/NewSessionEvent.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/NewSessionEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/NullSessionEvent.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/NullSessionEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionClosedEvent.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionClosedEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionDataReceivedEvent.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionDataReceivedEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEvent.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventListener.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventListenerImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventListenerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventProcessor.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEventProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/State.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/State.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackLoserState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackLoserState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackWinnerState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackWinnerState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTargetState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTargetState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTroopAmountState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTroopAmountState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/EvaluateDiceResultState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/EvaluateDiceResultState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackLoserState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackLoserState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackWinnerState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackWinnerState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ChooseTargetState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ChooseTargetState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ChooseTroopAmountState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ChooseTroopAmountState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/DistributionState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/DistributionState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/EvaluateDiceResultState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/EvaluateDiceResultState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/MoveTroopsState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/MoveTroopsState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ServerContext.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ServerContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/SpreadTroopsState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/SpreadTroopsState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/WaitingForPlayersState.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/WaitingForPlayersState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/NetworkClient.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/NetworkClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/NetworkServer.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/NetworkServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/Session.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/Session.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/SessionEventHandler.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/SessionEventHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/SessionImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/SessionImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SelectionResult.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SelectionResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SelectionResultImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SelectionResultImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketFactory.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketFactoryImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketFactoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketSelector.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketSelector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketSelectorImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/SocketSelectorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPClientSocket.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPClientSocket.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPClientSocketImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPClientSocketImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPServerSocket.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPServerSocket.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPServerSocketImpl.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/network/socket/TCPServerSocketImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/Scene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/Scene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneBase.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneManager.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneNames.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneNames.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneObject.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/Texts.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/Texts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/BackgroundSceneObject.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/BackgroundSceneObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/ImageButtonSceneObject.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/ImageButtonSceneObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/LabelSceneObject.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/LabelSceneObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/TextButtonSceneObject.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/TextButtonSceneObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/DiceRollScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/DiceRollScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameObjectMap.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameObjectMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/dice/DiceSceneObject.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/dice/DiceSceneObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Artillery.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Artillery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Cavalry.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Cavalry.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Figure.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Figure.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Infantry.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/Infantry.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/NoRiskNoFunDrawFigures.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/figures/NoRiskNoFunDrawFigures.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/CreateGameScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/CreateGameScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/JoinGameScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/JoinGameScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/LobbyScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/LobbyScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/MainMenuScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/MainMenuScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/MapSelectionScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/MapSelectionScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/ServerBrowserScene.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/ui/ServerBrowserScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/GdxTest.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/GdxTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/assets/impl/map/AssetLoaderMapTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/assets/impl/map/AssetLoaderMapTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/choosetarget/ChooseTargetTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/choosetarget/ChooseTargetTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/movetroops/FinishedTurnTest.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/movetroops/FinishedTurnTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/spread/SpreadTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/spread/SpreadTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/waitingforplayers/WaitingFoPlayersTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/waitingforplayers/WaitingFoPlayersTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/MessageDeserializerTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/MessageDeserializerTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/MessageSerializerTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/MessageSerializerTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/util/MessageBufferTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/protocol/util/MessageBufferTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientAcceptedStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientAcceptedStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientClosedStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientClosedStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientsTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/clients/ClientsTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/messaging/MessageBusImplTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/server/messaging/MessageBusImplTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/NetworkClientTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/NetworkClientTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/NetworkServerClientIntegrationTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/NetworkServerClientIntegrationTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/NetworkServerTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/NetworkServerTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/SessionImplTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/SessionImplTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/socket/SocketSelectorImplTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/socket/SocketSelectorImplTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/socket/TCPClientSocketImplTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/socket/TCPClientSocketImplTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/socket/TCPServerSocketImplTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/network/socket/TCPServerSocketImplTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/SceneManagerTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/SceneManagerTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/common/ImageButtonSceneObjectTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/common/ImageButtonSceneObjectTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/common/LabelSceneObjectTest.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/common/LabelSceneObjectTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/common/TextButtonSceneObjectTest.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/common/TextButtonSceneObjectTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/game/figure/FigureTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/scene/game/figure/FigureTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.ipr" afterPath="$PROJECT_DIR$/repo.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.iws" afterPath="$PROJECT_DIR$/repo.iws" />
     </list>
@@ -87,12 +274,12 @@
     <favorites_list name="repo" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="DistributionState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="189">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -101,8 +288,8 @@
       <file leaf-file-name="MoveTroopsState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="147">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -111,8 +298,8 @@
       <file leaf-file-name="SpreadTroopsState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+            <state relative-caret-position="210">
+              <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -121,8 +308,8 @@
       <file leaf-file-name="WaitingForNextTurnState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            <state relative-caret-position="147">
+              <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -131,8 +318,8 @@
       <file leaf-file-name="WaitingForPlayersState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="189">
+              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -141,8 +328,8 @@
       <file leaf-file-name="DistributionStateTests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="168">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -151,8 +338,8 @@
       <file leaf-file-name="MoveTroopsStateTests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="168">
+              <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -161,8 +348,8 @@
       <file leaf-file-name="SpreadTroopsStateTests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="210">
+              <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -171,8 +358,8 @@
       <file leaf-file-name="WaitingForNextTurnStateTests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            <state relative-caret-position="189">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -181,8 +368,8 @@
       <file leaf-file-name="WaitingForPlayersStateTests.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="-186">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -199,7 +386,7 @@
       </map>
     </option>
     <push-targets>
-      <push-target-info repo="$PROJECT_DIR$" source="master" target-remote="origin" target-branch="master" />
+      <push-target-info target-remote="origin" target-branch="master" repo="$PROJECT_DIR$" source="master" />
     </push-targets>
   </component>
   <component name="GradleLocalSettings">
@@ -2349,6 +2536,12 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
   <component name="ModuleEditorState">
     <option name="LAST_EDITED_MODULE_NAME" />
     <option name="LAST_EDITED_TAB_NAME" />
@@ -2364,16 +2557,7 @@
       <profile-state />
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -2389,20 +2573,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
+              <option name="myItemId" value="repo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2412,7 +2587,7 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
+              <option name="myItemId" value="repo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2421,207 +2596,16 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="statemachine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NoRiskNoFun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norisknofun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="statemachine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="PackagesPane">
+      <pane id="Scope" />
+      <pane id="AndroidView">
         <subPane />
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files" />
       </pane>
     </panes>
   </component>
@@ -2638,6 +2622,8 @@
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Added_Test_for_DistributionState__MoveTroopsState__SpreadTroopsState__WaitingForNextTurnSt.patch" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -2654,198 +2640,19 @@
       <recent name="C:\Users\philipp\Downloads\Klagi1(2)\NoRiskNoFun1\android\res\values" />
     </key>
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/Dice.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/EndGame.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/NextPlayer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmount.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/choosetroops/ChooseTroopsAmountCheck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/AttackResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/DiceAmount.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/DiceResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/loser/ContinueAttack.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/AttackRegion.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/AttackRegionCheck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/NoAttack.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroop.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroopCheck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroopsDone.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/NextPlayer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroop.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroopCheck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/distribution/AddTroops.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/movetroops/FinishTurn.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpread.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpreadCheck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/spread/PlayerSpreadFinished.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerJoined.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerJoinedCheck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/StartGame.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/State.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackLoserState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackWinnerState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTargetState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTroopAmountState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/EvaluateDiceResultState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackLoserState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/AttackWinnerState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ChooseTargetState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/ChooseTroopAmountState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/DistributionState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/EvaluateDiceResultState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/MoveTroopsState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/SpreadTroopsState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/server/WaitingForPlayersState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/network/NetworkServer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/network/SessionImplTests.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/choosetarget/ChooseTargetTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/movetroops/FinishedTurnTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/spread/SpreadTests.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/waitingforplayers/WaitingFoPlayersTests.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/ChangeState.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Android App.android">
-    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method>
-        <option name="Make" enabled="false" />
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -2853,46 +2660,52 @@
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
       <option name="PREFERRED_AVD" value="" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="DEBUGGER_TYPE" value="Java" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Hybrid>
       <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Native>
       <Profilers>
         <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
         <option name="SUPPORT_LIB_ENABLED" value="true" />
         <option name="INSTRUMENTATION_ENABLED" value="true" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2992,34 +2805,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
     <configuration default="false" name="android" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="android" />
       <option name="DEPLOY" value="true" />
@@ -3027,41 +2812,20 @@
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
       <option name="PREFERRED_AVD" value="" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="DEBUGGER_TYPE" value="Java" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Hybrid>
       <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Native>
       <Profilers>
         <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
         <option name="SUPPORT_LIB_ENABLED" value="true" />
         <option name="INSTRUMENTATION_ENABLED" value="true" />
       </Profilers>
@@ -3072,50 +2836,6 @@
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Android App.android" />
     </list>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Hybrid>
-      <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Native>
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <method />
-    </configuration>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -3135,6 +2855,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491203526283</updated>
+      <workItem from="1496838228452" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="Server communication added branch: NetworkTest">
       <created>1491204569369</created>
@@ -3188,41 +2909,47 @@
     <option name="localTasksCounter" value="8" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="12000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="0" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.50323623" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.50323623" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32707354" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32847896" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25323623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25273865" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -3283,21 +3010,14 @@
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint suspend="ALL" type="java-exception">
-          <properties />
-        </breakpoint>
-      </default-breakpoints>
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/android/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3307,14 +3027,14 @@
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+          <caret line="37" column="1" lean-forward="false" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3325,7 +3045,7 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3333,15 +3053,14 @@
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/NoRiskNoFun.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3351,14 +3070,14 @@
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+          <caret line="37" column="1" lean-forward="false" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3366,7 +3085,7 @@
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/NoRiskNoFun.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3377,14 +3096,14 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="9" selection-end-column="0" />
+          <caret line="0" column="3" lean-forward="false" selection-start-line="0" selection-start-column="3" selection-end-line="9" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3392,7 +3111,7 @@
     <entry file="file://$PROJECT_DIR$/android/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3401,7 +3120,7 @@
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
-          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+          <caret line="47" column="1" lean-forward="false" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -3409,21 +3128,21 @@
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/SceneObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/game/GameScene.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="162" column="52" selection-start-line="162" selection-start-column="52" selection-end-line="162" selection-end-column="52" />
+          <caret line="162" column="52" lean-forward="false" selection-start-line="162" selection-start-column="52" selection-end-line="162" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/NoRiskNoFun.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="43" column="47" selection-start-line="43" selection-start-column="47" selection-end-line="43" selection-end-column="47" />
+          <caret line="43" column="47" lean-forward="false" selection-start-line="43" selection-start-column="47" selection-end-line="43" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -3434,152 +3153,149 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTroopAmountState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ClientContext.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding />
+          <caret line="7" column="23" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroopCheck.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/SpawnTroop.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTargetState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackWinnerState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackLoserState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/EvaluateDiceResultState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/DistributionState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="189">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/MoveTroopsState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="147">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/SpreadTroopsState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        <state relative-caret-position="210">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="189">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        <state relative-caret-position="147">
+          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/DistributionStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="168">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/MoveTroopsStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        <state relative-caret-position="168">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/SpreadTroopsStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        <state relative-caret-position="210">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForNextTurnStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state relative-caret-position="189">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/statemachine/client/WaitingForPlayersStateTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="-186">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>

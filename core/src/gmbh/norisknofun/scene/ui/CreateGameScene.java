@@ -2,113 +2,95 @@ package gmbh.norisknofun.scene.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import gmbh.norisknofun.assets.AssetSound;
+import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
-import gmbh.norisknofun.scene.SceneManager;
+import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 
 /**
- * Created by Sputzi0815 on 24.04.2017.
+ * Scene shown, when the user creates a game.
  */
-
 public class CreateGameScene extends SceneBase {
 
-    public CreateGameScene() {
+    /**
+     * Data class shared amongst the scenes.
+     */
+    private final SceneData sceneData;
+
+    /**
+     * Sound played when buttons are clicked.
+     */
+    private final AssetSound buttonPressedSound;
+
+    public CreateGameScene(SceneData sceneData) {
 
         super(SceneNames.CREATE_GAME_SCENE, Color.WHITE);
+        this.sceneData = sceneData;
+        this.buttonPressedSound = sceneData.createSound(Assets.BUTTON_PRESSED_SOUND_FILENAME);
+
         setBackground();
         initImageButtons();
     }
 
+    private void setBackground() {
 
-
-    private void setBackground(){
-        addSceneObject(new BackgroundSceneObject());
+        addSceneObject(new BackgroundSceneObject(sceneData.getAssetFactory()));
     }
 
     private void initImageButtons() {
-        ImageButtonSceneObject /*createGameButton,*/ imageButtonBack, twoPlayers, threePlayers, fourPlayers;
 
-        /*
-        createGameButton = createImageButton("button_create_game_eng.png");
-        */
-        imageButtonBack = createImageButton("img/button_back.png");
+        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createTexture(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject twoPlayers = new ImageButtonSceneObject(sceneData.createTexture(Assets.TWO_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject threePlayers = new ImageButtonSceneObject(sceneData.createTexture(Assets.THREE_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject fourPlayers = new ImageButtonSceneObject(sceneData.createTexture(Assets.FOUR_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
 
-        twoPlayers = createImageButton("img/button_2_players.png");
-        threePlayers = createImageButton("img/button_3_players.png");
-        fourPlayers = createImageButton("img/button_4_players.png");
-
-        /*
-        createGameButton.setBounds((Gdx.graphics.getWidth()/6)-5, (float) (Gdx.graphics.getHeight()/2.5),553,480);
-        */
-        imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
+        backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10f, 275f, 240f);
         twoPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10)),(Gdx.graphics.getHeight()/8),275,240);
         threePlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 300),(Gdx.graphics.getHeight()/8),275,240);
         fourPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 600),(Gdx.graphics.getHeight()/8),275,240);
 
+        ClickListener switchToLobbySceneListener = new SwitchSceneClickListener(SceneNames.MAP_SELECTION_SCENE);
+        backButton.addListener(new SetNumPlayersClickListener(0));
+        backButton.addListener(new SwitchSceneClickListener(SceneNames.MAIN_MENU_SCENE));
+        twoPlayers.addListener(new SetNumPlayersClickListener(2));
+        twoPlayers.addListener(switchToLobbySceneListener);
+        threePlayers.addListener(new SetNumPlayersClickListener(3));
+        threePlayers.addListener(switchToLobbySceneListener);
+        fourPlayers.addListener(new SetNumPlayersClickListener(4));
+        fourPlayers.addListener(switchToLobbySceneListener);
 
-/*        createGameButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
-            }
-        });
-*/
-        imageButtonBack.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
-            }
-        });
-
-        twoPlayers.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager.getInstance().setActiveScene(SceneNames.LOBBY_SCENE);
-            }
-        });
-
-        threePlayers.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager.getInstance().setActiveScene(SceneNames.LOBBY_SCENE);
-            }
-        });
-
-        fourPlayers.addListener(new ClickListener() {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager.getInstance().setActiveScene(SceneNames.LOBBY_SCENE);
-            }
-        });
-
-
-        /*
-        addSceneObject(createGameButton);
-        */
-        addSceneObject(imageButtonBack);
+        addSceneObject(backButton);
         addSceneObject(twoPlayers);
         addSceneObject(threePlayers);
         addSceneObject(fourPlayers);
     }
 
-    private ImageButtonSceneObject createImageButton (String file){
-        Texture txt = new Texture(Gdx.files.internal(file));
-        ImageButton imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(txt)));
-        return new ImageButtonSceneObject(imageButton);
+    @Override
+    public void dispose() {
+
+        buttonPressedSound.dispose();
+        super.dispose();
+    }
+
+    private final class SetNumPlayersClickListener extends ClickListener {
+
+        private final int numPlayers;
+
+        SetNumPlayersClickListener(int numPlayers) {
+            this.numPlayers = numPlayers;
+        }
+
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+
+            sceneData.setMaximumNumberOfPlayers(numPlayers);
+        }
     }
 }
