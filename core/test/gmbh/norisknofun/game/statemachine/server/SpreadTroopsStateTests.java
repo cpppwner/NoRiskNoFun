@@ -9,6 +9,7 @@ import gmbh.norisknofun.assets.impl.AssetFactoryImpl;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
+import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.server.MessageBus;
 import gmbh.norisknofun.game.server.messaging.MessageBusImpl;
 
@@ -38,7 +39,7 @@ public class SpreadTroopsStateTests extends GdxTest {
 
     @Test
     public void nullNameWillNotThrowException() {
-        MoveTroop message = new MoveTroop(null, 1, "Someregion", "Otherregion");
+        SpawnTroop message = new SpawnTroop(null, "Otherregion");
 
         context.handle("123", message);
 
@@ -46,16 +47,11 @@ public class SpreadTroopsStateTests extends GdxTest {
 
     @Test
     public void nullRegionWillNotThrowException() {
-        MoveTroop message = new MoveTroop("Someone", 1, null, "Otherregion");
+        SpawnTroop message = new SpawnTroop("hubert",null);
 
         context.handle("123", message);
     }
 
-    @Test
-    public void zeroTroopsWillNotThrowException() {
-        MoveTroop message = new MoveTroop("Someone", 0, "Someregion", "Otherregion");
 
-        context.handle("123", message);
-    }
 
 }

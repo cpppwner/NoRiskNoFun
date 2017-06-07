@@ -41,20 +41,19 @@ public class WaitingForPlayersState extends State {
         if(message.getType().equals(PlayerJoined.class)){
             addPlayer((PlayerJoined) message, senderId);
         }else if(message.getType().equals(StartGame.class) ){
-            startGame((StartGame)message);
+            startGame();
         }else{
             Gdx.app.log("WaitingforPlayerState","message unknown");
         }
     }
 
-    private void  startGame(StartGame message){
-        //todo notify clients to change state
+    private void  startGame(){
+        context.sendMessage(new StartGame(true));
         context.setState(new SpreadTroopsState(context));
     }
 
 
     private void addPlayer(PlayerJoined message, String senderId){
-        boolean check=false;
         PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.getPlayerName(),senderId);
         if(data.getPlayers().addPlayer(new Player(message.getPlayerName(),senderId))) {
             playerJoinedCheck.setAllowedtojoin(true);
