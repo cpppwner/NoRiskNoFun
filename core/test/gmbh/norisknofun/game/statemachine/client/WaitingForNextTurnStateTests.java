@@ -23,7 +23,7 @@ public class WaitingForNextTurnStateTests {
     String players[] = {"Franz","Michael","Hubert"};
     @Before
     public void setup() {
-        data = new GameData(mock(AssetFactory.class));
+        data = new GameData();
         context = new ClientContext(mock(gmbh.norisknofun.game.client.OutboundMessageHandler.class), data);
         context.setState(new WaitingForNextTurnState(context));
         addPlayers();

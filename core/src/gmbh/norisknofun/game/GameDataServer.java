@@ -1,8 +1,5 @@
 package gmbh.norisknofun.game;
 
-import com.badlogic.gdx.Gdx;
-
-import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.assets.AssetMap;
 
 /**
@@ -11,35 +8,23 @@ import gmbh.norisknofun.assets.AssetMap;
 
 public class GameDataServer {
 
-    private String mapFilename = null;
     private AssetMap mapAsset = null;
     private int maxPlayer;
     private int[] diceRoll;
     private String currentplayer;
-    private AssetFactory assetFactory;
     private Players players;
 
-    public GameDataServer(AssetFactory assetFactory){
-        this.assetFactory = assetFactory;
+    public GameDataServer() {
         players= new Players();
     }
 
-
-    public void setMapFile(String mapFilename) {
-        this.mapFilename = mapFilename;
-        mapAsset = null;
+    public void setMapAsset(AssetMap mapAsset) {
+        this.mapAsset = mapAsset;
     }
 
     public AssetMap getMapAsset() {
-        if (mapFilename == null)
+        if (mapAsset == null)
             throw new IllegalStateException("mapFile was not set");
-
-        if (mapAsset == null) {
-            mapAsset = assetFactory.createAssetMap(mapFilename);
-            if (mapAsset == null) {
-                Gdx.app.error("MAP", "Failed to load map asset");
-            }
-        }
 
         return mapAsset;
     }

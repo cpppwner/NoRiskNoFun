@@ -20,7 +20,7 @@ public class GameDataTests {
     GameData data;
     @Before
     public void init() {
-        data = new GameData(new AssetFactoryImpl());
+        data = new GameData();
     }
 
     @Ignore

@@ -23,7 +23,7 @@ public class WaitingForPlayersStateTests {
     @Before
     public void setup() {
         MessageBus messageBus = new MessageBusImpl();
-        data = new GameDataServer(new AssetFactoryImpl());
+        data = new GameDataServer();
         context = new ServerContext(data, messageBus);
         context.setState(new WaitingForPlayersState(context));
     }

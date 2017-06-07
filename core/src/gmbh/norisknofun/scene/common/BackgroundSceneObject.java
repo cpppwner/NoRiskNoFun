@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+import gmbh.norisknofun.assets.AssetFactory;
+import gmbh.norisknofun.assets.AssetTexture;
 import gmbh.norisknofun.scene.SceneObject;
 
 /**
@@ -11,21 +13,26 @@ import gmbh.norisknofun.scene.SceneObject;
  */
 public final class BackgroundSceneObject extends SceneObject {
 
-    private final Texture texture;
+    private static final String DEFAULT_BACKGROUND_IMAGE = "img/menu.png";
 
-    public BackgroundSceneObject(){
+    private final AssetTexture texture;
+
+    public BackgroundSceneObject(AssetFactory assetFactory) {
         super();
-        texture= new Texture("menu.png");
+        texture = assetFactory.createAssetTexture(DEFAULT_BACKGROUND_IMAGE);
 
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha){
-       batch.draw(texture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
+        texture.draw(batch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
     public void dispose() {
+
+        texture.dispose();
         super.dispose();
     }
 }

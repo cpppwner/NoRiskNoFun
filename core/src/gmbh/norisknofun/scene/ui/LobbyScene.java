@@ -1,65 +1,61 @@
 package gmbh.norisknofun.scene.ui;
 
-/**
- * Created by Sputzi0815 on 17.05.2017.
- */
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.assets.AssetSound;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
+import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
-import gmbh.norisknofun.scene.SceneManager;
+import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
-import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
 
 public class LobbyScene extends SceneBase{
 
-    public LobbyScene() {
+    private final SceneData sceneData;
+
+    /**
+     * Sound played when buttons are clicked.
+     */
+    private final AssetSound buttonPressedSound;
+
+    public LobbyScene(SceneData sceneData) {
         super(SceneNames.LOBBY_SCENE, Color.WHITE);
+        this.sceneData = sceneData;
+        this.buttonPressedSound = sceneData.createSound(Assets.BUTTON_PRESSED_SOUND_FILENAME);
+
         setBackground();
         initImageButtons();
     }
 
     private void setBackground(){
-        addSceneObject(new BackgroundSceneObject());
+
+        addSceneObject(new BackgroundSceneObject(sceneData.getAssetFactory()));
     }
 
     private void initImageButtons() {
-        ImageButtonSceneObject imageButtonBack;
-
-        imageButtonBack = createImageButton("button_back.png");
-
-        imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
-
-        imageButtonBack.addListener(new ClickListener() {
+        ImageButtonSceneObject imageButtonStartGame = new ImageButtonSceneObject(sceneData.createTexture(Assets.START_GAME_BUTTON_FILENAME), buttonPressedSound);
+        imageButtonStartGame.setBounds((Gdx.graphics.getWidth() / 2.0f) - 137.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
+        imageButtonStartGame.addListener(new ClickListener() {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
-                SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+                sceneData.sendMessageFromGui(new StartGame(true));
             }
         });
+        addSceneObject(imageButtonStartGame);
 
-        addSceneObject(imageButtonBack);
     }
 
-
-    private ImageButtonSceneObject createImageButton (String file){
-        Texture txt = new Texture(Gdx.files.internal(file));
-        ImageButton imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(txt)));
-        return new ImageButtonSceneObject(imageButton);
+    @Override
+    public void dispose() {
+        buttonPressedSound.dispose();
+        super.dispose();
     }
-
 }
