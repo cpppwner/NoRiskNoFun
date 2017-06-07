@@ -9,14 +9,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 
 /**
@@ -44,6 +47,7 @@ public class JoinGameScene extends SceneBase {
 
         setBackground();
         initImageButtons();
+        initLabel();
     }
 
     private void  setBackground(){
@@ -64,6 +68,19 @@ public class JoinGameScene extends SceneBase {
         addSceneObject(joinGameButton);
         addSceneObject(imageButtonBack);
     }
+
+    /**
+     * Initialise the label shown on Join Game Scene.
+     */
+    private void initLabel() {
+
+        AssetLabel label = sceneData.createLabel(Texts.JOIN_GAME, sceneData.createFont(110, Color.WHITE, 2.0f));
+        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, (label.getHeight()*3.0f), label.getWidth(), Gdx.graphics.getHeight() - label.getHeight());
+
+    }
+
 
     @Override
     public void dispose() {

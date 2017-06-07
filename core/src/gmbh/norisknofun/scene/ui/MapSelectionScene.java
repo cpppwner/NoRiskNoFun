@@ -6,13 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
@@ -35,6 +38,7 @@ public final class MapSelectionScene extends SceneBase {
 
         setBackground();
         initMapSelectionButtons();
+        initLabel();
     }
 
     private void setBackground() {
@@ -61,6 +65,18 @@ public final class MapSelectionScene extends SceneBase {
         addSceneObject(buttonMapOne);
         addSceneObject(buttonMapTwo);
         addSceneObject(backButton);
+    }
+
+    /**
+     * Initialise the label shown on main menu.
+     */
+    private void initLabel() {
+
+        AssetLabel label = sceneData.createLabel(Texts.MAP_SELECTION, sceneData.createFont(110, Color.WHITE, 2.0f));
+        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, (label.getHeight()*3.0f), label.getWidth(), Gdx.graphics.getHeight() - label.getHeight());
+
     }
 
     @Override
