@@ -11,7 +11,7 @@ public class Player {
     private  String playername="";
     private boolean ishost=false;
     private int troopToSpread =0;
-    private String id;
+    private String id = "";
 
 
     public Player(){
