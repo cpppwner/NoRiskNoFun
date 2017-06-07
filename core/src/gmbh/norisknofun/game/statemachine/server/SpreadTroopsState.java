@@ -57,13 +57,22 @@ public class SpreadTroopsState extends State {
 
 
     private void moveTroop(MoveTroop message){
+        //no used field should be null or 0
+        if (message.getDestinationregion() == null
+                || message.getPlayername() == null
+                || message.getTroopamount() <= 0) {
+            return;
+        }
+
         List<AssetMap.Region> regions=data.getMapAsset().getRegions();
         int i=0;
+
+        // check if message comes from current player
         if(message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
             AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());
 
-            if (destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region
-
+            if (destinationregion.getOwner() == null || destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region
+                assignRegionsToPlayer();
                 broadcastMoveTroopsMessage(message);
                 setNextPlayer();
 
