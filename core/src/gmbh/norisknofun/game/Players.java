@@ -18,6 +18,10 @@ public class Players {
 
     }
     public boolean addPlayer(Player player){
+        // player with null name will not be added
+        if (player.getPlayername() == null || player.getId() == null) {
+            return false;
+        }
         for(Player p: players){
             if(p.getPlayername().equals(player.getPlayername()) || p.getId().equals(player.getId())){
                 return false;
@@ -70,8 +74,13 @@ public class Players {
     }
 
     public String getNextPlayername(String playername){
+
+        if (players.size() == 0 || playername == null) {
+            return null;
+        }
+
         int index = getPlayerIndexByName(playername);
-        if(index>=players.size()){
+        if(index>=players.size()-1){
             index=0;
         }else{
             index++;
