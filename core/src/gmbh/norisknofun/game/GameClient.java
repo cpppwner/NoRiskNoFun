@@ -90,4 +90,18 @@ public class GameClient implements SessionEventHandler {
         // called by NetworkClient
         client.sessionDataWritten(session);
     }
+
+    /**
+     * Process a message received from the GUI.
+     * <p>
+     * <p>
+     * The message is added to the client's inbound queue and processed in the next round.
+     * </p>
+     *
+     * @param message The message coming from the GUI.
+     */
+    public void processGuiMessage(Message message) {
+
+        inboundMessageQueue.add(message);
+    }
 }

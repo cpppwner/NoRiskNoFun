@@ -25,7 +25,7 @@ public class SpreadTroopsStateTests extends GdxTest {
     @Before
     public void setup() {
         MessageBus messageBus = new MessageBusImpl(); // can't mock because it's a final class
-        data = new GameDataServer(new AssetFactoryImpl());
+        data = new GameDataServer();
         player = new Player("Player1", "123");
         player2 = new Player("Player2", "987");
 

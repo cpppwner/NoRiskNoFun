@@ -21,7 +21,7 @@ public class GameDataServerTests {
     GameData data;
     @Before
     public void init() {
-        data = new GameData(new AssetFactoryImpl());
+        data = new GameData();
     }
 
 
