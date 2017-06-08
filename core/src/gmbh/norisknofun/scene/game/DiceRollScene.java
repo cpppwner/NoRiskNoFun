@@ -3,9 +3,7 @@ package gmbh.norisknofun.scene.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -13,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import gmbh.norisknofun.assets.AssetFont;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneManager;
@@ -28,7 +26,6 @@ public class DiceRollScene extends SceneBase {
     private final SceneData sceneData;
     private final GameData data;
 
-    private BitmapFont font;
     private LabelSceneObject cheatLabel;
     private List<DiceSceneObject> dieObjects;
 
@@ -91,7 +88,7 @@ public class DiceRollScene extends SceneBase {
      */
     private void initBackButton() {
         TextButtonSceneObject backButton;
-        backButton = new TextButtonSceneObject(sceneData.getAssetFactory(), "Back", null);
+        backButton = new TextButtonSceneObject(sceneData.createTextButton("Back", Assets.DICE_CHEATS_TEXT_BUTTON_DESCRIPTOR), null);
         backButton.setBounds(1000, 100, 500, 100);
         backButton.addListener(new ClickListener() {
 
@@ -113,16 +110,7 @@ public class DiceRollScene extends SceneBase {
      */
     private LabelSceneObject initLabel() {
 
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
-        font.getData().setScale(3.5f);
-
-        Label.LabelStyle style = new Label.LabelStyle();
-        style.font = font;
-        style.fontColor = Color.WHITE;
-
-        AssetFont font = sceneData.createFont(36, Color.WHITE, 2.0f);
-        return new LabelSceneObject(sceneData.createLabel(Integer.toString(cheatsAvailable), font));
+        return new LabelSceneObject(sceneData.createLabel(Integer.toString(cheatsAvailable), Assets.GAME_SCENE_LABEL_FONT_DESCRIPTOR));
     }
 
     /**

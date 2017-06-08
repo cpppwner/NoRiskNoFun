@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -50,10 +49,10 @@ public class CreateGameScene extends SceneBase {
 
     private void initImageButtons() {
 
-        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createTexture(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
-        ImageButtonSceneObject twoPlayers = new ImageButtonSceneObject(sceneData.createTexture(Assets.TWO_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
-        ImageButtonSceneObject threePlayers = new ImageButtonSceneObject(sceneData.createTexture(Assets.THREE_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
-        ImageButtonSceneObject fourPlayers = new ImageButtonSceneObject(sceneData.createTexture(Assets.FOUR_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createImageButton(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject twoPlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.TWO_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject threePlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.THREE_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject fourPlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.FOUR_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
 
         backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10f, 275f, 240f);
         twoPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10)),(Gdx.graphics.getHeight()/8),275,240);
@@ -81,11 +80,12 @@ public class CreateGameScene extends SceneBase {
      */
     private void initLabel() {
 
-        AssetLabel label = sceneData.createLabel(Texts.CREATE_GAME, sceneData.createFont(110, Color.WHITE, 2.0f));
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.LABEL_FONT_DESCRIPTOR));
         addSceneObject(sceneObject);
-        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, (label.getHeight()*3.0f), label.getWidth(), Gdx.graphics.getHeight() - label.getHeight());
-
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
     }
 
     @Override

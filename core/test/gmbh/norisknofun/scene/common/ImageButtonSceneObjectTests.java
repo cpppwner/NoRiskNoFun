@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import gmbh.norisknofun.assets.AssetImageButton;
 import gmbh.norisknofun.assets.AssetTexture;
 
 import static org.junit.Assert.assertEquals;
@@ -16,9 +17,9 @@ public class ImageButtonSceneObjectTests {
     @Test
     public void setBoundsSetsPositionCorrectly() {
 
-        AssetTexture texture = Mockito.mock(AssetTexture.class);
+        AssetImageButton wrappedAsset = Mockito.mock(AssetImageButton.class);
 
-        ImageButtonSceneObject sceneObject = new ImageButtonSceneObject(texture);
+        ImageButtonSceneObject sceneObject = new ImageButtonSceneObject(wrappedAsset);
 
         sceneObject.setBounds(2,3,1,1);
         assertEquals(2, (int)sceneObject.getX());
@@ -27,9 +28,9 @@ public class ImageButtonSceneObjectTests {
 
     @Test
     public void setBoundsSetsSizeCorrectly() {
-        AssetTexture texture = Mockito.mock(AssetTexture.class);
+        AssetImageButton wrappedAsset = Mockito.mock(AssetImageButton.class);
 
-        ImageButtonSceneObject sceneObject = new ImageButtonSceneObject(texture);
+        ImageButtonSceneObject sceneObject = new ImageButtonSceneObject(wrappedAsset);
 
         sceneObject.setBounds(1,1,2,3);
         assertEquals(2, (int)sceneObject.getWidth());

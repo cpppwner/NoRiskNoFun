@@ -27,8 +27,7 @@ public class LabelSceneObject extends SceneObject {
 
         this.label = label;
 
-        setWidth(label.getWidth());
-        setHeight(label.getHeight());
+        setBounds(label.getX(), label.getY(), label.getWidth(), label.getHeight());
     }
 
     @Override

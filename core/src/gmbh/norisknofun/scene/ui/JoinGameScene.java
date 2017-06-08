@@ -3,7 +3,6 @@ package gmbh.norisknofun.scene.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
-import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -49,8 +48,8 @@ public class JoinGameScene extends SceneBase {
 
     private void initImageButtons() {
 
-        ImageButtonSceneObject imageButtonBack = new ImageButtonSceneObject(sceneData.createTexture(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
-        ImageButtonSceneObject joinGameButton = new ImageButtonSceneObject(sceneData.createTexture(Assets.JOIN_GAME_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject imageButtonBack = new ImageButtonSceneObject(sceneData.createImageButton(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject joinGameButton = new ImageButtonSceneObject(sceneData.createImageButton(Assets.JOIN_GAME_BUTTON_FILENAME), buttonPressedSound);
 
         joinGameButton.setBounds((float) ((Gdx.graphics.getWidth()/2)-137.5),(Gdx.graphics.getHeight()/10),275,240);
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
@@ -67,13 +66,13 @@ public class JoinGameScene extends SceneBase {
      */
     private void initLabel() {
 
-        AssetLabel label = sceneData.createLabel(Texts.JOIN_GAME, sceneData.createFont(110, Color.WHITE, 2.0f));
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.LABEL_FONT_DESCRIPTOR));
         addSceneObject(sceneObject);
-        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, (label.getHeight()*3.0f), label.getWidth(), Gdx.graphics.getHeight() - label.getHeight());
-
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
     }
-
 
     @Override
     public void dispose() {

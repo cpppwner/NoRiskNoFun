@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.scene.Assets;
@@ -44,7 +43,7 @@ public class LobbyScene extends SceneBase{
     }
 
     private void initImageButtons() {
-        ImageButtonSceneObject imageButtonStartGame = new ImageButtonSceneObject(sceneData.createTexture(Assets.START_GAME_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject imageButtonStartGame = new ImageButtonSceneObject(sceneData.createImageButton(Assets.START_GAME_BUTTON_FILENAME), buttonPressedSound);
         imageButtonStartGame.setBounds((Gdx.graphics.getWidth() / 2.0f) - 137.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
         imageButtonStartGame.addListener(new ClickListener() {
 
@@ -62,10 +61,12 @@ public class LobbyScene extends SceneBase{
      */
     private void initLabel() {
 
-        AssetLabel label = sceneData.createLabel(Texts.SERVER_LOBBY, sceneData.createFont(110, Color.WHITE, 2.0f));
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.LABEL_FONT_DESCRIPTOR));
         addSceneObject(sceneObject);
-        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, (label.getHeight()*3.0f), label.getWidth(), Gdx.graphics.getHeight() - label.getHeight());
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight()*3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
 
     }
 

@@ -45,19 +45,20 @@ public final class MapSelectionScene extends SceneBase {
     }
 
     private void initMapSelectionButtons() {
-        TextButtonSceneObject buttonMapOne = new TextButtonSceneObject(sceneData.getAssetFactory(), MAP_ONE_BUTTON_TEXT, buttonPressedSound);
-        TextButtonSceneObject buttonMapTwo = new TextButtonSceneObject(sceneData.getAssetFactory(), MAP_TWO_BUTTON_TEXT, buttonPressedSound);
-        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createTexture(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+        TextButtonSceneObject buttonMapOne = new TextButtonSceneObject(
+                sceneData.createTextButton(MAP_ONE_BUTTON_TEXT, Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), buttonPressedSound);
+        TextButtonSceneObject buttonMapTwo = new TextButtonSceneObject(
+                sceneData.createTextButton(MAP_TWO_BUTTON_TEXT, Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), buttonPressedSound);
+        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createImageButton(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
 
         buttonMapOne.setBounds(490,500,500,120);
         buttonMapTwo.setBounds(490,250,500,120);
         backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
 
-        EventListener switchToLobbySceneListener = new SwitchSceneClickListener(SceneNames.LOBBY_SCENE);
         buttonMapOne.addListener(new SetSelectedMapClickListener("maps/Dummy One.map"));
-        buttonMapOne.addListener(switchToLobbySceneListener);
+        buttonMapOne.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
         buttonMapTwo.addListener(new SetSelectedMapClickListener("maps/Dummy Two.map"));
-        buttonMapTwo.addListener(switchToLobbySceneListener);
+        buttonMapTwo.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
         backButton.addListener(new SetSelectedMapClickListener(null));
         backButton.addListener(new SwitchSceneClickListener(SceneNames.CREATE_GAME_SCENE));
 
@@ -71,8 +72,7 @@ public final class MapSelectionScene extends SceneBase {
      */
     private void initLabel() {
 
-        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.MAP_SELECTION,
-                sceneData.createFont(110, Color.WHITE, 2.0f)));
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.LABEL_FONT_DESCRIPTOR));
         addSceneObject(sceneObject);
         sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
                 sceneObject.getHeight() * 3.0f,

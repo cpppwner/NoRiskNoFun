@@ -14,6 +14,16 @@ public interface AssetLabel extends Asset, Disposable {
     void draw(Batch batch, float parentAlpha);
 
     /**
+     * Get x-coordinate of label.
+     */
+    float getX();
+
+    /**
+     * Get y-coordinate of label.
+     */
+    float getY();
+
+    /**
      * Get width in pixel.
      */
     float getWidth();

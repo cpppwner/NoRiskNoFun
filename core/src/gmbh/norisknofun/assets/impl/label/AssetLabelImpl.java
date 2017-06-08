@@ -1,29 +1,49 @@
 package gmbh.norisknofun.assets.impl.label;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
-import gmbh.norisknofun.assets.AssetFont;
 import gmbh.norisknofun.assets.AssetLabel;
+import gmbh.norisknofun.assets.FontDescriptor;
+import gmbh.norisknofun.assets.impl.font.FontGenerator;
 
 /**
  * Default implementation of {@link AssetLabel}.
  */
 public class AssetLabelImpl implements AssetLabel {
 
+    private final BitmapFont font;
     private final Label label;
-    private final AssetFont font;
 
-    public AssetLabelImpl(String text, AssetFont font) {
+    /**
+     * Create a label with given text and font descriptor.
+     *
+     * @param text The text to show (might change)
+     * @param fontDescriptor Container class describing font properties of this label.
+     */
+    public AssetLabelImpl(String text, FontDescriptor fontDescriptor) {
 
-        label = new Label(text, new Label.LabelStyle(font.toBitmapFont(), font.toBitmapFont().getColor()));
-        this.font = font;
+        font = new FontGenerator(fontDescriptor).generateFont();
+        label = new Label(text, new Label.LabelStyle(font, font.getColor()));
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
         label.draw(batch, parentAlpha);
+    }
+
+    @Override
+    public float getX() {
+
+        return label.getX();
+    }
+
+    @Override
+    public float getY() {
+
+        return label.getY();
     }
 
     @Override

@@ -16,6 +16,7 @@ import java.util.Map;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
@@ -65,7 +66,7 @@ public final class GameScene extends SceneBase {
         if (initializeScene) {
             GameObjectMap gameObjectMap;
 
-            label = new LabelSceneObject(sceneData.createLabel("Region: ", sceneData.createFont(36, Color.WHITE, 2.0f)));
+            label = new LabelSceneObject(sceneData.createLabel("Region: ", Assets.GAME_SCENE_LABEL_FONT_DESCRIPTOR));
             label.setBounds(0, 0, 500, 100);
             addSceneObject(label);
 
@@ -203,7 +204,7 @@ public final class GameScene extends SceneBase {
      */
     private void addRollButton() {
         TextButtonSceneObject rollButton;
-        rollButton = new TextButtonSceneObject(sceneData.getAssetFactory(), "Dice Roll", null);
+        rollButton = new TextButtonSceneObject(sceneData.createTextButton("Dice Roll", Assets.DICE_CHEATS_TEXT_BUTTON_DESCRIPTOR), null);
         rollButton.setBounds(1000, 100, 500, 100);
         rollButton.addListener(new SwitchSceneClickListener(SceneNames.DICE_SCENE));
         addSceneObject(rollButton);

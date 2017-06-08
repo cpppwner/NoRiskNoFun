@@ -3,8 +3,8 @@ package gmbh.norisknofun.scene.common;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
+import gmbh.norisknofun.assets.AssetImageButton;
 import gmbh.norisknofun.assets.AssetSound;
-import gmbh.norisknofun.assets.AssetTexture;
 
 /**
  * Image button scene object.
@@ -17,38 +17,33 @@ import gmbh.norisknofun.assets.AssetTexture;
 public class ImageButtonSceneObject extends ButtonSceneObject {
 
     /**
-     * The texture used as image button.
+     * Image button asset.
      */
-    private final AssetTexture texture;
-    /**
-     * Wrapped libgdx {@link ImageButton}.
-     */
-    private final ImageButton imageButton;
+    private final AssetImageButton imageButton;
 
     /**
-     * Initialize image button with given texture.
+     * Initialize image button scene object with given image button asset
      *
-     * @param texture The texture used to represent this image button.
-     *                The texture is disposed by this scene object.
+     * @param imageButton The image button asset.
+     *                The image button is disposed by this scene object.
      */
-    public ImageButtonSceneObject(AssetTexture texture) {
-        this(texture, null);
+    public ImageButtonSceneObject(AssetImageButton imageButton) {
+        this(imageButton, null);
     }
 
     /**
      * Initialize image button with texture and sound to play on button click.
      *
-     * @param texture The texture used to display.
-     *                The texture is disposed by this scene object.
+     * @param imageButton The image button asset.
+     *                The image button is disposed by this scene object.
      * @param sound Sound played when the button is pressed.
      *              Note: The caller of of this constructor is responsible for disposing the sound,
      *              but only when the button instance is no longer used.
      */
-    public ImageButtonSceneObject(AssetTexture texture, AssetSound sound) {
+    public ImageButtonSceneObject(AssetImageButton imageButton, AssetSound sound) {
         super(sound);
 
-        this.texture = texture;
-        this.imageButton = new ImageButton(texture.createDrawable());
+        this.imageButton = imageButton;
 
         super.setBounds(imageButton.getX(), imageButton.getY(), imageButton.getWidth(), imageButton.getHeight());
     }
@@ -67,7 +62,7 @@ public class ImageButtonSceneObject extends ButtonSceneObject {
 
     @Override
     public void dispose() {
-        texture.dispose();
+        imageButton.dispose();
         super.dispose();
     }
 }
