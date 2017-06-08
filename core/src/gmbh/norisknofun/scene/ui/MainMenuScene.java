@@ -89,8 +89,8 @@ public final class MainMenuScene extends SceneBase {
     @Override
     public void dispose() {
 
+        super.dispose(); // dispose all scene objects.
         buttonPressedSound.dispose();
-        super.dispose();
     }
 
     private final class SetGameHostClickListener extends ClickListener {

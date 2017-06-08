@@ -2,19 +2,12 @@ package gmbh.norisknofun.scene.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
-import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;

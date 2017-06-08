@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -72,11 +71,13 @@ public final class MapSelectionScene extends SceneBase {
      */
     private void initLabel() {
 
-        AssetLabel label = sceneData.createLabel(Texts.MAP_SELECTION, sceneData.createFont(110, Color.WHITE, 2.0f));
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.MAP_SELECTION,
+                sceneData.createFont(110, Color.WHITE, 2.0f)));
         addSceneObject(sceneObject);
-        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, (label.getHeight()*3.0f), label.getWidth(), Gdx.graphics.getHeight() - label.getHeight());
-
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
     }
 
     @Override

@@ -1,42 +1,57 @@
 package gmbh.norisknofun.scene.common;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.assets.AssetTexture;
-import gmbh.norisknofun.scene.SceneManager;
-import gmbh.norisknofun.scene.SceneNames;
-import gmbh.norisknofun.scene.SceneObject;
 
 /**
  * Image button scene object.
+ *
+ * <p>
+ *     An image button is an image acting like a button (pressable and such).
+ *     This objects basically wraps the underlying libgdx {@link ImageButton}.
+ * </p>
  */
 public class ImageButtonSceneObject extends ButtonSceneObject {
 
+    /**
+     * The texture used as image button.
+     */
     private final AssetTexture texture;
-    private final AssetSound sound;
+    /**
+     * Wrapped libgdx {@link ImageButton}.
+     */
+    private final ImageButton imageButton;
 
-    private ImageButton imageButton;
-
+    /**
+     * Initialize image button with given texture.
+     *
+     * @param texture The texture used to represent this image button.
+     *                The texture is disposed by this scene object.
+     */
     public ImageButtonSceneObject(AssetTexture texture) {
         this(texture, null);
     }
 
+    /**
+     * Initialize image button with texture and sound to play on button click.
+     *
+     * @param texture The texture used to display.
+     *                The texture is disposed by this scene object.
+     * @param sound Sound played when the button is pressed.
+     *              Note: The caller of of this constructor is responsible for disposing the sound,
+     *              but only when the button instance is no longer used.
+     */
     public ImageButtonSceneObject(AssetTexture texture, AssetSound sound) {
         super(sound);
 
         this.texture = texture;
-        this.sound = sound;
         this.imageButton = new ImageButton(texture.createDrawable());
-    }
 
-    public ImageButton getButton(){
-        return imageButton;
+        super.setBounds(imageButton.getX(), imageButton.getY(), imageButton.getWidth(), imageButton.getHeight());
     }
-
 
     @Override
     public void draw(Batch batch, float parentAlpha){
@@ -52,7 +67,7 @@ public class ImageButtonSceneObject extends ButtonSceneObject {
 
     @Override
     public void dispose() {
-        super.dispose();
         texture.dispose();
+        super.dispose();
     }
 }
