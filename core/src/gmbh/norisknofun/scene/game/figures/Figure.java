@@ -49,7 +49,7 @@ public class Figure extends SceneObject {
     public void setHighlighted(Boolean highlighted){
         this.highlighted=highlighted;
         if(highlighted){
-            sprite.setRegion(new Texture("badlogic.jpg"));
+            sprite.setRegion(new Texture("img/badlogic.jpg"));
         }else{
             sprite.setRegion(img);
         }

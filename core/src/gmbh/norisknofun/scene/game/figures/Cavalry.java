@@ -11,13 +11,13 @@ public class Cavalry extends Figure {
 
     public Cavalry( int x, int y, int width, int height){
         super(x,y,width,height);
-        img= new Texture(Gdx.files.internal("kavalerie.png"));
+        img= new Texture(Gdx.files.internal("img/kavalerie.png"));
         super.sprite.setRegion(img);
     }
 
     public Cavalry(){
         super();
-        img= new Texture(Gdx.files.internal("kavalerie.png"));
+        img= new Texture(Gdx.files.internal("img/kavalerie.png"));
         super.sprite.setRegion(img);
     }
 
