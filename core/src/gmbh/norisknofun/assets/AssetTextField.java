@@ -3,8 +3,17 @@ package gmbh.norisknofun.assets;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
- * Created by cpppwner on 08.06.17.
+ * Text button asset abstracting libgdx {@link com.badlogic.gdx.scenes.scene2d.ui.TextField}.
  */
+public interface AssetTextField extends UIAsset, Disposable {
 
-public interface AssetTextField extends Asset, Disposable {
+    /**
+     * Get text field's name.
+     */
+    String getName();
+
+    /**
+     * Get the text.
+     */
+    String getText();
 }

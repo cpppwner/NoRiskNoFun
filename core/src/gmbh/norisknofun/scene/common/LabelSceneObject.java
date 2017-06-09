@@ -1,7 +1,5 @@
 package gmbh.norisknofun.scene.common;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-
 import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.scene.SceneObject;
 
@@ -27,18 +25,15 @@ public class LabelSceneObject extends SceneObject {
 
         this.label = label;
 
-        setBounds(label.getX(), label.getY(), label.getWidth(), label.getHeight());
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        label.draw(batch, parentAlpha);
+        setSize(label.getWidth(), label.getHeight());
+        addActor(label.getActor());
     }
 
     @Override
     public void setBounds(float x, float y, float width, float height) {
+
+        label.setBounds(0.0f, 0.0f, width, height);;
         super.setBounds(x, y, width, height);
-        label.setBounds(x, y, width, height);
     }
 
     /**

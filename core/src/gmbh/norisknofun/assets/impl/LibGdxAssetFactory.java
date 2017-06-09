@@ -10,13 +10,7 @@ import gmbh.norisknofun.assets.AssetTexture;
 import gmbh.norisknofun.assets.FontDescriptor;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
 import gmbh.norisknofun.assets.TextFieldDescriptor;
-import gmbh.norisknofun.assets.impl.imagebutton.AssetImageButtonImpl;
-import gmbh.norisknofun.assets.impl.label.AssetLabelImpl;
 import gmbh.norisknofun.assets.impl.map.AssetLoaderMap;
-import gmbh.norisknofun.assets.impl.sound.AssetSoundImpl;
-import gmbh.norisknofun.assets.impl.textbutton.AssetTextButtonImpl;
-import gmbh.norisknofun.assets.impl.textfield.AssetTextFieldImpl;
-import gmbh.norisknofun.assets.impl.texture.AssetTextureImpl;
 
 /**
  * Default implementation of {@link gmbh.norisknofun.assets.AssetFactory}.
@@ -60,8 +54,8 @@ public class LibGdxAssetFactory implements AssetFactory {
     }
 
     @Override
-    public AssetTextField createAssetTextField(TextFieldDescriptor textFieldDescriptor) {
+    public AssetTextField createAssetTextField(String initialFieldText, TextFieldDescriptor textFieldDescriptor) {
 
-        return new AssetTextFieldImpl(textFieldDescriptor);
+        return new AssetTextFieldImpl(initialFieldText, textFieldDescriptor);
     }
 }

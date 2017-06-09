@@ -110,7 +110,7 @@ public class DiceRollScene extends SceneBase {
      */
     private LabelSceneObject initLabel() {
 
-        return new LabelSceneObject(sceneData.createLabel(Integer.toString(cheatsAvailable), Assets.GAME_SCENE_LABEL_FONT_DESCRIPTOR));
+        return new LabelSceneObject(sceneData.createLabel(Integer.toString(cheatsAvailable), Assets.FONT_36PX_WHITE_WITH_BORDER));
     }
 
     /**

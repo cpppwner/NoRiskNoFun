@@ -1,7 +1,5 @@
 package gmbh.norisknofun.scene.common;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.assets.AssetTextButton;
 
@@ -36,18 +34,15 @@ public class TextButtonSceneObject extends ButtonSceneObject {
         super(sound);
         this.textButton = textButton;
 
-        super.setBounds(textButton.getX(), textButton.getY(), textButton.getWidth(), textButton.getHeight());
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha){
-        textButton.draw(batch,parentAlpha);
+        setSize(textButton.getWidth(), textButton.getHeight());
+        addActor(textButton.getActor());
     }
 
     @Override
     public void setBounds(float x, float y, float width, float height){
-        super.setBounds(x,y,width,height);
-        textButton.setBounds(x,y,width,height);
+
+        textButton.setBounds(0.0f, 0.0f, width, height);
+        super.setBounds(x, y, width, height);
     }
 
     @Override

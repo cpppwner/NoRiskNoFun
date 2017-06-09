@@ -1,21 +1,15 @@
 package gmbh.norisknofun.assets;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
- * Created by cpppwner on 08.06.17.
+ * Text button asset abstracting libgdx {@link com.badlogic.gdx.scenes.scene2d.ui.TextButton}.
  */
-public interface AssetTextButton extends Asset, Disposable {
-    float getX();
+public interface AssetTextButton extends UIAsset, Disposable {
 
-    float getY();
-
-    float getWidth();
-
-    float getHeight();
-
-    void setBounds(float x, float y, float width, float height);
-
-    void draw(Batch batch, float parentAlpha);
+    /**
+     * Get text button's name.
+     * @return
+     */
+    String getName();
 }

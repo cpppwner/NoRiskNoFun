@@ -15,6 +15,7 @@ import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
+import gmbh.norisknofun.scene.common.TextFieldSceneObject;
 
 /**
  * Scene shown, when the user creates a game.
@@ -38,6 +39,7 @@ public class CreateGameScene extends SceneBase {
         this.buttonPressedSound = sceneData.createSound(Assets.BUTTON_PRESSED_SOUND_FILENAME);
 
         setBackground();
+        initNameSelection();
         initImageButtons();
         initLabel();
     }
@@ -45,6 +47,20 @@ public class CreateGameScene extends SceneBase {
     private void setBackground() {
 
         addSceneObject(new BackgroundSceneObject(sceneData.getAssetFactory()));
+    }
+
+    private void initNameSelection() {
+
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.SELECT_NAME_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 4.0f,
+                sceneObject.getWidth(),
+                sceneObject.getHeight());
+
+        TextFieldSceneObject textField = new TextFieldSceneObject(sceneData.createTextField(Assets.NAME_TEXT_FIELD_DESCRIPTOR));
+        textField.setBounds(500, 500, textField.getWidth(), textField.getHeight());
+        addSceneObject(textField);
     }
 
     private void initImageButtons() {
@@ -80,12 +96,10 @@ public class CreateGameScene extends SceneBase {
      */
     private void initLabel() {
 
-        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.LABEL_FONT_DESCRIPTOR));
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.CREATE_GAME, Assets.FONT_110PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
-        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
-                sceneObject.getHeight() * 3.0f,
-                sceneObject.getWidth(),
-                Gdx.graphics.getHeight() - sceneObject.getHeight());
+        sceneObject.setPosition((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 3.0f);
     }
 
     @Override

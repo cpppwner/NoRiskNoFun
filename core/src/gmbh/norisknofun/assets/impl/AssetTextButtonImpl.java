@@ -1,21 +1,19 @@
-package gmbh.norisknofun.assets.impl.textbutton;
+package gmbh.norisknofun.assets.impl;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import gmbh.norisknofun.assets.AssetTextButton;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
-import gmbh.norisknofun.assets.impl.font.FontGenerator;
 
 /**
- * Created by cpppwner on 08.06.17.
+ * Default implementation of {@link AssetTextButton}.
  */
-
-public class AssetTextButtonImpl implements AssetTextButton {
+class AssetTextButtonImpl implements AssetTextButton {
 
     private final TextButtonDescriptor textButtonDescriptor;
     private final BitmapFont font;
@@ -23,7 +21,12 @@ public class AssetTextButtonImpl implements AssetTextButton {
     private final Texture downTexture;
     private final TextButton textButton;
 
-    public AssetTextButtonImpl(String initialButtonText, TextButtonDescriptor textButtonDescriptor) {
+    /**
+     * Create AssetTextButton.
+     * @param initialButtonText The initial button text.
+     * @param textButtonDescriptor Descriptor object describing some button text properties.
+     */
+    AssetTextButtonImpl(String initialButtonText, TextButtonDescriptor textButtonDescriptor) {
         this.textButtonDescriptor = textButtonDescriptor;
         font = new FontGenerator(textButtonDescriptor.getTextButtonFont()).generateFont();
         upTexture = new Texture(textButtonDescriptor.getUpTextureFilename());
@@ -33,15 +36,7 @@ public class AssetTextButtonImpl implements AssetTextButton {
         textButton = new TextButton(initialButtonText, createButtonStyle());
     }
 
-    @Override
-    public void dispose() {
 
-        font.dispose();
-        upTexture.dispose();
-        if (!textButtonDescriptor.getUpTextureFilename().equals(textButtonDescriptor.getDownTextureFilename())) {
-            downTexture.dispose();
-        }
-    }
 
     @Override
     public String getName() {
@@ -94,8 +89,17 @@ public class AssetTextButtonImpl implements AssetTextButton {
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public Actor getActor() {
+        return textButton;
+    }
 
-        textButton.draw(batch, parentAlpha);
+    @Override
+    public void dispose() {
+
+        font.dispose();
+        upTexture.dispose();
+        if (!textButtonDescriptor.getUpTextureFilename().equals(textButtonDescriptor.getDownTextureFilename())) {
+            downTexture.dispose();
+        }
     }
 }

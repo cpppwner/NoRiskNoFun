@@ -1,8 +1,6 @@
 package gmbh.norisknofun.assets;
 
-import com.badlogic.gdx.graphics.Color;
-
-import gmbh.norisknofun.assets.impl.imagebutton.AssetImageButtonImpl;
+import gmbh.norisknofun.assets.impl.AssetImageButtonImpl;
 
 /**
  * Abstract factory to create appropriate assets.
@@ -62,5 +60,5 @@ public interface AssetFactory {
      */
     AssetTextButton createAssetTextButton(String initialButtonText, TextButtonDescriptor textButtonDescriptor);
 
-    AssetTextField createAssetTextField(TextFieldDescriptor textFieldDescriptor);
+    AssetTextField createAssetTextField(String initialFieldText, TextFieldDescriptor textFieldDescriptor);
 }

@@ -66,7 +66,7 @@ public final class GameScene extends SceneBase {
         if (initializeScene) {
             GameObjectMap gameObjectMap;
 
-            label = new LabelSceneObject(sceneData.createLabel("Region: ", Assets.GAME_SCENE_LABEL_FONT_DESCRIPTOR));
+            label = new LabelSceneObject(sceneData.createLabel("Region: ", Assets.FONT_36PX_WHITE_WITH_BORDER));
             label.setBounds(0, 0, 500, 100);
             addSceneObject(label);
 

@@ -9,7 +9,7 @@ import gmbh.norisknofun.assets.AssetTexture;
 import gmbh.norisknofun.assets.FontDescriptor;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
 import gmbh.norisknofun.assets.TextFieldDescriptor;
-import gmbh.norisknofun.assets.impl.imagebutton.AssetImageButtonImpl;
+import gmbh.norisknofun.assets.impl.AssetImageButtonImpl;
 import gmbh.norisknofun.game.GameClient;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.GameDataServer;
@@ -111,9 +111,9 @@ public class SceneData {
         return getAssetFactory().createAssetTextButton(initialButtonText, textButtonDescriptor);
     }
 
-    public AssetTextField createAssetField(TextFieldDescriptor textFieldDescriptor) {
+    public AssetTextField createTextField(TextFieldDescriptor textFieldDescriptor) {
 
-        return getAssetFactory().createAssetTextField(textFieldDescriptor);
+        return getAssetFactory().createAssetTextField("", textFieldDescriptor);
     }
 
     /**

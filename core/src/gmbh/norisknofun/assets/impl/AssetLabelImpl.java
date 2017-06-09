@@ -1,17 +1,16 @@
-package gmbh.norisknofun.assets.impl.label;
+package gmbh.norisknofun.assets.impl;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.FontDescriptor;
-import gmbh.norisknofun.assets.impl.font.FontGenerator;
 
 /**
  * Default implementation of {@link AssetLabel}.
  */
-public class AssetLabelImpl implements AssetLabel {
+class AssetLabelImpl implements AssetLabel {
 
     private final BitmapFont font;
     private final Label label;
@@ -22,16 +21,16 @@ public class AssetLabelImpl implements AssetLabel {
      * @param text The text to show (might change)
      * @param fontDescriptor Container class describing font properties of this label.
      */
-    public AssetLabelImpl(String text, FontDescriptor fontDescriptor) {
+    AssetLabelImpl(String text, FontDescriptor fontDescriptor) {
 
         font = new FontGenerator(fontDescriptor).generateFont();
         label = new Label(text, new Label.LabelStyle(font, font.getColor()));
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public String getName() {
 
-        label.draw(batch, parentAlpha);
+        return label.getText().toString();
     }
 
     @Override
@@ -71,14 +70,13 @@ public class AssetLabelImpl implements AssetLabel {
     }
 
     @Override
-    public void dispose() {
-
-        font.dispose();
+    public Actor getActor() {
+        return label;
     }
 
     @Override
-    public String getName() {
+    public void dispose() {
 
-        return label.getText().toString();
+        font.dispose();
     }
 }

@@ -107,11 +107,19 @@ public final class FontDescriptor {
             return false;
 
         FontDescriptor other = (FontDescriptor)o;
+        return compareFontParameters(other) && compareBorderParameters(other);
+    }
+
+    private boolean compareFontParameters(FontDescriptor other) {
 
         return fontFilename.equals(other.fontFilename)
                 && fontSize == other.fontSize
-                && foregroundColor.equals(other.foregroundColor)
-                && borderWidth == other.borderWidth
+                && foregroundColor.equals(other.foregroundColor);
+    }
+
+    private boolean compareBorderParameters(FontDescriptor other) {
+
+        return Float.compare(borderWidth, other.borderWidth) == 0
                 && borderColor.equals(other.borderColor)
                 && borderStraight == other.borderStraight;
     }

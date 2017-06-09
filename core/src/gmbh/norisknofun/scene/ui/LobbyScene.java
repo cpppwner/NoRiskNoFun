@@ -61,7 +61,7 @@ public class LobbyScene extends SceneBase{
      */
     private void initLabel() {
 
-        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.LABEL_FONT_DESCRIPTOR));
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.SERVER_LOBBY, Assets.FONT_110PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
                 sceneObject.getHeight()*3.0f,

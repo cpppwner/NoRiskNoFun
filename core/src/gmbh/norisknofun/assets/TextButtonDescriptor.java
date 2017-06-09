@@ -70,10 +70,19 @@ public final class TextButtonDescriptor {
         TextButtonDescriptor other = (TextButtonDescriptor)o;
 
         return textButtonFont.equals(other.textButtonFont)
-                && upTextureFilename.equals(other.upTextureFilename)
-                && downTextureFilename.equals(other.downTextureFilename)
-                && fontColor.equals(other.fontColor)
-                && downFontColor.equals(other.downFontColor);
+                && compareTextures(other)
+                && compareColors(other);
+    }
+
+    private boolean compareTextures(TextButtonDescriptor other) {
+
+        return upTextureFilename.equals(other.upTextureFilename)
+                && downTextureFilename.equals(other.downTextureFilename);
+    }
+
+    private boolean compareColors(TextButtonDescriptor other) {
+
+        return fontColor.equals(other.fontColor) && downFontColor.equals(other.downFontColor);
     }
 
     public static final class Builder {

@@ -1,9 +1,9 @@
-package gmbh.norisknofun.assets.impl.imagebutton;
+package gmbh.norisknofun.assets.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -12,7 +12,7 @@ import gmbh.norisknofun.assets.AssetImageButton;
 /**
  * Default implementation of {@link AssetImageButton}.
  */
-public class AssetImageButtonImpl implements AssetImageButton {
+class AssetImageButtonImpl implements AssetImageButton {
 
     /**
      * Texture filename used for the image button.
@@ -32,7 +32,7 @@ public class AssetImageButtonImpl implements AssetImageButton {
      *
      * @param  textureFilename Texture's filename.
      */
-    public AssetImageButtonImpl(String textureFilename) {
+    AssetImageButtonImpl(String textureFilename) {
 
         this.textureFilename = textureFilename;
         texture = new Texture(Gdx.files.internal(textureFilename));
@@ -70,8 +70,8 @@ public class AssetImageButtonImpl implements AssetImageButton {
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha) {
-        imageButton.draw(batch, parentAlpha);
+    public Actor getActor() {
+        return imageButton;
     }
 
     @Override

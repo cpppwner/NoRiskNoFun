@@ -1,6 +1,5 @@
 package gmbh.norisknofun.scene.common;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
 import gmbh.norisknofun.assets.AssetImageButton;
@@ -45,19 +44,15 @@ public class ImageButtonSceneObject extends ButtonSceneObject {
 
         this.imageButton = imageButton;
 
-        super.setBounds(imageButton.getX(), imageButton.getY(), imageButton.getWidth(), imageButton.getHeight());
+        setSize(imageButton.getWidth(), imageButton.getHeight());
+        addActor(imageButton.getActor());
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha){
-       imageButton.draw(batch,parentAlpha);
+    public void setBounds(float x, float y, float width, float height) {
 
-    }
-
-    @Override
-    public void setBounds(float x, float y, float width, float height){
-        super.setBounds(x,y,width,height);
-        imageButton.setBounds(x,y,width,height);
+        imageButton.setBounds(0.0f, 0.0f, width, height);
+        super.setBounds(x, y, width, height);
     }
 
     @Override

@@ -78,7 +78,7 @@ public final class MainMenuScene extends SceneBase {
      */
     private void initLabel() {
 
-        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.LABEL_FONT_DESCRIPTOR));
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.FONT_110PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f, 160.0f, sceneObject.getWidth(), sceneObject.getHeight());
     }

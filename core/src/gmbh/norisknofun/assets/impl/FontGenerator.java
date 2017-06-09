@@ -1,4 +1,4 @@
-package gmbh.norisknofun.assets.impl.font;
+package gmbh.norisknofun.assets.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,7 +9,7 @@ import gmbh.norisknofun.assets.FontDescriptor;
 /**
  * Class used to generate libgdx {@link BitmapFont} out of our own {@link FontDescriptor}.
  */
-public class FontGenerator {
+class FontGenerator {
 
     /**
      * Font descriptor.
@@ -17,7 +17,7 @@ public class FontGenerator {
     private final FontDescriptor fontDescriptor;
 
 
-    public FontGenerator(FontDescriptor fontDescriptor) {
+    FontGenerator(FontDescriptor fontDescriptor) {
 
         this.fontDescriptor = fontDescriptor;
     }
@@ -25,7 +25,7 @@ public class FontGenerator {
     /**
      * Generate the bitmap font.
      */
-    public BitmapFont generateFont() {
+    BitmapFont generateFont() {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontDescriptor.getFontFilename()));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

@@ -1,7 +1,6 @@
 package gmbh.norisknofun.assets;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
@@ -23,9 +22,4 @@ public interface AssetTexture extends Asset, Disposable {
      * @param height Height of the texture to draw.
      */
     void draw(Batch batch, float x, float y, float width, float height);
-
-    /**
-     * Create a libGdx drawable interface wrapping the texture.
-     */
-    Drawable createDrawable();
 }
