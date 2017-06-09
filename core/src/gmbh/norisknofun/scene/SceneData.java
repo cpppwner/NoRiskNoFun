@@ -1,6 +1,7 @@
 package gmbh.norisknofun.scene;
 
 import gmbh.norisknofun.assets.AssetFactory;
+import gmbh.norisknofun.assets.AssetImageButton;
 import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.assets.AssetTextButton;
@@ -9,7 +10,6 @@ import gmbh.norisknofun.assets.AssetTexture;
 import gmbh.norisknofun.assets.FontDescriptor;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
 import gmbh.norisknofun.assets.TextFieldDescriptor;
-import gmbh.norisknofun.assets.impl.AssetImageButtonImpl;
 import gmbh.norisknofun.game.GameClient;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.GameDataServer;
@@ -101,7 +101,7 @@ public class SceneData {
         return getAssetFactory().createAssetLabel(text, fontDescriptor);
     }
 
-    public AssetImageButtonImpl createImageButton(String textureFilename) {
+    public AssetImageButton createImageButton(String textureFilename) {
 
         return getAssetFactory().createAssetImageButton(textureFilename);
     }

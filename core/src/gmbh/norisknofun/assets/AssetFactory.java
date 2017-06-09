@@ -1,7 +1,5 @@
 package gmbh.norisknofun.assets;
 
-import gmbh.norisknofun.assets.impl.AssetImageButtonImpl;
-
 /**
  * Abstract factory to create appropriate assets.
  *
@@ -51,7 +49,7 @@ public interface AssetFactory {
      * @param textureFilename The texture filename used for rendering the image button.
      * @return Newly created image button asset.
      */
-    AssetImageButtonImpl createAssetImageButton(String textureFilename);
+    AssetImageButton createAssetImageButton(String textureFilename);
 
     /**
      *
