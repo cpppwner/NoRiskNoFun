@@ -1,15 +1,9 @@
 package gmbh.norisknofun.game;
 
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
-import gmbh.norisknofun.assets.impl.AssetFactoryImpl;
 
 
 /**

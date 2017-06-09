@@ -1,23 +1,33 @@
 package gmbh.norisknofun.scene.common;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import gmbh.norisknofun.assets.AssetLabel;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 
 public class LabelSceneObjectTest {
 
+    private AssetLabel mockAssetLabel;
+
+    @Before
+    public void setUp() {
+
+        Actor mockActor = mock(Actor.class);
+        mockAssetLabel = mock(AssetLabel.class);
+        doReturn(mockActor).when(mockAssetLabel).getActor();
+    }
+
     @Test
     public void setBoundsSetsPositionCorrectly() {
-        AssetLabel label = Mockito.mock(AssetLabel.class);
 
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        LabelSceneObject sceneObject = new LabelSceneObject(mockAssetLabel);
 
         sceneObject.setBounds(2,3,1,1);
         assertEquals(2, (int)sceneObject.getX());
@@ -26,9 +36,8 @@ public class LabelSceneObjectTest {
 
     @Test
     public void setBoundsSetsSizeCorrectly() {
-        AssetLabel label = Mockito.mock(AssetLabel.class);
 
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        LabelSceneObject sceneObject = new LabelSceneObject(mockAssetLabel);
 
         sceneObject.setBounds(1,1,2,3);
         assertEquals(2, (int)sceneObject.getWidth());

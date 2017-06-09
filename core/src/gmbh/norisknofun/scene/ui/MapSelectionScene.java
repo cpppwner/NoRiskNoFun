@@ -2,7 +2,6 @@ package gmbh.norisknofun.scene.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -11,8 +10,10 @@ import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 
@@ -35,6 +36,7 @@ public final class MapSelectionScene extends SceneBase {
 
         setBackground();
         initMapSelectionButtons();
+        initLabel();
     }
 
     private void setBackground() {
@@ -42,25 +44,39 @@ public final class MapSelectionScene extends SceneBase {
     }
 
     private void initMapSelectionButtons() {
-        TextButtonSceneObject buttonMapOne = new TextButtonSceneObject(sceneData.getAssetFactory(), MAP_ONE_BUTTON_TEXT, buttonPressedSound);
-        TextButtonSceneObject buttonMapTwo = new TextButtonSceneObject(sceneData.getAssetFactory(), MAP_TWO_BUTTON_TEXT, buttonPressedSound);
-        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createTexture(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+        TextButtonSceneObject buttonMapOne = new TextButtonSceneObject(
+                sceneData.createTextButton(MAP_ONE_BUTTON_TEXT, Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), buttonPressedSound);
+        TextButtonSceneObject buttonMapTwo = new TextButtonSceneObject(
+                sceneData.createTextButton(MAP_TWO_BUTTON_TEXT, Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), buttonPressedSound);
+        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createImageButton(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
 
         buttonMapOne.setBounds(490,500,500,120);
         buttonMapTwo.setBounds(490,250,500,120);
         backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
 
-        EventListener switchToLobbySceneListener = new SwitchSceneClickListener(SceneNames.LOBBY_SCENE);
         buttonMapOne.addListener(new SetSelectedMapClickListener("maps/Dummy One.map"));
-        buttonMapOne.addListener(switchToLobbySceneListener);
+        buttonMapOne.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
         buttonMapTwo.addListener(new SetSelectedMapClickListener("maps/Dummy Two.map"));
-        buttonMapTwo.addListener(switchToLobbySceneListener);
+        buttonMapTwo.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
         backButton.addListener(new SetSelectedMapClickListener(null));
         backButton.addListener(new SwitchSceneClickListener(SceneNames.CREATE_GAME_SCENE));
 
         addSceneObject(buttonMapOne);
         addSceneObject(buttonMapTwo);
         addSceneObject(backButton);
+    }
+
+    /**
+     * Initialise the label shown on main menu.
+     */
+    private void initLabel() {
+
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.MAP_SELECTION, Assets.FONT_110PX_WHITE_WITH_BORDER));
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
     }
 
     @Override

@@ -1,12 +1,16 @@
 package gmbh.norisknofun.scene;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
  * Scene Object base class.
  */
-public abstract class SceneObject extends Actor implements Disposable {
+public abstract class SceneObject extends Group implements Disposable {
+
+    protected SceneObject() {
+        setTransform(false);
+    }
 
     /**
      * Called when {@link Scene} gets shown.

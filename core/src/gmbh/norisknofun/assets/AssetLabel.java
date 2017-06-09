@@ -1,32 +1,16 @@
 package gmbh.norisknofun.assets;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
  * Label asset.
  */
-public interface AssetLabel extends Asset, Disposable {
+public interface AssetLabel extends UIAsset, Disposable {
 
     /**
-     * Draw label.
+     * Get label's name.
      */
-    void draw(Batch batch, float parentAlpha);
-
-    /**
-     * Get width in pixel.
-     */
-    float getWidth();
-
-    /**
-     * Get height in pixel.
-     */
-    float getHeight();
-
-    /**
-     * Set label's bounds.
-     */
-    void setBounds(float x, float y, float width, float height);
+    String getName();
 
     /**
      * Set label's text.

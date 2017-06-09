@@ -1,58 +1,63 @@
 package gmbh.norisknofun.scene.common;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import gmbh.norisknofun.assets.AssetImageButton;
 import gmbh.norisknofun.assets.AssetSound;
-import gmbh.norisknofun.assets.AssetTexture;
-import gmbh.norisknofun.scene.SceneManager;
-import gmbh.norisknofun.scene.SceneNames;
-import gmbh.norisknofun.scene.SceneObject;
 
 /**
  * Image button scene object.
+ *
+ * <p>
+ *     An image button is an image acting like a button (pressable and such).
+ *     This objects basically wraps the underlying libgdx {@link ImageButton}.
+ * </p>
  */
 public class ImageButtonSceneObject extends ButtonSceneObject {
 
-    private final AssetTexture texture;
-    private final AssetSound sound;
+    /**
+     * Image button asset.
+     */
+    private final AssetImageButton imageButton;
 
-    private ImageButton imageButton;
-
-    public ImageButtonSceneObject(AssetTexture texture) {
-        this(texture, null);
+    /**
+     * Initialize image button scene object with given image button asset
+     *
+     * @param imageButton The image button asset.
+     *                The image button is disposed by this scene object.
+     */
+    public ImageButtonSceneObject(AssetImageButton imageButton) {
+        this(imageButton, null);
     }
 
-    public ImageButtonSceneObject(AssetTexture texture, AssetSound sound) {
+    /**
+     * Initialize image button with texture and sound to play on button click.
+     *
+     * @param imageButton The image button asset.
+     *                The image button is disposed by this scene object.
+     * @param sound Sound played when the button is pressed.
+     *              Note: The caller of of this constructor is responsible for disposing the sound,
+     *              but only when the button instance is no longer used.
+     */
+    public ImageButtonSceneObject(AssetImageButton imageButton, AssetSound sound) {
         super(sound);
 
-        this.texture = texture;
-        this.sound = sound;
-        this.imageButton = new ImageButton(texture.createDrawable());
-    }
+        this.imageButton = imageButton;
 
-    public ImageButton getButton(){
-        return imageButton;
-    }
-
-
-    @Override
-    public void draw(Batch batch, float parentAlpha){
-       imageButton.draw(batch,parentAlpha);
-
+        setSize(imageButton.getWidth(), imageButton.getHeight());
+        addActor(imageButton.getActor());
     }
 
     @Override
-    public void setBounds(float x, float y, float width, float height){
-        super.setBounds(x,y,width,height);
-        imageButton.setBounds(x,y,width,height);
+    public void setBounds(float x, float y, float width, float height) {
+
+        imageButton.setBounds(0.0f, 0.0f, width, height);
+        super.setBounds(x, y, width, height);
     }
 
     @Override
     public void dispose() {
+        imageButton.dispose();
         super.dispose();
-        texture.dispose();
     }
 }

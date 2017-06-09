@@ -8,7 +8,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import gmbh.norisknofun.assets.AssetMap;
-import gmbh.norisknofun.assets.impl.AssetFactoryImpl;
 
 
 /**

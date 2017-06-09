@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -51,8 +50,8 @@ public final class MainMenuScene extends SceneBase {
      */
     private void initMenuButtons() {
 
-        ImageButtonSceneObject imageButtonCreate = new ImageButtonSceneObject(sceneData.createTexture(Assets.CREATE_GAME_BUTTON_FILENAME), buttonPressedSound);
-        ImageButtonSceneObject imageButtonJoin = new ImageButtonSceneObject(sceneData.createTexture(Assets.JOIN_GAME_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject imageButtonCreate = new ImageButtonSceneObject(sceneData.createImageButton(Assets.CREATE_GAME_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject imageButtonJoin = new ImageButtonSceneObject(sceneData.createImageButton(Assets.JOIN_GAME_BUTTON_FILENAME), buttonPressedSound);
 
         imageButtonCreate.setBounds((Gdx.graphics.getWidth() / 6) - 5, (float) (Gdx.graphics.getHeight() / 2.5), 553, 480);
         imageButtonJoin.setBounds((Gdx.graphics.getWidth() / 2) + 10, (float) (Gdx.graphics.getHeight() / 2.5), 553, 480);
@@ -79,17 +78,16 @@ public final class MainMenuScene extends SceneBase {
      */
     private void initLabel() {
 
-        AssetLabel label = sceneData.createLabel(Texts.APPLICATION_TITLE, sceneData.createFont(110, Color.WHITE, 2.0f));
-        LabelSceneObject sceneObject = new LabelSceneObject(label);
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.FONT_110PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
-        sceneObject.setBounds((Gdx.graphics.getWidth() - label.getWidth()) / 2.0f, 160.0f, label.getWidth(), label.getHeight());
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f, 160.0f, sceneObject.getWidth(), sceneObject.getHeight());
     }
 
     @Override
     public void dispose() {
 
+        super.dispose(); // dispose all scene objects.
         buttonPressedSound.dispose();
-        super.dispose();
     }
 
     private final class SetGameHostClickListener extends ClickListener {
