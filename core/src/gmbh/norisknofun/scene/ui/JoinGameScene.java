@@ -2,21 +2,16 @@ package gmbh.norisknofun.scene.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
-import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 
 /**
@@ -44,6 +39,7 @@ public class JoinGameScene extends SceneBase {
 
         setBackground();
         initImageButtons();
+        initLabel();
     }
 
     private void  setBackground(){
@@ -52,8 +48,8 @@ public class JoinGameScene extends SceneBase {
 
     private void initImageButtons() {
 
-        ImageButtonSceneObject imageButtonBack = new ImageButtonSceneObject(sceneData.createTexture(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
-        ImageButtonSceneObject joinGameButton = new ImageButtonSceneObject(sceneData.createTexture(Assets.JOIN_GAME_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject imageButtonBack = new ImageButtonSceneObject(sceneData.createImageButton(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject joinGameButton = new ImageButtonSceneObject(sceneData.createImageButton(Assets.JOIN_GAME_BUTTON_FILENAME), buttonPressedSound);
 
         joinGameButton.setBounds((float) ((Gdx.graphics.getWidth()/2)-137.5),(Gdx.graphics.getHeight()/10),275,240);
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth()/1.5),(Gdx.graphics.getHeight()/10),275,240);
@@ -63,6 +59,19 @@ public class JoinGameScene extends SceneBase {
 
         addSceneObject(joinGameButton);
         addSceneObject(imageButtonBack);
+    }
+
+    /**
+     * Initialise the label shown on Join Game Scene.
+     */
+    private void initLabel() {
+
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.JOIN_GAME, Assets.FONT_110PX_WHITE_WITH_BORDER));
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
     }
 
     @Override

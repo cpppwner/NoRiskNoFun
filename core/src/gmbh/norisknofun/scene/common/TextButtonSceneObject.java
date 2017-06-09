@@ -1,62 +1,53 @@
 package gmbh.norisknofun.scene.common;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
-import gmbh.norisknofun.assets.AssetFactory;
-import gmbh.norisknofun.assets.AssetFont;
 import gmbh.norisknofun.assets.AssetSound;
-import gmbh.norisknofun.assets.AssetTexture;
-import gmbh.norisknofun.scene.Assets;
-import gmbh.norisknofun.scene.SceneObject;
+import gmbh.norisknofun.assets.AssetTextButton;
 
 /**
  * Text button scene object.
+ *
+ * <p>
+ *     In contrary to the {@link ImageButtonSceneObject} this class has text inside.
+ *     If the button's text might change, prefer this scene object over the {@link ImageButtonSceneObject}.
+ * </p>
  */
 public class TextButtonSceneObject extends ButtonSceneObject {
 
-    private static final int DEFAULT_FONT_SIZE = 36;
+    private final AssetTextButton textButton;
 
-    private final AssetFont font;
-    private final AssetTexture texture;
-    private final TextButton textButton;
+    /**
+     * Create text button scene object.
+     *
+     * @param textButton Wrapped text button.
+     */
+    public TextButtonSceneObject(AssetTextButton textButton) {
+        this(textButton, null);
+    }
 
-    public TextButtonSceneObject(AssetFactory assetFactory, String buttonText, AssetSound sound) {
+    /**
+     * Create text button scene object.
+     *
+     * @param sound The sound to play if clicked or null to not play any sound.
+     */
+    public TextButtonSceneObject(AssetTextButton textButton, AssetSound sound) {
 
         super(sound);
+        this.textButton = textButton;
 
-        font = assetFactory.createAssetFont(DEFAULT_FONT_SIZE, Color.BLACK, 1.0f);
-        texture = assetFactory.createAssetTexture(Assets.TEXT_BUTTON_FILENAME);
-        textButton = new TextButton(buttonText, createDefaultButtonStyle());
-    }
-
-    private TextButton.TextButtonStyle createDefaultButtonStyle() {
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font.toBitmapFont();
-        style.up = texture.createDrawable();
-        style.down = texture.createDrawable();
-        style.fontColor = new Color(0f, 0f, 0f, 1);
-        style.downFontColor = new Color(0, 0.4f, 0, 1);
-
-        return style;
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha){
-        textButton.draw(batch,parentAlpha);
+        setSize(textButton.getWidth(), textButton.getHeight());
+        addActor(textButton.getActor());
     }
 
     @Override
     public void setBounds(float x, float y, float width, float height){
-        super.setBounds(x,y,width,height);
-        textButton.setBounds(x,y,width,height);
+
+        textButton.setBounds(0.0f, 0.0f, width, height);
+        super.setBounds(x, y, width, height);
     }
 
     @Override
     public void dispose() {
-        font.dispose();
-        texture.dispose();
+        textButton.dispose();
         super.dispose();
     }
 }

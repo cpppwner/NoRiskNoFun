@@ -1,12 +1,15 @@
 package gmbh.norisknofun.scene;
 
-import com.badlogic.gdx.graphics.Color;
-
 import gmbh.norisknofun.assets.AssetFactory;
-import gmbh.norisknofun.assets.AssetFont;
+import gmbh.norisknofun.assets.AssetImageButton;
 import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.assets.AssetSound;
+import gmbh.norisknofun.assets.AssetTextButton;
+import gmbh.norisknofun.assets.AssetTextField;
 import gmbh.norisknofun.assets.AssetTexture;
+import gmbh.norisknofun.assets.FontDescriptor;
+import gmbh.norisknofun.assets.TextButtonDescriptor;
+import gmbh.norisknofun.assets.TextFieldDescriptor;
 import gmbh.norisknofun.game.GameClient;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.GameDataServer;
@@ -88,26 +91,29 @@ public class SceneData {
     }
 
     /**
-     * Create a font asset.
-     *
-     * @param fontSize    Font size.
-     * @param color       Font color.
-     * @param borderWidth Border width.
-     */
-    public AssetFont createFont(int fontSize, Color color, float borderWidth) {
-
-        return getAssetFactory().createAssetFont(fontSize, color, borderWidth);
-    }
-
-    /**
      * Create label asset.
      *
      * @param text The label text.
-     * @param font The label font.
+     * @param fontDescriptor The label font descriptor.
      */
-    public AssetLabel createLabel(String text, AssetFont font) {
+    public AssetLabel createLabel(String text, FontDescriptor fontDescriptor) {
 
-        return getAssetFactory().createAssetLabel(text, font);
+        return getAssetFactory().createAssetLabel(text, fontDescriptor);
+    }
+
+    public AssetImageButton createImageButton(String textureFilename) {
+
+        return getAssetFactory().createAssetImageButton(textureFilename);
+    }
+
+    public AssetTextButton createTextButton(String initialButtonText, TextButtonDescriptor textButtonDescriptor) {
+
+        return getAssetFactory().createAssetTextButton(initialButtonText, textButtonDescriptor);
+    }
+
+    public AssetTextField createTextField(TextFieldDescriptor textFieldDescriptor) {
+
+        return getAssetFactory().createAssetTextField("", textFieldDescriptor);
     }
 
     /**

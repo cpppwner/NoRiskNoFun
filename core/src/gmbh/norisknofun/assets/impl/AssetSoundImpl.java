@@ -1,4 +1,4 @@
-package gmbh.norisknofun.assets.impl.sound;
+package gmbh.norisknofun.assets.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -12,7 +12,7 @@ import gmbh.norisknofun.assets.AssetSound;
  *     This relies on libgdx.
  * </p>
  */
-public class AssetSoundImpl implements AssetSound {
+class AssetSoundImpl implements AssetSound {
 
     /**
      * Sound's filename.
@@ -27,7 +27,7 @@ public class AssetSoundImpl implements AssetSound {
     /**
      * Create texture asset from given filename.
      */
-    public AssetSoundImpl(String filename) {
+    AssetSoundImpl(String filename) {
 
         this.filename = filename;
         this.sound = Gdx.audio.newSound(Gdx.files.internal(filename));

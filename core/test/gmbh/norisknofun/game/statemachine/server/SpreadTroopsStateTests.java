@@ -4,11 +4,8 @@ package gmbh.norisknofun.game.statemachine.server;
 import org.junit.Test;
 import org.junit.Before;
 
-import gmbh.norisknofun.assets.impl.AssetFactoryImpl;
-
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.server.MessageBus;
 import gmbh.norisknofun.game.server.messaging.MessageBusImpl;

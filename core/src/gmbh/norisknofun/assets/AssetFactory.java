@@ -1,12 +1,10 @@
 package gmbh.norisknofun.assets;
 
-import com.badlogic.gdx.graphics.Color;
-
 /**
  * Abstract factory to create appropriate assets.
  *
  * <p>
- *     Makes testing of GUI scenes easier.
+ *     Makes testing of GUI scenes easier, since we are encapsulating libgdx related things in assets.
  * </p>
  */
 public interface AssetFactory {
@@ -38,24 +36,27 @@ public interface AssetFactory {
     /**
      * Create a label asset using the default font (see assets/font).
      *
-     * <p>
-     *     The label itself takes care about disposing of the font.
-     * </p>
-     *
-     * @param text The label text.
-     * @param font The font asset.
+     * @param initialLabelText The initial label text.
+     * @param fontDescriptor Descriptor object used to specify the font of the label.
      *
      * @return Newly created Label asset.
      */
-    AssetLabel createAssetLabel(String text, AssetFont font);
+    AssetLabel createAssetLabel(String initialLabelText, FontDescriptor fontDescriptor);
 
     /**
-     * Create font asset.
+     * Create image button asset from given texture filename.
      *
-     * @param fontSize Font size.
-     * @param color Color used for the text.
-     * @param borderWidth Width of the border wrapping the text.
-     * @return Newly created font asset.
+     * @param textureFilename The texture filename used for rendering the image button.
+     * @return Newly created image button asset.
      */
-    AssetFont createAssetFont(int fontSize, Color color, float borderWidth);
+    AssetImageButton createAssetImageButton(String textureFilename);
+
+    /**
+     *
+     * @param textButtonDescriptor
+     * @return
+     */
+    AssetTextButton createAssetTextButton(String initialButtonText, TextButtonDescriptor textButtonDescriptor);
+
+    AssetTextField createAssetTextField(String initialFieldText, TextFieldDescriptor textFieldDescriptor);
 }

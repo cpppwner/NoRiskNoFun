@@ -12,8 +12,10 @@ import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
 
 
 public class LobbyScene extends SceneBase{
@@ -32,6 +34,7 @@ public class LobbyScene extends SceneBase{
 
         setBackground();
         initImageButtons();
+        initLabel();
     }
 
     private void setBackground(){
@@ -40,7 +43,7 @@ public class LobbyScene extends SceneBase{
     }
 
     private void initImageButtons() {
-        ImageButtonSceneObject imageButtonStartGame = new ImageButtonSceneObject(sceneData.createTexture(Assets.START_GAME_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject imageButtonStartGame = new ImageButtonSceneObject(sceneData.createImageButton(Assets.START_GAME_BUTTON_FILENAME), buttonPressedSound);
         imageButtonStartGame.setBounds((Gdx.graphics.getWidth() / 2.0f) - 137.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
         imageButtonStartGame.addListener(new ClickListener() {
 
@@ -50,6 +53,20 @@ public class LobbyScene extends SceneBase{
             }
         });
         addSceneObject(imageButtonStartGame);
+
+    }
+
+    /**
+     * Initialise the label shown on main menu.
+     */
+    private void initLabel() {
+
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.SERVER_LOBBY, Assets.FONT_110PX_WHITE_WITH_BORDER));
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight()*3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
 
     }
 

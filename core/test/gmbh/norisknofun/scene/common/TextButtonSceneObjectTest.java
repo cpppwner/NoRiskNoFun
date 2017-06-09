@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 
 import gmbh.norisknofun.GdxTest;
 import gmbh.norisknofun.assets.AssetFactory;
+import gmbh.norisknofun.assets.AssetTextButton;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -21,7 +22,9 @@ public class TextButtonSceneObjectTest extends GdxTest{
     @Test
     public void setBoundsSetsPositionCorrectly() {
 
-        TextButtonSceneObject sceneObject = new TextButtonSceneObject(mock(AssetFactory.class), "test", null);
+        AssetTextButton wrappedAsset = mock(AssetTextButton.class);
+
+        TextButtonSceneObject sceneObject = new TextButtonSceneObject(wrappedAsset);
 
         sceneObject.setBounds(2,3,1,1);
         assertEquals(2, (int)sceneObject.getX());
@@ -31,7 +34,9 @@ public class TextButtonSceneObjectTest extends GdxTest{
     @Test
     public void setBoundsSetsSizeCorrectly() {
 
-        TextButtonSceneObject sceneObject = new TextButtonSceneObject(mock(AssetFactory.class), "test", null);
+        AssetTextButton wrappedAsset = mock(AssetTextButton.class);
+
+        TextButtonSceneObject sceneObject = new TextButtonSceneObject(wrappedAsset);
 
         sceneObject.setBounds(1,1,2,3);
         assertEquals(2, (int)sceneObject.getWidth());
