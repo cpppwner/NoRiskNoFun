@@ -1,6 +1,5 @@
 package gmbh.norisknofun.assets.impl;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,6 +12,11 @@ import gmbh.norisknofun.assets.AssetImageButton;
  * Default implementation of {@link AssetImageButton}.
  */
 class AssetImageButtonImpl implements AssetImageButton {
+
+    /**
+     * Cache for low level assets.
+     */
+    private final LibGdxAssetCache cache;
 
     /**
      * Texture filename used for the image button.
@@ -30,12 +34,14 @@ class AssetImageButtonImpl implements AssetImageButton {
     /**
      * Initialize image button asset.
      *
+     * @param cache Low level asset cache.
      * @param  textureFilename Texture's filename.
      */
-    AssetImageButtonImpl(String textureFilename) {
+    AssetImageButtonImpl(LibGdxAssetCache cache, String textureFilename) {
 
+        this.cache = cache;
         this.textureFilename = textureFilename;
-        texture = new Texture(Gdx.files.internal(textureFilename));
+        texture = cache.getTexture(textureFilename);
         imageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(texture)));
     }
 
@@ -77,6 +83,6 @@ class AssetImageButtonImpl implements AssetImageButton {
     @Override
     public void dispose() {
 
-        texture.dispose();
+        cache.releaseTexture(texture);
     }
 }

@@ -1,10 +1,13 @@
 package gmbh.norisknofun.assets;
 
+import com.badlogic.gdx.graphics.Color;
+
 /**
  * Abstract factory to create appropriate assets.
  *
  * <p>
  *     Makes testing of GUI scenes easier, since we are encapsulating libgdx related things in assets.
+ *     Assets might be real assets like textures and sounds or GUI widgets.
  * </p>
  */
 public interface AssetFactory {
@@ -24,6 +27,18 @@ public interface AssetFactory {
      * @return Newly created texture asset.
      */
     AssetTexture createAssetTexture(String filename);
+
+    /**
+     * Create pixmap texture asset.
+     *
+     * <p>
+     *     The wrapped pixmap is 1x1 pixels in size.
+     * </p>
+     *
+     * @param color The color used for the pixmap texture.
+     * @return Newly created pixmap texture asset.
+     */
+    AssetPixmapTexture createAssetPixmapTexture(Color color);
 
     /**
      * Create sound asset.
@@ -52,11 +67,44 @@ public interface AssetFactory {
     AssetImageButton createAssetImageButton(String textureFilename);
 
     /**
+     * Create text button asset for given initial button text and descriptor.
      *
-     * @param textButtonDescriptor
-     * @return
+     * @param initialButtonText The initial button text.
+     * @param textButtonDescriptor Container object describing text button styles.
+     * @return Newly created text button asset.
      */
     AssetTextButton createAssetTextButton(String initialButtonText, TextButtonDescriptor textButtonDescriptor);
 
+    /**
+     * Create text field asset for given initial field text and descriptor.
+     *
+     * @param initialFieldText Initial text in the text field.
+     * @param textFieldDescriptor Container object describing text field styles.
+     * @return Newly created text field asset.
+     */
     AssetTextField createAssetTextField(String initialFieldText, TextFieldDescriptor textFieldDescriptor);
+
+    /**
+     * Create a numeric text field asset showing initial field value and descriptor.
+     *
+     * @param initialFieldValue The initial value displayed in the text field.
+     * @param textFieldDescriptor Container object describing text field styles.
+     * @return Newly created numeric field asset.
+     */
+    AssetNumericField createAssetNumericField(int initialFieldValue, TextFieldDescriptor textFieldDescriptor);
+
+    /**
+     * Create modal dialog asset.
+     *
+     * <p>
+     *     This basically creates a modal dialog with header text (see the descriptor),
+     *     the text to be shown and an OK button.
+     *     So this should be sufficient for error/info dialogs.
+     * </p>
+     *
+     * @param dialogText The text to show in the modal dialog.
+     * @param modalDialogDescriptor Container object describing some modal dialog layout.
+     * @return Newly created modal dialog asset.
+     */
+    AssetModalDialog createAssetModalDialog(String dialogText, ModalDialogDescriptor modalDialogDescriptor);
 }

@@ -12,18 +12,32 @@ import gmbh.norisknofun.assets.FontDescriptor;
  */
 class AssetLabelImpl implements AssetLabel {
 
+    /**
+     * Low level asset cache.
+     */
+    private final LibGdxAssetCache cache;
+
+    /**
+     * The bitmap font used for the label.
+     */
     private final BitmapFont font;
+
+    /**
+     * gdx label.
+     */
     private final Label label;
 
     /**
      * Create a label with given text and font descriptor.
      *
-     * @param text The text to show (might change)
+     * @param cache Low level asset cache.
+     * @param text The text to show (might change).
      * @param fontDescriptor Container class describing font properties of this label.
      */
-    AssetLabelImpl(String text, FontDescriptor fontDescriptor) {
+    AssetLabelImpl(LibGdxAssetCache cache, String text, FontDescriptor fontDescriptor) {
 
-        font = new FontGenerator(fontDescriptor).generateFont();
+        this.cache = cache;
+        font = cache.getFont(fontDescriptor);
         label = new Label(text, new Label.LabelStyle(font, font.getColor()));
     }
 
@@ -77,6 +91,18 @@ class AssetLabelImpl implements AssetLabel {
     @Override
     public void dispose() {
 
-        font.dispose();
+        cache.releaseFont(font);
+    }
+
+    /**
+     * Get the wrapped gdx label.
+     *
+     * <p>
+     *     Required for modal dialog.
+     * </p>
+     */
+    Label getLabel() {
+
+        return label;
     }
 }

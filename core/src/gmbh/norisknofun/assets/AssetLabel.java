@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 /**
  * Label asset.
  */
-public interface AssetLabel extends UIAsset, Disposable {
+public interface AssetLabel extends AssetWidget, Disposable {
 
     /**
      * Get label's name.
