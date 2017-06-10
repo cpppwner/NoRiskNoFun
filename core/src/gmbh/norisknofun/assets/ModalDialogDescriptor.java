@@ -34,7 +34,7 @@ public final class ModalDialogDescriptor {
     }
 
     public Color getTitleFontColor() {
-        return titleFontColor;
+        return new Color(titleFontColor);
     }
 
     public String getTitle() {
@@ -46,7 +46,7 @@ public final class ModalDialogDescriptor {
     }
 
     public Color getBackgroundColor() {
-        return backgroundColor;
+        return new Color(backgroundColor);
     }
 
     public TextButtonDescriptor getTextButtonDescriptor() {
@@ -92,7 +92,7 @@ public final class ModalDialogDescriptor {
 
         private FontDescriptor titleFont;
         private Color titleFontColor = Color.BLACK;
-        private String title;
+        private String title = "";
         private FontDescriptor messageFont;
         private Color backgroundColor = Color.LIGHT_GRAY;
         private TextButtonDescriptor buttonDescriptor;
@@ -117,6 +117,11 @@ public final class ModalDialogDescriptor {
             return this;
         }
 
+        public Builder setBackgroundColor(Color backgroundColor) {
+            this.backgroundColor = backgroundColor;
+            return this;
+        }
+
         public Builder setButtonDescriptor(TextButtonDescriptor buttonDescriptor) {
             this.buttonDescriptor = buttonDescriptor;
             return this;
@@ -135,8 +140,8 @@ public final class ModalDialogDescriptor {
             if (titleFontColor == null) {
                 throw new IllegalStateException("fontColor is null");
             }
-            if (title == null || title.isEmpty()) {
-                throw new IllegalStateException("title is null or empty");
+            if (title == null) {
+                throw new IllegalStateException("title is null");
             }
             if (messageFont == null) {
                 throw new IllegalStateException("messageFont is null");

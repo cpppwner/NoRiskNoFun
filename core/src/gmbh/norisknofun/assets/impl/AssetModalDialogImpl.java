@@ -1,5 +1,6 @@
 package gmbh.norisknofun.assets.impl;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -23,6 +24,7 @@ class AssetModalDialogImpl implements AssetModalDialog {
     private final ModalDialogDescriptor modalDialogDescriptor;
     private final BitmapFont titleFont;
     private final Texture backgroundTexture;
+    private final Texture stageBackgroundTexture;
     private final AssetLabelImpl textLabel;
     private final AssetTextButtonImpl textButton;
     private final Dialog dialog;
@@ -33,6 +35,7 @@ class AssetModalDialogImpl implements AssetModalDialog {
         this.modalDialogDescriptor = modalDialogDescriptor;
         titleFont = cache.getFont(modalDialogDescriptor.getTitleFont());
         backgroundTexture = cache.getPixMapTexture(modalDialogDescriptor.getBackgroundColor());
+        stageBackgroundTexture = createStageBackgroundTexture();
         textLabel = new AssetLabelImpl(cache, dialogText, modalDialogDescriptor.getMessageFont());
         textButton = new AssetTextButtonImpl(cache, BUTTON_TEXT, modalDialogDescriptor.getTextButtonDescriptor());
 
@@ -41,12 +44,22 @@ class AssetModalDialogImpl implements AssetModalDialog {
                 .button(textButton.getTextButton());
     }
 
+    private Texture createStageBackgroundTexture() {
+
+        Color stageBackgroundColor = modalDialogDescriptor.getBackgroundColor();
+        stageBackgroundColor.a = 0.5f;
+
+        return cache.getPixMapTexture(stageBackgroundColor);
+    }
+
     private Window.WindowStyle createWindowStyle() {
+
 
         Window.WindowStyle style = new Window.WindowStyle();
         style.background = new TextureRegionDrawable(new TextureRegion(backgroundTexture));
         style.titleFont = titleFont;
         style.titleFontColor = modalDialogDescriptor.getTitleFontColor();
+        style.stageBackground = new TextureRegionDrawable(new TextureRegion(stageBackgroundTexture));
 
         return style;
     }
@@ -94,6 +107,7 @@ class AssetModalDialogImpl implements AssetModalDialog {
         textLabel.dispose();
         cache.releaseFont(titleFont);
         cache.releasePixMapTexture(backgroundTexture);
+        cache.releasePixMapTexture(stageBackgroundTexture);
     }
 
     @Override
