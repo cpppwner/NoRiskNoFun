@@ -62,13 +62,17 @@ public final class ModalDialogDescriptor {
 
         ModalDialogDescriptor other = (ModalDialogDescriptor) o;
 
-        if (!titleFont.equals(other.titleFont)) return false;
-        if (!titleFontColor.equals(other.titleFontColor)) return false;
-        if (!title.equals(other.title)) return false;
-        if (!messageFont.equals(other.messageFont)) return false;
-        if (!buttonDescriptor.equals(other.buttonDescriptor)) return false;
+        if (!titleFont.equals(other.titleFont))
+            return false;
+        if (!titleFontColor.equals(other.titleFontColor))
+            return false;
+        if (!title.equals(other.title))
+            return false;
+        if (!messageFont.equals(other.messageFont))
+            return false;
+        if (!buttonDescriptor.equals(other.buttonDescriptor))
+            return false;
         return backgroundColor.equals(other.backgroundColor);
-
     }
 
     @Override

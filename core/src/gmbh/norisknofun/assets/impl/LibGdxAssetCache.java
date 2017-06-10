@@ -209,14 +209,14 @@ class LibGdxAssetCache {
      *
      * @param cache The cache where to search for the asset to be released.
      * @param valueToRelease The asset to release.
-     * @param <KeyType> Key type in the {@code Map}.
-     * @param <AssetType> The asset type.
+     * @param <K> Key type in the {@code Map}.
+     * @param <T> The asset type.
      */
-    private static <KeyType, AssetType extends Disposable> void release(Map<KeyType, RefCountedAsset<AssetType>> cache,
-                                                                AssetType valueToRelease) {
+    private static <K, T extends Disposable> void release(Map<K, RefCountedAsset<T>> cache,
+                                                          T valueToRelease) {
 
-        KeyType keyToRemove = null;
-        for (Map.Entry<KeyType, RefCountedAsset<AssetType>> entry : cache.entrySet()) {
+        K keyToRemove = null;
+        for (Map.Entry<K, RefCountedAsset<T>> entry : cache.entrySet()) {
             if (entry.getValue().wrapsAsset(valueToRelease)) {
                 if (entry.getValue().release()) {
                     keyToRemove = entry.getKey();
@@ -233,12 +233,12 @@ class LibGdxAssetCache {
     /**
      * Helper class providing simple reference counting.
      *
-     * @param <AssetType> The wrapped asset type (texture, sound, bitmap font).
+     * @param <T> The wrapped asset type (texture, sound, bitmap font).
      */
-    private static final class RefCountedAsset<AssetType extends Disposable> {
+    private static final class RefCountedAsset<T extends Disposable> {
 
         /** the wrapped asset */
-        private final AssetType asset;
+        private final T asset;
         /** reference count */
         private int refCount;
 
@@ -249,7 +249,7 @@ class LibGdxAssetCache {
          *     The reference count is set to 0.
          * </p>
          */
-        private RefCountedAsset(AssetType asset) {
+        RefCountedAsset(T asset) {
 
             this.asset = asset;
             refCount = 0;
@@ -262,7 +262,7 @@ class LibGdxAssetCache {
          * @param asset The asset to check if it's wrapped by this class.
          * @return {@code true} if this class wraps the given asset, {@code false} otherwise.
          */
-        private boolean wrapsAsset(AssetType asset) {
+        private boolean wrapsAsset(T asset) {
 
             return this.asset == asset; // reference equality
         }
@@ -270,7 +270,7 @@ class LibGdxAssetCache {
         /**
          * Get the wrapped asset and increment the reference count by one.
          */
-        private AssetType get() {
+        private T get() {
             refCount += 1;
             return asset;
         }
