@@ -19,6 +19,12 @@ import gmbh.norisknofun.scene.ui.MapSelectionScene;
 
 public class NoRiskNoFun implements ApplicationListener  {
 
+    private String ip;
+
+    public NoRiskNoFun(String ip) {
+        this.ip=ip;
+    }
+
     @Override
     public void create() {
 
