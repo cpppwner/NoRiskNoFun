@@ -68,10 +68,8 @@ public class ClientClosedStateTests {
         assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
         verify(clientStateMock, times(1)).enter();
         verify(clientStateMock, times(1)).processDataReceived();
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(clientStateMock, messageBusMock);
-        verifyZeroInteractions(sessionMock);
+        verifyZeroInteractions(sessionMock, messageBusMock);
     }
 
     @Test
@@ -105,10 +103,8 @@ public class ClientClosedStateTests {
         assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
         verify(clientStateMock, times(1)).enter();
         verify(clientStateMock, times(1)).processDataReceived();
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(clientStateMock, messageBusMock);
-        verifyZeroInteractions(sessionMock);
+        verifyZeroInteractions(sessionMock, messageBusMock);
     }
 
     @Test
@@ -126,9 +122,7 @@ public class ClientClosedStateTests {
         assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
         verify(clientStateMock, times(1)).enter();
         verify(clientStateMock, times(1)).processDataReceived();
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(clientStateMock, messageBusMock);
-        verifyZeroInteractions(sessionMock);
+        verifyZeroInteractions(sessionMock, messageBusMock);
     }
 }

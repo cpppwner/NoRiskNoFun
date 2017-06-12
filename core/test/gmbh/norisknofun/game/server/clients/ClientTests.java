@@ -75,18 +75,17 @@ public class ClientTests {
         assertThat(target.getMessageBus(), is(sameInstance(messageBusMock)));
         assertThat(target.getMessageBuffer(), is(notNullValue()));
         assertThat(target.getMessageBuffer().length(), is(0));
-        assertThat(target.getCurrentState(), is(instanceOf(ClientAcceptedState.class)));
+        assertThat(target.getCurrentState(), is(instanceOf(ClientConnectedState.class)));
     }
 
     @Test
-    public void newlyConstructedClientRegistersItselfToTheMessageBusImmediately() {
+    public void newlyConstructedClientDoesNotRegistersItselfToTheMessageBusImmediately() {
 
         // given
         Client target = new Client(sessionMock, messageBusMock);
 
         // then
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(target);
-        verifyZeroInteractions(sessionMock);
+        verifyZeroInteractions(sessionMock, messageBusMock);
     }
 
     @Test
@@ -123,7 +122,7 @@ public class ClientTests {
         target.subscribeToMessageBus();
 
         // then
-        verify(messageBusMock, times(2)).registerOutboundMessageHandler(target);
+        verify(messageBusMock, times(1)).registerOutboundMessageHandler(target);
         verifyNoMoreInteractions(messageBusMock);
     }
 
@@ -137,7 +136,6 @@ public class ClientTests {
         target.unsubscribeFromMessageBus();
 
         // then
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(target);
         verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(target);
         verifyNoMoreInteractions(messageBusMock);
     }
@@ -152,7 +150,6 @@ public class ClientTests {
         target.distributeInboundMessage(messageMock);
 
         // then
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(target);
         verify(messageBusMock, times(1)).distributeInboundMessage(target.getId(), messageMock);
         verifyNoMoreInteractions(messageBusMock);
         verifyZeroInteractions(messageMock);

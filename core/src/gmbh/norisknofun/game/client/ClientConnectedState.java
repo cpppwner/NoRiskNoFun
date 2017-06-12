@@ -39,10 +39,10 @@ class ClientConnectedState implements ClientState {
 
         try {
             byte[] data = new MessageSerializer(message).serialize();
-            client.getSesssion().write(data);
+            client.getSession().write(data);
         } catch (IOException | ProtocolException e) {
             Gdx.app.error(getClass().getSimpleName(), "Handling outbound message failed", e);
-            client.getSesssion().terminate(); // terminate the session
+            client.getSession().terminate(); // terminate the session
         }
     }
 
@@ -76,7 +76,7 @@ class ClientConnectedState implements ClientState {
             client.distributeInboundMessage(message);
         } catch (ProtocolException | IOException e) {
             Gdx.app.error(getClass().getSimpleName(), "Deserialize message failed", e);
-            client.getSesssion().terminate();
+            client.getSession().terminate();
         }
     }
 }

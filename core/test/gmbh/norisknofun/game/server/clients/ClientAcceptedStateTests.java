@@ -58,14 +58,13 @@ public class ClientAcceptedStateTests extends GdxTest {
         target.enter();
 
         // then
-        verify(messageBusMock, times(2)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
         verifyNoMoreInteractions(messageBusMock);
         verifyZeroInteractions(messageBusMock);
     }
 
     @Test
-    public void exitingStateDoesNothing() {
+    public void exitingStateUnsubscribesFromMessageBus() {
 
         // given
         ClientAcceptedState target = new ClientAcceptedState(client);
@@ -74,8 +73,7 @@ public class ClientAcceptedStateTests extends GdxTest {
         target.exit();
 
         // then
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(2)).unregisterOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(messageBusMock);
         verifyZeroInteractions(messageBusMock);
     }
@@ -135,8 +133,6 @@ public class ClientAcceptedStateTests extends GdxTest {
         assertThat(client.getMessageBuffer().length(), is(1));
         assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
         verifyZeroInteractions(sessionMock);
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(messageBusMock);
     }
 
@@ -158,8 +154,6 @@ public class ClientAcceptedStateTests extends GdxTest {
         assertThat(client.getCurrentState(), is(instanceOf(ClientClosedState.class)));
         verify(sessionMock, times(1)).terminate();
         verifyNoMoreInteractions(sessionMock);
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(messageBusMock);
     }
 
@@ -177,8 +171,6 @@ public class ClientAcceptedStateTests extends GdxTest {
         assertThat(client.getMessageBuffer().length(), is(0));
         assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
         verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), any(TestMessage.class));
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(messageBusMock);
         verifyZeroInteractions(sessionMock);
     }
@@ -195,8 +187,6 @@ public class ClientAcceptedStateTests extends GdxTest {
         // then
         assertThat(client.getCurrentState(), is(instanceOf(ClientClosedState.class)));
         verifyZeroInteractions(sessionMock);
-        verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
-        verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
         verifyNoMoreInteractions(messageBusMock);
     }
 
