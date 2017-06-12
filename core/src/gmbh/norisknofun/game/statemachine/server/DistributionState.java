@@ -42,8 +42,6 @@ public class DistributionState extends State {
     }
 
     private void moveTroop(MoveTroop message){ //todo Refactor later
-        List<AssetMap.Region> regions=context.getGameData().getMapAsset().getRegions();
-        int i=0;
         if(message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
 
             AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());

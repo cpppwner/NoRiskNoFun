@@ -3,40 +3,36 @@ package gmbh.norisknofun.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import gmbh.norisknofun.game.Player;
-
 /**
  * Created by pippp on 03.06.2017.
  */
 
 public class Players {
 
-    private List<Player> players= new ArrayList<>();
+    private List<Player> playerlist = new ArrayList<>();
 
 
-    public Players(){
 
-    }
     public boolean addPlayer(Player player){
         // player with null name will not be added
         if (player.getPlayername() == null || player.getId() == null) {
             return false;
         }
-        for(Player p: players){
+        for(Player p: playerlist){
             if(p.getPlayername().equals(player.getPlayername()) || p.getId().equals(player.getId())){
                 return false;
             }
         }
-        players.add(player);
+        playerlist.add(player);
         return true;
     }
 
 
 
     public boolean removePlayer(String playername){
-        for(Player p: players){
+        for(Player p: playerlist){
             if(p.getPlayername().equals(playername)){
-                players.remove(p);
+                playerlist.remove(p);
                 return true;
             }
         }
@@ -44,7 +40,7 @@ public class Players {
     }
     public Player getPlayerByName(String name){
 
-        for(Player p: players){
+        for(Player p: playerlist){
             if(p.getPlayername().equals(name)){
                 return p;
             }
@@ -54,7 +50,7 @@ public class Players {
 
     public Player getPlayerByID(String id){
 
-        for(Player p: players){
+        for(Player p: playerlist){
             if(p.getId().equals(id)){
                 return p;
             }
@@ -64,10 +60,10 @@ public class Players {
 
     private int getPlayerIndexByName(String playername){
         int index=0;
-        for(int i=0; i<players.size(); i++){
-            if(players.get(i).getPlayername().equals(playername)){
+        for(int i = 0; i< playerlist.size(); i++){
+            if(playerlist.get(i).getPlayername().equals(playername)){
                 index=i;
-                i=players.size();
+                i= playerlist.size();
             }
         }
         return index;
@@ -75,20 +71,20 @@ public class Players {
 
     public String getNextPlayername(String playername){
 
-        if (players.size() == 0 || playername == null) {
+        if (playerlist.isEmpty() || playername == null) {
             return null;
         }
 
         int index = getPlayerIndexByName(playername);
-        if(index>=players.size()-1){
+        if(index>= playerlist.size()-1){
             index=0;
         }else{
             index++;
         }
 
-        return players.get(index).getPlayername();
+        return playerlist.get(index).getPlayername();
     }
-    public List<Player> getPlayers(){
-        return players;
+    public List<Player> getPlayerlist(){
+        return playerlist;
     }
 }

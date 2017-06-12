@@ -53,8 +53,7 @@ public class MoveTroopsState extends State {
 
 
     private void moveTroop(MoveTroop message){
-        List<AssetMap.Region> regions=data.getMapAsset().getRegions();
-        int i=0;
+
         if(message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
             AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());
 

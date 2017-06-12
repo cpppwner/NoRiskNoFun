@@ -50,8 +50,8 @@ public class WaitingForPlayersStateTests {
 
         context.handle("SomeID", message);
 
-        assertEquals(1, data.getPlayers().getPlayers().size());
-        assertEquals(data.getPlayers().getPlayers().get(0).getPlayername(), player.getPlayername());
+        assertEquals(1, data.getPlayers().getPlayerlist().size());
+        assertEquals(data.getPlayers().getPlayerlist().get(0).getPlayername(), player.getPlayername());
 
     }
 
@@ -64,7 +64,7 @@ public class WaitingForPlayersStateTests {
         context.handle("SomeID", message);
         context.handle("SomeID", message);
 
-        assertEquals(1, data.getPlayers().getPlayers().size());
+        assertEquals(1, data.getPlayers().getPlayerlist().size());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class WaitingForPlayersStateTests {
 
         context.handle("SomeID", message);
 
-        assertEquals(0, data.getPlayers().getPlayers().size());
+        assertEquals(0, data.getPlayers().getPlayerlist().size());
 
     }
 

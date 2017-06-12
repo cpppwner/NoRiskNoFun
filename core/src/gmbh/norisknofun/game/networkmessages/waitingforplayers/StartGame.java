@@ -21,17 +21,17 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class StartGame extends BasicMessageImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private boolean startGame = true;
+    private boolean start = true;
 
     public StartGame(boolean startGame) {
-        this.startGame = startGame;
+        this.start = startGame;
     }
 
     public boolean isStartGame() {
-        return startGame;
+        return start;
     }
 
     public void setStartGame(boolean startGame) {
-        this.startGame = startGame;
+        this.start = startGame;
     }
 }

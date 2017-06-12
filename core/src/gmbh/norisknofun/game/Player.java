@@ -1,6 +1,6 @@
 package gmbh.norisknofun.game;
 
-import gmbh.norisknofun.network.Session;
+
 
 /**
  * Created by pippp on 17.05.2017.
@@ -15,7 +15,7 @@ public class Player {
 
 
     public Player(){
-
+        // for testing
     }
 
     public Player(String playername, String id){

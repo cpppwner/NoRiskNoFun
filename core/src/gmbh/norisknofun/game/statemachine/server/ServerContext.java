@@ -1,6 +1,6 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.GameData;
+
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
@@ -38,7 +38,7 @@ public class ServerContext implements InboundMessageHandler {
 
        messageBus.distributeOutboundMessage(message);
 
-        //todo send message via message bus
+        // send message via message bus
         // either via messageBus.distributeOutboundMessage(message); --> to send it to all clients
         // or via messageBus.distributeOutboundMessage(id, message); --> to send it to the client with id only
 
@@ -54,7 +54,7 @@ public class ServerContext implements InboundMessageHandler {
 
     @Override
     public void handle(String senderId, Message message) {
-        // TODO delegate this message to the appropriate state
+        //  delegate this message to the appropriate state
         // note the senderId is a unique identifier identifying the client who sent the message
         // senderId is equal to Client#getId() method
         state.handleMessage(senderId,(BasicMessageImpl)message);

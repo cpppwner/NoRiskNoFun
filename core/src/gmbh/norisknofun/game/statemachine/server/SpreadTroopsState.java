@@ -7,8 +7,6 @@ import java.util.List;
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
@@ -82,7 +80,7 @@ public class SpreadTroopsState extends State {
         }
     }
     private void setNextPlayer(){
-        if(currentplayerindex>data.getPlayers().getPlayers().size()-1){
+        if(currentplayerindex>data.getPlayers().getPlayerlist().size()-1){
             currentplayerindex=0;
         }else {
             currentplayerindex++;
@@ -93,7 +91,7 @@ public class SpreadTroopsState extends State {
 
 
     private void setCurrentPlayer(int playerindex){
-        data.setCurrentplayer(data.getPlayers().getPlayers().get(playerindex).getPlayername());
+        data.setCurrentplayer(data.getPlayers().getPlayerlist().get(playerindex).getPlayername());
         String playername =data.getCurrentplayer().getPlayername();
         PlayerSpread playerSpread = new PlayerSpread(playername,true);
 

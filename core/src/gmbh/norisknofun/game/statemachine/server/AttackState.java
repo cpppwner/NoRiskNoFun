@@ -10,10 +10,11 @@ import gmbh.norisknofun.game.statemachine.State;
 public class AttackState extends State {
 
     private ServerContext context;
+    private State state;
     public AttackState(ServerContext context){
         this.context=context;
     }
-   private State state;
+
     @Override
     public void enter() {
         state.enter();
