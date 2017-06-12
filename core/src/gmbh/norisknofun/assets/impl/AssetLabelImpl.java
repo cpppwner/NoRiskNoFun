@@ -1,7 +1,10 @@
 package gmbh.norisknofun.assets.impl;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import gmbh.norisknofun.assets.AssetLabel;
@@ -11,6 +14,8 @@ import gmbh.norisknofun.assets.FontDescriptor;
  * Default implementation of {@link AssetLabel}.
  */
 class AssetLabelImpl implements AssetLabel {
+
+    private static Color DEFAULT_BACKGROUND_COLOR = new Color(0f, 0f, 0f, 0f);
 
     /**
      * Low level asset cache.
@@ -28,6 +33,11 @@ class AssetLabelImpl implements AssetLabel {
     private final Label label;
 
     /**
+     * Current background texture - be careful - this must be released when changed.
+     */
+    private Texture currentBackground;
+
+    /**
      * Create a label with given text and font descriptor.
      *
      * @param cache Low level asset cache.
@@ -38,7 +48,16 @@ class AssetLabelImpl implements AssetLabel {
 
         this.cache = cache;
         font = cache.getFont(fontDescriptor);
-        label = new Label(text, new Label.LabelStyle(font, font.getColor()));
+        label = new Label(text, createDefaultLabelStyle());
+    }
+
+    private Label.LabelStyle createDefaultLabelStyle() {
+
+        currentBackground = cache.getPixMapTexture(DEFAULT_BACKGROUND_COLOR);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, font.getColor());
+        labelStyle.background = new Image(currentBackground).getDrawable();
+
+        return labelStyle;
     }
 
     @Override
@@ -81,6 +100,20 @@ class AssetLabelImpl implements AssetLabel {
     public void setText(String text) {
 
         label.setText(text);
+    }
+
+    @Override
+    public void setBackgroundColor(Color color) {
+
+        // prepare new style
+        Texture newTexture = cache.getPixMapTexture(color);
+        Label.LabelStyle newStyle = new Label.LabelStyle(label.getStyle());
+        newStyle.background = new Image(newTexture).getDrawable();
+        label.setStyle(newStyle);
+
+        // release old texture & set new one
+        cache.releasePixMapTexture(currentBackground);
+        currentBackground = newTexture;
     }
 
     @Override
