@@ -4,6 +4,7 @@ package gmbh.norisknofun;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.format.Formatter;
+import android.util.Log;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -21,6 +22,7 @@ public class AndroidLauncher extends AndroidApplication {
 	private String getIpAddress (){
 		WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
 		String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+		Log.d("ANDROID_Luncher","IP:"+ip);
 		return ip;
 	}
 
