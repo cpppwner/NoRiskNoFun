@@ -22,7 +22,7 @@ public class AndroidLauncher extends AndroidApplication {
 	private String getIpAddress (){
 		WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
 		String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
-		Log.d("ANDROID_Luncher","IP:"+ip);
+		Log.d("ANDROID_Launcher","IP:"+ip);
 		return ip;
 	}
 
