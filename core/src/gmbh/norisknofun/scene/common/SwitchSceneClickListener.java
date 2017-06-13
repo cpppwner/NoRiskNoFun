@@ -8,7 +8,7 @@ import gmbh.norisknofun.scene.SceneManager;
 /**
  * {@link ClickListener} used to switch scene.
  */
-public final class SwitchSceneClickListener extends ClickListener {
+public class SwitchSceneClickListener extends ClickListener {
 
     /**
      * Scene's name to switch to when clicked event occured.

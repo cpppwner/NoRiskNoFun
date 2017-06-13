@@ -69,6 +69,21 @@ class AssetTextButtonImpl implements AssetTextButton {
     }
 
     @Override
+    public void setDisabled() {
+        textButton.setDisabled(true);
+    }
+
+    @Override
+    public void setEnabled() {
+        textButton.setDisabled(false);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !textButton.isDisabled();
+    }
+
+    @Override
     public float getX() {
 
         return textButton.getX();

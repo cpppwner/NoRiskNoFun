@@ -81,6 +81,21 @@ class AssetImageButtonImpl implements AssetImageButton {
     }
 
     @Override
+    public void setDisabled() {
+        imageButton.setDisabled(true);
+    }
+
+    @Override
+    public void setEnabled() {
+        imageButton.setDisabled(false);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !imageButton.isDisabled();
+    }
+
+    @Override
     public void dispose() {
 
         cache.releaseTexture(texture);

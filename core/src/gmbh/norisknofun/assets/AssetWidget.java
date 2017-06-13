@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 /**
  * User interface asset (widget asset).
  */
-public interface AssetWidget {
+interface AssetWidget {
 
     /**
      * Get x-coordinate of wrapped {@link ImageButton}.
@@ -42,5 +42,4 @@ public interface AssetWidget {
      * Get wrapped actor.
      */
     Actor getActor();
-
 }
