@@ -2,6 +2,9 @@ package gmbh.norisknofun.assets.impl.map;
 
 import com.badlogic.gdx.graphics.Color;
 
+
+import java.util.List;
+
 import gmbh.norisknofun.assets.AssetMap.Region;
 
 /**
@@ -34,9 +37,12 @@ final class RegionImpl implements Region {
      */
     private Color regionColor;
 
-    RegionImpl(String name, float[] vertices) {
+    private List<String> neighbouringRegions;
+
+    RegionImpl(String name, float[] vertices, List<String> neighbouringRegions) {
         this.name = name;
         this.vertices = vertices;
+        this.neighbouringRegions=neighbouringRegions;
 
         regionOwner = "none";
         numberTroops = 0;
@@ -90,4 +96,16 @@ final class RegionImpl implements Region {
             regionColor = Color.WHITE;
         }
     }
+
+    @Override
+    public void setNeighbouringRegions(List<String> regions) {
+        this.neighbouringRegions=regions;
+    }
+
+    @Override
+    public List<String> getNeighbouringRegions() {
+        return this.neighbouringRegions;
+    }
+
+
 }

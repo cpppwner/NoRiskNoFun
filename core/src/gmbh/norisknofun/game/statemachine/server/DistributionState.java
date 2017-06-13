@@ -67,6 +67,6 @@ public class DistributionState extends State {
     }
     private void sendMoveTroopCheckMessage(String  playername, boolean movepossible){
         MoveTroopCheck response = new MoveTroopCheck(playername,movepossible);
-        context.sendMessage(response); // todo how to send to specific client
+        context.sendMessage(response,data.getPlayerByName(playername).getId());
     }
 }

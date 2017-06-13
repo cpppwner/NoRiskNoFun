@@ -18,18 +18,27 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class AttackRegion extends BasicMessageImpl implements Serializable{
 
-    private  String regionname;
+    private  String originRegion;
+    private  String attackedRegion;
     private static final long serialVersionUID = 1L;
 
     public AttackRegion(String regionname) {
-        this.regionname = regionname;
+        this.originRegion = regionname;
     }
 
-    public String getRegionname() {
-        return regionname;
+    public String getOriginRegion() {
+        return originRegion;
     }
 
-    public void setRegionname(String regionname) {
-        this.regionname = regionname;
+    public void setOriginRegion(String originRegion) {
+        this.originRegion = originRegion;
+    }
+
+    public String getAttackedRegion() {
+        return attackedRegion;
+    }
+
+    public void setAttackedRegion(String attackedRegion) {
+        this.attackedRegion = attackedRegion;
     }
 }

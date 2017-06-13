@@ -1,5 +1,6 @@
 package gmbh.norisknofun.game.statemachine.server;
 
+import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.statemachine.State;
 
@@ -10,8 +11,12 @@ import gmbh.norisknofun.game.statemachine.State;
 public class AttackWinnerState extends State {
 
     private ServerContext context;
-    public AttackWinnerState(ServerContext context){
+    private AttackState state;
+    private final GameDataServer data;
+    public AttackWinnerState(ServerContext context, AttackState state){
         this.context=context;
+        this.data=context.getGameData();
+        this.state=state;
     }
 
     @Override

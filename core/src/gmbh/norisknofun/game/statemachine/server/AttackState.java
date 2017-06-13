@@ -13,6 +13,8 @@ public class AttackState extends State {
     private State state;
     public AttackState(ServerContext context){
         this.context=context;
+        setState(new ChooseTroopAmountState(context,this));
+
     }
 
     @Override
@@ -29,5 +31,9 @@ public class AttackState extends State {
     @Override
     public void handleMessage(String senderId, Message message) {
         state.handleMessage(senderId,message);
+    }
+
+    public void setState(State state){
+        this.state=state;
     }
 }
