@@ -49,6 +49,7 @@ public class WaitingForPlayersState extends State {
 
     private void  startGame(){
         context.sendMessage(new StartGame(true));
+        context.setState(new SpreadTroopsState(context));
     }
 
 
