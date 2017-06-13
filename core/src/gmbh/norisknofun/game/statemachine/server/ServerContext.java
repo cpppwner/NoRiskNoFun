@@ -26,8 +26,15 @@ public class ServerContext implements InboundMessageHandler {
         this.messageBus.registerInboundMessageHandler(this);
     }
 
-    public void setState(State state){
-        this.state=state;
+    void setState(State state){
+
+        if (state == null) {
+            throw new IllegalArgumentException("state is null");
+        }
+
+        this.state.exit();
+        this.state = state;
+        this.state.enter();
     }
 
     public State getState(){
