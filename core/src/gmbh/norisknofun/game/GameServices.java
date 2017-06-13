@@ -105,4 +105,9 @@ public class GameServices {
 
         hostingMode = false;
     }
+
+    public boolean isHostingMode() {
+
+        return hostingMode;
+    }
 }

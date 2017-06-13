@@ -190,6 +190,10 @@ public class SceneData {
         }
     }
 
+    public boolean isGameHost() {
+        return gameServices.isHostingMode();
+    }
+
     /**
      * Set maximum number of allowed players - only used when hosting the game.
      */

@@ -3,15 +3,12 @@ package gmbh.norisknofun.scene.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
-import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
@@ -73,7 +70,7 @@ public class JoinGameScene extends SceneBase {
         joinGameButton.setBounds((float) ((Gdx.graphics.getWidth() / 2) - 137.5), (Gdx.graphics.getHeight() / 10), 275, 240);
         imageButtonBack.setBounds((float) (Gdx.graphics.getWidth() / 1.5), (Gdx.graphics.getHeight() / 10), 275, 240);
 
-        joinGameButton.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
+        joinGameButton.addListener(new SwitchToLobbySceneListener());
         imageButtonBack.addListener(new SwitchSceneClickListener(SceneNames.MAIN_MENU_SCENE));
 
         addSceneObject(joinGameButton);
@@ -123,11 +120,14 @@ public class JoinGameScene extends SceneBase {
         super.dispose();
     }
 
-    private final class SwitchSceneClickListener extends ClickListener {
+    private final class SwitchToLobbySceneListener extends SwitchSceneClickListener {
 
-        public SwitchSceneClickListener(String lobbyScene) {
+        SwitchToLobbySceneListener() {
+            super(SceneNames.LOBBY_SCENE);
         }
 
+
+        @Override
         public void clicked(InputEvent event, float x, float y) {
             if (nameTextField.getText() == null || nameTextField.getText().isEmpty()) {
                 AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
@@ -144,7 +144,7 @@ public class JoinGameScene extends SceneBase {
 
                 sceneData.setHostIp(hostTextField.getText());
                 sceneData.setPlayerName(nameTextField.getText());
-                SceneManager.getInstance().setActiveScene(SceneNames.LOBBY_SCENE);
+                super.clicked(event, x, y);
             }
         }
     }
