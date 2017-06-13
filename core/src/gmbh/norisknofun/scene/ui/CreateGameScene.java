@@ -5,16 +5,17 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
+import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
-import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 import gmbh.norisknofun.scene.common.TextFieldSceneObject;
 
 /**
@@ -31,6 +32,8 @@ public class CreateGameScene extends SceneBase {
      * Sound played when buttons are clicked.
      */
     private final AssetSound buttonPressedSound;
+
+    private TextFieldSceneObject textField;
 
     public CreateGameScene(SceneData sceneData) {
 
@@ -51,15 +54,13 @@ public class CreateGameScene extends SceneBase {
 
     private void initNameSelection() {
 
+        // TODO julian - still needs layouting
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.SELECT_NAME_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
-        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
-                sceneObject.getHeight() * 4.0f,
-                sceneObject.getWidth(),
-                sceneObject.getHeight());
+        sceneObject.setBounds(Gdx.graphics.getWidth()/8.0f, Gdx.graphics.getHeight()/2.0f, sceneObject.getWidth(), 125);
 
-        TextFieldSceneObject textField = new TextFieldSceneObject(sceneData.createTextField(Assets.NAME_TEXT_FIELD_DESCRIPTOR));
-        textField.setBounds(500, 500, textField.getWidth(), textField.getHeight());
+        textField = new TextFieldSceneObject(sceneData.createTextField(Assets.NAME_TEXT_FIELD_DESCRIPTOR));
+        textField.setBounds((Gdx.graphics.getWidth()/8.0f)+ sceneObject.getWidth(), Gdx.graphics.getHeight()/2.0f, 500,125);
         addSceneObject(textField);
     }
 
@@ -75,15 +76,10 @@ public class CreateGameScene extends SceneBase {
         threePlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 300),(Gdx.graphics.getHeight()/8),275,240);
         fourPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 600),(Gdx.graphics.getHeight()/8),275,240);
 
-        ClickListener switchToLobbySceneListener = new SwitchSceneClickListener(SceneNames.MAP_SELECTION_SCENE);
-        backButton.addListener(new SetNumPlayersClickListener(0));
-        backButton.addListener(new SwitchSceneClickListener(SceneNames.MAIN_MENU_SCENE));
-        twoPlayers.addListener(new SetNumPlayersClickListener(2));
-        twoPlayers.addListener(switchToLobbySceneListener);
-        threePlayers.addListener(new SetNumPlayersClickListener(3));
-        threePlayers.addListener(switchToLobbySceneListener);
-        fourPlayers.addListener(new SetNumPlayersClickListener(4));
-        fourPlayers.addListener(switchToLobbySceneListener);
+        backButton.addListener(new BackClickListener());
+        twoPlayers.addListener(new ContinueClickListener(2));
+        threePlayers.addListener(new ContinueClickListener(3));
+        fourPlayers.addListener(new ContinueClickListener(4));
 
         addSceneObject(backButton);
         addSceneObject(twoPlayers);
@@ -98,8 +94,10 @@ public class CreateGameScene extends SceneBase {
 
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.CREATE_GAME, Assets.FONT_110PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
-        sceneObject.setPosition((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
-                sceneObject.getHeight() * 3.0f);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                sceneObject.getHeight() * 3.0f,
+                sceneObject.getWidth(),
+                Gdx.graphics.getHeight() - sceneObject.getHeight());
     }
 
     @Override
@@ -109,18 +107,36 @@ public class CreateGameScene extends SceneBase {
         super.dispose();
     }
 
-    private final class SetNumPlayersClickListener extends ClickListener {
+    private final class BackClickListener extends ClickListener {
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            sceneData.setMaximumNumberOfPlayers(0);
+            SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+        }
+    }
 
-        private final int numPlayers;
+    private final class ContinueClickListener extends ClickListener {
 
-        SetNumPlayersClickListener(int numPlayers) {
-            this.numPlayers = numPlayers;
+        private final int numPlayersChosen;
+
+        private ContinueClickListener(int numPlayersChosen) {
+            this.numPlayersChosen = numPlayersChosen;
         }
 
         @Override
         public void clicked(InputEvent event, float x, float y) {
 
-            sceneData.setMaximumNumberOfPlayers(numPlayers);
+            if (textField.getText() == null || textField.getText().isEmpty()) {
+                AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
+                dialog.show(getStage());
+                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+            } else {
+                // TODO - set playername
+                sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
+                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
+            }
+
         }
     }
 }

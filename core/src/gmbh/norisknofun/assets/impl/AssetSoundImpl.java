@@ -1,18 +1,18 @@
 package gmbh.norisknofun.assets.impl;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 import gmbh.norisknofun.assets.AssetSound;
 
 /**
  * Default implementation of {@link AssetSound}.
- *
- * <p>
- *     This relies on libgdx.
- * </p>
  */
 class AssetSoundImpl implements AssetSound {
+
+    /**
+     * Asset cache.
+     */
+    private final LibGdxAssetCache cache;
 
     /**
      * Sound's filename.
@@ -27,10 +27,11 @@ class AssetSoundImpl implements AssetSound {
     /**
      * Create texture asset from given filename.
      */
-    AssetSoundImpl(String filename) {
+    AssetSoundImpl(LibGdxAssetCache cache, String filename) {
 
+        this.cache = cache;
         this.filename = filename;
-        this.sound = Gdx.audio.newSound(Gdx.files.internal(filename));
+        this.sound = cache.getSound(filename);
     }
 
     @Override
@@ -51,6 +52,6 @@ class AssetSoundImpl implements AssetSound {
 
     @Override
     public void dispose() {
-        sound.dispose();
+        cache.releaseSound(sound);
     }
 }

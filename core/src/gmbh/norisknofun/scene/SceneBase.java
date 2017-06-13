@@ -89,7 +89,6 @@ public abstract class SceneBase implements Scene {
         for (SceneObject sceneObject : sceneObjects) {
             sceneObject.resize(width, height);
         }
-
     }
 
     @Override

@@ -4,9 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
 /**
- * User interface asset.
+ * User interface asset (widget asset).
  */
-public interface UIAsset {
+public interface AssetWidget {
 
     /**
      * Get x-coordinate of wrapped {@link ImageButton}.

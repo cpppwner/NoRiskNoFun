@@ -1,6 +1,5 @@
 package gmbh.norisknofun.assets.impl;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -10,6 +9,11 @@ import gmbh.norisknofun.assets.AssetTexture;
  * Asset for textures.
  */
 final class AssetTextureImpl implements AssetTexture {
+
+    /**
+     * Cache for caching assets
+     */
+    private final LibGdxAssetCache cache;
 
     /**
      * Asset's filename.
@@ -24,10 +28,11 @@ final class AssetTextureImpl implements AssetTexture {
     /**
      * Create texture asset from given filename.
      */
-    AssetTextureImpl(String filename) {
+    AssetTextureImpl(LibGdxAssetCache cache, String filename) {
 
+        this.cache = cache;
         this.filename = filename;
-        this.texture = new Texture(Gdx.files.internal(filename));
+        this.texture = cache.getTexture(filename);
     }
 
     @Override
@@ -44,6 +49,6 @@ final class AssetTextureImpl implements AssetTexture {
     @Override
     public void dispose() {
 
-        texture.dispose();
+        cache.releaseTexture(texture);
     }
 }

@@ -3,6 +3,7 @@ package gmbh.norisknofun.scene;
 import com.badlogic.gdx.graphics.Color;
 
 import gmbh.norisknofun.assets.FontDescriptor;
+import gmbh.norisknofun.assets.ModalDialogDescriptor;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
 import gmbh.norisknofun.assets.TextFieldDescriptor;
 
@@ -50,6 +51,18 @@ public class Assets {
             .setForegroundColor(Color.WHITE)
             .setBorderWidth(2.0f)
             .build();
+    public static final FontDescriptor FONT_60PX_BLACK_NO_BORDER = new FontDescriptor.Builder()
+            .setFontFilename(DEFAULT_FONT_FILENAME)
+            .setFontSize(60)
+            .setForegroundColor(Color.BLACK)
+            .setBorderWidth(0.0f)
+            .build();
+    public static final FontDescriptor FONT_60PX_RED_WITH_BORDER = new FontDescriptor.Builder()
+            .setFontFilename(DEFAULT_FONT_FILENAME)
+            .setFontSize(60)
+            .setForegroundColor(Color.RED)
+            .setBorderWidth(2.0f)
+            .build();
     public static final FontDescriptor FONT_60PX_WHITE_WITH_BORDER = new FontDescriptor.Builder()
             .setFontFilename(DEFAULT_FONT_FILENAME)
             .setFontSize(60)
@@ -63,7 +76,7 @@ public class Assets {
             .setDownTextureFilename(TEXT_BUTTON_FILENAME)
             .setUpTextureFilename(TEXT_BUTTON_FILENAME)
             .setFontColor(Color.BLACK)
-            .setDownFontColor(Color.RED)
+            .setDownFontColor(Color.BLACK)
             .build();
     public static final TextButtonDescriptor DICE_CHEATS_TEXT_BUTTON_DESCRIPTOR = new TextButtonDescriptor.Builder()
             .setTextButtonFont(FONT_36PX_BLACK_NO_BORDER)
@@ -80,6 +93,23 @@ public class Assets {
             .setMessageFont(FONT_36PX_GRAY_NO_BORDER)
             .setMessageFontColor(Color.GRAY)
             .setHintText(Texts.NAME_HINT_TEXT)
+            .build();
+    public static final TextFieldDescriptor IP_ADDRESS_TEXT_FIELD_DESCRIPTOR = new TextFieldDescriptor.Builder()
+            .setFont(FONT_36PX_BLACK_NO_BORDER)
+            .setFontColor(Color.BLACK)
+            .setMessageFont(FONT_36PX_GRAY_NO_BORDER)
+            .setMessageFontColor(Color.GRAY)
+            .setHintText(Texts.SERVER_IP_HINT_TEXT)
+            .build();
+
+    // modal error dialog
+    public static final ModalDialogDescriptor ERROR_DIALOG_DESCRIPTOR = new ModalDialogDescriptor.Builder()
+            .setBackgroundColor(Color.DARK_GRAY)
+            .setButtonDescriptor(DEFAULT_TEXT_BUTTON_DESCRIPTOR)
+            .setMessageFont(FONT_60PX_RED_WITH_BORDER)
+            .setTitle(Texts.ERROR_DIALOG_TITLE)
+            .setTitleFont(FONT_60PX_BLACK_NO_BORDER)
+            .setTitleFontColor(Color.BLACK)
             .build();
 
 

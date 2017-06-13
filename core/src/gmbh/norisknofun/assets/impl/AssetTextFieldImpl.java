@@ -1,7 +1,6 @@
 package gmbh.norisknofun.assets.impl;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,33 +16,45 @@ import gmbh.norisknofun.assets.TextFieldDescriptor;
  */
 class AssetTextFieldImpl implements AssetTextField {
 
+    /**
+     * Low level gdx asset cache.
+     */
+    private final LibGdxAssetCache cache;
+    /**
+     * Descriptor object describing the style of this text field.
+     */
     private final TextFieldDescriptor textFieldDescriptor;
+    /**
+     * Font used to render the text.
+     */
     private final BitmapFont textFont;
+    /**
+     * Font used to render the hint text.
+     */
     private final BitmapFont hintFont;
-    private final Pixmap backgroundPixmap;
+    /**
+     * Background pixmap texture.
+     */
     private final Texture backgroundTexture;
+    /**
+     * Wrapped text field.
+     */
     private final TextField textField;
 
-    AssetTextFieldImpl(String initialFieldText, TextFieldDescriptor textFieldDescriptor) {
+    AssetTextFieldImpl(LibGdxAssetCache cache, String initialFieldText, TextFieldDescriptor textFieldDescriptor) {
 
+        this.cache = cache;
         this.textFieldDescriptor = textFieldDescriptor;
-        textFont = new FontGenerator(textFieldDescriptor.getFont()).generateFont();
-        hintFont = new FontGenerator(textFieldDescriptor.getMessageFont()).generateFont();
-        backgroundPixmap = createDefaultBackgroundPixmap();
-        backgroundTexture = new Texture(backgroundPixmap);
+        textFont = cache.getFont(textFieldDescriptor.getFont());
+        hintFont = cache.getFont(textFieldDescriptor.getMessageFont());
+        backgroundTexture = cache.getPixMapTexture(Color.WHITE);
         textField = new TextField(initialFieldText, createTextFieldStyle());
         textField.setMessageText(textFieldDescriptor.getHintText());
     }
 
-    private static Pixmap createDefaultBackgroundPixmap() {
-
-        Pixmap backgroundPixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        backgroundPixmap.setColor(Color.WHITE);
-        backgroundPixmap.fill();
-
-        return backgroundPixmap;
-    }
-
+    /**
+     * Create text style.
+     */
     private TextField.TextFieldStyle createTextFieldStyle() {
 
         TextField.TextFieldStyle style = new TextField.TextFieldStyle();
@@ -100,9 +111,16 @@ class AssetTextFieldImpl implements AssetTextField {
     @Override
     public void dispose() {
 
-        textFont.dispose();
-        hintFont.dispose();
-        backgroundTexture.dispose();
-        backgroundPixmap.dispose();
+        cache.releaseFont(textFont);
+        cache.releaseFont(hintFont);
+        cache.releasePixMapTexture(backgroundTexture);
+    }
+
+    /**
+     * Set text field filter.
+     * @param textFieldFilter Filter to apply to this text field.
+     */
+    void setTextFieldFilter(TextField.TextFieldFilter.DigitsOnlyFilter textFieldFilter) {
+        textField.setTextFieldFilter(textFieldFilter);
     }
 }

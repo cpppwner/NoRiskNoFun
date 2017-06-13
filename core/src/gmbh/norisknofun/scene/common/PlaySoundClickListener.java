@@ -27,6 +27,7 @@ public class PlaySoundClickListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        sound.play();
+        if (sound != null)
+            sound.play();
     }
 }

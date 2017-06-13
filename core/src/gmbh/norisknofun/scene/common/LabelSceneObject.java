@@ -1,5 +1,7 @@
 package gmbh.norisknofun.scene.common;
 
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+
 import gmbh.norisknofun.assets.AssetLabel;
 import gmbh.norisknofun.scene.SceneObject;
 
@@ -50,5 +52,15 @@ public class LabelSceneObject extends SceneObject {
 
         label.dispose();
         super.dispose();
+    }
+
+    @Override
+    public boolean addListener(EventListener listener) {
+        return label.getActor().addListener(listener);
+    }
+
+    @Override
+    public boolean removeListener(EventListener listener) {
+        return label.getActor().removeListener(listener);
     }
 }
