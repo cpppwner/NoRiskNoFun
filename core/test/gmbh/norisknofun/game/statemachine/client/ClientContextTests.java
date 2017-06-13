@@ -64,8 +64,6 @@ public class ClientContextTests {
         expectedException.expectMessage("state is null");
 
         context.setState(null);
-
-        assertNull(context.getState());
     }
 
 
