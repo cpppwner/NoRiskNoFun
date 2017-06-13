@@ -19,11 +19,18 @@ public class ClientContext  {
     public ClientContext(OutboundMessageHandler outboundMessageHandler, GameData data){
         this.outboundMessageHandler = outboundMessageHandler;
         this.data = data;
-        state = new WaitingForPlayersState(this);
+        state = new ConnectingState(this);
     }
 
-    public void setState(State state){
+    public void setState(State state) {
+
+        if (state == null) {
+            throw new IllegalArgumentException("state is null");
+        }
+
+        this.state.exit();
         this.state=state;
+        this.state.enter();
     }
 
     public State getState(){
@@ -35,7 +42,7 @@ public class ClientContext  {
         state.handleMessage("", message); // work with interfaces
     }
 
-    public void sendMessage(BasicMessageImpl message){
+    public void sendMessage(Message message){
 
         outboundMessageHandler.handle(message);
     }

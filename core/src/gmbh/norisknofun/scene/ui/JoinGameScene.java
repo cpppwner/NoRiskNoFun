@@ -141,6 +141,9 @@ public class JoinGameScene extends SceneBase {
                         getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
             }
             else{
+
+                sceneData.setHostIp(hostTextField.getText());
+                sceneData.setPlayerName(nameTextField.getText());
                 SceneManager.getInstance().setActiveScene(SceneNames.LOBBY_SCENE);
             }
         }

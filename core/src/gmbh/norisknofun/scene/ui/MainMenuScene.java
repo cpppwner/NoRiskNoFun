@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -81,6 +82,19 @@ public final class MainMenuScene extends SceneBase {
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.APPLICATION_TITLE, Assets.FONT_110PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f, 160.0f, sceneObject.getWidth(), sceneObject.getHeight());
+    }
+
+    @Override
+    public void show() {
+
+        super.show();
+
+        String lastError = sceneData.getLastError();
+        if (lastError != null) {
+            // error occurred and we'll show it
+            AssetModalDialog errorDialog = sceneData.createModalDialog(lastError, Assets.ERROR_DIALOG_DESCRIPTOR);
+            errorDialog.show(getStage());
+        }
     }
 
     @Override

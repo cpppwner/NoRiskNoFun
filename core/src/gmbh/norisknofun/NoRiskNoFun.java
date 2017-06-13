@@ -17,9 +17,15 @@ import gmbh.norisknofun.scene.ui.LobbyScene;
 import gmbh.norisknofun.scene.ui.MainMenuScene;
 import gmbh.norisknofun.scene.ui.MapSelectionScene;
 
+/**
+ * Main entry point for the NoRiskNoFun game.
+ */
 public class NoRiskNoFun implements ApplicationListener  {
 
-    private String ip;
+    /**
+     * our own ip address.
+     */
+    private final String ip;
 
     public NoRiskNoFun(String ip) {
         this.ip=ip;
@@ -35,6 +41,8 @@ public class NoRiskNoFun implements ApplicationListener  {
     private void registerScenes() {
 
         SceneData sceneData = new SceneData(new LibGdxAssetFactory(), new SocketFactoryImpl());
+        sceneData.setHostIp(ip);
+
         SceneManager.getInstance().registerScene(new MapSelectionScene(sceneData));
         SceneManager.getInstance().registerScene(new GameScene(sceneData));
         SceneManager.getInstance().registerScene(new CreateGameScene(sceneData));

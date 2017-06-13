@@ -21,11 +21,11 @@ public class AndroidLauncher extends AndroidApplication {
 	}
 
 	private String getIpAddress (){
-		WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+
+		WifiManager wm = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+		@SuppressWarnings("deprecation")
 		String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
 		Log.d("ANDROID_Launcher","IP:"+ip);
 		return ip;
 	}
-
-
 }

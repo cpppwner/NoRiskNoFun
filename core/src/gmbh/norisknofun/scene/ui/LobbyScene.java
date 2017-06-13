@@ -11,6 +11,7 @@ import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
+import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
@@ -67,6 +68,26 @@ public class LobbyScene extends SceneBase{
                 sceneObject.getWidth(),
                 Gdx.graphics.getHeight() - sceneObject.getHeight());
 
+    }
+
+    @Override
+    public void show() {
+        // called when the scene is shown
+        super.show();
+        startServices();
+    }
+
+    private void startServices() {
+        try {
+            if (!sceneData.startGameServices()) {
+                // error occurred - set error message and return to main menu
+                sceneData.setLastError(Texts.ERROR_STARTING_GAME_SERVICES);
+                SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+            }
+        } catch (InterruptedException e) {
+            Gdx.app.error(getClass().getSimpleName(), "Thread interrupted while starting game services", e);
+            Thread.interrupted(); // re-interrupt
+        }
     }
 
     @Override

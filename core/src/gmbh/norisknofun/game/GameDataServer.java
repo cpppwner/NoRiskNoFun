@@ -3,11 +3,11 @@ package gmbh.norisknofun.game;
 import gmbh.norisknofun.assets.AssetMap;
 
 /**
- * Created by Peter on 04.06.2017.
+ * Container class storing information required by the server.
  */
-
 public class GameDataServer {
 
+    private String mapFilename = null;
     private AssetMap mapAsset = null;
     private int maxPlayer;
     private String currentplayer;
@@ -20,6 +20,14 @@ public class GameDataServer {
 
     public GameDataServer() {
         players= new Players();
+    }
+
+    public void setMapFilename(String mapFilename) {
+        this.mapFilename = mapFilename;
+    }
+
+    public String getMapFilename() {
+        return  mapFilename;
     }
 
     public void setMapAsset(AssetMap mapAsset) {
@@ -121,4 +129,6 @@ public class GameDataServer {
         }
         return true;
     }
+
+
 }

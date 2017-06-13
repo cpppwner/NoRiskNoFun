@@ -10,7 +10,7 @@ import gmbh.norisknofun.game.networkmessages.Message;
 
 public abstract class State implements Serializable {
 
-    public abstract void enter();
-    public abstract void exit();
+    public void enter() {}
+    public void exit() {}
     public abstract void handleMessage(String senderId, Message message);
 }

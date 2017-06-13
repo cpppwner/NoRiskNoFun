@@ -7,7 +7,7 @@ import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.networkmessages.Message;
 
 /**
- * Class containing game related data.
+ * Class containing game related data (client side).
  */
 public class GameData {
 
@@ -17,6 +17,7 @@ public class GameData {
     private String currentplayer;
 
     private List<Player> players = new ArrayList<>();
+    private String playerName;
 
     public void setMapAsset(AssetMap mapAsset) {
         this.mapAsset = mapAsset;
@@ -62,8 +63,8 @@ public class GameData {
      * @param message Action the GUI should perform
      */
     public void setGuiChanges(Message message) {
-        guiChanges.setMessage(message);
-        guiChanges.setChanged(true);
+        guiChanges.setValue(message);
+        guiChanges.setChanged();
 
     }
 
@@ -72,7 +73,7 @@ public class GameData {
      * @return GUI Message
      */
     public Message getGuiChanges() {
-        return guiChanges.getMessage();
+        return guiChanges.getValue();
     }
 
     /**
@@ -80,7 +81,11 @@ public class GameData {
      * @param changedFlag Flag signalling the GUI to perform an action
      */
     public void setChangedFlag(boolean changedFlag) {
-        guiChanges.setChanged(changedFlag);
+
+        if (changedFlag)
+            guiChanges.setChanged();
+        else
+            guiChanges.resetChanged();
     }
 
     /**
@@ -88,6 +93,14 @@ public class GameData {
      * This will be called by the render thread
      */
     public boolean hasChanged() {
-        return guiChanges.getChanged();
+        return guiChanges.hasChanged();
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }

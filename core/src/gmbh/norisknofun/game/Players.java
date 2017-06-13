@@ -2,6 +2,7 @@ package gmbh.norisknofun.game;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -86,6 +87,6 @@ public class Players implements Serializable{
         return playerlist.get(index).getPlayername();
     }
     public List<Player> getPlayerlist(){
-        return playerlist;
+        return Collections.unmodifiableList(playerlist);
     }
 }

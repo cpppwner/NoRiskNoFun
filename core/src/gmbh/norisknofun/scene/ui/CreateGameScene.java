@@ -132,7 +132,7 @@ public class CreateGameScene extends SceneBase {
                 dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
                         getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
             } else {
-                // TODO - set playername
+                sceneData.setPlayerName(textField.getText());
                 sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
                 SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
             }
