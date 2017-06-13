@@ -1,5 +1,7 @@
 package gmbh.norisknofun.scene.common;
 
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+
 import gmbh.norisknofun.assets.AssetTextField;
 import gmbh.norisknofun.scene.SceneObject;
 
@@ -33,5 +35,15 @@ public class TextFieldSceneObject extends SceneObject {
     public void dispose() {
         textField.dispose();
         super.dispose();
+    }
+
+    @Override
+    public boolean addListener(EventListener listener) {
+        return textField.getActor().addListener(listener);
+    }
+
+    @Override
+    public boolean removeListener(EventListener listener) {
+        return textField.getActor().removeListener(listener);
     }
 }

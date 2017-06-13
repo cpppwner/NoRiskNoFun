@@ -1,9 +1,11 @@
 package gmbh.norisknofun.scene.common;
 
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
 import gmbh.norisknofun.assets.AssetImageButton;
 import gmbh.norisknofun.assets.AssetSound;
+import gmbh.norisknofun.scene.SceneObject;
 
 /**
  * Image button scene object.
@@ -13,7 +15,7 @@ import gmbh.norisknofun.assets.AssetSound;
  *     This objects basically wraps the underlying libgdx {@link ImageButton}.
  * </p>
  */
-public class ImageButtonSceneObject extends ButtonSceneObject {
+public class ImageButtonSceneObject extends SceneObject {
 
     /**
      * Image button asset.
@@ -40,10 +42,11 @@ public class ImageButtonSceneObject extends ButtonSceneObject {
      *              but only when the button instance is no longer used.
      */
     public ImageButtonSceneObject(AssetImageButton imageButton, AssetSound sound) {
-        super(sound);
 
+        super();
         this.imageButton = imageButton;
 
+        addListener(new PlaySoundClickListener(sound));
         setSize(imageButton.getWidth(), imageButton.getHeight());
         addActor(imageButton.getActor());
     }
@@ -59,5 +62,15 @@ public class ImageButtonSceneObject extends ButtonSceneObject {
     public void dispose() {
         imageButton.dispose();
         super.dispose();
+    }
+
+    @Override
+    public boolean addListener(EventListener listener) {
+        return imageButton.getActor().addListener(listener);
+    }
+
+    @Override
+    public boolean removeListener(EventListener listener) {
+        return imageButton.getActor().removeListener(listener);
     }
 }

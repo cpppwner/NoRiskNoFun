@@ -46,7 +46,6 @@ public class LobbyScene extends SceneBase{
         ImageButtonSceneObject imageButtonStartGame = new ImageButtonSceneObject(sceneData.createImageButton(Assets.START_GAME_BUTTON_FILENAME), buttonPressedSound);
         imageButtonStartGame.setBounds((Gdx.graphics.getWidth() / 2.0f) - 137.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
         imageButtonStartGame.addListener(new ClickListener() {
-
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 sceneData.sendMessageFromGui(new StartGame(true));
