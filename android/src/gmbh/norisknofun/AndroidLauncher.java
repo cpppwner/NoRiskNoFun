@@ -16,6 +16,7 @@ public class AndroidLauncher extends AndroidApplication {
 
 
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+		Log.d("ANDROID_Launcher","initialize");
 		initialize(new NoRiskNoFun(getIpAddress()), config);
 	}
 
