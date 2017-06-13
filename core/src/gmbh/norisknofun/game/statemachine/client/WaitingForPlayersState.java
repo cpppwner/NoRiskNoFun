@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.EndGame;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.game.statemachine.State;
 import gmbh.norisknofun.scene.SceneManager;
@@ -30,7 +31,7 @@ public class WaitingForPlayersState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
 
         if(message.getType().equals(EndGame.class)){
             SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);

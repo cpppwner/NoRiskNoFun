@@ -1,6 +1,6 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -27,7 +27,7 @@ public class AttackState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
         state.handleMessage(senderId,message);
     }
 }

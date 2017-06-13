@@ -2,11 +2,9 @@ package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
 
-import java.util.List;
-
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
@@ -40,7 +38,7 @@ public class MoveTroopsState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId,BasicMessageImpl message  ) {
+    public void handleMessage(String senderId, Message message  ) {
         if(message.getType().equals(MoveTroop.class)){
             moveTroop((MoveTroop)message);
         }else if( message.getType().equals(FinishTurn.class)){

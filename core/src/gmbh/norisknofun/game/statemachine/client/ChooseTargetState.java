@@ -2,7 +2,7 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegionCheck;
 import gmbh.norisknofun.game.statemachine.State;
 
@@ -28,7 +28,7 @@ public class ChooseTargetState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
 
        if(message.getType().equals(AttackRegionCheck.class)){
             //todo show dialog with error message

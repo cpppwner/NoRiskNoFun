@@ -2,7 +2,7 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
@@ -31,7 +31,7 @@ public class DistributionState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
 
         if(message.getType().equals(AddTroops.class)){
             addTroops(((AddTroops)message).getAmount());

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoinedCheck;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
@@ -36,20 +36,19 @@ public class WaitingForPlayersState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
 
         if(message.getType().equals(PlayerJoined.class)){
             addPlayer((PlayerJoined) message, senderId);
         }else if(message.getType().equals(StartGame.class) ){
             startGame();
         }else{
-            Gdx.app.log("WaitingforPlayerState","message unknown");
+            Gdx.app.log("Server: WaitingforPlayerState","message unknown: " + message.getType().getSimpleName());
         }
     }
 
     private void  startGame(){
         context.sendMessage(new StartGame(true));
-        context.setState(new SpreadTroopsState(context));
     }
 
 
