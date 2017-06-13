@@ -1,13 +1,19 @@
 package gmbh.norisknofun.scene;
 
+import com.badlogic.gdx.graphics.Color;
+
 import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.assets.AssetImageButton;
 import gmbh.norisknofun.assets.AssetLabel;
+import gmbh.norisknofun.assets.AssetModalDialog;
+import gmbh.norisknofun.assets.AssetNumericField;
+import gmbh.norisknofun.assets.AssetPixmapTexture;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.assets.AssetTextButton;
 import gmbh.norisknofun.assets.AssetTextField;
 import gmbh.norisknofun.assets.AssetTexture;
 import gmbh.norisknofun.assets.FontDescriptor;
+import gmbh.norisknofun.assets.ModalDialogDescriptor;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
 import gmbh.norisknofun.assets.TextFieldDescriptor;
 import gmbh.norisknofun.game.GameClient;
@@ -58,8 +64,6 @@ public class SceneData {
 
         this.gameDataServer = new GameDataServer();
         this.gameDataClient = new GameData();
-
-
     }
 
     /**
@@ -78,6 +82,16 @@ public class SceneData {
     public AssetTexture createTexture(String filename) {
 
         return getAssetFactory().createAssetTexture(filename);
+    }
+
+    /**
+     * Create a 1x1 pixels pixmap texture with given color.
+     *
+     * @param color The color used in the pixmap texture.
+     */
+    public AssetPixmapTexture createPixmapTexture(Color color) {
+
+        return getAssetFactory().createAssetPixmapTexture(color);
     }
 
     /**
@@ -114,6 +128,16 @@ public class SceneData {
     public AssetTextField createTextField(TextFieldDescriptor textFieldDescriptor) {
 
         return getAssetFactory().createAssetTextField("", textFieldDescriptor);
+    }
+
+    public AssetNumericField createNumericField(TextFieldDescriptor textFieldDescriptor) {
+
+        return getAssetFactory().createAssetNumericField(0, textFieldDescriptor);
+    }
+
+    public AssetModalDialog createModalDialog(String dialogText, ModalDialogDescriptor modalDialogDescriptor) {
+
+        return getAssetFactory().createAssetModalDialog(dialogText, modalDialogDescriptor);
     }
 
     /**

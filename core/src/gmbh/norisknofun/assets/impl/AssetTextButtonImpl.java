@@ -15,7 +15,17 @@ import gmbh.norisknofun.assets.TextButtonDescriptor;
  */
 class AssetTextButtonImpl implements AssetTextButton {
 
+    /**
+     * Low level gdx asset cache.
+     */
+    private final LibGdxAssetCache cache;
+
+    /**
+     * Descriptor object describing the text button's style.
+     */
     private final TextButtonDescriptor textButtonDescriptor;
+
+
     private final BitmapFont font;
     private final Texture upTexture;
     private final Texture downTexture;
@@ -23,25 +33,19 @@ class AssetTextButtonImpl implements AssetTextButton {
 
     /**
      * Create AssetTextButton.
+     * @param cache Low level asset cache.
      * @param initialButtonText The initial button text.
      * @param textButtonDescriptor Descriptor object describing some button text properties.
      */
-    AssetTextButtonImpl(String initialButtonText, TextButtonDescriptor textButtonDescriptor) {
+    AssetTextButtonImpl(LibGdxAssetCache cache, String initialButtonText, TextButtonDescriptor textButtonDescriptor) {
+
+        this.cache = cache;
         this.textButtonDescriptor = textButtonDescriptor;
-        font = new FontGenerator(textButtonDescriptor.getTextButtonFont()).generateFont();
-        upTexture = new Texture(textButtonDescriptor.getUpTextureFilename());
-        downTexture = (textButtonDescriptor.getUpTextureFilename().equals(textButtonDescriptor.getDownTextureFilename()))
-            ? upTexture
-            : new Texture(textButtonDescriptor.getDownTextureFilename());
+        font = cache.getFont(textButtonDescriptor.getTextButtonFont());
+        upTexture = cache.getTexture(textButtonDescriptor.getUpTextureFilename());
+        downTexture = cache.getTexture(textButtonDescriptor.getDownTextureFilename());
+
         textButton = new TextButton(initialButtonText, createButtonStyle());
-    }
-
-
-
-    @Override
-    public String getName() {
-
-        return textButton.getName();
     }
 
     /**
@@ -56,6 +60,12 @@ class AssetTextButtonImpl implements AssetTextButton {
         style.downFontColor = textButtonDescriptor.getDownFontColor();
 
         return style;
+    }
+
+    @Override
+    public String getName() {
+
+        return textButton.getName();
     }
 
     @Override
@@ -96,10 +106,16 @@ class AssetTextButtonImpl implements AssetTextButton {
     @Override
     public void dispose() {
 
-        font.dispose();
-        upTexture.dispose();
-        if (!textButtonDescriptor.getUpTextureFilename().equals(textButtonDescriptor.getDownTextureFilename())) {
-            downTexture.dispose();
-        }
+        cache.releaseFont(font);
+        cache.releaseTexture(upTexture);
+        cache.releaseTexture(downTexture);
+    }
+
+    /**
+     * Get libgdx {@link TextButton} wrapped by this object.
+     */
+    TextButton getTextButton() {
+
+        return textButton;
     }
 }

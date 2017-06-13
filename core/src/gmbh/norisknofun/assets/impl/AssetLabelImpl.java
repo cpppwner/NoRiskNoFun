@@ -1,7 +1,10 @@
 package gmbh.norisknofun.assets.impl;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import gmbh.norisknofun.assets.AssetLabel;
@@ -12,19 +15,49 @@ import gmbh.norisknofun.assets.FontDescriptor;
  */
 class AssetLabelImpl implements AssetLabel {
 
+    private static Color DEFAULT_BACKGROUND_COLOR = new Color(0f, 0f, 0f, 0f);
+
+    /**
+     * Low level asset cache.
+     */
+    private final LibGdxAssetCache cache;
+
+    /**
+     * The bitmap font used for the label.
+     */
     private final BitmapFont font;
+
+    /**
+     * gdx label.
+     */
     private final Label label;
+
+    /**
+     * Current background texture - be careful - this must be released when changed.
+     */
+    private Texture currentBackground;
 
     /**
      * Create a label with given text and font descriptor.
      *
-     * @param text The text to show (might change)
+     * @param cache Low level asset cache.
+     * @param text The text to show (might change).
      * @param fontDescriptor Container class describing font properties of this label.
      */
-    AssetLabelImpl(String text, FontDescriptor fontDescriptor) {
+    AssetLabelImpl(LibGdxAssetCache cache, String text, FontDescriptor fontDescriptor) {
 
-        font = new FontGenerator(fontDescriptor).generateFont();
-        label = new Label(text, new Label.LabelStyle(font, font.getColor()));
+        this.cache = cache;
+        font = cache.getFont(fontDescriptor);
+        label = new Label(text, createDefaultLabelStyle());
+    }
+
+    private Label.LabelStyle createDefaultLabelStyle() {
+
+        currentBackground = cache.getPixMapTexture(DEFAULT_BACKGROUND_COLOR);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, font.getColor());
+        labelStyle.background = new Image(currentBackground).getDrawable();
+
+        return labelStyle;
     }
 
     @Override
@@ -70,6 +103,20 @@ class AssetLabelImpl implements AssetLabel {
     }
 
     @Override
+    public void setBackgroundColor(Color color) {
+
+        // prepare new style
+        Texture newTexture = cache.getPixMapTexture(color);
+        Label.LabelStyle newStyle = new Label.LabelStyle(label.getStyle());
+        newStyle.background = new Image(newTexture).getDrawable();
+        label.setStyle(newStyle);
+
+        // release old texture & set new one
+        cache.releasePixMapTexture(currentBackground);
+        currentBackground = newTexture;
+    }
+
+    @Override
     public Actor getActor() {
         return label;
     }
@@ -77,6 +124,18 @@ class AssetLabelImpl implements AssetLabel {
     @Override
     public void dispose() {
 
-        font.dispose();
+        cache.releaseFont(font);
+    }
+
+    /**
+     * Get the wrapped gdx label.
+     *
+     * <p>
+     *     Required for modal dialog.
+     * </p>
+     */
+    Label getLabel() {
+
+        return label;
     }
 }

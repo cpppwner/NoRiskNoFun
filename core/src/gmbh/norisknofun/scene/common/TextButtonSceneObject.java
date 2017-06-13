@@ -1,7 +1,10 @@
 package gmbh.norisknofun.scene.common;
 
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.assets.AssetTextButton;
+import gmbh.norisknofun.scene.SceneObject;
 
 /**
  * Text button scene object.
@@ -11,7 +14,7 @@ import gmbh.norisknofun.assets.AssetTextButton;
  *     If the button's text might change, prefer this scene object over the {@link ImageButtonSceneObject}.
  * </p>
  */
-public class TextButtonSceneObject extends ButtonSceneObject {
+public class TextButtonSceneObject extends SceneObject {
 
     private final AssetTextButton textButton;
 
@@ -31,9 +34,10 @@ public class TextButtonSceneObject extends ButtonSceneObject {
      */
     public TextButtonSceneObject(AssetTextButton textButton, AssetSound sound) {
 
-        super(sound);
+        super();
         this.textButton = textButton;
 
+        addListener(new PlaySoundClickListener(sound));
         setSize(textButton.getWidth(), textButton.getHeight());
         addActor(textButton.getActor());
     }
@@ -49,5 +53,15 @@ public class TextButtonSceneObject extends ButtonSceneObject {
     public void dispose() {
         textButton.dispose();
         super.dispose();
+    }
+
+    @Override
+    public boolean addListener(EventListener listener) {
+        return textButton.getActor().addListener(listener);
+    }
+
+    @Override
+    public boolean removeListener(EventListener listener) {
+        return textButton.getActor().removeListener(listener);
     }
 }

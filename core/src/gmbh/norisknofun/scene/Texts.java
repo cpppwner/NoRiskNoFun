@@ -12,6 +12,10 @@ public final class Texts {
     public static final String SERVER_LOBBY = "Lobby";
     public static final String SELECT_NAME_LABEL = "Select your name:";
     public static final String NAME_HINT_TEXT = "Name";
+    public static final String ERROR_DIALOG_TITLE = "Error";
+    public static final String ENTER_NAME_LABEL = "Enter Name:";
+    public static final String ENTER_SERVER_IP_LABEL = "Enter Server IP:";
+    public static final String SERVER_IP_HINT_TEXT = "IP Address";
 
     private Texts() {}
 }
