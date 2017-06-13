@@ -6,6 +6,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
+import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;

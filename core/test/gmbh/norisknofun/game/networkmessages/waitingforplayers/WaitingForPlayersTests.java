@@ -11,18 +11,24 @@ import java.io.ObjectOutputStream;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by Philipp Mödritscher on 23.05.2017.
  *
  */
 
-public class WaitingFoPlayersTests {
+public class WaitingForPlayersTests {
     private ByteArrayOutputStream baos;
     private ObjectOutputStream oos;
 
 
     private  final String PLAYER = "Player1";
+    private  final String MAP = "map1";
+    private  final int MAXPLAYER = 4;
+    private  final int RGB  = 255;
+    private final String reason="Player with same Name not allowed";
+
     private  final boolean START = true;
     @Before
     public void setUp() throws IOException {
@@ -43,14 +49,48 @@ public class WaitingFoPlayersTests {
     @Test
     public void playerJoinedCheck() throws IOException, ClassNotFoundException {
 
-        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(PLAYER);
+
+
+        PlayerAccepted playerJoinedCheck = new PlayerAccepted(PLAYER);
+        playerJoinedCheck.setMapName(MAP);
+        playerJoinedCheck.setMaxNumPlayers(MAXPLAYER);
+        playerJoinedCheck.setPlayerColor(RGB);
+
         oos.writeObject (playerJoinedCheck);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
-        PlayerJoinedCheck playerJoinedCheck1 =(PlayerJoinedCheck) ois.readObject();
+        PlayerAccepted playerJoinedCheck1 =(PlayerAccepted) ois.readObject();
         assertEquals(playerJoinedCheck1.getPlayerName(),PLAYER);
+        assertEquals(playerJoinedCheck1.getMapName(),MAP);
+        assertEquals(playerJoinedCheck1.getMaxNumPlayers(),MAXPLAYER);
+        assertEquals(playerJoinedCheck1.getPlayerColor(),RGB);
 
     }
+
+    @Test
+    public void playerRejected() throws IOException, ClassNotFoundException {
+
+        PlayerRejected playerRejected = new PlayerRejected();
+        oos.writeObject (playerRejected);
+        ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
+        ObjectInputStream ois = new ObjectInputStream (bais);
+        PlayerRejected playerRejected1 =(PlayerRejected) ois.readObject();
+        assertEquals(playerRejected1.getReason(),reason);
+
+    }
+
+    @Test
+    public void playersInGame() throws IOException, ClassNotFoundException {
+
+        PlayersInGame playersInGame = new PlayersInGame();
+        oos.writeObject (playersInGame);
+        ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
+        ObjectInputStream ois = new ObjectInputStream (bais);
+        PlayersInGame playersInGame1 =(PlayersInGame) ois.readObject();
+        assertNull(playersInGame1.getAllPlayers());
+
+    }
+
     @Test
     public void startGame() throws IOException, ClassNotFoundException {
 

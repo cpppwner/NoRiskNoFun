@@ -1,5 +1,6 @@
 package gmbh.norisknofun.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by pippp on 03.06.2017.
  */
 
-public class Players {
+public class Players implements Serializable{
 
     private List<Player> playerlist = new ArrayList<>();
 

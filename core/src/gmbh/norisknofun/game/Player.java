@@ -1,6 +1,7 @@
 package gmbh.norisknofun.game;
 
 
+import java.awt.Color;
 
 /**
  * Created by pippp on 17.05.2017.
@@ -12,15 +13,22 @@ public class Player {
     private boolean ishost=false;
     private int troopToSpread =0;
     private String id = "";
+    private int playerColor;
 
 
     public Player(){
         // for testing
     }
 
+    public Player(String playername, String id,int playerColor){
+        this.playername=playername;
+        this.id=id;
+        this.playerColor = playerColor;
+    }
     public Player(String playername, String id){
         this.playername=playername;
         this.id=id;
+
     }
 
     public String getPlayername() {

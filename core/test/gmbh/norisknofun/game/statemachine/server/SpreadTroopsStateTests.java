@@ -4,6 +4,8 @@ package gmbh.norisknofun.game.statemachine.server;
 import org.junit.Test;
 import org.junit.Before;
 
+import java.awt.Color;
+
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
@@ -23,8 +25,8 @@ public class SpreadTroopsStateTests extends GdxTest {
     public void setup() {
         MessageBus messageBus = new MessageBusImpl(); // can't mock because it's a final class
         data = new GameDataServer();
-        player = new Player("Player1", "123");
-        player2 = new Player("Player2", "987");
+        player = new Player("Player1", "123", Color.RED.getRGB());
+        player2 = new Player("Player2", "987",Color.RED.getRGB());
 
 
         data.getPlayers().addPlayer(player);
