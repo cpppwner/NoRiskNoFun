@@ -1,8 +1,8 @@
 package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
-import java.awt.Color;
 
 import gmbh.norisknofun.game.ColorPool;
 import gmbh.norisknofun.game.GameDataServer;
@@ -63,7 +63,7 @@ public class WaitingForPlayersState extends State {
     private void addPlayer(PlayerJoined message, String senderId){
         PlayerAccepted playerAccepted = new PlayerAccepted(message.getPlayerName());
         Color color = colorPool.getNextAvailableColor();
-        int playerColor = color.getRGB();
+        int playerColor = Color.argb8888(color); // Color.argb8888() should be equivalent to AWT's getRGB()
         playerAccepted.setPlayerColor(playerColor);
         playerAccepted.setMaxNumPlayers(context.getGameData().getMaxPlayer());
         try{

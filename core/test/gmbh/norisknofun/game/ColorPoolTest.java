@@ -1,10 +1,11 @@
 package gmbh.norisknofun.game;
 
+import com.badlogic.gdx.graphics.Color;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.Color;
 import java.util.List;
 
 import static org.hamcrest.Matchers.instanceOf;
