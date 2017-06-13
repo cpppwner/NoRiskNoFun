@@ -57,7 +57,7 @@ public class ServerContext implements InboundMessageHandler {
         //  delegate this message to the appropriate state
         // note the senderId is a unique identifier identifying the client who sent the message
         // senderId is equal to Client#getId() method
-        state.handleMessage(senderId,(BasicMessageImpl)message);
+        state.handleMessage(senderId, message);
 
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
@@ -42,10 +42,11 @@ public class SpreadTroopsState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
 
 
         if (message.getType().equals(SpawnTroop.class)){
+            System.out.println("SERVER SPREAD TROOPS: RECEIVED SPAWNTROOP");
             spawnTroopOnRegion((SpawnTroop)message);
         }
         else{

@@ -32,7 +32,7 @@ public class ClientContext  {
 
     public void delegateMessage(Message message){
 
-        state.handleMessage("",(BasicMessageImpl)message); // work with interfaces
+        state.handleMessage("", message); // work with interfaces
     }
 
     public void sendMessage(BasicMessageImpl message){

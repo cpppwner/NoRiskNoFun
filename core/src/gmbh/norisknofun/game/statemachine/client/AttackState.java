@@ -1,9 +1,9 @@
 package gmbh.norisknofun.game.statemachine.client;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import com.badlogic.gdx.Gdx;
+
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.statemachine.State;
-import gmbh.norisknofun.game.statemachine.server.*;
-import gmbh.norisknofun.game.statemachine.client.ChooseTargetState;
 
 /**
  * Created by Katharina on 19.05.2017.
@@ -16,6 +16,8 @@ public class AttackState extends State {
 
     public AttackState(ClientContext context){
         this.context=context;
+        Gdx.app.log("ATTACK STATE","ENTERED");
+
         state= new ChooseTargetState(context);
     }
     @Override
@@ -29,7 +31,7 @@ public class AttackState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
         state.handleMessage(senderId,message);
     }
 }
