@@ -1,6 +1,7 @@
 package gmbh.norisknofun.game;
 
-import java.awt.Color;
+
+import com.badlogic.gdx.graphics.Color;
 
 /**
  * Created by philipp on 13.06.2017.
