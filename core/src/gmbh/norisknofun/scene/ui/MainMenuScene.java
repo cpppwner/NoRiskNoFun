@@ -94,6 +94,12 @@ public final class MainMenuScene extends SceneBase {
             // error occurred and we'll show it
             AssetModalDialog errorDialog = sceneData.createModalDialog(lastError, Assets.ERROR_DIALOG_DESCRIPTOR);
             errorDialog.show(getStage());
+            try {
+                sceneData.stopGameServices(); // stop game services if any where running
+            } catch (InterruptedException e) {
+                Gdx.app.error(getClass().getSimpleName(), "Interrupted while stopping game services", e);
+                Thread.currentThread().interrupt();
+            }
         }
     }
 

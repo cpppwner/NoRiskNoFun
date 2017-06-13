@@ -2,7 +2,6 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
@@ -49,6 +48,6 @@ public class SpreadTroopsState extends State {
 
     private void setNextPlayer(String playername){
         if(playername!=null)
-       context.getGameData().setCurrentplayer(playername);
+       context.getGameData().setCurrentPlayer(playername);
     }
 }

@@ -82,7 +82,7 @@ public class ChooseTargetState extends State {
         AssetMap.Region attackedRegion= data.getRegionByName(message.getAttackedRegion());
         AssetMap.Region orginRegion= data.getRegionByName(message.getOriginRegion());
 
-        if(data.getCurrentplayer().getPlayername().equals(attackedRegion.getOwner()))
+        if(data.getCurrentplayer().getPlayerName().equals(attackedRegion.getOwner()))
             check=false;
 
         if(!orginRegion.getNeighbouringRegions().contains(attackedRegion.getName()))

@@ -17,7 +17,6 @@ import gmbh.norisknofun.assets.FontDescriptor;
 import gmbh.norisknofun.assets.ModalDialogDescriptor;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
 import gmbh.norisknofun.assets.TextFieldDescriptor;
-import gmbh.norisknofun.game.Changeable;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.GameServices;
@@ -40,8 +39,6 @@ public class SceneData {
     private final GameData gameDataClient;
     private final GameServices gameServices;
 
-    private final Changeable<String> lastError;
-
     /**
      * Initialize SceneData instance.
      *
@@ -54,8 +51,6 @@ public class SceneData {
         gameDataServer = new GameDataServer();
         gameDataClient = new GameData();
         gameServices = new GameServices(socketFactory, gameDataServer, gameDataClient);
-
-        lastError = new Changeable<>();
     }
 
     /**
@@ -259,8 +254,7 @@ public class SceneData {
      * @param lastError The last error messaged.
      */
     public void setLastError(String lastError) {
-        this.lastError.setValue(lastError);
-        this.lastError.setChanged();
+        gameDataClient.setLastError(lastError);
     }
 
     /**
@@ -269,15 +263,7 @@ public class SceneData {
      * @return The last error message that was set or {@code null} if none was set.
      */
     public String getLastError() {
-
-        String result = null;
-
-        if (lastError.hasChanged()) {
-            lastError.resetChanged();
-            result = lastError.getValue();
-        }
-
-        return result;
+        return gameDataClient.getLastError();
     }
 
     /**

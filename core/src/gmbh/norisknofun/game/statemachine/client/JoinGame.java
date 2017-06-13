@@ -1,5 +1,7 @@
 package gmbh.norisknofun.game.statemachine.client;
 
+import com.badlogic.gdx.Gdx;
+
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerAccepted;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
@@ -21,6 +23,7 @@ class JoinGame extends State {
     @Override
     public void enter() {
 
+        // send our join request to the server
         Message joinRequest = new PlayerJoined(clientContext.getGameData().getPlayerName());
         clientContext.sendMessage(joinRequest);
     }
@@ -32,8 +35,9 @@ class JoinGame extends State {
             handlePlayerRejected((PlayerRejected)message);
         } else if (message instanceof PlayerAccepted) {
             handlePlayerAccepted((PlayerAccepted)message);
+        } else {
+            Gdx.app.log(getClass().getSimpleName(), "Unsupported message class received " + message.getType().getName());
         }
-
     }
 
     private void handlePlayerAccepted(PlayerAccepted message) {
@@ -41,5 +45,9 @@ class JoinGame extends State {
     }
 
     private void handlePlayerRejected(PlayerRejected message) {
+
+        // our join request was rejected by the server
+        clientContext.getGameData().setLastError("Join rejected: " + message.getReason());
+        clientContext.setState(new ErrorState());
     }
 }

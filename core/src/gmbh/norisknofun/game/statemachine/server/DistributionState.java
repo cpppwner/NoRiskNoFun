@@ -40,7 +40,7 @@ public class DistributionState extends State {
     }
 
     private void moveTroop(MoveTroop message){ //todo Refactor later
-        if(message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
+        if(message.getPlayername().equals(data.getCurrentplayer().getPlayerName())) {
 
             AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());
             if (destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region

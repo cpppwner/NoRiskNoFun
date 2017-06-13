@@ -17,6 +17,23 @@ public class Changeable <T> {
      */
     private T currentValue = null;
 
+    public Changeable() {
+
+    }
+
+    /**
+     * Initialize changeable with initial value.
+     *
+     * <p>
+     *     This will not set the changed flag.
+     * </p>
+     *
+     * @param initialValue The initial value to use.
+     */
+    public Changeable(T initialValue) {
+        currentValue = initialValue;
+    }
+
     public void setValue(T newValue) {
         currentValue = newValue;
     }

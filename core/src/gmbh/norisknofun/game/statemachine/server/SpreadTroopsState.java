@@ -66,7 +66,7 @@ public class SpreadTroopsState extends State {
         int i = 0;
 
         // check if message comes from current player
-        if (message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
+        if (message.getPlayername().equals(data.getCurrentplayer().getPlayerName())) {
             AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getRegionname());
 
             if (destinationregion.getOwner() == null || destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region
@@ -92,8 +92,8 @@ public class SpreadTroopsState extends State {
 
 
     private void setCurrentPlayer(int playerindex){
-        data.setCurrentplayer(data.getPlayers().getPlayerlist().get(playerindex).getPlayername());
-        String playername =data.getCurrentplayer().getPlayername();
+        data.setCurrentplayer(data.getPlayers().getPlayerlist().get(playerindex).getPlayerName());
+        String playername =data.getCurrentplayer().getPlayerName();
         PlayerSpread playerSpread = new PlayerSpread(playername,true);
 
 

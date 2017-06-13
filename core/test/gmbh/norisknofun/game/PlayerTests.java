@@ -23,7 +23,7 @@ public class PlayerTests {
         Player player2 = new Player("P1", "123");
 
         assertNotNull(player2.getId());
-        assertNotNull(player2.getPlayername());
+        assertNotNull(player2.getPlayerName());
     }
 
     @Test
@@ -32,14 +32,14 @@ public class PlayerTests {
 
 
         assertEquals(player2.getId(), "456");
-        assertEquals(player2.getPlayername(), "P2");
+        assertEquals(player2.getPlayerName(), "P2");
         assertEquals(player2.getTroopToSpread(), 0);
         assertEquals(player2.ishost(), false);
     }
 
     @Test
     public void getPlayernameReturnsCorrectName() {
-        assertEquals(player.getPlayername(), "P1");
+        assertEquals(player.getPlayerName(), "P1");
     }
 
     @Test
@@ -59,9 +59,9 @@ public class PlayerTests {
 
     @Test
     public void setPlayernameSetsPlayername() {
-        player.setPlayername("ABC");
+        player.setPlayerName("ABC");
 
-        assertEquals(player.getPlayername(), "ABC");
+        assertEquals(player.getPlayerName(), "ABC");
     }
 
     @Test

@@ -31,11 +31,11 @@ public class Player {
 
     }
 
-    public String getPlayername() {
+    public String getPlayerName() {
         return playername;
     }
 
-    public void setPlayername(String playername) {
+    public void setPlayerName(String playername) {
         this.playername = playername;
     }
 

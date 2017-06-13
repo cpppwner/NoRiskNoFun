@@ -3,19 +3,18 @@ package gmbh.norisknofun.scene.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
-import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
 import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
+import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 import gmbh.norisknofun.scene.common.TextFieldSceneObject;
 
 /**
@@ -107,19 +106,25 @@ public class CreateGameScene extends SceneBase {
         super.dispose();
     }
 
-    private final class BackClickListener extends ClickListener {
+    private final class BackClickListener extends SwitchSceneClickListener {
+
+        private BackClickListener() {
+            super(SceneNames.MAIN_MENU_SCENE);
+        }
+
         @Override
         public void clicked(InputEvent event, float x, float y) {
             sceneData.setMaximumNumberOfPlayers(0);
-            SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+            super.clicked(event, x, y);
         }
     }
 
-    private final class ContinueClickListener extends ClickListener {
+    private final class ContinueClickListener extends SwitchSceneClickListener {
 
         private final int numPlayersChosen;
 
         private ContinueClickListener(int numPlayersChosen) {
+            super(SceneNames.MAP_SELECTION_SCENE);
             this.numPlayersChosen = numPlayersChosen;
         }
 
@@ -134,9 +139,8 @@ public class CreateGameScene extends SceneBase {
             } else {
                 sceneData.setPlayerName(textField.getText());
                 sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
-                SceneManager.getInstance().setActiveScene(SceneNames.MAP_SELECTION_SCENE);
+                super.clicked(event, x, y);
             }
-
         }
     }
 }

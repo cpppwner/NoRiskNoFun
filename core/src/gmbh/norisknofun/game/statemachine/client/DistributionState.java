@@ -47,6 +47,6 @@ public class DistributionState extends State {
 
     private void addTroops(int amount){
         if(amount>=0)
-        context.getGameData().getCurrentplayer().setTroopToSpread(amount);
+        context.getGameData().getCurrentPlayer().setTroopToSpread(amount);
     }
 }

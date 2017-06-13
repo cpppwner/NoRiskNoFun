@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
-import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
@@ -27,10 +26,10 @@ public class DistributionStateTests {
         context.setState(new DistributionState(context));
         Player player = new Player ();
         player.setIshost(false);
-        player.setPlayername("Franz");
+        player.setPlayerName("Franz");
         player.setTroopToSpread(0);
         data.addPlayer(player);
-        data.setCurrentplayer(player.getPlayername());
+        data.setCurrentPlayer(player.getPlayerName());
     }
 
 
@@ -39,7 +38,7 @@ public class DistributionStateTests {
     public void AddTroopsMessageSetTroopsToSpread() {
         BasicMessageImpl message = new AddTroops(5);
         context.delegateMessage(message);
-        assertEquals(5, data.getCurrentplayer().getTroopToSpread());
+        assertEquals(5, data.getCurrentPlayer().getTroopToSpread());
     }
 
     @Test
@@ -47,7 +46,7 @@ public class DistributionStateTests {
 
         BasicMessageImpl message = new AddTroops(-5);
         context.delegateMessage(message);
-        assertEquals(0, data.getCurrentplayer().getTroopToSpread());
+        assertEquals(0, data.getCurrentPlayer().getTroopToSpread());
 
     }
 }

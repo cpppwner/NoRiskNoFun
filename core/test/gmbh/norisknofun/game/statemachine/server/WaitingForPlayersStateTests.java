@@ -6,9 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
-import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
@@ -46,23 +43,23 @@ public class WaitingForPlayersStateTests {
     public void PlayerJoinedMessageAddsPlayer() {
 
         Player player = new Player();
-        player.setPlayername("Player1");
-        BasicMessageImpl message = new PlayerJoined(player.getPlayername());
+        player.setPlayerName("Player1");
+        BasicMessageImpl message = new PlayerJoined(player.getPlayerName());
 
 
 
         context.handle("SomeID", message);
 
         assertEquals(1, data.getPlayers().getPlayerlist().size());
-        assertEquals(data.getPlayers().getPlayerlist().get(0).getPlayername(), player.getPlayername());
+        assertEquals(data.getPlayers().getPlayerlist().get(0).getPlayerName(), player.getPlayerName());
 
     }
 
     @Test
     public void PlayerWithSameNameWillNotBeAddedTwice() {
         Player player = new Player();
-        player.setPlayername("Player1");
-        BasicMessageImpl message = new PlayerJoined(player.getPlayername());
+        player.setPlayerName("Player1");
+        BasicMessageImpl message = new PlayerJoined(player.getPlayerName());
 
         context.handle("SomeID", message);
         context.handle("SomeID", message);
@@ -73,8 +70,8 @@ public class WaitingForPlayersStateTests {
     @Test
     public void NullPlayernameWillNotBeAdded() {
         Player player = new Player();
-        player.setPlayername(null);
-        BasicMessageImpl message = new PlayerJoined(player.getPlayername());
+        player.setPlayerName(null);
+        BasicMessageImpl message = new PlayerJoined(player.getPlayerName());
 
         context.handle("SomeID", message);
 

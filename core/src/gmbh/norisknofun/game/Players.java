@@ -17,11 +17,11 @@ public class Players implements Serializable{
 
     public boolean addPlayer(Player player){
         // player with null name will not be added
-        if (player.getPlayername() == null || player.getId() == null) {
+        if (player.getPlayerName() == null || player.getId() == null) {
             return false;
         }
         for(Player p: playerlist){
-            if(p.getPlayername().equals(player.getPlayername()) || p.getId().equals(player.getId())){
+            if(p.getPlayerName().equals(player.getPlayerName()) || p.getId().equals(player.getId())){
                 return false;
             }
         }
@@ -33,7 +33,7 @@ public class Players implements Serializable{
 
     public boolean removePlayer(String playername){
         for(Player p: playerlist){
-            if(p.getPlayername().equals(playername)){
+            if(p.getPlayerName().equals(playername)){
                 playerlist.remove(p);
                 return true;
             }
@@ -43,7 +43,7 @@ public class Players implements Serializable{
     public Player getPlayerByName(String name){
 
         for(Player p: playerlist){
-            if(p.getPlayername().equals(name)){
+            if(p.getPlayerName().equals(name)){
                 return p;
             }
         }
@@ -63,7 +63,7 @@ public class Players implements Serializable{
     private int getPlayerIndexByName(String playername){
         int index=0;
         for(int i = 0; i< playerlist.size(); i++){
-            if(playerlist.get(i).getPlayername().equals(playername)){
+            if(playerlist.get(i).getPlayerName().equals(playername)){
                 index=i;
                 i= playerlist.size();
             }
@@ -84,7 +84,7 @@ public class Players implements Serializable{
             index++;
         }
 
-        return playerlist.get(index).getPlayername();
+        return playerlist.get(index).getPlayerName();
     }
     public List<Player> getPlayerlist(){
         return Collections.unmodifiableList(playerlist);

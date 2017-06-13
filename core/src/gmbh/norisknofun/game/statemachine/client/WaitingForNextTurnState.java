@@ -43,9 +43,9 @@ public class WaitingForNextTurnState extends State {
     }
 
 
-    private void setNextPlayer(String playername){
-        if(playername!=null){
-            data.setCurrentplayer(playername);
+    private void setNextPlayer(String playerName){
+        if(playerName!=null){
+            data.setCurrentPlayer(playerName);
             //todo check if nextplayer name is your own player name and change state
         }
     }
