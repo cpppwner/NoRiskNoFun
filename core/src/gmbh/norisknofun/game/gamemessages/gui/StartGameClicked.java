@@ -1,8 +1,14 @@
-package gmbh.norisknofun.game.gamemessages;
+package gmbh.norisknofun.game.gamemessages.gui;
+
+import gmbh.norisknofun.game.networkmessages.Message;
 
 /**
- * Created by cpppwner on 14.06.17.
+ * Message class sent by the UI (lobby scene) when host pressed the start game button.
  */
+public class StartGameClicked implements Message {
 
-public class StartGameClicked {
+    @Override
+    public Class<? extends Message> getType() {
+        return getClass();
+    }
 }
