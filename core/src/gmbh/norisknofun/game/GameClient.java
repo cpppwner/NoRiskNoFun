@@ -26,7 +26,7 @@ import gmbh.norisknofun.network.SessionEventHandler;
  *     and processing them.
  * </p>
  */
-public class GameClient implements SessionEventHandler {
+class GameClient implements SessionEventHandler {
 
     /**
      * Queue storing all inbound messages.
@@ -40,7 +40,7 @@ public class GameClient implements SessionEventHandler {
     private final Client client;
     private final ClientContext clientContext;
 
-    public GameClient(GameData data) {
+    GameClient(GameData data) {
 
         inboundMessageQueue = new ConcurrentLinkedQueue<>();
         client = new Client(inboundMessageQueue);
@@ -55,7 +55,7 @@ public class GameClient implements SessionEventHandler {
      *     The rendering thread is only allowed to call this method.
      * </p>
      */
-    public void processPendingMessages() {
+    void processPendingMessages() {
 
         for (Message message = inboundMessageQueue.poll(); message != null; message = inboundMessageQueue.poll()) {
             clientContext.delegateMessage(message);
@@ -100,7 +100,7 @@ public class GameClient implements SessionEventHandler {
      *
      * @param message The message coming from the GUI.
      */
-    public void processGuiMessage(Message message) {
+    void processGuiMessage(Message message) {
 
         inboundMessageQueue.add(message);
     }

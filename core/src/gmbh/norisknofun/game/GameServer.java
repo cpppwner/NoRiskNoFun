@@ -18,7 +18,7 @@ import gmbh.norisknofun.game.statemachine.server.ServerContext;
 /**
  * Game server for handling game logic.
  */
-public class GameServer {
+class GameServer {
 
     private static final long SESSION_EVENT_POLL_TIMEOUT = 1;
     private static final TimeUnit SESSION_EVENT_POLL_TIME_UNIT = TimeUnit.SECONDS;
@@ -29,7 +29,7 @@ public class GameServer {
     private final Clients clients;
     private final ServerContext serverContext;
 
-    public GameServer(GameDataServer data, SessionEventListener eventListener) {
+    GameServer(GameDataServer data, SessionEventListener eventListener) {
 
         gameServerThread = createGameServerThread();
         this.eventListener = eventListener;
@@ -79,7 +79,7 @@ public class GameServer {
         clients.closeAll();
     }
 
-    public synchronized boolean isRunning() {
+    synchronized boolean isRunning() {
 
         return gameServerThread.isAlive();
     }
