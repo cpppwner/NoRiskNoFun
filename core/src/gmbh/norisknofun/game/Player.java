@@ -62,4 +62,12 @@ public class Player {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void setColor(int color) {
+        this.playerColor = color;
+    }
+
+    public int getColor() {
+        return playerColor;
+    }
 }

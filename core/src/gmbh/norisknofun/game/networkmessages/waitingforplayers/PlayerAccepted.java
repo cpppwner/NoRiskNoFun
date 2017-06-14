@@ -4,6 +4,8 @@ package gmbh.norisknofun.game.networkmessages.waitingforplayers;
  * Created by Philipp Mödritscher on 10.05.2017.
  */
 
+import gmbh.norisknofun.game.Player;
+
 /**
  * If Player can Join then Server sends true otherwise PlayerRejected
  *
@@ -18,9 +20,10 @@ public class PlayerAccepted extends PlayerJoined {
     private int maxNumPlayers;
     private String mapName;
 
-    public PlayerAccepted(String playerName) {
-        super(playerName);
-
+    public PlayerAccepted(Player player) {
+        super(player.getPlayerName());
+        playerId = player.getId();
+        playerColor = player.getColor();
     }
 
 
@@ -28,16 +31,8 @@ public class PlayerAccepted extends PlayerJoined {
         return playerId;
     }
 
-    public void setPlayerId(String playerId) {
-        this.playerId = playerId;
-    }
-
     public int getPlayerColor() {
         return playerColor;
-    }
-
-    public void setPlayerColor(int playerColor) {
-        this.playerColor = playerColor;
     }
 
     public int getMaxNumPlayers() {

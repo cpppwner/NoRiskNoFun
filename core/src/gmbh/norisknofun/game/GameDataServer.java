@@ -95,6 +95,10 @@ public class GameDataServer {
 
     public Player getPlayerById(String senderId) {return players.getPlayerByID(senderId);}
 
+    public int getNumPlayers() {
+        return players.getNumPlayers();
+    }
+
     public int[] getAttackerDiceResult() {
         return attackerDiceResult;
     }
@@ -131,4 +135,7 @@ public class GameDataServer {
     }
 
 
+    public boolean isServerFull() {
+        return getNumPlayers() == getMaxPlayer();
+    }
 }

@@ -16,30 +16,19 @@ import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
- * Created by pippp on 15.05.2017.
+ * Server side state that is used, when waiting for further players to join the game.
  */
+class WaitingForPlayersState extends State {
 
-public class WaitingForPlayersState extends State {
-
-    private ServerContext context;
+    private final ServerContext context;
     private final GameDataServer data;
-    ColorPool colorPool;
-    public WaitingForPlayersState(ServerContext context){
+    private final ColorPool colorPool;
+
+    WaitingForPlayersState(ServerContext context){
 
         this.context=context;
         this.data=context.getGameData();
         colorPool= new ColorPool();
-    }
-
-
-    @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
     }
 
     @Override
@@ -50,7 +39,7 @@ public class WaitingForPlayersState extends State {
         }else if(message.getType().equals(StartGame.class) ){
             startGame();
         }else{
-            Gdx.app.log("Server: WaitingforPlayerState","message unknown: " + message.getType().getSimpleName());
+            Gdx.app.log(getClass().getSimpleName(), "message unknown: " + message.getType().getName());
         }
     }
 
@@ -60,42 +49,32 @@ public class WaitingForPlayersState extends State {
     }
 
 
-    private void addPlayer(PlayerJoined message, String senderId){
-        PlayerAccepted playerAccepted = new PlayerAccepted(message.getPlayerName());
-        Color color = colorPool.getNextAvailableColor();
-        int playerColor = Color.argb8888(color); // Color.argb8888() should be equivalent to AWT's getRGB()
-        playerAccepted.setPlayerColor(playerColor);
-        playerAccepted.setMaxNumPlayers(context.getGameData().getMaxPlayer());
-        try{
-            playerAccepted.setMapName(context.getGameData().getMapAsset().getName());
-        }catch(IllegalStateException e){
-            //Map not set
+    private void addPlayer(PlayerJoined message, String senderId) {
 
+        // check if the player can be accepted
+        if (data.isServerFull()) {
+            // server full - reject new player
+            Message reject = new PlayerRejected("Server is full.");
+            context.sendMessage(reject, senderId);
+        } else if (data.getPlayerByName(message.getPlayerName()) != null) {
+            // player with same name already exists
+            Message reject = new PlayerRejected("Name is already in use.");
+            context.sendMessage(reject, senderId);
+        } else {
+            // all fine, accept player
+            acceptNewPlayer(message, senderId);
+            context.sendMessage(new PlayersInGame(data.getPlayers()));
         }
-
-        playerAccepted.setPlayerId(senderId);
-
-        PlayersInGame playersInGame = new PlayersInGame();
-
-        playersInGame.setAllPlayers(context.getGameData().getPlayers());
-
-        if(data.getPlayers().addPlayer(new Player(message.getPlayerName(),senderId,playerColor))) {
-
-
-
-            context.sendMessage(playersInGame);
-            context.sendMessage(playerAccepted,senderId);
-
-        }
-        else {
-            PlayerRejected playerRejected = new PlayerRejected();
-            colorPool.relaseColor(color);
-            context.sendMessage(playerRejected,senderId);
-        }
-
     }
 
+    private void acceptNewPlayer(PlayerJoined message, String senderId) {
 
+        Player newPlayer = new Player(message.getPlayerName(), senderId, Color.argb8888(colorPool.getNextAvailableColor()));
+        data.getPlayers().addPlayer(newPlayer);
 
-
+        PlayerAccepted playerAccepted = new PlayerAccepted(newPlayer);
+        playerAccepted.setMapName(data.getMapFilename());
+        playerAccepted.setMaxNumPlayers(data.getMaxPlayer());
+        context.sendMessage(playerAccepted, senderId);
+    }
 }

@@ -2,7 +2,6 @@ package gmbh.norisknofun.game.statemachine.server;
 
 
 import gmbh.norisknofun.game.GameDataServer;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.server.InboundMessageHandler;
@@ -41,7 +40,7 @@ public class ServerContext implements InboundMessageHandler {
         return this.state;
     }
 
-    public void sendMessage(BasicMessageImpl message){
+    public void sendMessage(Message message){
 
        messageBus.distributeOutboundMessage(message);
 
@@ -51,7 +50,7 @@ public class ServerContext implements InboundMessageHandler {
 
     }
 
-    public void sendMessage(BasicMessageImpl message, String id){
+    public void sendMessage(Message message, String id){
         messageBus.distributeOutboundMessage(id,message);
     }
 

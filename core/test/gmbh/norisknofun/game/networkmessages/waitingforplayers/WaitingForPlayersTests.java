@@ -10,8 +10,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
+import gmbh.norisknofun.game.Player;
+import gmbh.norisknofun.game.Players;
+
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by Philipp Mödritscher on 23.05.2017.
@@ -49,12 +54,12 @@ public class WaitingForPlayersTests {
     @Test
     public void playerJoinedCheck() throws IOException, ClassNotFoundException {
 
+        Player newPlayer = new Player(PLAYER, "", RGB);
 
 
-        PlayerAccepted playerJoinedCheck = new PlayerAccepted(PLAYER);
+        PlayerAccepted playerJoinedCheck = new PlayerAccepted(newPlayer);
         playerJoinedCheck.setMapName(MAP);
         playerJoinedCheck.setMaxNumPlayers(MAXPLAYER);
-        playerJoinedCheck.setPlayerColor(RGB);
 
         oos.writeObject (playerJoinedCheck);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
@@ -70,7 +75,7 @@ public class WaitingForPlayersTests {
     @Test
     public void playerRejected() throws IOException, ClassNotFoundException {
 
-        PlayerRejected playerRejected = new PlayerRejected();
+        PlayerRejected playerRejected = new PlayerRejected(reason);
         oos.writeObject (playerRejected);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
@@ -82,12 +87,12 @@ public class WaitingForPlayersTests {
     @Test
     public void playersInGame() throws IOException, ClassNotFoundException {
 
-        PlayersInGame playersInGame = new PlayersInGame();
+        PlayersInGame playersInGame = new PlayersInGame(new Players());
         oos.writeObject (playersInGame);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayersInGame playersInGame1 =(PlayersInGame) ois.readObject();
-        assertNull(playersInGame1.getAllPlayers());
+        assertThat(playersInGame1.getAllPlayers().size(), is(0));
 
     }
 

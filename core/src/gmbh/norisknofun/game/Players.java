@@ -86,6 +86,11 @@ public class Players implements Serializable{
 
         return playerlist.get(index).getPlayerName();
     }
+
+    public int getNumPlayers() {
+        return playerlist.size();
+    }
+
     public List<Player> getPlayerlist(){
         return Collections.unmodifiableList(playerlist);
     }

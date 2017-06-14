@@ -14,17 +14,16 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  *
  * Server -> Client
  */
-
-
-
 public class PlayerRejected extends BasicMessageImpl implements Serializable {
 
 
-    private final String reason="Player with same Name not allowed";
+    private final String reason;
+
+    public PlayerRejected(String reason) {
+        this.reason = reason;
+    }
 
     public String getReason() {
         return reason;
     }
-
-
 }

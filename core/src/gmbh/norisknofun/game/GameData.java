@@ -30,6 +30,8 @@ public class GameData {
     private final Changeable<List<Player>> allPlayers = new Changeable<>();
 
     private int[] diceRoll;
+    private int maxNumPlayers;
+    private String mapFilename;
 
     public GameData() {
         allPlayers.setValue(new LinkedList<Player>());
@@ -92,11 +94,15 @@ public class GameData {
     }
 
     public void setPlayerName(String playerName) {
-        myself.setPlayerName(playerName);
+        getMyself().setPlayerName(playerName);
     }
 
     public String getPlayerName() {
-        return myself.getPlayerName();
+        return getMyself().getPlayerName();
+    }
+
+    public Player getMyself() {
+        return myself;
     }
 
     /**
@@ -157,5 +163,13 @@ public class GameData {
 
     public List<Player> getPlayers() {
         return Collections.unmodifiableList(allPlayers.getValue());
+    }
+
+    public void setMapFilename(String mapFilename) {
+        this.mapFilename = mapFilename;
+    }
+
+    public void setMaxNumPlayers(int maxNumPlayers) {
+        this.maxNumPlayers = maxNumPlayers;
     }
 }
