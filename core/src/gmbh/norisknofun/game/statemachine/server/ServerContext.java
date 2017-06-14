@@ -4,7 +4,6 @@ package gmbh.norisknofun.game.statemachine.server;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameDataServer;
-
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.server.InboundMessageHandler;
 import gmbh.norisknofun.game.server.MessageBus;

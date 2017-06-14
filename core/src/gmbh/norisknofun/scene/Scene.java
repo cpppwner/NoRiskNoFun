@@ -1,7 +1,6 @@
 package gmbh.norisknofun.scene;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * Interface for all scenes.

@@ -1,12 +1,7 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.networkmessages.Message;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import gmbh.norisknofun.game.GameDataServer;
-import gmbh.norisknofun.game.networkmessages.Dice;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceAmount;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceResult;
 import gmbh.norisknofun.game.statemachine.State;
@@ -49,6 +44,7 @@ public class EvaluateDiceResultState extends State {
         int winsOfDefender=0;
         int winsOfAttacker=0;
 
+
         if(getAttackerId().equals(senderId)){
             data.setAttackerDiceResult(message.getDiceResults());
         }else if(getDefenderId().equals(senderId)){
@@ -56,8 +52,8 @@ public class EvaluateDiceResultState extends State {
         }
 
         if(!isEmpty(data.getDefenderDiceResult()) && !isEmpty(data.getAttackerDiceResult())) {
-            calculateAttackResult(winsOfAttacker, winsOfDefender);
-            handleAttackResult(winsOfAttacker,winsOfDefender);
+            int [] result=calculateAttackResult(winsOfAttacker, winsOfDefender);
+            handleAttackResult(result[0],result[1]);
         }
 
     }
@@ -75,7 +71,7 @@ public class EvaluateDiceResultState extends State {
 
     }
 
-    private void calculateAttackResult(int winsOfAttacker, int winsOfDefender){
+    private int [] calculateAttackResult(int winsOfAttacker, int winsOfDefender){
 
 
         int [] defenderDiceResult = data.getDefenderDiceResult();
@@ -89,7 +85,7 @@ public class EvaluateDiceResultState extends State {
                   winsOfDefender++;
               }
           }
-
+        return new int[]{winsOfAttacker,winsOfDefender};
     }
 
     private int getMaxValue(int [] dice){

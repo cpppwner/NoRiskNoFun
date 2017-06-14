@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.client.OutboundMessageHandler;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.statemachine.State;
 

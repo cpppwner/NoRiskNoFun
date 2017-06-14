@@ -1,7 +1,6 @@
 package gmbh.norisknofun.scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.util.Collections;

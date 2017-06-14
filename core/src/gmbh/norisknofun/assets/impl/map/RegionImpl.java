@@ -2,7 +2,6 @@ package gmbh.norisknofun.assets.impl.map;
 
 import com.badlogic.gdx.graphics.Color;
 
-
 import java.util.List;
 
 import gmbh.norisknofun.assets.AssetMap.Region;
@@ -93,6 +92,20 @@ final class RegionImpl implements Region {
     public void setTroops(int amount) {
         numberTroops = amount;
         if (numberTroops < 1) {
+            numberTroops = 0;
+            regionColor = Color.WHITE;
+        }
+    }
+
+    /**
+     * Update the amount of troops on this region
+     * @param amount Add amount to numberTroops. May be negative
+     */
+    @Override
+    public void updateTroops(int amount) {
+        numberTroops += amount;
+        if (numberTroops < 1) {
+            numberTroops = 0;
             regionColor = Color.WHITE;
         }
     }

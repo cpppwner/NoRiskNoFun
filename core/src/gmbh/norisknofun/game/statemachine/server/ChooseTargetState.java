@@ -21,6 +21,7 @@ public class ChooseTargetState extends State {
     public ChooseTargetState(ServerContext context){
         this.context=context;
         this.data=context.getGameData();
+
     }
 
 
@@ -48,56 +49,54 @@ public class ChooseTargetState extends State {
 
     private void attackRegion(String senderId, AttackRegion message) {
 
-        if(checkIfCurrentPlayer(senderId)){
-
-            if(checkAttackedRegion(senderId,message)){
+        if(checkAttackRegionMessage(senderId, message)){
 
                 data.setDefendersRegion(data.getRegionByName(message.getAttackedRegion()));
                 data.setAttackerRegion(data.getRegionByName(message.getOriginRegion()));
-
-                sendAttackRegionCheckMessage(senderId,true);
-
+                sendAttackRegionCheckMessage(senderId,true,"");
                 context.setState(new AttackState(context));
-            }
+
         }
     }
 
-    private boolean checkIfCurrentPlayer(String senderId){
-        if(data.getPlayerById(senderId).equals(data.getCurrentplayer()))
-            return true;
-
-        sendAttackRegionCheckMessage(senderId,false);
-        return false;
-    }
-
     /**
-     * Check if attacked region is hostile region
-     * and neighbouring region of originregion
-     *
+     * Check
+     * if message comes from current player
+     * if attacked region is hostile region
+     * neighbouring region of originregion
+     * @param senderId
      * @param message
-     * @return
+     * @return true if message is ok
      */
-    private boolean checkAttackedRegion(String senderId, AttackRegion message){
+    private boolean checkAttackRegionMessage(String senderId, AttackRegion message){
         boolean check=true;
         AssetMap.Region attackedRegion= data.getRegionByName(message.getAttackedRegion());
         AssetMap.Region orginRegion= data.getRegionByName(message.getOriginRegion());
 
-        if(data.getCurrentplayer().getPlayerName().equals(attackedRegion.getOwner()))
+
+        if(!data.getCurrentplayer().getId().equals(senderId)){
             check=false;
+            sendAttackRegionCheckMessage(senderId,false,"Its not your turn");
+        }
 
-        if(!orginRegion.getNeighbouringRegions().contains(attackedRegion.getName()))
-            check=false;
-
-
-        if(!check)
-            sendAttackRegionCheckMessage(senderId,false);
+        else if(data.getCurrentplayer().getPlayerName().equals(attackedRegion.getOwner())) {
+            check = false;
+            sendAttackRegionCheckMessage(senderId,false,"You can't attack your own region");
+        }
+        else if(!orginRegion.getNeighbouringRegions().contains(attackedRegion.getName())) {
+            check = false;
+            sendAttackRegionCheckMessage(senderId,false,"Not an neighbouring Region");
+        }
 
         return check;
     }
-    private void sendAttackRegionCheckMessage(String senderId, boolean check){
-        AttackRegionCheck  attackRegionCheckmessage= new AttackRegionCheck(check);
+
+    private void sendAttackRegionCheckMessage(String senderId, boolean check, String errorMessage){
+        AttackRegionCheck  attackRegionCheckmessage= new AttackRegionCheck(check,errorMessage);
         context.sendMessage(attackRegionCheckmessage,senderId);
     }
+
+
 
 
 }

@@ -16,8 +16,9 @@ import java.util.Map;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameData;
-import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -223,20 +224,40 @@ public final class GameScene extends SceneBase {
     }
 
     /**
-     * Check if a flag in GameData has been changed and update the GUI accordingly
+     * Remove a certain amount of troops from a region given in message
+     * @param message GUI Message indicating which troops to remove
      */
-    private void handleGuiUpdate() {
-        Message message = data.getGuiChanges();
+    private void removeTroop(RemoveTroopGui message) {
+        int amount = message.getTroopAmount();
 
-        if (message.getType().equals(SpawnTroopGui.class)) {
-            // spawn troop
-            spawnNewTroop((SpawnTroopGui) data.getGuiChanges());
-        } else if (message.getType().equals(MoveTroopGui.class)) {
-            // move existing troop
-            moveTroop((MoveTroopGui) message);
-        } else {
-            Gdx.app.log("GameScene","Unknown Message");
+
+        for (Figure actor : figures) {
+            if (amount <= 0) { // stop if the correct actors have been removed
+                break;
+            }
+
+            // remove actor if it's on the same region
+            if (actor.getCurrentRegion().getName().equals(message.getRegionName())) {
+                removeFigure(actor);
+            }
         }
+
+        if (amount != 0) {
+            // todo: something wrong, there weren't enough troops on the region
+            Gdx.app.log("GameScene", "Couldn't remove all requested troops");
+        }
+    }
+
+    /**
+     * Remove a specific actor from the game and update the underlying region
+     * @param actor Actor to remove
+     */
+    private void removeFigure(Figure actor) {
+        actor.getCurrentRegion().updateTroops(-1);
+        figures.remove(actor);
+        
+        actor.dispose();
+        actor.remove();
     }
 
     /**
@@ -250,7 +271,7 @@ public final class GameScene extends SceneBase {
         infantry.setFirstMove(false);
         infantry.setCurrentRegion(regionNameMap.get(message.getRegionName()));
 
-        // todo: don't create a new Color object everytime
+        // todo: don't create a new Color object every time
         setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
 
         figures.add(infantry);
@@ -259,7 +280,7 @@ public final class GameScene extends SceneBase {
 
     /**
      * Move the highlighted Figures to the position specified in the message
-     * @param message
+     * @param message GUI Message containing information about the changes
      */
     private void moveTroop(MoveTroopGui message) {
         AssetMap.Region toRegion = regionNameMap.get(message.getToRegion());
@@ -278,6 +299,26 @@ public final class GameScene extends SceneBase {
                 toRegion.setTroops(toRegion.getTroops() + 1);
 
             }
+        }
+    }
+
+    /**
+     * Check if a flag in GameData has been changed and update the GUI accordingly
+     */
+    private void handleGuiUpdate() {
+        Message message = data.getGuiChanges();
+
+        if (message.getType().equals(SpawnTroopGui.class)) {
+            // spawn troop
+            spawnNewTroop((SpawnTroopGui) data.getGuiChanges());
+        } else if (message.getType().equals(MoveTroopGui.class)) {
+            // move existing troop
+            moveTroop((MoveTroopGui) message);
+        } else if (message.getType().equals(RemoveTroopGui.class)) {
+            removeTroop((RemoveTroopGui) message);
+        }
+        else {
+            Gdx.app.log("GameScene","Unknown Message");
         }
     }
 

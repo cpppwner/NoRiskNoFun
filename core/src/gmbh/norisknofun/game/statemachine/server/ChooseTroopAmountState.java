@@ -1,12 +1,13 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.networkmessages.Message;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameDataServer;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.choosetroops.ChooseTroopsAmount;
 import gmbh.norisknofun.game.networkmessages.attack.choosetroops.ChooseTroopsAmountCheck;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
+import gmbh.norisknofun.game.networkmessages.common.RemoveTroop;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -46,27 +47,28 @@ public class ChooseTroopAmountState extends State {
 
     private void setAttackingTroops(String senderId, ChooseTroopsAmount message){
 
-        if(checkTroopAmount(message)){
-            data.setAttackingTroops(message.getAmount());
-
+        if(checkTroopAmountMessage(senderId,message)){
+            shiftTroopsforAttack(senderId,message.getAmount());
             sendChooseTroopsAmountCheckMessage(senderId,true);
             sendIsAttackedMessage(); // inform defender to change in EvaluateDiceResultState
 
             attackState.setState(new EvaluateDiceResultState(context,attackState));
-        }else{
-            sendChooseTroopsAmountCheckMessage(senderId,false);
         }
     }
 
 
-    private boolean checkTroopAmount(ChooseTroopsAmount message){
+    private boolean checkTroopAmountMessage(String senderId,ChooseTroopsAmount message){
         boolean check=true;
 
-        if(message.getAmount()>3 || message.getAmount()<1)
+        if(message.getAmount()>3 || message.getAmount()<1){
             check=false;
+            sendChooseTroopsAmountCheckMessage(senderId,false);
+        }
 
-        if(data.getAttackerRegion().getTroops()-message.getAmount()<1)
-            check=false;
+        if(data.getAttackerRegion().getTroops()-message.getAmount()<1) {
+            check = false;
+            sendChooseTroopsAmountCheckMessage(senderId,false);
+        }
 
 
         return check;
@@ -80,5 +82,19 @@ public class ChooseTroopAmountState extends State {
     private void sendIsAttackedMessage(){
         IsAttacked isAttacked= new IsAttacked();
         context.sendMessage(isAttacked,data.getPlayerByName(data.getDefendersRegion().getOwner()).getId());
+
     }
+
+    private void shiftTroopsforAttack(String senderId, int amount){
+        RemoveTroop removeTroop;
+        data.setAttackingTroops(amount);
+        data.getAttackerRegion().setTroops(data.getAttackerRegion().getTroops()-amount);
+        for(int i=0; i<amount; i++){
+            removeTroop= new RemoveTroop();
+            removeTroop.setAmount(amount);
+            removeTroop.setRegion(data.getAttackerRegion().getName());
+            context.sendMessage(removeTroop,senderId);
+        }
+    }
+
 }

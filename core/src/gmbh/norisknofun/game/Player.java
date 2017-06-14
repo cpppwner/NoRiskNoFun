@@ -1,8 +1,6 @@
 package gmbh.norisknofun.game;
 
 
-import java.awt.Color;
-
 /**
  * Created by pippp on 17.05.2017.
  */
@@ -14,6 +12,7 @@ public class Player {
     private int troopToSpread =0;
     private String id = "";
     private int playerColor;
+    private int troopsActive; // current amount of troops this player owns
 
 
     public Player(){
@@ -25,6 +24,7 @@ public class Player {
         this.id=id;
         this.playerColor = playerColor;
     }
+
     public Player(String playername, String id){
         this.playername=playername;
         this.id=id;
@@ -69,5 +69,17 @@ public class Player {
 
     public int getColor() {
         return playerColor;
+    }
+
+    public int getTroopsActive() {
+        return troopsActive;
+    }
+
+    public void setTroopsActive(int troopsActive) {
+        this.troopsActive = troopsActive;
+    }
+
+    public void updateTroopsActive(int troopsActive) {
+        this.troopsActive += troopsActive;
     }
 }

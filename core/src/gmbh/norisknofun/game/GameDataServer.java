@@ -134,7 +134,13 @@ public class GameDataServer {
         return true;
     }
 
-
+    public void clearAttackData(){
+        attackerDiceResult= new int[3];
+        defenderDiceResult= new int[3];
+        attackingTroops=0;
+        defendersRegion=null;
+        attackerRegion=null;
+    }
     public boolean isServerFull() {
         return getNumPlayers() == getMaxPlayer();
     }

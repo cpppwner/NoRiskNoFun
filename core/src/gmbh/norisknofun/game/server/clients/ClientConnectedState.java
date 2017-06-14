@@ -9,8 +9,8 @@ import gmbh.norisknofun.game.protocol.MessageDeserializer;
 import gmbh.norisknofun.game.protocol.MessageSerializer;
 import gmbh.norisknofun.game.protocol.ProtocolException;
 import gmbh.norisknofun.game.protocol.messages.handshake.Handshake;
-import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeConstants;
 import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeAccepted;
+import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeConstants;
 import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeRejected;
 
 /**
