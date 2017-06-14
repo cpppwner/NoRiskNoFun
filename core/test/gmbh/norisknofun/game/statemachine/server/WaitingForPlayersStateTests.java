@@ -20,7 +20,6 @@ import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerRejected;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.game.server.MessageBus;
-import gmbh.norisknofun.game.server.messaging.MessageBusImpl;
 
 
 public class WaitingForPlayersStateTests {
@@ -102,5 +101,4 @@ public class WaitingForPlayersStateTests {
         verify(messageBusMock, times(1)).distributeOutboundMessage(eq("someID"), any(PlayerRejected.class));
         verifyNoMoreInteractions(messageBusMock);
     }
-
 }
