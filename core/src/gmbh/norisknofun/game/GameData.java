@@ -13,7 +13,6 @@ import gmbh.norisknofun.scene.SceneData;
  */
 public class GameData {
 
-    private Changeable<Message> guiChanges = new Changeable<>();
 
     /**
      * Helper field to pass around some last error message to the GUI.
@@ -24,6 +23,7 @@ public class GameData {
      */
     private final Changeable<String> lastError = new Changeable<>();
     private final Changeable<AssetMap> mapAsset = new Changeable<>(null);
+    private Changeable<Message> guiChanges = new Changeable<>();
 
     private final Player myself = new Player();
     private Player currentPlayer = null;
