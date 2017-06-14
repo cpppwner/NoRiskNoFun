@@ -110,4 +110,8 @@ public class GameServices {
 
         return hostingMode;
     }
+
+    public void processPendingMessages() {
+        gameClient.processPendingMessages();
+    }
 }

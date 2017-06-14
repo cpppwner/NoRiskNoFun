@@ -39,7 +39,7 @@ public class WaitingForPlayersState extends State {
             context.setState(new SpreadTroopsState(context));
         }
         else{
-            Gdx.app.log("WaitingForPlayers","unknown message");
+            Gdx.app.log(getClass().getSimpleName(),"unknown message " + message.getType().getName());
         }
     }
 

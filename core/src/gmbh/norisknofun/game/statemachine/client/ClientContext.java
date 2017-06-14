@@ -1,5 +1,7 @@
 package gmbh.norisknofun.game.statemachine.client;
 
+import com.badlogic.gdx.Gdx;
+
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.client.OutboundMessageHandler;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
@@ -20,6 +22,8 @@ public class ClientContext  {
         this.outboundMessageHandler = outboundMessageHandler;
         this.data = data;
         state = new ConnectingState(this);
+        state.enter();
+
     }
 
     public void setState(State state) {
@@ -27,6 +31,8 @@ public class ClientContext  {
         if (state == null) {
             throw new IllegalArgumentException("state is null");
         }
+
+        Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
 
         this.state.exit();
         this.state=state;

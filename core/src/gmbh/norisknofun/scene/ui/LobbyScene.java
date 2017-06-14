@@ -95,6 +95,8 @@ public class LobbyScene extends SceneBase{
                 // error occurred - set error message and return to main menu
                 sceneData.setLastError(Texts.ERROR_STARTING_GAME_SERVICES);
                 SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
+            } else {
+                Gdx.app.log(getClass().getSimpleName(), "Services successfully started");
             }
         } catch (InterruptedException e) {
             Gdx.app.error(getClass().getSimpleName(), "Thread interrupted while starting game services", e);

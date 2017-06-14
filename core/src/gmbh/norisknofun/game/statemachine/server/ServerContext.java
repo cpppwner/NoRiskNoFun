@@ -1,6 +1,8 @@
 package gmbh.norisknofun.game.statemachine.server;
 
 
+import com.badlogic.gdx.Gdx;
+
 import gmbh.norisknofun.game.GameDataServer;
 
 import gmbh.norisknofun.game.networkmessages.Message;
@@ -30,6 +32,8 @@ public class ServerContext implements InboundMessageHandler {
         if (state == null) {
             throw new IllegalArgumentException("state is null");
         }
+
+        Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
 
         this.state.exit();
         this.state = state;

@@ -27,6 +27,8 @@ public class NoRiskNoFun implements ApplicationListener  {
      */
     private final String ip;
 
+    private SceneData sceneData;
+
     public NoRiskNoFun(String ip) {
         this.ip=ip;
     }
@@ -40,7 +42,7 @@ public class NoRiskNoFun implements ApplicationListener  {
 
     private void registerScenes() {
 
-        SceneData sceneData = new SceneData(new LibGdxAssetFactory(), new SocketFactoryImpl());
+        sceneData = new SceneData(new LibGdxAssetFactory(), new SocketFactoryImpl());
         sceneData.setHostIp(ip);
 
         SceneManager.getInstance().registerScene(new MapSelectionScene(sceneData));
@@ -66,6 +68,7 @@ public class NoRiskNoFun implements ApplicationListener  {
     @Override
     public void render() {
 
+        sceneData.processPendingMessages();
         getActiveScene().render(Gdx.graphics.getDeltaTime());
     }
 
