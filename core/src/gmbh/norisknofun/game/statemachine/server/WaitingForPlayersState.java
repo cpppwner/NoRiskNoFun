@@ -53,13 +53,11 @@ class WaitingForPlayersState extends State {
 
         // check if the player can be accepted
         if (data.isServerFull()) {
-            // server full - reject new player
-            Message reject = new PlayerRejected("Server is full.");
-            context.sendMessage(reject, senderId);
-        } else if (data.getPlayerByName(message.getPlayerName()) != null) {
-            // player with same name already exists
-            Message reject = new PlayerRejected("Name is already in use.");
-            context.sendMessage(reject, senderId);
+            context.sendMessage(new PlayerRejected("Server is full."), senderId);
+        } else if (message.getPlayerName() == null
+                || message.getPlayerName().isEmpty()
+                || data.getPlayerByName(message.getPlayerName()) != null) {
+            context.sendMessage(new PlayerRejected("Name is already in use."), senderId);
         } else {
             // all fine, accept player
             acceptNewPlayer(message, senderId);
