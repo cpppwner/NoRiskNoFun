@@ -330,9 +330,6 @@ public final class GameScene extends SceneBase {
             data.setChangedFlag(false);
         }
 
-
-        // todo: call GameClient.processPendingMessages()
-
         super.render(delta);
     }
 }
