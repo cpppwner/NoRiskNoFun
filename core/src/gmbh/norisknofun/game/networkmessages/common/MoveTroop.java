@@ -30,6 +30,9 @@ public class MoveTroop extends BasicMessageImpl implements Serializable{
         this.destinationregion = destinationregion;
         this.originregion = originregion;
     }
+    public MoveTroop(){
+        //to fill the message object via setter
+    }
 
     public String getPlayername() {
         return playername;

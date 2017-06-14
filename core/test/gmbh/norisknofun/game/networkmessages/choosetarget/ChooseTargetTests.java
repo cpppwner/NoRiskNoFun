@@ -41,7 +41,7 @@ public class ChooseTargetTests {
     @Test
     public void attackRegionCheck() throws IOException, ClassNotFoundException {
 
-        AttackRegionCheck attackRegionCheck = new AttackRegionCheck(true);
+        AttackRegionCheck attackRegionCheck = new AttackRegionCheck(true,"");
         oos.writeObject (attackRegionCheck);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);

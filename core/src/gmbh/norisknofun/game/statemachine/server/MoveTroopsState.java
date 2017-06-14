@@ -40,7 +40,7 @@ public class MoveTroopsState extends State {
     @Override
     public void handleMessage(String senderId, Message message  ) {
         if(message.getType().equals(MoveTroop.class)){
-            moveTroop((MoveTroop)message);
+            moveTroop(senderId,(MoveTroop)message);
         }else if( message.getType().equals(FinishTurn.class)){
             setNextPlayer();
         }
@@ -50,7 +50,7 @@ public class MoveTroopsState extends State {
     }
 
 
-    private void moveTroop(MoveTroop message){
+    private void moveTroop(String senderId, MoveTroop message){
 
         if(message.getPlayername().equals(data.getCurrentplayer().getPlayerName())) {
             AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());
@@ -60,8 +60,10 @@ public class MoveTroopsState extends State {
                 broadcastMoveTroopsMessage(message);
 
             } else {
-                sendMoveTroopCheckMessage(message.getPlayername(),false);
+                sendMoveTroopCheckMessage(senderId, message.getPlayername(),false);
             }
+        }else{
+            sendMoveTroopCheckMessage(senderId,message.getPlayername(),false);
         }
     }
 
@@ -69,6 +71,7 @@ public class MoveTroopsState extends State {
 
         data.setNextPlayer();
         broadcastNextPlayerMessage();
+        context.setState(new ChooseTargetState(context));
 
     }
 
@@ -81,8 +84,8 @@ public class MoveTroopsState extends State {
         MoveTroop moveTroop = new MoveTroop(message.getPlayername(),message.getTroopamount(),message.getDestinationregion(),message.getOriginregion());
         context.sendMessage(moveTroop); // send to all clients
     }
-    private void sendMoveTroopCheckMessage(String  playername, boolean movepossible){
+    private void sendMoveTroopCheckMessage(String senderId,String  playername, boolean movepossible){
         MoveTroopCheck response = new MoveTroopCheck(playername,movepossible);
-        context.sendMessage(response); // todo how to send to specific client
+        context.sendMessage(response,senderId); // todo how to send to specific client
     }
 }

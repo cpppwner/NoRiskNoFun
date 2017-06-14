@@ -49,6 +49,7 @@ public class EvaluateDiceResultState extends State {
         int winsOfDefender=0;
         int winsOfAttacker=0;
 
+
         if(getAttackerId().equals(senderId)){
             data.setAttackerDiceResult(message.getDiceResults());
         }else if(getDefenderId().equals(senderId)){
