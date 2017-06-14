@@ -2,11 +2,8 @@ package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.statemachine.State;
@@ -44,7 +41,7 @@ public class DistributionState extends State {
                 spawnTroop(senderId, (SpawnTroop) message);
             }
         }catch (Exception e){
-            e.printStackTrace();
+
             Gdx.app.error("DistributionState",e.getMessage());
         }
     }

@@ -2,7 +2,6 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.EndGame;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
@@ -39,7 +38,7 @@ public class WaitingForPlayersState extends State {
             context.setState(new SpreadTroopsState(context));
         }
         else{
-            Gdx.app.log("WaitingForPlayers","unknown message");
+            Gdx.app.log(getClass().getSimpleName(),"unknown message " + message.getType().getName());
         }
     }
 

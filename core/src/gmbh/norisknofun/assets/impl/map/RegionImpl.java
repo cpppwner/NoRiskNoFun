@@ -2,7 +2,6 @@ package gmbh.norisknofun.assets.impl.map;
 
 import com.badlogic.gdx.graphics.Color;
 
-
 import java.util.List;
 
 import gmbh.norisknofun.assets.AssetMap.Region;

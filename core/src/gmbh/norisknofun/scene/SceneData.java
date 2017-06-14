@@ -293,4 +293,8 @@ public class SceneData {
     public void sendMessageFromGui(Message message) {
         gameServices.sendMessageFromGui(message);
     }
+
+    public void processPendingMessages() {
+        gameServices.processPendingMessages();
+    }
 }

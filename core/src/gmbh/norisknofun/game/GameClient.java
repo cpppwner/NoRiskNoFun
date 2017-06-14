@@ -57,7 +57,7 @@ public class GameClient implements SessionEventHandler {
      */
     public void processPendingMessages() {
 
-        for (Message message: inboundMessageQueue) {
+        for (Message message = inboundMessageQueue.poll(); message != null; message = inboundMessageQueue.poll()) {
             clientContext.delegateMessage(message);
         }
     }

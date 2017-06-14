@@ -116,6 +116,7 @@ class ClientHandshakeState implements ClientState {
         } else if (message instanceof HandshakeAccepted) {
 
             client.distributeInboundMessage(new ClientConnected());
+            client.setState(new ClientConnectedState(client));
 
         } else {
 
