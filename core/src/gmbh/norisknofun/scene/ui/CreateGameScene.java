@@ -94,9 +94,9 @@ public class CreateGameScene extends SceneBase {
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.CREATE_GAME, Assets.FONT_110PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
-                sceneObject.getHeight() * 3.0f,
+                Gdx.graphics.getHeight() - (sceneObject.getHeight() * 2.0f),
                 sceneObject.getWidth(),
-                Gdx.graphics.getHeight() - sceneObject.getHeight());
+                sceneObject.getHeight());
     }
 
     @Override
