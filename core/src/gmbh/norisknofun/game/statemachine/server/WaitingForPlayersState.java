@@ -1,49 +1,45 @@
 package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
+
+import gmbh.norisknofun.game.ColorPool;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
-import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoinedCheck;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerAccepted;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerRejected;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayersInGame;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
- * Created by pippp on 15.05.2017.
+ * Server side state that is used, when waiting for further players to join the game.
  */
+class WaitingForPlayersState extends State {
 
-public class WaitingForPlayersState extends State {
-
-    private ServerContext context;
+    private final ServerContext context;
     private final GameDataServer data;
-    public WaitingForPlayersState(ServerContext context){
+    private final ColorPool colorPool;
+
+    WaitingForPlayersState(ServerContext context){
 
         this.context=context;
         this.data=context.getGameData();
-    }
-
-
-    @Override
-    public void enter() {
-
+        colorPool= new ColorPool();
     }
 
     @Override
-    public void exit() {
-
-    }
-
-    @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
 
         if(message.getType().equals(PlayerJoined.class)){
             addPlayer((PlayerJoined) message, senderId);
         }else if(message.getType().equals(StartGame.class) ){
             startGame();
         }else{
-            Gdx.app.log("WaitingforPlayerState","message unknown");
+            Gdx.app.log(getClass().getSimpleName(), "message unknown: " + message.getType().getName());
         }
     }
 
@@ -53,18 +49,30 @@ public class WaitingForPlayersState extends State {
     }
 
 
-    private void addPlayer(PlayerJoined message, String senderId){
-        PlayerJoinedCheck playerJoinedCheck = new PlayerJoinedCheck(message.getPlayerName(),senderId);
-        if(data.getPlayers().addPlayer(new Player(message.getPlayerName(),senderId))) {
-            playerJoinedCheck.setAllowedtojoin(true);
+    private void addPlayer(PlayerJoined message, String senderId) {
+
+        // check if the player can be accepted
+        if (data.isServerFull()) {
+            context.sendMessage(new PlayerRejected("Server is full."), senderId);
+        } else if (message.getPlayerName() == null
+                || message.getPlayerName().isEmpty()
+                || data.getPlayerByName(message.getPlayerName()) != null) {
+            context.sendMessage(new PlayerRejected("Name is already in use."), senderId);
+        } else {
+            // all fine, accept player
+            acceptNewPlayer(message, senderId);
+            context.sendMessage(new PlayersInGame(data.getPlayers()));
         }
-        else {
-            playerJoinedCheck.setAllowedtojoin(false);
-        }
-        context.sendMessage(playerJoinedCheck,senderId);
     }
 
+    private void acceptNewPlayer(PlayerJoined message, String senderId) {
 
+        Player newPlayer = new Player(message.getPlayerName(), senderId, Color.argb8888(colorPool.getNextAvailableColor()));
+        data.getPlayers().addPlayer(newPlayer);
 
-
+        PlayerAccepted playerAccepted = new PlayerAccepted(newPlayer);
+        playerAccepted.setMapName(data.getMapFilename());
+        playerAccepted.setMaxNumPlayers(data.getMaxPlayer());
+        context.sendMessage(playerAccepted, senderId);
+    }
 }

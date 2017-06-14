@@ -11,13 +11,13 @@ public class Infantry extends Figure {
 
     public Infantry( int x, int y, int width, int height){
         super(x,y,width,height);
-        img= new Texture(Gdx.files.internal("infanterie.png"));
+        img= new Texture(Gdx.files.internal("img/infanterie.png"));
         super.sprite.setRegion(img);
     }
 
     public Infantry(){
         super();
-        img= new Texture(Gdx.files.internal("infanterie.png"));
+        img= new Texture(Gdx.files.internal("img/infanterie.png"));
         super.sprite.setRegion(img);
     }
 

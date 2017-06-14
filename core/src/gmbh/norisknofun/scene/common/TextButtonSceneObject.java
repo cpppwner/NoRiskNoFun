@@ -64,4 +64,33 @@ public class TextButtonSceneObject extends SceneObject {
     public boolean removeListener(EventListener listener) {
         return textButton.getActor().removeListener(listener);
     }
+
+    /**
+     * Set the text button scene object to disabled.
+     *
+     * <p>
+     *     When set to disabled, the button is not clickable.
+     * </p>
+     */
+    public void setDisabled() {
+        textButton.setDisabled();
+    }
+
+    /**
+     * Set the text button scene object to enabled.
+     *
+     * <p>
+     *     When set to disabled, the button is not clickable.
+     * </p>
+     */
+    public void setEnabled() {
+        textButton.setEnabled();
+    }
+
+    /**
+     * Get a flag indicating whether the button is enabled {@code true} or not {@code false}.
+     */
+    public boolean isEnabled() {
+        return textButton.isEnabled();
+    }
 }

@@ -1,6 +1,13 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import com.badlogic.gdx.Gdx;
+
+import gmbh.norisknofun.assets.AssetMap;
+import gmbh.norisknofun.game.GameDataServer;
+import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegion;
+import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegionCheck;
+import gmbh.norisknofun.game.networkmessages.choosetarget.NoAttack;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -10,8 +17,11 @@ import gmbh.norisknofun.game.statemachine.State;
 public class ChooseTargetState extends State {
 
     private ServerContext context;
+    private final GameDataServer data;
     public ChooseTargetState(ServerContext context){
         this.context=context;
+        this.data=context.getGameData();
+
     }
 
 
@@ -26,7 +36,67 @@ public class ChooseTargetState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
 
+        if(message.getType().equals(NoAttack.class)){
+            context.setState(new MoveTroopsState(context));
+        }else if(message.getType().equals(AttackRegion.class)){
+            attackRegion(senderId,(AttackRegion)message);
+        }else{
+            Gdx.app.log("ChooseTargetState","unknown message");
+        }
     }
+
+    private void attackRegion(String senderId, AttackRegion message) {
+
+        if(checkAttackRegionMessage(senderId, message)){
+
+                data.setDefendersRegion(data.getRegionByName(message.getAttackedRegion()));
+                data.setAttackerRegion(data.getRegionByName(message.getOriginRegion()));
+                sendAttackRegionCheckMessage(senderId,true,"");
+                context.setState(new AttackState(context));
+
+        }
+    }
+
+    /**
+     * Check
+     * if message comes from current player
+     * if attacked region is hostile region
+     * neighbouring region of originregion
+     * @param senderId
+     * @param message
+     * @return true if message is ok
+     */
+    private boolean checkAttackRegionMessage(String senderId, AttackRegion message){
+        boolean check=true;
+        AssetMap.Region attackedRegion= data.getRegionByName(message.getAttackedRegion());
+        AssetMap.Region orginRegion= data.getRegionByName(message.getOriginRegion());
+
+
+        if(!data.getCurrentplayer().getId().equals(senderId)){
+            check=false;
+            sendAttackRegionCheckMessage(senderId,false,"Its not your turn");
+        }
+
+        else if(data.getCurrentplayer().getPlayerName().equals(attackedRegion.getOwner())) {
+            check = false;
+            sendAttackRegionCheckMessage(senderId,false,"You can't attack your own region");
+        }
+        else if(!orginRegion.getNeighbouringRegions().contains(attackedRegion.getName())) {
+            check = false;
+            sendAttackRegionCheckMessage(senderId,false,"Not an neighbouring Region");
+        }
+
+        return check;
+    }
+
+    private void sendAttackRegionCheckMessage(String senderId, boolean check, String errorMessage){
+        AttackRegionCheck  attackRegionCheckmessage= new AttackRegionCheck(check,errorMessage);
+        context.sendMessage(attackRegionCheckmessage,senderId);
+    }
+
+
+
+
 }

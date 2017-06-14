@@ -41,27 +41,28 @@ public class GameDataServerTests {
     @Test
     public void getPlayersReturnsCorrectPlayers() {
         Player player1 = new Player();
-        player1.setPlayername("Player1");
+        player1.setPlayerName("Player1");
 
         data.addPlayer(player1);
         Player obtained = data.getPlayers().get(0);
 
         assertSame(player1, obtained);
-        assertEquals(player1.getPlayername(), obtained.getPlayername());
+        assertEquals(player1.getPlayerName(), obtained.getPlayerName());
     }
 
     @Test
     public void getCurrentPlayerReturnsCorrectPlayer() {
         Player playerCurrent = new Player();
-        playerCurrent.setPlayername("PlayerCurrent");
-        data.setCurrentplayer(playerCurrent.getPlayername());
+        playerCurrent.setPlayerName("PlayerCurrent");
 
         data.addPlayer(new Player());
         data.addPlayer(new Player());
         data.addPlayer(new Player());
         data.addPlayer(playerCurrent);
 
-        Player obtained = data.getCurrentplayer();
+        data.setCurrentPlayer(playerCurrent.getPlayerName());
+
+        Player obtained = data.getCurrentPlayer();
 
         assertSame(playerCurrent, obtained);
     }

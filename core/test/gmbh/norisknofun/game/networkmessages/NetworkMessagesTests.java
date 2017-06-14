@@ -11,11 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
-import gmbh.norisknofun.game.statemachine.server.WaitingForPlayersState;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 /**
  * Created by Philipp Mödritscher on 22.05.2017.
@@ -30,8 +26,8 @@ public class NetworkMessagesTests {
 
     @Before
     public void setUp() throws IOException {
-         baos = new ByteArrayOutputStream ();
-         oos = new ObjectOutputStream (baos);
+        baos = new ByteArrayOutputStream ();
+        oos = new ObjectOutputStream (baos);
     }
     @Test
     public void nextPlayerFields() throws IOException, ClassNotFoundException {

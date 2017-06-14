@@ -9,7 +9,29 @@ public interface AssetTextButton extends AssetWidget, Disposable {
 
     /**
      * Get text button's name.
-     * @return
      */
     String getName();
+
+    /**
+     * Disable the text button.
+     *
+     * <p>
+     *     When a button is disabled, it's not clickable.
+     * </p>
+     */
+    void setDisabled();
+
+    /**
+     * Enable the text button.
+     *
+     * <p>
+     *     When a button is enabled, it's clickable.
+     * </p>
+     */
+    void setEnabled();
+
+    /**
+     * Test if the button is enabled.
+     */
+    boolean isEnabled();
 }

@@ -1,29 +1,41 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
+import org.junit.rules.ExpectedException;
 
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.server.MessageBus;
 import gmbh.norisknofun.game.server.messaging.MessageBusImpl;
+import gmbh.norisknofun.game.statemachine.State;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 
 public class ServerContextTests {
 
-    GameDataServer data;
-    ServerContext context;
+    private ServerContext context;
 
     @Before
     public void initialize() {
-        data = mock(GameDataServer.class);
+        GameDataServer data = mock(GameDataServer.class);
         MessageBus messageBus = new MessageBusImpl();
 
         context = new ServerContext(data, messageBus);
     }
+
+    @Rule
+    public ExpectedException expectException = ExpectedException.none();
 
     @Test
     public void newlyInitializedContextReturnsCorrectStartingState() {
@@ -51,22 +63,12 @@ public class ServerContextTests {
     }
 
     @Test
-    public void settingNullStateWorks() {
-        MoveTroopsState state = null;
+    public void settingNullStateThrowsException () {
 
-        context.setState(state);
-
-        assertNull(context.getState());
-    }
-
-    @Test
-    public void switchingFromNullStateWorks() {
-        MoveTroopsState state = mock(MoveTroopsState.class);
+        expectException.expect(IllegalArgumentException.class);
+        expectException.expectMessage("state is null");
 
         context.setState(null);
-        context.setState(state);
-
-        assertSame(state, context.getState());
     }
 
     @Test
@@ -78,6 +80,29 @@ public class ServerContextTests {
 
         assertThat(context.getGameData(), instanceOf(GameDataServer.class));
         assertSame(data, context.getGameData());
+    }
+
+    @Test
+    public void enterAndExitMethodsAreInvokedDuringStateTransition() {
+
+        State mockStateOne = mock(State.class);
+        State mockStateTwo = mock(State.class);
+
+        context.setState(mockStateOne);
+
+        assertThat(context.getState(), is(sameInstance(mockStateOne)));
+        verify(mockStateOne, times(1)).enter();
+        verifyNoMoreInteractions(mockStateOne);
+        verifyZeroInteractions(mockStateTwo);
+
+        context.setState(mockStateTwo);
+        assertThat(context.getState(), is(sameInstance(mockStateTwo)));
+        verify(mockStateOne, times(1)).enter();
+        verify(mockStateOne, times(1)).exit();
+        verifyNoMoreInteractions(mockStateOne);
+
+        verify(mockStateTwo, times(1)).enter();
+        verifyNoMoreInteractions(mockStateTwo);
     }
 
 }

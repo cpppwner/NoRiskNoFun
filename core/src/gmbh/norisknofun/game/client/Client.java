@@ -93,7 +93,12 @@ public class Client implements OutboundMessageHandler, SessionEventHandler {
         state.enter();
     }
 
-    Session getSesssion() {
+    ClientState getCurrentState() {
+
+        return state;
+    }
+
+    Session getSession() {
 
         return session;
     }

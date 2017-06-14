@@ -2,11 +2,9 @@ package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
 
-import java.util.List;
-
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
@@ -40,9 +38,9 @@ public class MoveTroopsState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId,BasicMessageImpl message  ) {
+    public void handleMessage(String senderId, Message message  ) {
         if(message.getType().equals(MoveTroop.class)){
-            moveTroop((MoveTroop)message);
+            moveTroop(senderId,(MoveTroop)message);
         }else if( message.getType().equals(FinishTurn.class)){
             setNextPlayer();
         }
@@ -52,10 +50,9 @@ public class MoveTroopsState extends State {
     }
 
 
-    private void moveTroop(MoveTroop message){
-        List<AssetMap.Region> regions=data.getMapAsset().getRegions();
-        int i=0;
-        if(message.getPlayername().equals(data.getCurrentplayer().getPlayername())) {
+    private void moveTroop(String senderId, MoveTroop message){
+
+        if(message.getPlayername().equals(data.getCurrentplayer().getPlayerName())) {
             AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getDestinationregion());
 
             if (destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region
@@ -63,8 +60,10 @@ public class MoveTroopsState extends State {
                 broadcastMoveTroopsMessage(message);
 
             } else {
-                sendMoveTroopCheckMessage(message.getPlayername(),false);
+                sendMoveTroopCheckMessage(senderId, message.getPlayername(),false);
             }
+        }else{
+            sendMoveTroopCheckMessage(senderId,message.getPlayername(),false);
         }
     }
 
@@ -72,11 +71,12 @@ public class MoveTroopsState extends State {
 
         data.setNextPlayer();
         broadcastNextPlayerMessage();
+        context.setState(new ChooseTargetState(context));
 
     }
 
     private void broadcastNextPlayerMessage(){
-        NextPlayer nextPlayer= new NextPlayer(data.getCurrentplayer().getPlayername());
+        NextPlayer nextPlayer= new NextPlayer(data.getCurrentplayer().getPlayerName());
         context.sendMessage(nextPlayer);  //send to all clients
     }
 
@@ -84,8 +84,8 @@ public class MoveTroopsState extends State {
         MoveTroop moveTroop = new MoveTroop(message.getPlayername(),message.getTroopamount(),message.getDestinationregion(),message.getOriginregion());
         context.sendMessage(moveTroop); // send to all clients
     }
-    private void sendMoveTroopCheckMessage(String  playername, boolean movepossible){
+    private void sendMoveTroopCheckMessage(String senderId,String  playername, boolean movepossible){
         MoveTroopCheck response = new MoveTroopCheck(playername,movepossible);
-        context.sendMessage(response); // todo how to send to specific client
+        context.sendMessage(response,senderId); // todo how to send to specific client
     }
 }

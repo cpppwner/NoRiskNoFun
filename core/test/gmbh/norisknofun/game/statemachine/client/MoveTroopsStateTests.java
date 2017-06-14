@@ -3,7 +3,6 @@ package gmbh.norisknofun.game.statemachine.client;
 import org.junit.Before;
 import org.junit.Test;
 
-import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
@@ -38,12 +37,12 @@ public class MoveTroopsStateTests {
         for(int i=0; i<players.length; i++){
             player= new Player();
             player.setIshost(false);
-            player.setPlayername(players[i]);
+            player.setPlayerName(players[i]);
             player.setTroopToSpread(0);
             data.addPlayer(player);
         }
 
-        data.setCurrentplayer(players[0]);
+        data.setCurrentPlayer(players[0]);
     }
 
 
@@ -51,18 +50,18 @@ public class MoveTroopsStateTests {
     public void SetNextPlayerAndSwitchState() {
         BasicMessageImpl message = new NextPlayer(players[1]);
         context.delegateMessage(message);
-        assertEquals(players[1], data.getCurrentplayer().getPlayername());
+        assertEquals(players[1], data.getCurrentPlayer().getPlayerName());
         assertThat(context.getState(), instanceOf(WaitingForNextTurnState.class));
     }
 
     @Test
-    public void NullPlayernameWillNotBeSet() {
+    public void NullPlayerNameWillNotBeSet() {
 
-        data.setCurrentplayer(players[0]);
+        data.setCurrentPlayer(players[0]);
 
         BasicMessageImpl message = new NextPlayer(null);
         context.delegateMessage(message);
-        assertEquals(players[0], data.getCurrentplayer().getPlayername());
+        assertEquals(players[0], data.getCurrentPlayer().getPlayerName());
 
     }
 }

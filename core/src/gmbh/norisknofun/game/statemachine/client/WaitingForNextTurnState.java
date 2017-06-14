@@ -5,7 +5,7 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameData;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.statemachine.State;
 
@@ -34,7 +34,7 @@ public class WaitingForNextTurnState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
         if(message.getType().equals(NextPlayer.class)){
             setNextPlayer(((NextPlayer)message).getPlayername());
         }else{
@@ -43,9 +43,9 @@ public class WaitingForNextTurnState extends State {
     }
 
 
-    private void setNextPlayer(String playername){
-        if(playername!=null){
-            data.setCurrentplayer(playername);
+    private void setNextPlayer(String playerName){
+        if(playerName!=null){
+            data.setCurrentPlayer(playerName);
             //todo check if nextplayer name is your own player name and change state
         }
     }

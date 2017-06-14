@@ -1,8 +1,7 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.GameData;
+
 import gmbh.norisknofun.game.GameDataServer;
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.server.InboundMessageHandler;
@@ -26,25 +25,32 @@ public class ServerContext implements InboundMessageHandler {
         this.messageBus.registerInboundMessageHandler(this);
     }
 
-    public void setState(State state){
-        this.state=state;
+    void setState(State state){
+
+        if (state == null) {
+            throw new IllegalArgumentException("state is null");
+        }
+
+        this.state.exit();
+        this.state = state;
+        this.state.enter();
     }
 
     public State getState(){
         return this.state;
     }
 
-    public void sendMessage(BasicMessageImpl message){
+    public void sendMessage(Message message){
 
        messageBus.distributeOutboundMessage(message);
 
-        //todo send message via message bus
+        // send message via message bus
         // either via messageBus.distributeOutboundMessage(message); --> to send it to all clients
         // or via messageBus.distributeOutboundMessage(id, message); --> to send it to the client with id only
 
     }
 
-    public void sendMessage(BasicMessageImpl message, String id){
+    public void sendMessage(Message message, String id){
         messageBus.distributeOutboundMessage(id,message);
     }
 
@@ -54,10 +60,10 @@ public class ServerContext implements InboundMessageHandler {
 
     @Override
     public void handle(String senderId, Message message) {
-        // TODO delegate this message to the appropriate state
+        //  delegate this message to the appropriate state
         // note the senderId is a unique identifier identifying the client who sent the message
         // senderId is equal to Client#getId() method
-        state.handleMessage(senderId,(BasicMessageImpl)message);
+        state.handleMessage(senderId, message);
 
     }
 }

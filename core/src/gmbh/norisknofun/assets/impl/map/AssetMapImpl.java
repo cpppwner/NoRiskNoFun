@@ -43,7 +43,7 @@ final class AssetMapImpl implements AssetMap {
             vertices[i * 2 + 1] = vertex.y;
         }
 
-        return new RegionImpl(region.name, vertices);
+        return new RegionImpl(region.name, vertices,region.neighbouringRegions);
     }
 
     @Override

@@ -32,6 +32,7 @@ class GameObjectMap extends SceneObject {
 
     private List<PolygonRegion> polygonRegions;
     private Map<AssetMap.Region, PolygonRegion> regionMap;
+    private Map<String, AssetMap.Region> regionNameMap;
 
     GameObjectMap(AssetMap assetMap) {
 
@@ -45,6 +46,7 @@ class GameObjectMap extends SceneObject {
         texture = new Texture(pix);
 
         regionMap = new HashMap<>();
+        regionNameMap = new HashMap<>();
 
         initPolygonRegions(assetMap);
     }
@@ -60,12 +62,17 @@ class GameObjectMap extends SceneObject {
                     new EarClippingTriangulator().computeTriangles(region.getVertices()).toArray());
 
             regionMap.put(region, polyReg);
+            regionNameMap.put(region.getName(), region);
             polygonRegions.add(polyReg);
         }
     }
 
     public Map<AssetMap.Region, PolygonRegion> getRegionMap() {
         return regionMap;
+    }
+
+    public Map<String, AssetMap.Region> getRegionNameMap() {
+        return regionNameMap;
     }
 
     public List<PolygonRegion> getPolygonRegions() {

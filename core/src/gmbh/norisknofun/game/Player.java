@@ -1,6 +1,5 @@
 package gmbh.norisknofun.game;
 
-import gmbh.norisknofun.network.Session;
 
 /**
  * Created by pippp on 17.05.2017.
@@ -12,22 +11,31 @@ public class Player {
     private boolean ishost=false;
     private int troopToSpread =0;
     private String id = "";
+    private int playerColor;
+    private int troopsActive; // current amount of troops this player owns
 
 
     public Player(){
+        // for testing
+    }
 
+    public Player(String playername, String id,int playerColor){
+        this.playername=playername;
+        this.id=id;
+        this.playerColor = playerColor;
     }
 
     public Player(String playername, String id){
         this.playername=playername;
         this.id=id;
+
     }
 
-    public String getPlayername() {
+    public String getPlayerName() {
         return playername;
     }
 
-    public void setPlayername(String playername) {
+    public void setPlayerName(String playername) {
         this.playername = playername;
     }
 
@@ -53,5 +61,25 @@ public class Player {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setColor(int color) {
+        this.playerColor = color;
+    }
+
+    public int getColor() {
+        return playerColor;
+    }
+
+    public int getTroopsActive() {
+        return troopsActive;
+    }
+
+    public void setTroopsActive(int troopsActive) {
+        this.troopsActive = troopsActive;
+    }
+
+    public void updateTroopsActive(int troopsActive) {
+        this.troopsActive += troopsActive;
     }
 }

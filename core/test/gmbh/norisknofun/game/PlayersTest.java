@@ -27,7 +27,7 @@ public class PlayersTest {
 
     @Test
     public void getPlayersCorrectlyReturnsList() {
-        List obtained = players.getPlayers();
+        List obtained = players.getPlayerlist();
 
         assertThat(obtained, instanceOf(List.class) );
     }
@@ -37,7 +37,7 @@ public class PlayersTest {
     public void addPlayerAddsPlayerInEmptyList() {
         players.addPlayer(player1);
 
-        List<Player> obtained = players.getPlayers();
+        List<Player> obtained = players.getPlayerlist();
 
         assertEquals(obtained.size(), 1);
         assertSame(player1, obtained.get(0));
@@ -48,7 +48,7 @@ public class PlayersTest {
         players.addPlayer(player1);
         players.addPlayer(player2);
 
-        List<Player> obtained = players.getPlayers();
+        List<Player> obtained = players.getPlayerlist();
 
         assertEquals(obtained.size(), 2);
         assertSame(player1, obtained.get(0));
@@ -68,18 +68,18 @@ public class PlayersTest {
         boolean obtained = players.addPlayer(player1);
 
         assertEquals(false, obtained);
-        assertEquals(1, players.getPlayers().size());
+        assertEquals(1, players.getPlayerlist().size());
     }
 
     @Test
     public void addPlayerDoesntAddSamePlayernameTwice() {
-        Player player3 = new Player(player1.getPlayername(), "987");
+        Player player3 = new Player(player1.getPlayerName(), "987");
 
         players.addPlayer(player1);
         boolean obtained = players.addPlayer(player3);
 
         assertEquals(false, obtained);
-        assertEquals(1, players.getPlayers().size());
+        assertEquals(1, players.getPlayerlist().size());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class PlayersTest {
         boolean obtained = players.addPlayer(player3);
 
         assertEquals(false, obtained);
-        assertEquals(1, players.getPlayers().size());
+        assertEquals(1, players.getPlayerlist().size());
     }
 
     @Test
@@ -100,7 +100,7 @@ public class PlayersTest {
         boolean obtained = players.addPlayer(player3);
 
         assertEquals(false, obtained);
-        assertEquals(0, players.getPlayers().size());
+        assertEquals(0, players.getPlayerlist().size());
     }
 
     @Test
@@ -110,7 +110,7 @@ public class PlayersTest {
         boolean obtained = players.addPlayer(player3);
 
         assertEquals(false, obtained);
-        assertEquals(0, players.getPlayers().size());
+        assertEquals(0, players.getPlayerlist().size());
     }
 
     @Test
@@ -118,21 +118,21 @@ public class PlayersTest {
         players.addPlayer(player1);
         players.addPlayer(player2);
 
-        boolean obtained = players.removePlayer(player1.getPlayername());
+        boolean obtained = players.removePlayer(player1.getPlayerName());
 
         assertEquals(true, obtained);
-        assertEquals(1, players.getPlayers().size());
-        assertSame(player2, players.getPlayers().get(0));
+        assertEquals(1, players.getPlayerlist().size());
+        assertSame(player2, players.getPlayerlist().get(0));
     }
 
     @Test
     public void removePlayerRemovesLastPlayer() {
         players.addPlayer(player1);
 
-        boolean obtained = players.removePlayer(player1.getPlayername());
+        boolean obtained = players.removePlayer(player1.getPlayerName());
 
         assertEquals(true, obtained);
-        assertEquals(0, players.getPlayers().size());
+        assertEquals(0, players.getPlayerlist().size());
     }
 
     @Test
@@ -142,8 +142,8 @@ public class PlayersTest {
         boolean obtained = players.removePlayer("Unknown");
 
         assertEquals(false, obtained);
-        assertEquals(1, players.getPlayers().size());
-        assertSame(player1, players.getPlayers().get(0));
+        assertEquals(1, players.getPlayerlist().size());
+        assertSame(player1, players.getPlayerlist().get(0));
     }
 
     @Test
@@ -151,12 +151,12 @@ public class PlayersTest {
         players.addPlayer(player1);
         players.addPlayer(player2);
 
-        players.removePlayer(player1.getPlayername());
-        boolean obtained = players.removePlayer(player1.getPlayername());
+        players.removePlayer(player1.getPlayerName());
+        boolean obtained = players.removePlayer(player1.getPlayerName());
 
         assertEquals(false, obtained);
-        assertEquals(1, players.getPlayers().size());
-        assertSame(player2, players.getPlayers().get(0));
+        assertEquals(1, players.getPlayerlist().size());
+        assertSame(player2, players.getPlayerlist().get(0));
     }
 
     @Test
@@ -166,8 +166,8 @@ public class PlayersTest {
         boolean obtained = players.removePlayer(null);
 
         assertEquals(false, obtained);
-        assertEquals(1, players.getPlayers().size());
-        assertSame(player1, players.getPlayers().get(0));
+        assertEquals(1, players.getPlayerlist().size());
+        assertSame(player1, players.getPlayerlist().get(0));
     }
 
     @Test
@@ -175,7 +175,7 @@ public class PlayersTest {
         boolean obtained = players.removePlayer("Someone");
 
         assertEquals(false, obtained);
-        assertEquals(0, players.getPlayers().size());
+        assertEquals(0, players.getPlayerlist().size());
     }
 
 
@@ -219,9 +219,9 @@ public class PlayersTest {
         players.addPlayer(player1);
         players.addPlayer(player2);
 
-        String obtained = players.getNextPlayername(player1.getPlayername());
+        String obtained = players.getNextPlayername(player1.getPlayerName());
 
-        assertEquals(player2.getPlayername(), obtained);
+        assertEquals(player2.getPlayerName(), obtained);
     }
 
     @Test
@@ -229,18 +229,18 @@ public class PlayersTest {
         players.addPlayer(player1);
         players.addPlayer(player2);
 
-        String obtained = players.getNextPlayername(player2.getPlayername());
+        String obtained = players.getNextPlayername(player2.getPlayerName());
 
-        assertEquals(player1.getPlayername(), obtained);
+        assertEquals(player1.getPlayerName(), obtained);
     }
 
     @Test
     public void getNextPlayernameWorksWithSinglePlayer() {
         players.addPlayer(player1);
 
-        String obtained = players.getNextPlayername(player1.getPlayername());
+        String obtained = players.getNextPlayername(player1.getPlayerName());
 
-        assertEquals(player1.getPlayername(), obtained);
+        assertEquals(player1.getPlayerName(), obtained);
     }
 
     @Test

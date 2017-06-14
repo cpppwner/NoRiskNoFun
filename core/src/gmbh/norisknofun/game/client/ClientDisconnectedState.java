@@ -20,8 +20,6 @@ class ClientDisconnectedState implements ClientState {
 
         client.setSession(null);
         client.getMessageBuffer().clear();
-        // TODO stefan.eberl - 2017-05-05 add special message letting the game logic also know about
-        // disconnect event
     }
 
     @Override
@@ -33,21 +31,19 @@ class ClientDisconnectedState implements ClientState {
     public void handleOutboundMessage(Message message) {
 
         // nothing to do - don't throw, maybe the game logic did not yet process our special message
-        // se enter();
+        // see enter();
     }
 
     @Override
     public void handleNewSession(Session newSession) {
 
-        // client got reconnected again - make state transition
-        client.setSession(newSession);
-        client.setState(new ClientConnectedState(client));
+        throw new IllegalStateException("Not expecting new session here - huh :/");
     }
 
     @Override
     public void handleSessionClosed(Session closedSession) {
 
-        throw new IllegalStateException("session is already closed - huh :/");
+        // nothing to do here
     }
 
     @Override

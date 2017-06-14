@@ -1,6 +1,6 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -10,10 +10,13 @@ import gmbh.norisknofun.game.statemachine.State;
 public class AttackState extends State {
 
     private ServerContext context;
+    private State state;
     public AttackState(ServerContext context){
         this.context=context;
+        setState(new ChooseTroopAmountState(context,this));
+
     }
-   private State state;
+
     @Override
     public void enter() {
         state.enter();
@@ -26,7 +29,11 @@ public class AttackState extends State {
     }
 
     @Override
-    public void handleMessage(String senderId, BasicMessageImpl message) {
+    public void handleMessage(String senderId, Message message) {
         state.handleMessage(senderId,message);
+    }
+
+    public void setState(State state){
+        this.state=state;
     }
 }

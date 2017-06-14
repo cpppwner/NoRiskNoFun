@@ -68,5 +68,11 @@ public interface AssetMap extends Asset {
         int getTroops();
 
         void setTroops(int amount);
+
+        void updateTroops(int amount);
+
+        void setNeighbouringRegions(List<String> regions);
+
+        List<String> getNeighbouringRegions();
     }
 }

@@ -63,7 +63,7 @@ public final class Client implements OutboundMessageHandler {
      */
     private void setInitialState() {
 
-        state = new ClientAcceptedState(this);
+        state = new ClientConnectedState(this);
         state.enter();
     }
 

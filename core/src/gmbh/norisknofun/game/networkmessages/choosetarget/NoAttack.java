@@ -11,6 +11,5 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class NoAttack extends BasicMessageImpl implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    public NoAttack() {
-    }
+
 }

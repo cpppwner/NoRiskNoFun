@@ -73,4 +73,33 @@ public class ImageButtonSceneObject extends SceneObject {
     public boolean removeListener(EventListener listener) {
         return imageButton.getActor().removeListener(listener);
     }
+
+    /**
+     * Set the image button scene object to disabled.
+     *
+     * <p>
+     *     When set to disabled, the button is not clickable.
+     * </p>
+     */
+    public void setDisabled() {
+        imageButton.setDisabled();
+    }
+
+    /**
+     * Set the image button scene object to enabled.
+     *
+     * <p>
+     *     When set to disabled, the button is not clickable.
+     * </p>
+     */
+    public void setEnabled() {
+        imageButton.setEnabled();
+    }
+
+    /**
+     * Get a flag indicating whether the button is enabled {@code true} or not {@code false}.
+     */
+    public boolean isEnabled() {
+        return imageButton.isEnabled();
+    }
 }

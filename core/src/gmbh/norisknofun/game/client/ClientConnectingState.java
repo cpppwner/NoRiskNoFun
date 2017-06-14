@@ -5,6 +5,10 @@ import gmbh.norisknofun.network.Session;
 
 /**
  * Initial state, when a client is starting to connect.
+ *
+ * <p>
+ *     Wait until a new session arrives.
+ * </p>
  */
 class ClientConnectingState implements ClientState {
 
@@ -34,7 +38,7 @@ class ClientConnectingState implements ClientState {
     public void handleNewSession(Session newSession) {
 
         client.setSession(newSession);
-        client.setState(new ClientConnectedState(client));
+        client.setState(new ClientHandshakeState(client));
     }
 
     @Override

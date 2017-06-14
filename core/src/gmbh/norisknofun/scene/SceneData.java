@@ -1,6 +1,7 @@
 package gmbh.norisknofun.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.assets.AssetImageButton;
@@ -16,41 +17,27 @@ import gmbh.norisknofun.assets.FontDescriptor;
 import gmbh.norisknofun.assets.ModalDialogDescriptor;
 import gmbh.norisknofun.assets.TextButtonDescriptor;
 import gmbh.norisknofun.assets.TextFieldDescriptor;
-import gmbh.norisknofun.game.GameClient;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.GameDataServer;
-import gmbh.norisknofun.game.GameServer;
+import gmbh.norisknofun.game.GameServices;
 import gmbh.norisknofun.game.networkmessages.Message;
-import gmbh.norisknofun.game.server.networking.SessionEventListener;
-import gmbh.norisknofun.game.server.networking.SessionEventListenerImpl;
-import gmbh.norisknofun.network.NetworkClient;
-import gmbh.norisknofun.network.NetworkServer;
 import gmbh.norisknofun.network.socket.SocketFactory;
 
 /**
  * Data class shared amongst the scenes.
+ *
+ * <p>
+ *     This class is for collecting input from the various scenes + adds some
+ *     helpers to create appropriate assets.
+ * </p>
  */
 public class SceneData {
 
-    private static final String LOCALHOST = "127.0.0.1";
-    private static final int PORT = 27010;
-
     private final AssetFactory assetFactory;
 
-    private boolean gameHost = false;
-    private String mapFilename = null;
-    private String playername = null;
-    private String hostOrIp = LOCALHOST;
-
-    private final SocketFactory socketFactory;
-
-    private GameServer gameServer;
-    private NetworkServer networkServer;
-    private GameDataServer gameDataServer;
-
-    private GameClient gameClient;
-    private NetworkClient networkClient;
-    private GameData gameDataClient;
+    private final GameDataServer gameDataServer;
+    private final GameData gameDataClient;
+    private final GameServices gameServices;
 
     /**
      * Initialize SceneData instance.
@@ -60,10 +47,10 @@ public class SceneData {
     public SceneData(AssetFactory assetFactory, SocketFactory socketFactory) {
 
         this.assetFactory = assetFactory;
-        this.socketFactory = socketFactory;
 
-        this.gameDataServer = new GameDataServer();
-        this.gameDataClient = new GameData();
+        gameDataServer = new GameDataServer();
+        gameDataClient = new GameData();
+        gameServices = new GameServices(socketFactory, gameDataServer, gameDataClient);
     }
 
     /**
@@ -115,26 +102,71 @@ public class SceneData {
         return getAssetFactory().createAssetLabel(text, fontDescriptor);
     }
 
+    /**
+     * Create image button asset.
+     *
+     * @param textureFilename The texture filename for which to create the image button.
+     * @return Newly created image button asset.
+     */
     public AssetImageButton createImageButton(String textureFilename) {
 
         return getAssetFactory().createAssetImageButton(textureFilename);
     }
 
+    /**
+     * Create text button asset.
+     *
+     * @param initialButtonText The initial button text for the button.
+     * @param textButtonDescriptor Descriptor container object containing some style information.
+     * @return Newly created text button asset.
+     */
     public AssetTextButton createTextButton(String initialButtonText, TextButtonDescriptor textButtonDescriptor) {
 
         return getAssetFactory().createAssetTextButton(initialButtonText, textButtonDescriptor);
     }
 
+    /**
+     * Create text input field asset.
+     *
+     * @param textFieldDescriptor Descriptor container object containing some style information.
+     * @return Newly created text input field asset.
+     */
     public AssetTextField createTextField(TextFieldDescriptor textFieldDescriptor) {
 
         return getAssetFactory().createAssetTextField("", textFieldDescriptor);
     }
 
+    /**
+     * Create numeric input field asset.
+     *
+     * <p>
+     *     Numeric input fields are basically text input fields with an input filter, that only
+     *     allows numeric input values.
+     * </p>
+     *
+     * @param textFieldDescriptor Descriptor container object containing some style information.
+     * @return Newly created numeric input field asset.
+     */
     public AssetNumericField createNumericField(TextFieldDescriptor textFieldDescriptor) {
 
         return getAssetFactory().createAssetNumericField(0, textFieldDescriptor);
     }
 
+    /**
+     * Create special asset, a modal dialog.
+     *
+     * <p>
+     *     An {@link AssetModalDialog} is a modal dialog with some text shown in the dialog,
+     *     and OK button and some title in the dialog menu bar.
+     *
+     *     Use {@link AssetModalDialog#show(Stage)} to show the dialog and do not add any
+     *     SceneObject to the scene's internal scene object list.
+     * </p>
+     *
+     * @param dialogText The text shown in the dialog window.
+     * @param modalDialogDescriptor Descriptor describing some style layout.
+     * @return Newly created modal dialog asset.
+     */
     public AssetModalDialog createModalDialog(String dialogText, ModalDialogDescriptor modalDialogDescriptor) {
 
         return getAssetFactory().createAssetModalDialog(dialogText, modalDialogDescriptor);
@@ -146,14 +178,15 @@ public class SceneData {
      * @param gameHost {@code true} if game must be hosted, {@code false} otherwise.
      */
     public void setGameHost(boolean gameHost) {
-        this.gameHost = gameHost;
+        if (gameHost) {
+            gameServices.setHostingMode();
+        } else {
+            gameServices.setJoiningMode();
+        }
     }
 
-    /**
-     * Get boolean flag indicating whether to host the game {@code true}, or just join {@code false}
-     */
     public boolean isGameHost() {
-        return gameHost;
+        return gameServices.isHostingMode();
     }
 
     /**
@@ -165,21 +198,13 @@ public class SceneData {
     }
 
     /**
-     * Get maximum number of allowed players.
-     */
-    public int getMaximumNumberOfPlayers() {
-        return gameDataServer.getMaxPlayer();
-    }
-
-    /**
      * Set map filename.
      */
     public void setMapFilename(String mapFilename) {
 
         // NOTE: create two instances to avoid race conditions between server & client.
+        gameDataServer.setMapFilename(mapFilename);
         gameDataServer.setMapAsset(getAssetFactory().createAssetMap(mapFilename));
-        gameDataClient.setMapAsset(getAssetFactory().createAssetMap(mapFilename));
-        this.mapFilename = mapFilename;
     }
 
     /**
@@ -190,10 +215,74 @@ public class SceneData {
     }
 
     /**
-     * Get map filename.
+     * Set the player's desired name which he wants to use in the game.
+     * @param playerName The name the player chose in the scenes.
      */
-    public String getMapFilename() {
-        return mapFilename;
+    public void setPlayerName(String playerName) {
+        gameDataClient.setPlayerName(playerName);
+    }
+
+    /**
+     * Set the host ip to which the client should connect to.
+     *
+     * <p>
+     *     By default this is preset to the own ip address - when hosting the game.
+     * </p>
+     *
+     * @param hostIp The host ip to which the client should connect.
+     */
+    public void setHostIp(String hostIp) {
+        gameServices.setHostIp(hostIp);
+    }
+
+    /**
+     * Get the host (our own) IP address.
+     *
+     * <p>
+     *     It's shown in some scene.
+     * </p>
+     *
+     * @return The host's IP address.
+     */
+    public String getHostIp() {
+        return gameServices.getHostIp();
+    }
+
+    /**
+     * Set the last error that occurred.
+     *
+     * @param lastError The last error messaged.
+     */
+    public void setLastError(String lastError) {
+        gameDataClient.setLastError(lastError);
+    }
+
+    /**
+     * Get the last error message, if one was set before using {@link SceneData#setLastError(String)}.
+     *
+     * @return The last error message that was set or {@code null} if none was set.
+     */
+    public String getLastError() {
+        return gameDataClient.getLastError();
+    }
+
+    /**
+     * Start game related services.
+     *
+     * @return {@code true} if services were successfully started, {@code false} otherwise.
+     * @throws InterruptedException In case the thread gets interrupted.
+     */
+    public boolean startGameServices() throws InterruptedException {
+        return gameServices.startServices();
+    }
+
+    /**
+     * Stop game related services.
+     *
+     * @throws InterruptedException In case the thread gets interrupted.
+     */
+    public void stopGameServices() throws InterruptedException {
+        gameServices.stopServices();
     }
 
     /**
@@ -202,85 +291,6 @@ public class SceneData {
      * @param message The message to send from GUI.
      */
     public void sendMessageFromGui(Message message) {
-        if (message == null) {
-            throw new IllegalArgumentException("message is null");
-        }
-        if (gameClient == null) {
-            throw new IllegalStateException("Client not started yet");
-        }
-        gameClient.processGuiMessage(message);
-    }
-
-    public boolean startServices() throws InterruptedException {
-
-        if (isGameHost() && gameServer != null) {
-            // already started
-            throw new IllegalStateException("game server already started");
-        }
-
-        if (gameClient != null) {
-            throw new IllegalStateException("game client already started");
-        }
-
-        boolean success = false;
-        if (isGameHost()) {
-            success = startServer();
-        }
-
-        if (success) {
-            success = startClient();
-        }
-
-        if (!success) {
-            // either server or client could not be started - stop everyting
-            stopServices();
-        }
-
-        return success;
-    }
-
-    private boolean startServer() {
-
-        SessionEventListener serverSessionEventListener = new SessionEventListenerImpl();
-        gameServer = new GameServer(gameDataServer, serverSessionEventListener);
-        if (!gameServer.start())
-            return false;
-
-        networkServer = new NetworkServer(socketFactory, serverSessionEventListener);
-        return networkServer.start(PORT);
-    }
-
-
-    private boolean startClient() {
-
-        gameClient = new GameClient(gameDataClient);
-        networkClient = new NetworkClient(socketFactory, gameClient);
-        return networkClient.connect(hostOrIp, PORT);
-    }
-
-    public void stopServices() throws InterruptedException {
-
-        stopClient();
-        stopServer();
-    }
-
-    private void stopClient() throws InterruptedException {
-
-        if (networkClient != null) {
-            networkClient.stop();
-        }
-        networkClient = null;
-    }
-
-    private void stopServer() throws InterruptedException {
-
-        if (networkServer != null) {
-            networkServer.stop();
-        }
-        if (gameServer != null) {
-            gameServer.stop();
-        }
-        networkServer = null;
-        gameServer = null;
+        gameServices.sendMessageFromGui(message);
     }
 }

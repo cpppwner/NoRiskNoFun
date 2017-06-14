@@ -21,9 +21,11 @@ public class AttackRegionCheck extends BasicMessageImpl implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private boolean attackreachable;
+    private String errorMessage="";
 
-    public AttackRegionCheck(boolean attackreachable) {
+    public AttackRegionCheck(boolean attackreachable, String errorMessage) {
         this.attackreachable = attackreachable;
+        this.errorMessage=errorMessage;
     }
 
     public boolean isAttackreachable() {
@@ -32,5 +34,13 @@ public class AttackRegionCheck extends BasicMessageImpl implements Serializable{
 
     public void setAttackreachable(boolean attackreachable) {
         this.attackreachable = attackreachable;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

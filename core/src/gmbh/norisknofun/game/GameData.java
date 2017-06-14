@@ -1,38 +1,52 @@
 package gmbh.norisknofun.game;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import gmbh.norisknofun.assets.AssetMap;
+import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.scene.SceneData;
 
 /**
- * Class containing game related data.
+ * Class containing game related data (client side).
  */
 public class GameData {
 
-    private AssetMap mapAsset = null;
-    private int[] diceRoll;
-    private String currentplayer;
 
-    private List<Player> players = new ArrayList<>();
+    /**
+     * Helper field to pass around some last error message to the GUI.
+     *
+     * <p>
+     *     The main menu will check if this has been changed, and if so display it.
+     * </p>
+     */
+    private final Changeable<String> lastError = new Changeable<>();
+    private final Changeable<AssetMap> mapAsset = new Changeable<>(null);
+    private Changeable<Message> guiChanges = new Changeable<>();
+
+    private final Player myself = new Player();
+    private Player currentPlayer = null;
+    private final Changeable<List<Player>> allPlayers = new Changeable<>();
+
+    private int[] diceRoll;
+    private int maxNumPlayers;
+    private String mapFilename;
+
+    public GameData() {
+        allPlayers.setValue(new LinkedList<Player>());
+    }
 
     public void setMapAsset(AssetMap mapAsset) {
-        this.mapAsset = mapAsset;
+        this.mapAsset.setValue(mapAsset);
+        this.mapAsset.setChanged();
     }
 
     public AssetMap getMapAsset() {
-        if (mapAsset == null)
-            throw new IllegalStateException("mapFile was not set");
+        if (mapAsset.getValue() == null)
+            throw new IllegalStateException("mapAsset was not set");
 
-        return mapAsset;
-    }
-
-    public void addPlayer(Player player){
-        players.add(player);
-    }
-
-    public List<Player> getPlayers(){
-        return players;
+        return mapAsset.getValue();
     }
 
     public void setDiceRoll(int[] roll) {
@@ -42,16 +56,120 @@ public class GameData {
         return diceRoll;
     }
 
-    public void setCurrentplayer(String currentplayer){
-        this.currentplayer=currentplayer;
+    /**
+     * Modify the action the GUI should perform and automatically set the changed flag
+     * @param message Action the GUI should perform
+     */
+    public void setGuiChanges(Message message) {
+        guiChanges.setValue(message);
+        guiChanges.setChanged();
     }
-    public Player getCurrentplayer(){
-        Player player= null;
-        for(Player p: players){
-            if(p.getPlayername().equals(currentplayer)){
-                player=p;
+
+    /**
+     * Get the action the GUI should perform
+     * @return GUI Message
+     */
+    public Message getGuiChanges() {
+        return guiChanges.getValue();
+    }
+
+    /**
+     * Set if the GUI should perform an action
+     * @param changedFlag Flag signalling the GUI to perform an action
+     */
+    public void setChangedFlag(boolean changedFlag) {
+
+        if (changedFlag)
+            guiChanges.setChanged();
+        else
+            guiChanges.resetChanged();
+    }
+
+    /**
+     * Check if there are any GUI actions to perform
+     * This will be called by the render thread
+     */
+    public boolean hasChanged() {
+        return guiChanges.hasChanged();
+    }
+
+    public void setPlayerName(String playerName) {
+        getMyself().setPlayerName(playerName);
+    }
+
+    public String getPlayerName() {
+        return getMyself().getPlayerName();
+    }
+
+    public Player getMyself() {
+        return myself;
+    }
+
+    /**
+     * Set the last error that occurred.
+     *
+     * @param lastError The last error messaged.
+     */
+    public void setLastError(String lastError) {
+        this.lastError.setValue(lastError);
+        this.lastError.setChanged();
+    }
+
+    /**
+     * Get the last error message, if one was set before using {@link SceneData#setLastError(String)}.
+     *
+     * @return The last error message that was set or {@code null} if none was set.
+     */
+    public String getLastError() {
+
+        String result = null;
+
+        if (lastError.hasChanged()) {
+            lastError.resetChanged();
+            result = lastError.getValue();
+        }
+
+        return result;
+    }
+
+    public void setCurrentPlayer(String currentPlayer) {
+
+        Player newCurrentPlayer = null;
+
+        for (Player player : allPlayers.getValue()) {
+            if (player.getPlayerName().equals(currentPlayer)) {
+                newCurrentPlayer = player;
+                break;
             }
         }
-        return player;
+
+        this.currentPlayer = newCurrentPlayer;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void addPlayer(Player player) {
+
+        allPlayers.getValue().add(player);
+        allPlayers.setChanged();
+    }
+
+    public void resetAllPlayersChanged() {
+
+        allPlayers.resetChanged();
+    }
+
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(allPlayers.getValue());
+    }
+
+    public void setMapFilename(String mapFilename) {
+        this.mapFilename = mapFilename;
+    }
+
+    public void setMaxNumPlayers(int maxNumPlayers) {
+        this.maxNumPlayers = maxNumPlayers;
     }
 }
