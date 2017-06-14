@@ -1,13 +1,12 @@
 package gmbh.norisknofun.game.statemachine.server;
 
-import gmbh.norisknofun.game.networkmessages.Message;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameDataServer;
+import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.choosetroops.ChooseTroopsAmount;
 import gmbh.norisknofun.game.networkmessages.attack.choosetroops.ChooseTroopsAmountCheck;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.RemoveTroop;
 import gmbh.norisknofun.game.statemachine.State;
 

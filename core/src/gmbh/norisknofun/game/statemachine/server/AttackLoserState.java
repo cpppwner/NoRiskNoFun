@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.loser.ContinueAttack;
-import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
 import gmbh.norisknofun.game.statemachine.State;
 
