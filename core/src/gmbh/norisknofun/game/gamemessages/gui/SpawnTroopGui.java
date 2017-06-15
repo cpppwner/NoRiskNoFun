@@ -10,11 +10,13 @@ public class SpawnTroopGui extends BasicMessageImpl {
     private String regionName;
     private float x;
     private float y;
+    private int id;
 
-    public SpawnTroopGui(String regionName, float x, float y) {
+    public SpawnTroopGui(String regionName, float x, float y, int id) {
         this.regionName = regionName;
         this.x = x;
         this.y = y;
+        this.id=id;
     }
 
     public String getRegionName() {
@@ -42,4 +44,11 @@ public class SpawnTroopGui extends BasicMessageImpl {
         this.y = y;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

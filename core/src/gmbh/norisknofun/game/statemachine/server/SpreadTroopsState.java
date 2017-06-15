@@ -84,7 +84,7 @@ public class SpreadTroopsState extends State {
             }
 
         }*/
-
+        message.setId(data.nextFigureId());
         context.sendMessage(message);
     }
     private void setNextPlayer(){

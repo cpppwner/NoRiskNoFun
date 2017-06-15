@@ -56,7 +56,7 @@ public class SpreadTroopsState extends State {
     }
 
     private void doSpawnTroop(SpawnTroop message) {
-        context.getGameData().setGuiChanges(new SpawnTroopGui(message.getRegionname(), 0, 0));
+        context.getGameData().setGuiChanges(new SpawnTroopGui(message.getRegionname(), 0, 0,message.getId()));
     }
 
     private void setNextPlayer(String playername) {

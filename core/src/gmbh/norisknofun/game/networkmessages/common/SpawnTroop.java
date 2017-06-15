@@ -11,6 +11,7 @@ public class SpawnTroop extends BasicMessageImpl {
     private static final long serialVersionUID = 1L;
     private  String playername;
     private String regionname;
+    private int id;
 
     public SpawnTroop(String playername, String regionname) {
         this.playername = playername;
@@ -31,5 +32,13 @@ public class SpawnTroop extends BasicMessageImpl {
 
     public void setRegionname(String regionname) {
         this.regionname = regionname;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

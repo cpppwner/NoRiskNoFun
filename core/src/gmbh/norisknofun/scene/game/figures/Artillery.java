@@ -11,8 +11,8 @@ public class Artillery extends Figure {
 
 
 
-    public Artillery( float x, float y, float width, float height){
-        super(x,y,width,height, );
+    public Artillery(float x, float y, float width, float height, int id){
+        super(x,y,width,height, id);
         img= new Texture(Gdx.files.internal("img/artillerie.png"));
        super.sprite.setRegion(img);
     }
