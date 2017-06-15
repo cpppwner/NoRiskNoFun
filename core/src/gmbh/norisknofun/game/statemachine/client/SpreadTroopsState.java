@@ -3,10 +3,12 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
+import gmbh.norisknofun.game.networkmessages.common.RemoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.statemachine.State;
@@ -42,6 +44,13 @@ public class SpreadTroopsState extends State {
             MoveTroopGui moveTroopGui= new MoveTroopGui(((MoveTroop)message).getFromRegion(), ((MoveTroop)message).getToRegion(),((MoveTroop) message).getFigureId() );
             moveTroopGui.setFigureId(((MoveTroop) message).getFigureId());
             context.getGameData().setGuiChanges(moveTroopGui); //temporary
+        } else if (message.getType().equals(RemoveTroopGui.class)) {
+            RemoveTroop removeTroop = new RemoveTroop();
+            removeTroop.setAmount(1);
+            removeTroop.setRegion(((RemoveTroopGui)message).getRegionName());
+            context.sendMessage(removeTroop);
+        } else if (message.getType().equals(RemoveTroop.class)) {
+            context.getGameData().setGuiChanges(new RemoveTroopGui(((RemoveTroop)message).getRegion(), 1));
         }
         else {
             Gdx.app.log("Client SpreadTroopsState", "unknown message:"+message.getClass().getSimpleName());

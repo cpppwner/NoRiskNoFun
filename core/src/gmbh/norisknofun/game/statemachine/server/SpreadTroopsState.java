@@ -2,12 +2,10 @@ package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
 
-import java.util.List;
-
-import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
+import gmbh.norisknofun.game.networkmessages.common.RemoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
@@ -21,14 +19,14 @@ public class SpreadTroopsState extends State {
 
     private ServerContext context;
     private final GameDataServer data;
-    private int currentplayerindex=0;
+    private int currentPlayerIndex =0;
     public SpreadTroopsState(ServerContext context){
 
         this.context=context;
         data=context.getGameData();
         assignRegionsToPlayer();
         assignTroopsToPlayer();
-        setCurrentPlayer(currentplayerindex);
+        setCurrentPlayer(currentPlayerIndex);
 
     }
 
@@ -50,6 +48,8 @@ public class SpreadTroopsState extends State {
             spawnTroopOnRegion((SpawnTroop)message);
         } else if (message.getType().equals(MoveTroop.class)) {
             context.sendMessage(message);
+        } else if (message.getType().equals(RemoveTroop.class)) {
+            context.sendMessage(message); // simply send the received message back
         }
         else{
             Gdx.app.log("SpreadTroopsState","message unknown");
@@ -89,12 +89,12 @@ public class SpreadTroopsState extends State {
         context.sendMessage(message);
     }
     private void setNextPlayer(){
-        if(currentplayerindex>data.getPlayers().getPlayerlist().size()-1){
-            currentplayerindex=0;
+        if(currentPlayerIndex >data.getPlayers().getPlayerlist().size()-1){
+            currentPlayerIndex =0;
         }else {
-            currentplayerindex++;
+            currentPlayerIndex++;
         }
-        setCurrentPlayer(currentplayerindex);
+        setCurrentPlayer(currentPlayerIndex);
 
     }
 

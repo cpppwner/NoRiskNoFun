@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -132,6 +133,8 @@ public final class GameScene extends SceneBase {
 
                     sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), currentRegion.getName(),actor.getId() ));
                 }
+            } else if (actor.isHighlighted() && !actor.isFirstMove()) { // todo: Temporary. If user moves figure out of region, it will be deleted.
+                sceneData.sendMessageFromGui(new RemoveTroopGui(actor.getCurrentRegion().getName(), 1));
             }
         }
     }
@@ -152,7 +155,7 @@ public final class GameScene extends SceneBase {
     private void moveActorToRegion(String region, Figure actor) {
         Vector2 movePosition = calculatePolygonCentroid(regionNameMap.get(region).getVertices());
 
-        actor.addAction(Actions.moveTo(movePosition.x * Gdx.graphics.getWidth(), movePosition.y * Gdx.graphics.getHeight()));
+        actor.addAction(Actions.moveTo(movePosition.x * Gdx.graphics.getWidth(), movePosition.y * Gdx.graphics.getHeight(), 0.2f));
         actor.setHighlighted(false);
     }
 
@@ -233,6 +236,11 @@ public final class GameScene extends SceneBase {
         addSceneObject(rollButton);
     }
 
+    /**
+     * Calculate the centroid of a polygon defined by its vertices
+     * @param vertices Array of polygon vertices
+     * @return Vector2 containing x and y coordinates of the centroid
+     */
     private Vector2 calculatePolygonCentroid(float[] vertices) {
         Vector2 polygonCentroid = new Vector2();
 
@@ -246,22 +254,42 @@ public final class GameScene extends SceneBase {
      */
     private void removeTroop(RemoveTroopGui message) {
         int amount = message.getTroopAmount();
-
+        Gdx.app.log("Removing", message.getRegionName() + ", " + message.getTroopAmount());
+        List<Figure> figuresToRemove = new LinkedList<>(); // use a separate list to avoid ConcurrentModificationException on figures list
 
         for (Figure actor : figures) {
+            if (actor.getId() == -1) { // one of the three default figures. ignore
+                continue;
+            }
             if (amount <= 0) { // stop if the correct actors have been removed
                 break;
             }
 
             // remove actor if it's on the same region
             if (actor.getCurrentRegion().getName().equals(message.getRegionName())) {
-                removeFigure(actor);
+                figuresToRemove.add(actor);
+                amount--;
             }
         }
+
+        removeFigures(figuresToRemove);
 
         if (amount != 0) {
             // todo: something wrong, there weren't enough troops on the region
             Gdx.app.log("GameScene", "Couldn't remove all requested troops");
+        }
+    }
+
+    /**
+     * Remove a list of Figure from the game
+     * @param figuresToRemove List containing all Figure objects to remove
+     */
+    private void removeFigures(List<Figure> figuresToRemove) {
+        for (Figure actor:figuresToRemove) {
+            actor.getCurrentRegion().updateTroops(-1);
+            figures.remove(actor);
+            actor.dispose();
+            actor.remove();
         }
     }
 
@@ -307,11 +335,9 @@ public final class GameScene extends SceneBase {
     private void moveTroop(MoveTroopGui message) {
         AssetMap.Region toRegion = regionNameMap.get(message.getToRegion());
         AssetMap.Region fromRegion = regionNameMap.get(message.getFromRegion());
-        System.out.println("figure id in message:"+message.getFigureId());
         for (Figure actor: figures) {
 
             if (actor.getId()==message.getFigureId()) {
-                System.out.println("Actor moved" + " has id:"+actor.getId());
                 moveActorToRegion(message.getToRegion(), actor);
                 actor.setCurrentRegion(toRegion);
                 setRegionColor(Color.BROWN, toRegion);
@@ -340,7 +366,7 @@ public final class GameScene extends SceneBase {
             removeTroop((RemoveTroopGui) message);
         }
         else {
-            Gdx.app.log("GameScene","Unknown Message");
+            Gdx.app.log("GameScene","Unknown Message: " + message.getClass().getSimpleName());
         }
     }
 
