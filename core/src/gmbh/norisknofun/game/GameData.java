@@ -6,6 +6,7 @@ import java.util.List;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayersInGame;
 import gmbh.norisknofun.scene.SceneData;
 
 /**
@@ -156,6 +157,18 @@ public class GameData {
         allPlayers.setChanged();
     }
 
+    public void updateAllPlayers(List<PlayersInGame.Player> players) {
+
+        allPlayers.getValue().clear();
+        for (PlayersInGame.Player player : players) {
+            addPlayer(new Player(player.getName(), "", player.getColor()));
+        }
+    }
+
+    public boolean hasPlayersChanged() {
+        return allPlayers.hasChanged();
+    }
+
     public void resetAllPlayersChanged() {
 
         allPlayers.resetChanged();
@@ -171,5 +184,9 @@ public class GameData {
 
     public void setMaxNumPlayers(int maxNumPlayers) {
         this.maxNumPlayers = maxNumPlayers;
+    }
+
+    public int getMaxNumPlayers() {
+        return maxNumPlayers;
     }
 }

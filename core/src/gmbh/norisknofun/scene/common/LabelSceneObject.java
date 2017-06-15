@@ -1,5 +1,6 @@
 package gmbh.norisknofun.scene.common;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 
 import gmbh.norisknofun.assets.AssetLabel;
@@ -45,6 +46,19 @@ public class LabelSceneObject extends SceneObject {
     public void setText(String text) {
 
         label.setText(text);
+    }
+
+    public void setTextAlignment(int alignment) {
+
+        label.setTextAlignment(alignment);
+    }
+
+    /**
+     * Set label's background color.
+     */
+    public void setBackgroundColor(Color color) {
+
+        label.setBackgroundColor(color);
     }
 
     @Override

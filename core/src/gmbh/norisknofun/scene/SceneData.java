@@ -202,9 +202,13 @@ public class SceneData {
      */
     public void setMapFilename(String mapFilename) {
 
-        // NOTE: create two instances to avoid race conditions between server & client.
+
         gameDataServer.setMapFilename(mapFilename);
-        gameDataServer.setMapAsset(getAssetFactory().createAssetMap(mapFilename));
+        if (mapFilename != null) {
+            gameDataServer.setMapAsset(getAssetFactory().createAssetMap(mapFilename));
+        } else {
+            gameDataServer.setMapAsset(null);
+        }
     }
 
     /**

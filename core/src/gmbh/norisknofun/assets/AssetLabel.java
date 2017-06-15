@@ -1,6 +1,7 @@
 package gmbh.norisknofun.assets;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
@@ -17,6 +18,11 @@ public interface AssetLabel extends AssetWidget, Disposable {
      * Set label's text.
      */
     void setText(String text);
+
+    /**
+     * Set alignment.
+     */
+    void setTextAlignment(int alignment);
 
     /**
      * Set label's background color.

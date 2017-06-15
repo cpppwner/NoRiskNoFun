@@ -31,7 +31,7 @@ public class SceneManager implements Disposable {
     /**
      * Map storing all registered {@link Scene scenes}.
      */
-    private final Map<String, Scene> scenes;
+    private final Map<String, SceneInfo> scenes;
 
     /**
      * Current active scene.
@@ -72,8 +72,7 @@ public class SceneManager implements Disposable {
         if (scenes.containsKey(scene.getName()))
             return false;
 
-        scene.preload();
-        scenes.put(scene.getName(), scene);
+        scenes.put(scene.getName(), new SceneInfo(scene));
 
         return true;
     }
@@ -96,7 +95,7 @@ public class SceneManager implements Disposable {
             // scene is the active on, scene transition must be done first.
             return false;
 
-        Scene scene = scenes.remove(sceneName);
+        SceneInfo scene = scenes.remove(sceneName);
         scene.dispose();
 
         return true;
@@ -127,7 +126,9 @@ public class SceneManager implements Disposable {
             return true;
 
         activeScene.hide();
-        activeScene = scenes.get(sceneName);
+        SceneInfo nextScene = scenes.get(sceneName);
+        nextScene.preload();
+        activeScene = nextScene.scene;
         activeScene.show();
         activeScene.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -156,8 +157,8 @@ public class SceneManager implements Disposable {
         activeScene.hide();
         activeScene = new NullScene(); // set back to null scene
 
-        for (Scene scene : scenes.values()) // don't replace with lambda expression
-            scene.dispose();
+        for (SceneInfo sceneInfo : scenes.values()) // don't replace with lambda expression
+            sceneInfo.dispose();
         scenes.clear();
     }
 
@@ -201,5 +202,30 @@ public class SceneManager implements Disposable {
 
         @Override
         public void dispose() { /*NullObject pattern*/ }
+    }
+
+    /**
+     * Helper class to store some additional infos.
+     */
+    private static final class SceneInfo implements Disposable {
+
+        private boolean isPreloaded = false;
+        private final Scene scene;
+
+        private SceneInfo(Scene scene) {
+            this.scene = scene;
+        }
+
+        @Override
+        public void dispose() {
+            scene.dispose();
+        }
+
+        private void preload() {
+            if (!isPreloaded) {
+                scene.preload();
+                isPreloaded = true;
+            }
+        }
     }
 }

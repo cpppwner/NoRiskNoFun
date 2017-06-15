@@ -66,7 +66,7 @@ class WaitingForPlayersState extends State {
 
     private void acceptNewPlayer(PlayerJoined message, String senderId) {
 
-        Player newPlayer = new Player(message.getPlayerName(), senderId, Color.argb8888(colorPool.getNextAvailableColor()));
+        Player newPlayer = new Player(message.getPlayerName(), senderId, Color.rgba8888(colorPool.getNextAvailableColor()));
         data.getPlayers().addPlayer(newPlayer);
 
         PlayerAccepted playerAccepted = new PlayerAccepted(newPlayer);
