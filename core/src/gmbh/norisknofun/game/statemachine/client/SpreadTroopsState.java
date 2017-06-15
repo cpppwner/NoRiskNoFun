@@ -30,6 +30,7 @@ public class SpreadTroopsState extends State {
         if (message.getType().equals(NextPlayer.class)) {
             setNextPlayer(((NextPlayer) message).getPlayername());
         } else if (message.getType().equals(SpawnTroop.class)) {
+            System.out.println("client state message id:"+((SpawnTroop)message).getId());
             doSpawnTroop((SpawnTroop) message);
         } else if (message.getType().equals(SpawnTroopCheck.class)) {
             // todo open dialog with error message
@@ -38,17 +39,19 @@ public class SpreadTroopsState extends State {
         } else if (message.getType().equals(MoveTroopGui.class)) {
             requestMove((MoveTroopGui) message);
         } else if (message.getType().equals(MoveTroop.class)) {
-            context.getGameData().setGuiChanges(new MoveTroopGui(((MoveTroop)message).getOriginregion(), ((MoveTroop)message).getDestinationregion())); //temporary
+            MoveTroopGui moveTroopGui= new MoveTroopGui(((MoveTroop)message).getFromRegion(), ((MoveTroop)message).getToRegion(),((MoveTroop) message).getFigureId() );
+            moveTroopGui.setFigureId(((MoveTroop) message).getFigureId());
+            context.getGameData().setGuiChanges(moveTroopGui); //temporary
         }
         else {
-            Gdx.app.log("Client SpreadTroopsState", "unknown message");
+            Gdx.app.log("Client SpreadTroopsState", "unknown message:"+message.getClass().getSimpleName());
         }
     }
 
 
     private void requestMove(MoveTroopGui message) {
 
-        context.sendMessage(new MoveTroop("P1", 1, message.getFromRegion(), message.getToRegion()));
+        context.sendMessage(new MoveTroop("P1", 1, message.getFromRegion(), message.getToRegion(),message.getFigureId() ));
     }
 
     private void requestSpawn(SpawnTroopGui message) {

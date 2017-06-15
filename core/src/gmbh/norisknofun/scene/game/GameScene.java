@@ -120,7 +120,7 @@ public final class GameScene extends SceneBase {
 
                 // if it's the actor's first move, explicitly set the region
                 if (actor.isFirstMove()) {
-                    sceneData.sendMessageFromGui(new SpawnTroopGui(currentRegion.getName(), x, y,0)); // id is 0 because we don't need it
+                    sceneData.sendMessageFromGui(new SpawnTroopGui(currentRegion.getName(), x, y,-1)); // id is 0 because we don't need it
                     actor.setHighlighted(false);
                     break;
                 }
@@ -130,7 +130,7 @@ public final class GameScene extends SceneBase {
 
                     //actor.getCurrentRegion().setTroops(actor.getCurrentRegion().getTroops()-1);
 
-                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), currentRegion.getName()));
+                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), currentRegion.getName(),actor.getId() ));
                 }
             }
         }
@@ -157,7 +157,7 @@ public final class GameScene extends SceneBase {
     }
 
     private Infantry createInfantry() {
-        Infantry infantry = new Infantry(Gdx.graphics.getWidth() * 0.3f, Gdx.graphics.getHeight() * 0.1f, 200, 200,0 );
+        Infantry infantry = new Infantry(Gdx.graphics.getWidth() * 0.3f, Gdx.graphics.getHeight() * 0.1f, 200, 200,-1 );
         infantry.addTouchListener();
 
         figures.add(infantry);
@@ -165,7 +165,7 @@ public final class GameScene extends SceneBase {
     }
 
     private Cavalry createCavalry() {
-        Cavalry cavalry = new Cavalry(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.1f, 200, 200, 0);
+        Cavalry cavalry = new Cavalry(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.1f, 200, 200, -1);
         cavalry.addTouchListener();
 
         figures.add(cavalry);
@@ -173,7 +173,7 @@ public final class GameScene extends SceneBase {
     }
 
     private Artillery createArtillery() {
-        Artillery artillery = new Artillery(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.1f, 200, 200, 0);
+        Artillery artillery = new Artillery(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.1f, 200, 200, -1);
         artillery.addTouchListener();
 
         figures.add(artillery);
@@ -307,9 +307,11 @@ public final class GameScene extends SceneBase {
     private void moveTroop(MoveTroopGui message) {
         AssetMap.Region toRegion = regionNameMap.get(message.getToRegion());
         AssetMap.Region fromRegion = regionNameMap.get(message.getFromRegion());
-
+        System.out.println("figure id in message:"+message.getFigureId());
         for (Figure actor: figures) {
-            if (actor.isHighlighted()) {
+
+            if (actor.getId()==message.getFigureId()) {
+                System.out.println("Actor moved" + " has id:"+actor.getId());
                 moveActorToRegion(message.getToRegion(), actor);
                 actor.setCurrentRegion(toRegion);
                 setRegionColor(Color.BROWN, toRegion);
