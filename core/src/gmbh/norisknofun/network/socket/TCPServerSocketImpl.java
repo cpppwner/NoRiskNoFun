@@ -16,6 +16,10 @@ import java.nio.channels.SocketChannel;
  */
 class TCPServerSocketImpl implements TCPServerSocket {
 
+    /**
+     * default timeout for the socket - 30 seconds
+     */
+    private static final int DEFAULT_SOCKET_TIMEOUT_IN_MS = 30 * 1000;
 
 
     private final ServerSocketChannel serverSocketChannel;
@@ -58,6 +62,7 @@ class TCPServerSocketImpl implements TCPServerSocket {
         TCPServerSocketImpl serverSocket = null;
         try {
             serverSocket = new TCPServerSocketImpl(ServerSocketChannel.open());
+            serverSocket.serverSocketChannel.socket().setSoTimeout(DEFAULT_SOCKET_TIMEOUT_IN_MS);
             serverSocket.serverSocketChannel.configureBlocking(false);
 
             // set SO_REUSEADDR socket option & bind socket
@@ -81,6 +86,7 @@ class TCPServerSocketImpl implements TCPServerSocket {
             return null; // no connection available
         }
 
+        socketChannel.socket().setSoTimeout(DEFAULT_SOCKET_TIMEOUT_IN_MS);
         socketChannel.configureBlocking(false);
 
         return new TCPClientSocketImpl(socketChannel);

@@ -3,6 +3,7 @@ package gmbh.norisknofun.network;
 import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -194,10 +195,13 @@ public class NetworkServer {
     }
 
     private void handleSocketRead(TCPClientSocket clientSocket) {
+
         SessionImpl session = socketSessionMap.get(clientSocket);
-        int numBytesRead;
+        int numBytesRead = 0;
         try {
             numBytesRead = session.doReadFromSocket(clientSocket);
+        } catch (SocketTimeoutException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "socket timed out during socket read", e);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket read", e);
             numBytesRead = -1; // so that session gets terminated
@@ -221,10 +225,13 @@ public class NetworkServer {
     }
 
     private void handleSocketWrite(TCPClientSocket clientSocket) {
+
         SessionImpl session = socketSessionMap.get(clientSocket);
-        int numBytesWritten;
+        int numBytesWritten = 0;
         try {
             numBytesWritten = session.doWriteToSocket(clientSocket);
+        } catch (SocketTimeoutException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "socket timed out during socket write", e);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket write", e);
             numBytesWritten = -1;
