@@ -17,9 +17,9 @@ import java.nio.channels.SocketChannel;
 class TCPClientSocketImpl implements TCPClientSocket {
 
     /**
-     * default timeout for the socket - 30 seconds
+     * default timeout for the socket - infinite timeout
      */
-    private static final int DEFAULT_SOCKET_TIMEOUT_IN_MS = 30 * 1000;
+    private static final int DEFAULT_SOCKET_TIMEOUT_IN_MS = 0;
 
     private SocketChannel socketChannel;
 

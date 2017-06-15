@@ -65,7 +65,7 @@ public class LobbyScene extends SceneBase{
             }
         });
         addSceneObject(imageButtonStartGame);
-        imageButtonStartGame.setDisabled();
+        //imageButtonStartGame.setDisabled();
     }
 
     /**

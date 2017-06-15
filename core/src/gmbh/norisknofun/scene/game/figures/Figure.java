@@ -20,11 +20,12 @@ public class Figure extends SceneObject {
     boolean highlighted = false;
     AssetMap.Region region = null;
     private boolean firstMove = true;
+    private int id;
 
 
-    public Figure( int x, int y, int width, int height){
+    public Figure(float x, float y, float width, float height, int id){
 
-
+        this.id = id;
         sprite = new Sprite();
         setBounds(x,y,width,height);
     }
@@ -90,4 +91,11 @@ public class Figure extends SceneObject {
         this.firstMove = firstMove;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

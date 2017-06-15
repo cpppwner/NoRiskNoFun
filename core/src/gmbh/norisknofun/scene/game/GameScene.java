@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.PolygonRegion;
+import com.badlogic.gdx.math.GeometryUtils;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -128,11 +130,12 @@ public final class GameScene extends SceneBase {
 
                     //actor.getCurrentRegion().setTroops(actor.getCurrentRegion().getTroops()-1);
 
-                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), currentRegion.getName(), x, y));
+                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), currentRegion.getName()));
                 }
             }
         }
     }
+
 
     /**
      * Move a specific figure to given coordinates
@@ -146,8 +149,15 @@ public final class GameScene extends SceneBase {
         actor.setHighlighted(false); // remove highlight after move
     }
 
+    private void moveActorToRegion(String region, Figure actor) {
+        Vector2 movePosition = calculatePolygonCentroid(regionNameMap.get(region).getVertices());
+
+        actor.addAction(Actions.moveTo(movePosition.x * Gdx.graphics.getWidth(), movePosition.y * Gdx.graphics.getHeight()));
+        actor.setHighlighted(false);
+    }
+
     private Infantry createInfantry() {
-        Infantry infantry = new Infantry((int) (Gdx.graphics.getWidth() * 0.3), (int) (Gdx.graphics.getHeight() * 0.1), 200, 200);
+        Infantry infantry = new Infantry(Gdx.graphics.getWidth() * 0.3f, Gdx.graphics.getHeight() * 0.1f, 200, 200);
         infantry.addTouchListener();
 
         figures.add(infantry);
@@ -155,7 +165,7 @@ public final class GameScene extends SceneBase {
     }
 
     private Cavalry createCavalry() {
-        Cavalry cavalry = new Cavalry((int) (Gdx.graphics.getWidth() * 0.5), (int) (Gdx.graphics.getHeight() * 0.1), 200, 200);
+        Cavalry cavalry = new Cavalry(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.1f, 200, 200);
         cavalry.addTouchListener();
 
         figures.add(cavalry);
@@ -163,7 +173,7 @@ public final class GameScene extends SceneBase {
     }
 
     private Artillery createArtillery() {
-        Artillery artillery = new Artillery((int) (Gdx.graphics.getWidth() * 0.7), (int) (Gdx.graphics.getHeight() * 0.1), 200, 200);
+        Artillery artillery = new Artillery(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.1f, 200, 200);
         artillery.addTouchListener();
 
         figures.add(artillery);
@@ -187,7 +197,7 @@ public final class GameScene extends SceneBase {
             // for Intersector, we have to convert to percentual x/y coordinates. Simply divide by screen width/height
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
                 label.setText("Region: " + region.getName());
-                region.setOwner(data.getCurrentPlayer().getPlayerName());
+                //region.setOwner(data.getCurrentPlayer().getPlayerName());
 
                 return true;
             }
@@ -221,6 +231,13 @@ public final class GameScene extends SceneBase {
         rollButton.setBounds(1000, 100, 500, 100);
         rollButton.addListener(new SwitchSceneClickListener(SceneNames.DICE_SCENE));
         addSceneObject(rollButton);
+    }
+
+    private Vector2 calculatePolygonCentroid(float[] vertices) {
+        Vector2 polygonCentroid = new Vector2();
+
+        GeometryUtils.polygonCentroid(vertices, 0, vertices.length, polygonCentroid);
+        return polygonCentroid;
     }
 
     /**
@@ -266,13 +283,18 @@ public final class GameScene extends SceneBase {
      */
     private void spawnNewTroop(SpawnTroopGui message) {
 
-        Infantry infantry = new Infantry((int) message.getX() - 100, (int) message.getY() - 100, 200, 200);
+        AssetMap.Region region = regionNameMap.get(message.getRegionName());
+        Vector2 troopCoordinates = calculatePolygonCentroid(region.getVertices());
+
+        Infantry infantry = new Infantry((troopCoordinates.x * Gdx.graphics.getWidth()) - 100, (troopCoordinates.y * Gdx.graphics.getHeight()) - 100, 200, 200);
         infantry.addTouchListener();
         infantry.setFirstMove(false);
         infantry.setCurrentRegion(regionNameMap.get(message.getRegionName()));
 
+
         // todo: don't create a new Color object every time
-        setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
+        //setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
+        setRegionColor(Color.BROWN, infantry.getCurrentRegion());
 
         figures.add(infantry);
         addSceneObject(infantry);
@@ -286,11 +308,9 @@ public final class GameScene extends SceneBase {
         AssetMap.Region toRegion = regionNameMap.get(message.getToRegion());
         AssetMap.Region fromRegion = regionNameMap.get(message.getFromRegion());
 
-        Gdx.app.log("GameScene", "Moving troop");
-
         for (Figure actor: figures) {
             if (actor.isHighlighted()) {
-                moveActor(message.getX(), message.getY(), actor);
+                moveActorToRegion(message.getToRegion(), actor);
                 actor.setCurrentRegion(toRegion);
                 setRegionColor(Color.BROWN, toRegion);
 

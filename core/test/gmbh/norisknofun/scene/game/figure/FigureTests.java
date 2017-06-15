@@ -22,14 +22,14 @@ public class FigureTests {
 
     @Test
     public void creatingFigureWithArgumentsWorksCorrectly() {
-        Figure figure = new Figure(1, 2, 3, 4);
+        Figure figure = new Figure(1, 2, 3, 4, );
 
         assertNotNull(figure);
     }
 
     @Test
     public void valuesGetCorrectlySetInConstructor() {
-        Figure figure = new Figure(1, 2, 3, 4);
+        Figure figure = new Figure(1, 2, 3, 4, );
 
         assertEquals(1, (int) figure.getX());
         assertEquals(2, (int) figure.getY());

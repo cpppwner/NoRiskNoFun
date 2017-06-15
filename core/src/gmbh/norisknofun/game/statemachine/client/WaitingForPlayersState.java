@@ -2,6 +2,7 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
+import gmbh.norisknofun.game.gamemessages.gui.StartGameClicked;
 import gmbh.norisknofun.game.networkmessages.EndGame;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
@@ -20,26 +21,23 @@ public class WaitingForPlayersState extends State {
     }
 
     @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
-    }
-
-    @Override
     public void handleMessage(String senderId, Message message) {
 
-        if(message.getType().equals(EndGame.class)){
-            SceneManager.getInstance().setActiveScene(SceneNames.MAIN_MENU_SCENE);
-        }else if(message.getType().equals(StartGame.class)){
-            context.setState(new SpreadTroopsState(context));
+        if(message.getType().equals(StartGame.class)){
+
+            startGame();
+
+        } else if (message.getType().equals(StartGameClicked.class)) {
+            context.sendMessage(new StartGame(true));
         }
         else{
             Gdx.app.log(getClass().getSimpleName(),"unknown message " + message.getType().getName());
         }
+    }
+
+    private void startGame() {
+        context.setState(new SpreadTroopsState(context));
+        SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
     }
 
 

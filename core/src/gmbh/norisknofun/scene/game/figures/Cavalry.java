@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Cavalry extends Figure {
 
-    public Cavalry( int x, int y, int width, int height){
-        super(x,y,width,height);
+    public Cavalry( float x, float y, float width, float height){
+        super(x,y,width,height, );
         img= new Texture(Gdx.files.internal("img/kavalerie.png"));
         super.sprite.setRegion(img);
     }
