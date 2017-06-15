@@ -33,7 +33,7 @@ public class CommonTests {
     @Test
     public void moveTroop() throws IOException, ClassNotFoundException {
 
-        MoveTroop moveTroop = new MoveTroop(PLAYER, 10,"dest", "origin");
+        MoveTroop moveTroop = new MoveTroop(PLAYER, 10,"dest", "origin", -1);
         oos.writeObject (moveTroop);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);

@@ -2,11 +2,10 @@ package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
 
-import java.util.List;
-
-import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
+import gmbh.norisknofun.game.networkmessages.common.RemoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
@@ -20,14 +19,14 @@ public class SpreadTroopsState extends State {
 
     private ServerContext context;
     private final GameDataServer data;
-    private int currentplayerindex=0;
+    private int currentPlayerIndex =0;
     public SpreadTroopsState(ServerContext context){
 
         this.context=context;
         data=context.getGameData();
         assignRegionsToPlayer();
         assignTroopsToPlayer();
-        setCurrentPlayer(currentplayerindex);
+        setCurrentPlayer(currentPlayerIndex);
 
     }
 
@@ -46,8 +45,11 @@ public class SpreadTroopsState extends State {
 
 
         if (message.getType().equals(SpawnTroop.class)){
-            System.out.println("SERVER SPREAD TROOPS: RECEIVED SPAWNTROOP");
             spawnTroopOnRegion((SpawnTroop)message);
+        } else if (message.getType().equals(MoveTroop.class)) {
+            context.sendMessage(message);
+        } else if (message.getType().equals(RemoveTroop.class)) {
+            context.sendMessage(message); // simply send the received message back
         }
         else{
             Gdx.app.log("SpreadTroopsState","message unknown");
@@ -56,7 +58,10 @@ public class SpreadTroopsState extends State {
 
 
     private void spawnTroopOnRegion(SpawnTroop message) {
-        //no used field should be null or 0
+
+        // todo: Temporarily disabled the check for testing purposes
+
+        /*        //no used field should be null or 0
         if (message.getRegionname() == null
                 || message.getPlayername() == null) {
             return;
@@ -78,15 +83,18 @@ public class SpreadTroopsState extends State {
                 sendSpawnTroopCheckMessage(false);
             }
 
-        }
+        }*/
+        message.setId(data.nextFigureId());
+        System.out.println("server state figure id:"+message.getId());
+        context.sendMessage(message);
     }
     private void setNextPlayer(){
-        if(currentplayerindex>data.getPlayers().getPlayerlist().size()-1){
-            currentplayerindex=0;
+        if(currentPlayerIndex >data.getPlayers().getPlayerlist().size()-1){
+            currentPlayerIndex =0;
         }else {
-            currentplayerindex++;
+            currentPlayerIndex++;
         }
-        setCurrentPlayer(currentplayerindex);
+        setCurrentPlayer(currentPlayerIndex);
 
     }
 

@@ -51,6 +51,7 @@ public class SceneData {
         gameDataServer = new GameDataServer();
         gameDataClient = new GameData();
         gameServices = new GameServices(socketFactory, gameDataServer, gameDataClient);
+        gameDataClient.setMapAsset(assetFactory.createAssetMap("maps/Dummy Two.map")); // fixme: termporarily hardcode map
     }
 
     /**

@@ -12,15 +12,14 @@ public class MoveTroopGui extends BasicMessageImpl {
 
     private String toRegion;
     private int troopamount;
-    private float x;
-    private float y;
+    private int figureId;
 
 
-    public MoveTroopGui(String fromRegion, String toRegion, float x, float y) {
+    public MoveTroopGui(String fromRegion, String toRegion, int id) {
         this.fromRegion = fromRegion;
         this.toRegion = toRegion;
-        this.x = x;
-        this.y = y;
+        this.figureId=id;
+
     }
 
     public String getFromRegion() {
@@ -47,20 +46,11 @@ public class MoveTroopGui extends BasicMessageImpl {
         this.toRegion = toRegion;
     }
 
-    public float getX() {
-        return x;
+    public int getFigureId() {
+        return figureId;
     }
 
-    public void setX(float x) {
-        this.x = x;
+    public void setFigureId(int figureIds) {
+        this.figureId = figureIds;
     }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
 }

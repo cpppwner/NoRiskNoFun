@@ -21,14 +21,16 @@ public class MoveTroop extends BasicMessageImpl implements Serializable{
     private static final long serialVersionUID = 1L;
     private String  playername;
     private int     troopamount;
-    private String  destinationregion;
-    private String  originregion;
+    private String toRegion;
+    private String fromRegion;
+    private int figureId;
 
-    public MoveTroop(String playername, int troopamount, String destinationregion, String originregion) {
+    public MoveTroop(String playername, int troopamount,  String fromRegion,String toRegion, int id) {
         this.playername = playername;
         this.troopamount = troopamount;
-        this.destinationregion = destinationregion;
-        this.originregion = originregion;
+        this.toRegion = toRegion;
+        this.fromRegion = fromRegion;
+        this.figureId=id;
     }
     public MoveTroop(){
         //to fill the message object via setter
@@ -50,19 +52,27 @@ public class MoveTroop extends BasicMessageImpl implements Serializable{
         this.troopamount = troopamount;
     }
 
-    public String getDestinationregion() {
-        return destinationregion;
+    public String getToRegion() {
+        return toRegion;
     }
 
-    public void setDestinationregion(String destinationregion) {
-        this.destinationregion = destinationregion;
+    public void setToRegion(String toRegion) {
+        this.toRegion = toRegion;
     }
 
-    public String getOriginregion() {
-        return originregion;
+    public String getFromRegion() {
+        return fromRegion;
     }
 
-    public void setOriginregion(String originregion) {
-        this.originregion = originregion;
+    public void setFromRegion(String fromRegion) {
+        this.fromRegion = fromRegion;
+    }
+
+    public int getFigureId() {
+        return figureId;
+    }
+
+    public void setFigureId(int figureId) {
+        this.figureId = figureId;
     }
 }
