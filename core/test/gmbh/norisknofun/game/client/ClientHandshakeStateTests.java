@@ -117,7 +117,7 @@ public class ClientHandshakeStateTests extends GdxTest {
         ClientHandshakeState target = new ClientHandshakeState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("no outbound message excepted here");
+        expectedException.expectMessage("unexpected handleOutboundMessage");
 
         // when/then
         target.handleOutboundMessage(mockMessage);
@@ -130,7 +130,7 @@ public class ClientHandshakeStateTests extends GdxTest {
         ClientHandshakeState target = new ClientHandshakeState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("not expecting new session during handshake");
+        expectedException.expectMessage("unexpected handleNewSession");
 
         // when/then
         target.handleNewSession(mockSession);
@@ -154,10 +154,5 @@ public class ClientHandshakeStateTests extends GdxTest {
         assertThat(((ClientConnectionRefused)messageQueue.get(0)).getReason(), is("connection closed by server"));
 
         verifyZeroInteractions(mockSession);
-    }
-
-    @Test
-    public void handleDataReceivedDoesNothingIfThereIsNotEnoughDataToDeserializeMessage() {
-
     }
 }
