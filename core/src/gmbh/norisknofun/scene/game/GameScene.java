@@ -44,7 +44,6 @@ public final class GameScene extends SceneBase {
     private final GameData data;
 
     private LabelSceneObject label;
-    private boolean initializeScene = true;
 
     private List<Figure> figures = new ArrayList<>();
     private Map<AssetMap.Region, PolygonRegion> regionMap;
@@ -68,29 +67,28 @@ public final class GameScene extends SceneBase {
         addSceneObject(createArtillery());
     }
 
+    @Override
+    public void preload() {
+
+        label = new LabelSceneObject(sceneData.createLabel("Region: ", Assets.FONT_36PX_WHITE_WITH_BORDER));
+        label.setBounds(0, 0, 500, 100);
+        addSceneObject(label);
+
+        GameObjectMap  gameObjectMap = new GameObjectMap(data.getMapAsset());
+        regionMap = gameObjectMap.getRegionMap();
+        regionNameMap = gameObjectMap.getRegionNameMap();
+
+        addSceneObject(gameObjectMap);
+        addFiguresToStage();
+        addInputListener();
+
+        addRollButton();
+    }
 
     @Override
     public void show() {
         // make sure the stage is not drawn again when coming back from another scene
-        if (initializeScene) {
-            GameObjectMap gameObjectMap;
 
-            label = new LabelSceneObject(sceneData.createLabel("Region: ", Assets.FONT_36PX_WHITE_WITH_BORDER));
-            label.setBounds(0, 0, 500, 100);
-            addSceneObject(label);
-
-            gameObjectMap = new GameObjectMap(data.getMapAsset());
-            regionMap = gameObjectMap.getRegionMap();
-            regionNameMap = gameObjectMap.getRegionNameMap();
-
-            addSceneObject(gameObjectMap);
-            addFiguresToStage();
-            addInputListener();
-
-            addRollButton();
-
-            initializeScene = false;
-        }
         super.show();
     }
 
