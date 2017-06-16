@@ -64,7 +64,7 @@ public class SpreadTroopsState extends State {
     }
 
     private void requestSpawn(SpawnTroopGui message) {
-        context.sendMessage(new SpawnTroop("P1", message.getRegionName()));
+        context.sendMessage(new SpawnTroop(message.getRegionName()));
     }
 
     private void doSpawnTroop(SpawnTroop message) {

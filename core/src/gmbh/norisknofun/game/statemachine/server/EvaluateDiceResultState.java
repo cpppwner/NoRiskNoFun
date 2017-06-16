@@ -31,8 +31,6 @@ public class EvaluateDiceResultState extends State {
     }
 
     private void handleDiceResult(String senderId, DiceResult message){
-        int winsOfDefender=0;
-        int winsOfAttacker=0;
 
 
         if(getAttackerId().equals(senderId)){
@@ -42,7 +40,7 @@ public class EvaluateDiceResultState extends State {
         }
 
         if(!isEmpty(data.getDefenderDiceResult()) && !isEmpty(data.getAttackerDiceResult())) {
-            int [] result=calculateAttackResult(winsOfAttacker, winsOfDefender);
+            int [] result=calculateAttackResult();
             handleAttackResult(result[0],result[1]);
         }
 
@@ -61,9 +59,10 @@ public class EvaluateDiceResultState extends State {
 
     }
 
-    private int [] calculateAttackResult(int winsOfAttacker, int winsOfDefender){
+    private int [] calculateAttackResult(){
 
-
+        int winsOfAttacker=0;
+        int winsOfDefender=0;
         int [] defenderDiceResult = data.getDefenderDiceResult();
         int [] attackerDiceResult = data.getAttackerDiceResult();
 

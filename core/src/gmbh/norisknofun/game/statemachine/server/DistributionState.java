@@ -51,9 +51,9 @@ public class DistributionState extends State {
 
     private boolean checkSpawnMessage(String senderId, SpawnTroop spawnTroop){
         boolean check=true;
-        if(spawnTroop.getRegionname()==null || spawnTroop.getPlayername()==null){
+        if(spawnTroop.getRegionname()==null){
             check=false;
-            sendSpawnTroopCheckMessage(senderId,"region or playername are null",false);
+            sendSpawnTroopCheckMessage(senderId,"region is null",false);
         }else if(!senderId.equals(data.getCurrentplayer().getId())){
             check=false;
             sendSpawnTroopCheckMessage(senderId,"you are not the current player",false);
@@ -69,7 +69,7 @@ public class DistributionState extends State {
     }
 
     private void broadcastSpawnTroopMessage(SpawnTroop message){
-        SpawnTroop spawnTroop = new SpawnTroop(message.getPlayername(),message.getRegionname());
+        SpawnTroop spawnTroop = new SpawnTroop(message.getRegionname());
         context.sendMessage(spawnTroop); // send to all clients
     }
     private void sendSpawnTroopCheckMessage(String senderId, String errormessage, boolean movepossible){

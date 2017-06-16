@@ -37,7 +37,7 @@ public class SpreadTroopsStateTests extends GdxTest {
 
     @Test
     public void nullNameWillNotThrowException() {
-        SpawnTroop message = new SpawnTroop(null, "Otherregion");
+        SpawnTroop message = new SpawnTroop("Otherregion");
 
         context.handle("123", message);
 
@@ -45,7 +45,7 @@ public class SpreadTroopsStateTests extends GdxTest {
 
     @Test
     public void nullRegionWillNotThrowException() {
-        SpawnTroop message = new SpawnTroop("hubert",null);
+        SpawnTroop message = new SpawnTroop(null);
 
         context.handle("123", message);
     }

@@ -7,6 +7,7 @@ import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerAccepted;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerRejected;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayersInGame;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -35,7 +36,9 @@ class JoinGame extends State {
             handlePlayerRejected((PlayerRejected)message);
         } else if (message instanceof PlayerAccepted) {
             handlePlayerAccepted((PlayerAccepted)message);
-        } else {
+        }else if( message instanceof PlayersInGame){
+            handleNewPlayerInGame((PlayersInGame)message);
+        }else {
             Gdx.app.log(getClass().getSimpleName(), "Unsupported message class received " + message.getType().getName());
         }
     }
@@ -60,5 +63,9 @@ class JoinGame extends State {
         // our join request was rejected by the server
         clientContext.getGameData().setLastError("Join rejected: " + message.getReason());
         clientContext.setState(new ErrorState());
+    }
+
+    private void handleNewPlayerInGame(PlayersInGame playersInGame){
+        clientContext.getGameData().updateAllPlayers(playersInGame.getAllPlayers());
     }
 }

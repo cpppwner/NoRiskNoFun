@@ -75,7 +75,8 @@ public class CommonTests {
     @Test
     public void spawnTroop() throws IOException, ClassNotFoundException{
 
-        SpawnTroop spawnTroop = new SpawnTroop(PLAYER,REGIONNAME);
+        SpawnTroop spawnTroop = new SpawnTroop(REGIONNAME);
+        spawnTroop.setPlayername(PLAYER);
         oos.writeObject (spawnTroop);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
