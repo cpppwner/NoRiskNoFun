@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import gmbh.norisknofun.game.ColorPool;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
+import gmbh.norisknofun.game.gamemessages.client.ClientConnected;
+import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerAccepted;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerJoined;
@@ -35,9 +37,14 @@ class WaitingForPlayersState extends State {
 
         if(message.getType().equals(PlayerJoined.class)){
             addPlayer((PlayerJoined) message, senderId);
-        }else if(message.getType().equals(StartGame.class) ){
+        }else if(message.getType().equals(StartGame.class)) {
             startGame();
-        }else{
+        } else if (message.getType().equals(ClientConnected.class)) {
+            // new client connected, don't care
+        } else if (message.getType().equals(ClientDisconnected.class)) {
+            // client disconnected, remote the
+            removePlayer(senderId);
+        } else {
             Gdx.app.log(getClass().getSimpleName(), "message unknown: " + message.getType().getName());
         }
     }
@@ -61,6 +68,15 @@ class WaitingForPlayersState extends State {
             // all fine, accept player
             acceptNewPlayer(message, senderId);
             context.sendMessage(new PlayersInGame(data.getPlayers()));
+        }
+    }
+
+
+    private void removePlayer(String senderId) {
+
+        Player player = data.getPlayers().getPlayerByID(senderId);
+        if (player != null) {
+            data.getPlayers().removePlayer(player.getPlayerName());
         }
     }
 
