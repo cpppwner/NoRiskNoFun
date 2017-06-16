@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
-import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -130,7 +129,7 @@ public class CreateGameScene extends SceneBase {
         @Override
         public void clicked(InputEvent event, float x, float y) {
 
-            if (textField.getText() == null || textField.getText().isEmpty()) {
+/*            if (textField.getText() == null || textField.getText().isEmpty()) {
                 AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
                 dialog.show(getStage());
                 dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
@@ -139,7 +138,10 @@ public class CreateGameScene extends SceneBase {
                 sceneData.setPlayerName(textField.getText());
                 sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
                 super.clicked(event, x, y);
-            }
+            }*/
+            sceneData.setPlayerName("PlayerB");
+            sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
+            super.clicked(event, x, y);
         }
     }
 }

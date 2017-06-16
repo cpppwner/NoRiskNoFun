@@ -9,9 +9,13 @@ import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.server.InboundMessageHandler;
 import gmbh.norisknofun.game.server.OutboundMessageHandler;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 /**
  * Unit tests for testing {@link MessageBusImpl}.

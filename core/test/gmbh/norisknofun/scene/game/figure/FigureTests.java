@@ -6,10 +6,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
-
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.scene.game.figures.Figure;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class FigureTests {
 

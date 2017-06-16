@@ -17,15 +17,7 @@ public class ChooseTargetState extends State {
     public ChooseTargetState(ClientContext context){
         this.context=context;
     }
-    @Override
-    public void enter() {
 
-    }
-
-    @Override
-    public void exit() {
-
-    }
 
     @Override
     public void handleMessage(String senderId, Message message) {

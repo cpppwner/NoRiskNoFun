@@ -20,15 +20,7 @@ public class DistributionState extends State {
     public DistributionState(ClientContext context){
         this.context=context;
     }
-    @Override
-    public void enter() {
 
-    }
-
-    @Override
-    public void exit() {
-
-    }
 
     @Override
     public void handleMessage(String senderId, Message message) {

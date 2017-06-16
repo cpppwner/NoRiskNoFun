@@ -2,7 +2,6 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
@@ -10,6 +9,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by Katharina on 29.05.2017.

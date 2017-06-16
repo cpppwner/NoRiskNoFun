@@ -3,7 +3,6 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.gamemessages.gui.StartGameClicked;
-import gmbh.norisknofun.game.networkmessages.EndGame;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayersInGame;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
