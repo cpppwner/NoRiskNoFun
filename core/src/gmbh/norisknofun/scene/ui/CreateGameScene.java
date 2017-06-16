@@ -139,7 +139,9 @@ public class CreateGameScene extends SceneBase {
                 sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
                 super.clicked(event, x, y);
             }*/
-            sceneData.setPlayerName("PlayerB");
+
+
+            sceneData.setPlayerName("PlayerHosting");
             sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
             super.clicked(event, x, y);
         }
