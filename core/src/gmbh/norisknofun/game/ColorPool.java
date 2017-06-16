@@ -53,7 +53,7 @@ public class ColorPool {
     /**
      * Release used color and return it into the pool of available color.
      */
-    void releaseColor(Color color) {
+    public void releaseColor(Color color) {
 
         usedColors.remove(color);
     }

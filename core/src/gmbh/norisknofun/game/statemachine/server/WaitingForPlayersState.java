@@ -77,6 +77,7 @@ class WaitingForPlayersState extends State {
         Player player = data.getPlayers().getPlayerByID(senderId);
         if (player != null) {
             data.getPlayers().removePlayer(player.getPlayerName());
+            colorPool.releaseColor(new Color(player.getColor()));
             context.sendMessage(new PlayersInGame(data.getPlayers())); // update all connected clients
         }
     }
