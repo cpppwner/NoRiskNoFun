@@ -19,6 +19,7 @@ import java.util.Map;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
@@ -60,11 +61,7 @@ public final class GameScene extends SceneBase {
 
 
     private void addFiguresToStage() {
-        addSceneObject(createInfantry());
-
-        addSceneObject(createCavalry());
-
-        addSceneObject(createArtillery());
+        addSceneObject(createInfantry()); // This troop will be used to spawn new ones
     }
 
     @Override
@@ -83,6 +80,10 @@ public final class GameScene extends SceneBase {
         addInputListener();
 
         addRollButton();
+
+        for (Player player:data.getPlayers()) {
+            Gdx.app.log("GameScene", "Player Available: " + player.getPlayerName());
+        }
     }
 
     @Override
@@ -158,7 +159,7 @@ public final class GameScene extends SceneBase {
     }
 
     private Infantry createInfantry() {
-        Infantry infantry = new Infantry(Gdx.graphics.getWidth() * 0.3f, Gdx.graphics.getHeight() * 0.1f, 200, 200,-1 );
+        Infantry infantry = new Infantry(Gdx.graphics.getWidth() * 0.0f, Gdx.graphics.getHeight() * 0.15f, 200, 200,-1 );
         infantry.addTouchListener();
 
         figures.add(infantry);

@@ -12,8 +12,11 @@ import gmbh.norisknofun.game.protocol.MessageSerializer;
 import gmbh.norisknofun.game.protocol.ProtocolException;
 import gmbh.norisknofun.game.protocol.util.MessageBuffer;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for testing the {@link Handshake} message class.

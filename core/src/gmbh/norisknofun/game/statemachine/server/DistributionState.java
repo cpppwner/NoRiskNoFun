@@ -23,15 +23,6 @@ public class DistributionState extends State {
         addTroopsToPlayer();
         checkIfSomeoneHasWon();
     }
-    @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
-    }
 
     @Override
     public void handleMessage(String senderId, Message message) {

@@ -1,18 +1,17 @@
 package gmbh.norisknofun.game.statemachine.server;
 
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.awt.Color;
 
+import gmbh.norisknofun.GdxTest;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.server.MessageBus;
 import gmbh.norisknofun.game.server.messaging.MessageBusImpl;
-
-import gmbh.norisknofun.GdxTest;
 
 
 public class SpreadTroopsStateTests extends GdxTest {

@@ -10,9 +10,14 @@ import java.util.LinkedList;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.network.Session;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Tests for testing {@link ClientConnectingState}.

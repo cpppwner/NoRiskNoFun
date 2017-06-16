@@ -2,8 +2,6 @@ package gmbh.norisknofun.game.protocol.messages.handshake;
 
 import java.io.Serializable;
 
-import gmbh.norisknofun.game.networkmessages.Message;
-
 /**
  * Message class sent by server to client, when client's handshake request is accepted.
  */

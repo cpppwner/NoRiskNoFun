@@ -11,11 +11,14 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import gmbh.norisknofun.GdxTest;
-import gmbh.norisknofun.assets.*;
+import gmbh.norisknofun.assets.Asset;
 import gmbh.norisknofun.assets.AssetMap;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 public class AssetLoaderMapTests extends GdxTest {
 

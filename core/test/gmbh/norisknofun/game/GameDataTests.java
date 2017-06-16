@@ -1,13 +1,15 @@
 package gmbh.norisknofun.game;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import gmbh.norisknofun.assets.AssetMap;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
 
 
 /**

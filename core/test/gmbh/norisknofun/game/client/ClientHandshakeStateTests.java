@@ -1,6 +1,5 @@
 package gmbh.norisknofun.game.client;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
@@ -24,9 +23,16 @@ import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeConstants;
 import gmbh.norisknofun.game.protocol.util.MessageBuffer;
 import gmbh.norisknofun.network.Session;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 /**
  * Test class for testing {@link ClientHandshakeState}.

@@ -1,17 +1,12 @@
 package gmbh.norisknofun.scene.common;
 
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
-
 
 import gmbh.norisknofun.GdxTest;
-import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.assets.AssetTextButton;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 

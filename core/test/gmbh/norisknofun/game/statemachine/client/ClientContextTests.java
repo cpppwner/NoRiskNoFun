@@ -1,19 +1,24 @@
 package gmbh.norisknofun.game.statemachine.client;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.mockito.Mockito.*;
-
-
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.client.Client;
 import gmbh.norisknofun.game.statemachine.State;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 
 public class ClientContextTests {
