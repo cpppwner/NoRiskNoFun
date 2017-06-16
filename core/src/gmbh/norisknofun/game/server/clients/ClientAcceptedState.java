@@ -15,7 +15,7 @@ import gmbh.norisknofun.game.protocol.ProtocolException;
 /**
  * State of a connected client when handshake was successfully performed.
  */
-final class ClientAcceptedState implements ClientState {
+final class ClientAcceptedState extends ClientStateBase {
 
     private final Client context;
 

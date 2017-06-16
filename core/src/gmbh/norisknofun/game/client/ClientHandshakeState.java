@@ -61,7 +61,10 @@ class ClientHandshakeState extends ClientStateBase {
     @Override
     public void handleDataReceived() {
 
-
+        MessageDeserializer deserializer = new MessageDeserializer(getClient().getMessageBuffer());
+        if (deserializer.hasMessageToDeserialize()) {
+            deserializeAndHandleMessage(deserializer);
+        }
     }
 
     private void deserializeAndHandleMessage(MessageDeserializer deserializer) {
