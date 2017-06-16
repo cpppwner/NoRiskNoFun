@@ -157,4 +157,6 @@ public class GameDataServer {
     public int nextFigureId() {
         return currentFigureId++;
     }
+
+
 }
