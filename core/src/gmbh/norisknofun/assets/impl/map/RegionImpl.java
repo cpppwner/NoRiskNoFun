@@ -103,16 +103,7 @@ final class RegionImpl implements Region {
      */
     @Override
     public void updateTroops(int amount) {
-        numberTroops += amount;
-        if (numberTroops < 1) {
-            numberTroops = 0;
-            regionColor = Color.WHITE;
-        }
-    }
-
-    @Override
-    public void setNeighbouringRegions(List<String> regions) {
-        this.neighbouringRegions=regions;
+        setTroops(numberTroops + amount);
     }
 
     @Override

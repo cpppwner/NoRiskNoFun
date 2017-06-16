@@ -29,7 +29,7 @@ public interface AssetMap extends Asset {
      *     Region is part of a map.
      * </p>
      */
-    public interface Region {
+    interface Region {
 
         /**
          * Get region's name.
@@ -57,22 +57,38 @@ public interface AssetMap extends Asset {
 
         /**
          * Set the player's name who owns the region or null, if no one currently does.
-         * @param newOwner
          */
         void setOwner(String newOwner);
 
+        /**
+         * Set region's color.
+         */
         void setColor(Color color);
 
+        /**
+         * Get region's color.
+         */
         Color getColor();
 
+        /**
+         * Get number of troops on this region.
+         */
         int getTroops();
 
+        /**
+         * Set number of troops on this region.
+         */
         void setTroops(int amount);
 
+        /**
+         * Updates the amount of troops.
+         * @param amount The number of troops to add (can be negative as well).
+         */
         void updateTroops(int amount);
 
-        void setNeighbouringRegions(List<String> regions);
-
+        /**
+         * Get all neighbouring regions.
+         */
         List<String> getNeighbouringRegions();
     }
 }

@@ -1,7 +1,6 @@
 package gmbh.norisknofun.assets;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
