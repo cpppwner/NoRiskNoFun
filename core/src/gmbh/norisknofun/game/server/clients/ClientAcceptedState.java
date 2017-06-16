@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
 
+import gmbh.norisknofun.game.gamemessages.client.ClientConnected;
+import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
+import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageDeserializer;
 import gmbh.norisknofun.game.protocol.MessageSerializer;
@@ -25,16 +28,23 @@ final class ClientAcceptedState implements ClientState {
     public void enter() {
 
         context.subscribeToMessageBus();
+        context.distributeInboundMessage(new ClientConnected());
     }
 
     @Override
     public void exit() {
 
+        context.distributeInboundMessage(new ClientDisconnected());
         context.unsubscribeFromMessageBus();
     }
 
     @Override
     public void handleOutboundMessage(Message message) {
+
+        if (message instanceof DisconnectClient) {
+            handleDisconnect((DisconnectClient)message);
+            return;
+        }
 
         try {
             byte[] data = new MessageSerializer(message).serialize();
@@ -43,6 +53,11 @@ final class ClientAcceptedState implements ClientState {
             Gdx.app.error(getClass().getSimpleName(), "Failed to serialize message \"" + message.getType().getSimpleName() + "\"", e);
             terminateClient();
         }
+    }
+
+    private void handleDisconnect(DisconnectClient message) {
+
+        closeClient(message.isTerminateClient());
     }
 
     @Override
@@ -69,8 +84,16 @@ final class ClientAcceptedState implements ClientState {
     }
 
     private void terminateClient() {
+        closeClient(true);
+    }
 
-        context.getSession().terminate();
+    private void closeClient(boolean terminate) {
+
+        if (terminate) {
+            context.getSession().terminate();
+        } else {
+            context.getSession().close();
+        }
         context.setState(new ClientClosedState(context));
     }
 

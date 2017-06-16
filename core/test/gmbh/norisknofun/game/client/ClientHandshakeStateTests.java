@@ -1,5 +1,7 @@
 package gmbh.norisknofun.game.client;
 
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gmbh.norisknofun.GdxTest;
+import gmbh.norisknofun.game.gamemessages.client.ClientConnectionRefused;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageDeserializer;
 import gmbh.norisknofun.game.protocol.ProtocolException;
@@ -99,6 +102,8 @@ public class ClientHandshakeStateTests extends GdxTest {
         // then
         assertThat(client.getCurrentState(), is(instanceOf(ClientDisconnectedState.class)));
         assertThat(messageQueue.size(), is(1));
+        assertThat(messageQueue.get(0), is(instanceOf(ClientConnectionRefused.class)));
+        assertThat(((ClientConnectionRefused)messageQueue.get(0)).getReason(), Matchers.startsWith("Failed to send handshake: "));
 
         verify(mockSession, times(1)).write(ArgumentMatchers.any(byte[].class));
         verify(mockSession, times(1)).terminate();
@@ -144,7 +149,15 @@ public class ClientHandshakeStateTests extends GdxTest {
 
         // then
         assertThat(client.getCurrentState(), is(instanceOf(ClientDisconnectedState.class)));
+        assertThat(messageQueue.size(), is(1));
+        assertThat(messageQueue.get(0), is(instanceOf(ClientConnectionRefused.class)));
+        assertThat(((ClientConnectionRefused)messageQueue.get(0)).getReason(), is("connection closed by server"));
 
         verifyZeroInteractions(mockSession);
+    }
+
+    @Test
+    public void handleDataReceivedDoesNothingIfThereIsNotEnoughDataToDeserializeMessage() {
+
     }
 }

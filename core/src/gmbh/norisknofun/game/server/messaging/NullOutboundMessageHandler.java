@@ -4,7 +4,12 @@ import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.server.OutboundMessageHandler;
 
 /**
- * Created by cpppwner on 01.06.17.
+ * Special message handler used, when game wants to send outbound message directly
+ * to one outbound handler, which is unknown.
+ *
+ * <p>
+ *     Implementing the Null Object pattern.
+ * </p>
  */
 class NullOutboundMessageHandler implements OutboundMessageHandler {
 

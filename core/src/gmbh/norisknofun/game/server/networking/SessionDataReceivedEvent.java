@@ -3,13 +3,16 @@ package gmbh.norisknofun.game.server.networking;
 import gmbh.norisknofun.network.Session;
 
 /**
- * Created by cpppwner on 25.05.17.
+ * Session event to indicate that a session received new data over the network.
  */
-
 public class SessionDataReceivedEvent implements SessionEvent {
 
+    /** The session that received data from the network */
     private final Session session;
 
+    /**
+     * Initialize the event with the session that received the data.
+     */
     SessionDataReceivedEvent(Session session) {
 
         this.session = session;

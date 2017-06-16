@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmbh.norisknofun.GdxTest;
+import gmbh.norisknofun.game.gamemessages.client.ClientConnected;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageDeserializer;
 import gmbh.norisknofun.game.protocol.MessageDeserializerTests;
@@ -305,6 +306,7 @@ public class ClientConnectedStateTests extends GdxTest {
 
         verify(sessionMock, times(1)).write(ArgumentMatchers.any(byte[].class));
         verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), ArgumentMatchers.any(ClientConnected.class));
         verifyNoMoreInteractions(sessionMock, messageBusMock);
     }
 

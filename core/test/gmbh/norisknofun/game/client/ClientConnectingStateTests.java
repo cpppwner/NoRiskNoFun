@@ -77,7 +77,7 @@ public class ClientConnectingStateTests {
         ClientConnectingState target = new ClientConnectingState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("cannot handle outbound message");
+        expectedException.expectMessage("unexpected handleOutboundMessage");
 
         // when/then
         target.handleOutboundMessage(mockMessage);
@@ -90,7 +90,7 @@ public class ClientConnectingStateTests {
         ClientConnectingState target = new ClientConnectingState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("unexpected session closed event");
+        expectedException.expectMessage("unexpected handleSessionClosed");
 
         // when/then
         target.handleSessionClosed(mockSession);
@@ -103,7 +103,7 @@ public class ClientConnectingStateTests {
         ClientConnectingState target = new ClientConnectingState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("unexpected data received event");
+        expectedException.expectMessage("unexpected handleDataReceived");
 
         // when/then
         target.handleDataReceived();

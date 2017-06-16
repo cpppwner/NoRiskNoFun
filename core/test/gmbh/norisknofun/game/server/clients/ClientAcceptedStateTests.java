@@ -14,6 +14,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gmbh.norisknofun.GdxTest;
+import gmbh.norisknofun.game.gamemessages.client.ClientConnected;
+import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
+import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageSerializer;
 import gmbh.norisknofun.game.protocol.ProtocolException;
@@ -59,8 +62,8 @@ public class ClientAcceptedStateTests extends GdxTest {
 
         // then
         verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), ArgumentMatchers.any(ClientConnected.class));
         verifyNoMoreInteractions(messageBusMock);
-        verifyZeroInteractions(messageBusMock);
     }
 
     @Test
@@ -74,8 +77,38 @@ public class ClientAcceptedStateTests extends GdxTest {
 
         // then
         verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), ArgumentMatchers.any(ClientDisconnected.class));
         verifyNoMoreInteractions(messageBusMock);
-        verifyZeroInteractions(messageBusMock);
+    }
+
+    @Test
+    public void handleOutboundMessageHandlesDisconnectRequestForRegularClose() {
+
+        // given
+        ClientAcceptedState target = new ClientAcceptedState(client);
+
+        // when
+        target.handleOutboundMessage(new DisconnectClient(false));
+
+        // then
+        assertThat(client.getCurrentState(), is(instanceOf(ClientClosedState.class)));
+        verify(sessionMock, times(1)).close();
+        verifyNoMoreInteractions(sessionMock, messageBusMock);
+    }
+
+    @Test
+    public void handleOutboundMessageHandlesDisconnectRequestForTerminate() {
+
+        // given
+        ClientAcceptedState target = new ClientAcceptedState(client);
+
+        // when
+        target.handleOutboundMessage(new DisconnectClient(true));
+
+        // then
+        assertThat(client.getCurrentState(), is(instanceOf(ClientClosedState.class)));
+        verify(sessionMock, times(1)).terminate();
+        verifyNoMoreInteractions(sessionMock, messageBusMock);
     }
 
     @Test

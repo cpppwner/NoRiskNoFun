@@ -3,13 +3,13 @@ package gmbh.norisknofun.game.gamemessages.client;
 import gmbh.norisknofun.game.networkmessages.Message;
 
 /**
- * Message sent internally by to notify that a new client has been connected.
+ * Special class to notify the server that a client was disconnected.
  *
  * <p>
- *     This message is used on the server and the client side.
+ *     This message is sent on server and client side.
  * </p>
  */
-public class ClientConnected implements Message {
+public class ClientDisconnected implements Message {
 
     @Override
     public Class<? extends Message> getType() {

@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit;
 import gmbh.norisknofun.network.Session;
 
 /**
- * Created by cpppwner on 25.05.17.
+ * Session event listener implementation.
  */
-
 public class SessionEventListenerImpl implements SessionEventListener {
 
+    /** Queue storing all incoming session events. */
     private final BlockingQueue<SessionEvent> sessionEvents = new LinkedBlockingQueue<>();
 
     @Override

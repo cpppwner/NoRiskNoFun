@@ -35,11 +35,13 @@ final class ClientConnectedState implements ClientState {
     @Override
     public void enter() {
 
+        // nothing to do here
     }
 
     @Override
     public void exit() {
 
+        // nothing to do here
     }
 
     @Override

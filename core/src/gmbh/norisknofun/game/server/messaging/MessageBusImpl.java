@@ -115,7 +115,7 @@ public final class MessageBusImpl implements MessageBus {
      *
      * @return Number of registered inbound message handlers.
      */
-    public int getNumRegisteredInboundMessageHandlers() {
+    int getNumRegisteredInboundMessageHandlers() {
 
         return inboundMessageHandlers.size();
     }
@@ -129,7 +129,7 @@ public final class MessageBusImpl implements MessageBus {
      *
      * @return Number of registered outbound message handlers.
      */
-    public int getNumRegisteredOutboundMessageHandlers() {
+    int getNumRegisteredOutboundMessageHandlers() {
 
         return outboundMessageHandlers.size();
     }
