@@ -69,9 +69,9 @@ public class CreateGameScene extends SceneBase {
         ImageButtonSceneObject fourPlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.FOUR_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
 
         backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10f, 275f, 240f);
-        twoPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10)),(Gdx.graphics.getHeight()/8),275,240);
-        threePlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 300),(Gdx.graphics.getHeight()/8),275,240);
-        fourPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 600),(Gdx.graphics.getHeight()/8),275,240);
+        twoPlayers.setBounds(Gdx.graphics.getWidth() / 10.0f, Gdx.graphics.getHeight() / 8.0f, 275.0f, 240f);
+        threePlayers.setBounds(Gdx.graphics.getWidth() / 10.0f + 300.0f, Gdx.graphics.getHeight() / 8.0f,275.0f, 240.0f);
+        fourPlayers.setBounds(Gdx.graphics.getWidth() / 10.0f + 600.0f, Gdx.graphics.getHeight() / 8.0f, 275.0f, 240.0f);
 
         backButton.addListener(new BackClickListener());
         twoPlayers.addListener(new ContinueClickListener(2));

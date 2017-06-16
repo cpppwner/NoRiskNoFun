@@ -165,15 +165,6 @@ public class DiceRollScene extends SceneBase {
     }
 
     /**
-     * Set the images to the roll result of a specific die
-     *
-     * @param index of die and result to update
-     */
-    private void showRollResult(int index) {
-        dieObjects.get(index).setDieNumber(rollResults[index]);
-    }
-
-    /**
      * Set ClickListener to all die.
      * Used for cheat function.
      */
@@ -263,7 +254,7 @@ public class DiceRollScene extends SceneBase {
         private void tryCheat(int index) {
             if (cheatsAvailable > 0) {
                 diceRoll(index);
-                showRollResult(index);
+                dieObjects.get(index).setDieNumber(rollResults[index]);
                 cheatsAvailable--;
                 cheatLabel.setText(Integer.toString(cheatsAvailable));
             }
