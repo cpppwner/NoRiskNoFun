@@ -134,25 +134,12 @@ public class DiceRollScene extends SceneBase {
      * Roll all dice and update their results
      */
     private void diceRoll() {
-        Random rnd = new Random();
-        rnd.setSeed(TimeUtils.nanoTime());
+        Random rnd = new Random(TimeUtils.nanoTime());
 
         // generate a random number from 1-6
         for (int i = 0; i < rollResults.length; i++) {
             rollResults[i] = rnd.nextInt(6) + 1;
         }
-    }
-
-    /**
-     * Roll only a single die and update the result
-     *
-     * @param index die to roll
-     */
-    private void diceRoll(int index) {
-        Random rnd = new Random();
-        rnd.setSeed(TimeUtils.nanoTime());
-
-        rollResults[index] = rnd.nextInt(6) + 1;
     }
 
     /**
@@ -184,20 +171,6 @@ public class DiceRollScene extends SceneBase {
      */
     private void showRollResult(int index) {
         dieObjects.get(index).setDieNumber(rollResults[index]);
-    }
-
-    /**
-     * Check if player can cheat and do so if it's available.
-     *
-     * @param index index of the die to re-roll
-     */
-    private void tryCheat(int index) {
-        if (cheatsAvailable > 0) {
-            diceRoll(index);
-            showRollResult(index);
-            cheatsAvailable--;
-            cheatLabel.setText(Integer.toString(cheatsAvailable));
-        }
     }
 
     /**
@@ -280,6 +253,32 @@ public class DiceRollScene extends SceneBase {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             tryCheat(dieIndex);
             return true;
+        }
+
+        /**
+         * Check if player can cheat and do so if it's available.
+         *
+         * @param index index of the die to re-roll
+         */
+        private void tryCheat(int index) {
+            if (cheatsAvailable > 0) {
+                diceRoll(index);
+                showRollResult(index);
+                cheatsAvailable--;
+                cheatLabel.setText(Integer.toString(cheatsAvailable));
+            }
+        }
+
+
+        /**
+         * Roll only a single die and update the result
+         *
+         * @param index die to roll
+         */
+        private void diceRoll(int index) {
+            Random rnd = new Random(TimeUtils.nanoTime());
+
+            rollResults[index] = rnd.nextInt(6) + 1;
         }
     }
 
