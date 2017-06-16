@@ -10,6 +10,8 @@ public interface AssetImageButton extends AssetWidget, Disposable {
 
     /**
      * Get image button's name.
+     *
+     * @return Get image button's name.
      */
     String getName();
 
@@ -33,6 +35,8 @@ public interface AssetImageButton extends AssetWidget, Disposable {
 
     /**
      * Test if the button is enabled.
+     *
+     * @return {@code true} if the image button is enabled, {@code false} otherwise.
      */
     boolean isEnabled();
 }

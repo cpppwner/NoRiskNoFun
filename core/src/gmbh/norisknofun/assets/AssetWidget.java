@@ -10,21 +10,29 @@ interface AssetWidget {
 
     /**
      * Get x-coordinate of wrapped {@link ImageButton}.
+     *
+     * @return x-coordinate of widget's current position.
      */
     float getX();
 
     /**
      * Get y-coordinate of wrapped {@link ImageButton}.
+     *
+     * @return y-coordinate of widget's current position.
      */
     float getY();
 
     /**
      * Get width of wrapped {@link ImageButton}.
+     *
+     * @return width of widget
      */
     float getWidth();
 
     /**
      * Get height of wrapped {@link ImageButton}.
+     *
+     * @return height of widget
      */
     float getHeight();
 
@@ -40,6 +48,8 @@ interface AssetWidget {
 
     /**
      * Get wrapped actor.
+     *
+     * @return The underlying libgdx {@link Actor}.
      */
     Actor getActor();
 }

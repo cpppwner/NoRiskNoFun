@@ -39,6 +39,8 @@ public final class FontDescriptor {
 
     /**
      * Get font filename.
+     *
+     * @return Font filename, relative to assets directory.
      */
     public String getFontFilename() {
         return fontFilename;
@@ -46,6 +48,8 @@ public final class FontDescriptor {
 
     /**
      * Get font size in pixels.
+     *
+     * @return Font size in pixels.
      */
     public int getFontSize() {
         return fontSize;
@@ -57,6 +61,8 @@ public final class FontDescriptor {
      * <p>
      *     A new {@link Color} instance is returned, since this class is immutable and libgdx Color is not.
      * </p>
+     *
+     * @return Foreground color of the font.
      */
     public Color getForegroundColor() {
         return new Color(foregroundColor);
@@ -64,6 +70,8 @@ public final class FontDescriptor {
 
     /**
      * Get border width in pixels.
+     *
+     * @return Font's border width in pixels.
      */
     public float getBorderWidth() {
         return borderWidth;
@@ -75,6 +83,8 @@ public final class FontDescriptor {
      * <p>
      *     A new {@link Color} instance is returned, since this class is immutable and libgdx Color is not.
      * </p>
+     *
+     * @return Font's border color.
      */
     public Color getBorderColor() {
         return new Color(borderColor);
@@ -82,6 +92,8 @@ public final class FontDescriptor {
 
     /**
      * Get a boolean flag indicating whether straight (mitered) are used ({@code true}) or rounded ({@code false}).
+     *
+     * @return {@code true} if straight borders shall be used, {@code false} otherwise.
      */
     public boolean isStraightBorderUsed() {
         return borderStraight;
@@ -110,6 +122,12 @@ public final class FontDescriptor {
         return compareFontParameters(other) && compareBorderParameters(other);
     }
 
+    /**
+     * Compare method to compare font related settings.
+     *
+     * @param other The other {@link FontDescriptor} to compare to.
+     * @return {@code true} if font related settings are equal, {@code false} otherwise.
+     */
     private boolean compareFontParameters(FontDescriptor other) {
 
         return fontFilename.equals(other.fontFilename)
@@ -117,6 +135,12 @@ public final class FontDescriptor {
                 && foregroundColor.equals(other.foregroundColor);
     }
 
+    /**
+     * Compare method to compare border related settings.
+     *
+     * @param other The other {@link FontDescriptor} to compare to.
+     * @return {@code true} if font border settings are equal, {@code false} otherwise.
+     */
     private boolean compareBorderParameters(FontDescriptor other) {
 
         return Float.compare(borderWidth, other.borderWidth) == 0
@@ -144,6 +168,8 @@ public final class FontDescriptor {
 
         /**
          * Set font filename.
+         *
+         * @return {@code this}
          */
         public Builder setFontFilename(String fontFilename) {
             this.fontFilename = fontFilename;
@@ -152,6 +178,8 @@ public final class FontDescriptor {
 
         /**
          * Set font size in pixels.
+         *
+         * @return {@code this}
          */
         public Builder setFontSize(int fontSize) {
             this.fontSize = fontSize;
@@ -160,6 +188,8 @@ public final class FontDescriptor {
 
         /**
          * Set foreground color.
+         *
+         * @return {@code this}
          */
         public Builder setForegroundColor(Color foregroundColor) {
             this.foregroundColor = foregroundColor;
@@ -168,6 +198,8 @@ public final class FontDescriptor {
 
         /**
          * Set border width in pixels.
+         *
+         * @return {@code this}
          */
         public Builder setBorderWidth(float borderWidth) {
             this.borderWidth = borderWidth;
@@ -176,6 +208,8 @@ public final class FontDescriptor {
 
         /**
          * Set border color in pixels.
+         *
+         * @return {@code this}
          */
         public Builder setBorderColor(Color borderColor) {
             this.borderColor = borderColor;
@@ -184,6 +218,8 @@ public final class FontDescriptor {
 
         /**
          * Enable using of straight (mitered) borders.
+         *
+         * @return {@code this}
          */
         public Builder setStraigtBorder() {
             this.borderStraight = true;
@@ -192,17 +228,33 @@ public final class FontDescriptor {
 
         /**
          * Enable using round borders.
+         *
+         * @return {@code this}
          */
         public Builder setRoundBorder() {
             this.borderStraight = false;
             return this;
         }
 
+        /**
+         * Build the {@link FontDescriptor}.
+         *
+         * <p>
+         *     If mandatory settings were not provided or specified wrongly, and
+         *     {@link IllegalStateException} is thrown.
+         * </p>
+         *
+         * @return Built font descriptor.
+         */
         public FontDescriptor build() {
             consistencyCheck();
             return new FontDescriptor(this);
         }
 
+        /**
+         * Checks provided settings for consistency and throws {@link IllegalStateException}
+         * if something is missing or wrong.
+         */
         private void consistencyCheck() {
 
             if (fontFilename == null || fontFilename.isEmpty()) {

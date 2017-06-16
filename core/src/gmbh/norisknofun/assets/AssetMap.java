@@ -11,6 +11,8 @@ public interface AssetMap extends Asset {
 
     /**
      * Get all regions defined in this map.
+     *
+     * @return Immutable list of map regions.
      */
     List<Region> getRegions();
 
@@ -33,6 +35,8 @@ public interface AssetMap extends Asset {
 
         /**
          * Get region's name.
+         *
+         * @return Region's name.
          */
         String getName();
 
@@ -47,11 +51,15 @@ public interface AssetMap extends Asset {
          *
          *     Note: All x/y coordinates are in range [0, 1].
          * </p>
+         *
+         * @return Vertices as array.
          */
         float[] getVertices();
 
         /**
          * Get the player's name who owns the region.
+         *
+         * @return Get the owner (player name) of this region.
          */
         String getOwner();
 
@@ -67,11 +75,15 @@ public interface AssetMap extends Asset {
 
         /**
          * Get region's color.
+         *
+         * @return Color of the region, which is the owner's color.
          */
         Color getColor();
 
         /**
          * Get number of troops on this region.
+         *
+         * @return Number of troops positioned on this region.
          */
         int getTroops();
 
@@ -88,6 +100,8 @@ public interface AssetMap extends Asset {
 
         /**
          * Get all neighbouring regions.
+         *
+         * @return Immutable list of neighbouring regions.
          */
         List<String> getNeighbouringRegions();
     }

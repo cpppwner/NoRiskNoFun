@@ -10,6 +10,8 @@ public interface AssetLabel extends AssetWidget, Disposable {
 
     /**
      * Get label's name.
+     *
+     * @return Get label's name.
      */
     String getName();
 
