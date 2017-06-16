@@ -25,8 +25,7 @@ class ClientDisconnectedState extends ClientStateBase {
     @Override
     public void handleOutboundMessage(Message message) {
 
-        // nothing to do - don't throw, maybe the game logic did not yet process our special message
-        // see enter();
+        // nothing to do here
     }
 
     @Override
