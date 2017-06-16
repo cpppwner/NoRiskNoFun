@@ -12,7 +12,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  *
  * After Player moved a Troop
  *
- * Server -> Client
+ * Server to Client
  */
 
 

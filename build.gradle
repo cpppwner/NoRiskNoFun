@@ -144,8 +144,15 @@ task jacocoTestReport(type: JacocoReport) {
     }
 }
 
+task generateJavaDoc(type: Javadoc) {
+    source project(":core").sourceSets.main.allJava
+    classpath = files(project(":core").sourceSets.main.compileClasspath)
+    destinationDir = file("${buildDir}/docs/javadoc")
+}
+
 task build {
     dependsOn tasks.jacocoTestReport
+    dependsOn tasks.generateJavaDoc
 }
 
 tasks.eclipse.doLast {

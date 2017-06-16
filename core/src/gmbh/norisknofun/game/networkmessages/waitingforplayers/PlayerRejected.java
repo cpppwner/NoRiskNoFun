@@ -12,7 +12,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 /**
  * If Player cannot Join
  *
- * Server -> Client
+ * Server to Client
  */
 public class PlayerRejected extends BasicMessageImpl implements Serializable {
 

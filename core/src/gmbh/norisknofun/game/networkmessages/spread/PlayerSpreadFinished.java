@@ -13,7 +13,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  * After Start Game,GameServer should choose which Player starts an then send this Message
  * Tell the Player he should Spread his troops
  *
- * Client -> Server
+ * Server to Clients
  */
 
 public class PlayerSpreadFinished extends BasicMessageImpl implements Serializable {

@@ -11,7 +11,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 /**
  * After Playernameselected
  *
- * Client -> Server
+ * Client to Server
  */
 
 

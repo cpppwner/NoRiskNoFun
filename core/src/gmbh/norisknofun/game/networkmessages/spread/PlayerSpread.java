@@ -12,7 +12,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  * or after others Spread was finished choose next Player to spread
  * Tell the Player he should Spread his troops
  *
- * Server -> Client
+ * Server to Client
  */
 
 

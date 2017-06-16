@@ -13,7 +13,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  * If Spread of Player was correct tell him
  *
  * If check is false Player has to spread again
- * Server -> Client
+ * Server to Client
  */
 
 public class PlayerSpreadCheck extends BasicMessageImpl implements Serializable{

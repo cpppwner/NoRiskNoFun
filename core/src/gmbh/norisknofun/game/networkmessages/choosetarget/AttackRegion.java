@@ -12,7 +12,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  *
  * If Spread is finished player can Attack
  *
- * Client -> Server
+ * Client to Server
  */
 
 
