@@ -53,7 +53,6 @@ public class CreateGameScene extends SceneBase {
 
     private void initNameSelection() {
 
-        // TODO julian - still needs layouting
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.SELECT_NAME_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds(Gdx.graphics.getWidth()/8.0f, Gdx.graphics.getHeight()/2.0f, sceneObject.getWidth(), 125);

@@ -79,7 +79,6 @@ public class JoinGameScene extends SceneBase {
 
     private void initNameSelection() {
 
-        // TODO julian - still needs layouting
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.ENTER_NAME_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds(Gdx.graphics.getWidth() / 8.0f, Gdx.graphics.getHeight() / 1.8f, sceneObject.getWidth(), 125);
@@ -91,7 +90,6 @@ public class JoinGameScene extends SceneBase {
 
     private void initHostSelection() {
 
-        // TODO julian - still needs layouting
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.ENTER_SERVER_IP_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds(Gdx.graphics.getWidth() / 8.0f, Gdx.graphics.getHeight() / 2.8f, sceneObject.getWidth(), 125);

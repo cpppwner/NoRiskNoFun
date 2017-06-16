@@ -48,10 +48,10 @@ class GameObjectMap extends SceneObject {
         regionMap = new HashMap<>();
         regionNameMap = new HashMap<>();
 
-        initPolygonRegions(assetMap);
+        initPolygonRegions();
     }
 
-    private void initPolygonRegions(AssetMap assetMap) {
+    private void initPolygonRegions() {
 
         polygonRegions = new ArrayList<>(assetMap.getRegions().size());
 
