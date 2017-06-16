@@ -1,5 +1,6 @@
 package gmbh.norisknofun.game.client;
 
+import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.network.Session;
 
@@ -16,6 +17,7 @@ class ClientDisconnectedState extends ClientStateBase {
     @Override
     public void enter() {
 
+        distributeInboundMessage(new ClientDisconnected());
         setSession(null);
         clearMessageBuffer();
     }
