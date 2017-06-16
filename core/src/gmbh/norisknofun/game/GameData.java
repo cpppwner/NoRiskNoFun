@@ -182,6 +182,11 @@ public class GameData {
         this.mapFilename = mapFilename;
     }
 
+    public String getMapFilename() {
+        return mapFilename;
+    }
+
+
     public void setMaxNumPlayers(int maxNumPlayers) {
         this.maxNumPlayers = maxNumPlayers;
     }

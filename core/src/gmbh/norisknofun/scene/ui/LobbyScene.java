@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
 import java.util.List;
 
+import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.gamemessages.gui.StartGameClicked;
@@ -157,7 +158,7 @@ public class LobbyScene extends SceneBase{
 
         initializePlayerNameLabels();
         updatePlayerNameLabelBounds();
-
+        loadMapAsset();
     }
 
     private void initializePlayerNameLabels() {
@@ -195,6 +196,13 @@ public class LobbyScene extends SceneBase{
             playerNameLabels.get(2).setBounds(50, y, width, height);
             playerNameLabels.get(3).setBounds((Gdx.graphics.getWidth() / 2.0f) + 10f, y, width, height);
         }
+    }
+
+    private void loadMapAsset() {
+
+        String mapFilename = sceneData.getGameData().getMapFilename();
+        AssetMap map = sceneData.getAssetFactory().createAssetMap(mapFilename);
+        sceneData.getGameData().setMapAsset(map);
     }
 
     /**
