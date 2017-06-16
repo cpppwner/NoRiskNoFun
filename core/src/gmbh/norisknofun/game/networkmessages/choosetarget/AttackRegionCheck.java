@@ -12,7 +12,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  *
  * GameServer checks if AttackedPlayer is reachable
  *
- * Server -> Client
+ * Server to Client
  */
 
 

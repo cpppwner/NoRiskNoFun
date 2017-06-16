@@ -9,7 +9,7 @@ import gmbh.norisknofun.game.Player;
 /**
  * If Player can Join then Server sends true otherwise PlayerRejected
  *
- * Server -> Client
+ * Server to Client
  */
 
 

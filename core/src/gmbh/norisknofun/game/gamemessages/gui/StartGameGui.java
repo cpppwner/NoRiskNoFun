@@ -7,7 +7,7 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  * State will switch to SpreadTroopsState
  *
  *
- * Client (who created the Game)-> Server
+ * Client (who created the Game) to Server
  */
 public class StartGameGui extends BasicMessageImpl {
 

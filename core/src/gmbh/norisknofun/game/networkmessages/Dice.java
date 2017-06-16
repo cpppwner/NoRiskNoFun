@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * If attackedPLayer is reachable and player has chosen amount of Troops and rolled the Dice
  *
- * Client -> Server
+ * Client to Server
  */
 public class Dice extends BasicMessageImpl implements Serializable{
 

@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * if not send also PlayerSpread
  *
- * Server -> Client
+ * Server to Client
  */
 
 public class EndGame extends BasicMessageImpl implements Serializable{
