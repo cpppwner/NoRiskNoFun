@@ -17,6 +17,8 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class SceneManagerTests extends GdxTest {
@@ -68,7 +70,8 @@ public class SceneManagerTests extends GdxTest {
         // then
         assertThat(obtained, is(true));
         assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.singleton(sceneName)));
-        verify(scene, times(1)).preload();
+        verify(scene, times(2)).getName();
+        verifyNoMoreInteractions(scene);
     }
 
     @Test
@@ -89,7 +92,8 @@ public class SceneManagerTests extends GdxTest {
         // then
         assertThat(obtained, is(true));
         assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.singleton(sceneName)));
-        verify(sceneOne, times(1)).preload();
+        verify(sceneOne, times(2)).getName();
+        verifyNoMoreInteractions(sceneOne);
 
         // and when
         obtained = SceneManager.getInstance().registerScene(sceneTwo);
@@ -97,7 +101,9 @@ public class SceneManagerTests extends GdxTest {
         // then
         assertThat(obtained, is(false));
         assertThat(SceneManager.getInstance().getRegisteredScenes(), equalTo(Collections.singleton(sceneName)));
-        verify(sceneTwo, times(0)).preload();
+        verify(sceneOne, times(2)).getName();
+        verify(sceneTwo, times(1)).getName();
+        verifyNoMoreInteractions(sceneOne, sceneTwo);
     }
 
     @Test
