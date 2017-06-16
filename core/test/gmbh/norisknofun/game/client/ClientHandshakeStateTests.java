@@ -101,7 +101,7 @@ public class ClientHandshakeStateTests extends GdxTest {
 
         // then
         assertThat(client.getCurrentState(), is(instanceOf(ClientDisconnectedState.class)));
-        assertThat(messageQueue.size(), is(1));
+        assertThat(messageQueue.size(), is(2));
         assertThat(messageQueue.get(0), is(instanceOf(ClientConnectionRefused.class)));
         assertThat(((ClientConnectionRefused)messageQueue.get(0)).getReason(), Matchers.startsWith("Failed to send handshake: "));
 
@@ -149,7 +149,7 @@ public class ClientHandshakeStateTests extends GdxTest {
 
         // then
         assertThat(client.getCurrentState(), is(instanceOf(ClientDisconnectedState.class)));
-        assertThat(messageQueue.size(), is(1));
+        assertThat(messageQueue.size(), is(2));
         assertThat(messageQueue.get(0), is(instanceOf(ClientConnectionRefused.class)));
         assertThat(((ClientConnectionRefused)messageQueue.get(0)).getReason(), is("connection closed by server"));
 
