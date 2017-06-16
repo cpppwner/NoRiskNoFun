@@ -202,30 +202,14 @@ public class DiceRollScene extends SceneBase {
 
     /**
      * Set ClickListener to all die.
-     * Used for cheat function. This doesn't work properly in a loop
+     * Used for cheat function.
      */
     private void setDiceClickListener() {
 
-        dieObjects.get(0).addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                tryCheat(0);
-                return true;
-            }
-        });
+        for (int i = 0; i < dieObjects.size(); i++) {
 
-        dieObjects.get(1).addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                tryCheat(1);
-                return true;
-            }
-        });
-
-        dieObjects.get(2).addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                tryCheat(2);
-                return true;
-            }
-        });
+            dieObjects.get(i).addListener(new DieCheatClickListener(i));
+        }
     }
 
 
@@ -273,6 +257,30 @@ public class DiceRollScene extends SceneBase {
         }
 
         super.render(delta);
+    }
+
+    /**
+     * Special click listener, listening for cheats.
+     */
+    private final class DieCheatClickListener extends ClickListener {
+
+        /**
+         * The die index for cheating.
+         */
+        private final int dieIndex;
+
+        /**
+         * Initializer click listener.
+         */
+        private DieCheatClickListener(int dieIndex) {
+            this.dieIndex = dieIndex;
+        }
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            tryCheat(dieIndex);
+            return true;
+        }
     }
 
 }
