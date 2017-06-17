@@ -25,15 +25,6 @@ public class ChooseTroopAmountState extends State {
         this.data=context.getGameData();
     }
 
-    @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
-    }
 
     @Override
     public void handleMessage(String senderId, Message message) {
@@ -49,7 +40,7 @@ public class ChooseTroopAmountState extends State {
 
         if(checkTroopAmountMessage(senderId,message)){
             shiftTroopsforAttack(senderId,message.getAmount());
-            sendChooseTroopsAmountCheckMessage(senderId,true);
+            sendChooseTroopsAmountCheckMessage(senderId,true,"");
             sendIsAttackedMessage(); // inform defender to change in EvaluateDiceResultState
 
             attackState.setState(new EvaluateDiceResultState(context,attackState));
@@ -62,20 +53,20 @@ public class ChooseTroopAmountState extends State {
 
         if(message.getAmount()>3 || message.getAmount()<1){
             check=false;
-            sendChooseTroopsAmountCheckMessage(senderId,false);
+            sendChooseTroopsAmountCheckMessage(senderId,false,"Invalid amount of troops");
         }
 
         if(data.getAttackerRegion().getTroops()-message.getAmount()<1) {
             check = false;
-            sendChooseTroopsAmountCheckMessage(senderId,false);
+            sendChooseTroopsAmountCheckMessage(senderId,false,"Not enough Troops");
         }
 
 
         return check;
     }
 
-    private void sendChooseTroopsAmountCheckMessage(String senderId,boolean check){
-        ChooseTroopsAmountCheck chooseTroopsAmountCheck= new ChooseTroopsAmountCheck(check);
+    private void sendChooseTroopsAmountCheckMessage(String senderId,boolean check, String errormessage){
+        ChooseTroopsAmountCheck chooseTroopsAmountCheck= new ChooseTroopsAmountCheck(check,errormessage);
         context.sendMessage(chooseTroopsAmountCheck,senderId);
     }
 

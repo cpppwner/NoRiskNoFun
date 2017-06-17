@@ -8,15 +8,6 @@ import gmbh.norisknofun.game.statemachine.State;
  */
 
 public class AttackWinnerState extends State {
-    @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
-    }
 
     @Override
     public void handleMessage(String senderId, Message message) {

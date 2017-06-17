@@ -44,6 +44,7 @@ public class ClientContext  {
 
     public void delegateMessage(Message message){
 
+        System.out.println("Client Delegate: " + message.getClass().getName());
         state.handleMessage("", message); // work with interfaces
     }
 

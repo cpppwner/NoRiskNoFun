@@ -15,10 +15,11 @@ public class Changeable <T> {
      * Value containing information about the Scene updates
      * e.g. a GUI Message
      */
-    private T currentValue = null;
+    private T currentValue;
 
     public Changeable() {
 
+        this(null);
     }
 
     /**

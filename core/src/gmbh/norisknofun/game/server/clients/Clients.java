@@ -81,7 +81,7 @@ public final class Clients {
     /**
      * Get the number of registered {@link Client clients}.
      */
-    public int getNumberOfRegisteredClients() {
+    int getNumberOfRegisteredClients() {
 
         return registeredClients.size();
     }

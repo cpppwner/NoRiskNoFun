@@ -14,11 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmbh.norisknofun.GdxTest;
+import gmbh.norisknofun.game.gamemessages.client.ClientConnected;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageDeserializer;
-import gmbh.norisknofun.game.protocol.MessageDeserializerTests;
 import gmbh.norisknofun.game.protocol.MessageSerializer;
-import gmbh.norisknofun.game.protocol.ProtocolConstants;
 import gmbh.norisknofun.game.protocol.ProtocolException;
 import gmbh.norisknofun.game.protocol.messages.handshake.Handshake;
 import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeAccepted;
@@ -26,12 +25,20 @@ import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeConstants;
 import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeRejected;
 import gmbh.norisknofun.game.protocol.util.MessageBuffer;
 import gmbh.norisknofun.game.server.MessageBus;
-import gmbh.norisknofun.game.server.networking.SessionClosedEvent;
 import gmbh.norisknofun.network.Session;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 /**
  * Unit tests for testing {@link ClientConnectedState}.
@@ -305,6 +312,7 @@ public class ClientConnectedStateTests extends GdxTest {
 
         verify(sessionMock, times(1)).write(ArgumentMatchers.any(byte[].class));
         verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), ArgumentMatchers.any(ClientConnected.class));
         verifyNoMoreInteractions(sessionMock, messageBusMock);
     }
 

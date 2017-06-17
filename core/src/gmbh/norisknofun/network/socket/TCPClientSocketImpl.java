@@ -16,6 +16,11 @@ import java.nio.channels.SocketChannel;
  */
 class TCPClientSocketImpl implements TCPClientSocket {
 
+    /**
+     * default timeout for the socket - infinite timeout
+     */
+    private static final int DEFAULT_SOCKET_TIMEOUT_IN_MS = 0;
+
     private SocketChannel socketChannel;
 
     /**
@@ -40,6 +45,7 @@ class TCPClientSocketImpl implements TCPClientSocket {
         TCPClientSocketImpl clientSocket = null;
         try {
             clientSocket = new TCPClientSocketImpl(SocketChannel.open());
+            clientSocket.socketChannel.socket().setSoTimeout(DEFAULT_SOCKET_TIMEOUT_IN_MS);
             clientSocket.socketChannel.connect(new InetSocketAddress(address, port));
             clientSocket.socketChannel.configureBlocking(false);
         } catch(Exception e) {

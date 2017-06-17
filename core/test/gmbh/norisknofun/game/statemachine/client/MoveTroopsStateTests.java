@@ -11,7 +11,7 @@ import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by Katharina on 30.05.2017.

@@ -6,10 +6,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
-
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.scene.game.figures.Figure;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class FigureTests {
 
@@ -22,14 +25,14 @@ public class FigureTests {
 
     @Test
     public void creatingFigureWithArgumentsWorksCorrectly() {
-        Figure figure = new Figure(1, 2, 3, 4);
+        Figure figure = new Figure(1, 2, 3, 4,0 );
 
         assertNotNull(figure);
     }
 
     @Test
     public void valuesGetCorrectlySetInConstructor() {
-        Figure figure = new Figure(1, 2, 3, 4);
+        Figure figure = new Figure(1, 2, 3, 4, 0);
 
         assertEquals(1, (int) figure.getX());
         assertEquals(2, (int) figure.getY());

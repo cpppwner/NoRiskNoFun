@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
-import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -53,7 +52,6 @@ public class CreateGameScene extends SceneBase {
 
     private void initNameSelection() {
 
-        // TODO julian - still needs layouting
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.SELECT_NAME_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds(Gdx.graphics.getWidth()/8.0f, Gdx.graphics.getHeight()/2.0f, sceneObject.getWidth(), 125);
@@ -71,9 +69,9 @@ public class CreateGameScene extends SceneBase {
         ImageButtonSceneObject fourPlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.FOUR_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
 
         backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10f, 275f, 240f);
-        twoPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10)),(Gdx.graphics.getHeight()/8),275,240);
-        threePlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 300),(Gdx.graphics.getHeight()/8),275,240);
-        fourPlayers.setBounds((float) ((Gdx.graphics.getWidth()/10) + 600),(Gdx.graphics.getHeight()/8),275,240);
+        twoPlayers.setBounds(Gdx.graphics.getWidth() / 10.0f, Gdx.graphics.getHeight() / 8.0f, 275.0f, 240f);
+        threePlayers.setBounds(Gdx.graphics.getWidth() / 10.0f + 300.0f, Gdx.graphics.getHeight() / 8.0f,275.0f, 240.0f);
+        fourPlayers.setBounds(Gdx.graphics.getWidth() / 10.0f + 600.0f, Gdx.graphics.getHeight() / 8.0f, 275.0f, 240.0f);
 
         backButton.addListener(new BackClickListener());
         twoPlayers.addListener(new ContinueClickListener(2));
@@ -131,7 +129,7 @@ public class CreateGameScene extends SceneBase {
         @Override
         public void clicked(InputEvent event, float x, float y) {
 
-            if (textField.getText() == null || textField.getText().isEmpty()) {
+/*            if (textField.getText() == null || textField.getText().isEmpty()) {
                 AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
                 dialog.show(getStage());
                 dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
@@ -140,7 +138,12 @@ public class CreateGameScene extends SceneBase {
                 sceneData.setPlayerName(textField.getText());
                 sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
                 super.clicked(event, x, y);
-            }
+            }*/
+
+
+            sceneData.setPlayerName("PlayerHosting");
+            sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
+            super.clicked(event, x, y);
         }
     }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
-import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -45,6 +44,8 @@ public class JoinGameScene extends SceneBase {
 
     /**
      * Construct and initialize main menu scene.
+     *
+     * @param sceneData Contained class shared amongst scenes.
      */
     public JoinGameScene(SceneData sceneData) {
         super(SceneNames.JOIN_GAME_SCENE, Color.WHITE);
@@ -79,7 +80,6 @@ public class JoinGameScene extends SceneBase {
 
     private void initNameSelection() {
 
-        // TODO julian - still needs layouting
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.ENTER_NAME_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds(Gdx.graphics.getWidth() / 8.0f, Gdx.graphics.getHeight() / 1.8f, sceneObject.getWidth(), 125);
@@ -91,7 +91,6 @@ public class JoinGameScene extends SceneBase {
 
     private void initHostSelection() {
 
-        // TODO julian - still needs layouting
         LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.ENTER_SERVER_IP_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
         addSceneObject(sceneObject);
         sceneObject.setBounds(Gdx.graphics.getWidth() / 8.0f, Gdx.graphics.getHeight() / 2.8f, sceneObject.getWidth(), 125);
@@ -129,23 +128,31 @@ public class JoinGameScene extends SceneBase {
 
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            if (nameTextField.getText() == null || nameTextField.getText().isEmpty()) {
-                AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
-                dialog.show(getStage());
-                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
-            } else if (hostTextField.getText() == null || hostTextField.getText().isEmpty()) {
-                AssetModalDialog dialog = sceneData.createModalDialog("IP is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
-                dialog.show(getStage());
-                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
-            }
-            else{
+//            if (nameTextField.getText() == null || nameTextField.getText().isEmpty()) {
+//                AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
+//                dialog.show(getStage());
+//                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+//                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+//            } else if (hostTextField.getText() == null || hostTextField.getText().isEmpty()) {
+//                AssetModalDialog dialog = sceneData.createModalDialog("IP is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
+//                dialog.show(getStage());
+//                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+//                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+//            }
+//            else{
+//
+//                sceneData.setHostIp(hostTextField.getText());
+//                sceneData.setPlayerName(nameTextField.getText());
+//                super.clicked(event, x, y);
+//            }
 
-                sceneData.setHostIp(hostTextField.getText());
+                sceneData.setHostIp("192.168.43.10");
+            if ( !nameTextField.getText().isEmpty()) {
                 sceneData.setPlayerName(nameTextField.getText());
-                super.clicked(event, x, y);
+            } else {
+                sceneData.setPlayerName("PlayerJoining");
             }
+            super.clicked(event, x, y);
         }
     }
 }

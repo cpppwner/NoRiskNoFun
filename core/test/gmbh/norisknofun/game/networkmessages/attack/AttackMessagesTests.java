@@ -3,9 +3,9 @@ package gmbh.norisknofun.game.networkmessages.attack;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,6 +16,7 @@ import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceAmount;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceResult;
 import gmbh.norisknofun.game.networkmessages.attack.loser.ContinueAttack;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -27,7 +28,7 @@ public class AttackMessagesTests {
 
     private ByteArrayOutputStream baos;
     private ObjectOutputStream oos;
-    private  final String PLAYER = "Player1";
+    private  final String ATTACKEREGION = "region1";
 
     @Before
     public void setUp() throws IOException {
@@ -53,7 +54,7 @@ public class AttackMessagesTests {
     public void ChooseTroopsAmountCheck() throws IOException, ClassNotFoundException {
 
 
-        ChooseTroopsAmountCheck chooseTroopsAmountCheck = new ChooseTroopsAmountCheck(true);
+        ChooseTroopsAmountCheck chooseTroopsAmountCheck = new ChooseTroopsAmountCheck(true,"");
         oos.writeObject (chooseTroopsAmountCheck);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
@@ -65,12 +66,13 @@ public class AttackMessagesTests {
     @Test
     public void AttackResult() throws IOException, ClassNotFoundException {
 
-        AttackResult attackResult = new AttackResult(PLAYER);
+        AttackResult attackResult = new AttackResult(true,ATTACKEREGION);
         oos.writeObject (attackResult);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         AttackResult attackResult1 =(AttackResult) ois.readObject();
-        assertEquals(attackResult1.getPlayername(),  PLAYER);
+        assertEquals(attackResult1.getAttackedRegion(),  ATTACKEREGION);
+        assertEquals(attackResult.isWon(),true);
 
     }
     @Test

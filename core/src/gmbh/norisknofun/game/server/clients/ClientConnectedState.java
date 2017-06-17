@@ -16,7 +16,7 @@ import gmbh.norisknofun.game.protocol.messages.handshake.HandshakeRejected;
 /**
  * Initial state for a freshly connected client.
  */
-final class ClientConnectedState implements ClientState {
+final class ClientConnectedState extends ClientStateBase {
 
     /**
      * Context in terms of state pattern.
@@ -30,16 +30,6 @@ final class ClientConnectedState implements ClientState {
     ClientConnectedState(Client context) {
 
         this.context = context;
-    }
-
-    @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
     }
 
     @Override

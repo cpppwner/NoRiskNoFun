@@ -3,10 +3,9 @@ package gmbh.norisknofun.game.server.clients;
 import gmbh.norisknofun.game.networkmessages.Message;
 
 /**
- * Created by cpppwner on 04.06.17.
+ * State of a client when the connection has been closed.
  */
-
-final class ClientClosedState implements ClientState {
+final class ClientClosedState extends ClientStateBase {
 
     private final Client context;
 
@@ -19,12 +18,6 @@ final class ClientClosedState implements ClientState {
     public void enter() {
 
         context.getMessageBuffer().clear();
-    }
-
-    @Override
-    public void exit() {
-
-        // intentionally left empty - nothing to do here
     }
 
     @Override

@@ -8,5 +8,10 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public interface AssetPixmapTexture  extends Asset, Disposable {
 
+    /**
+     * Get the libgdx texture.
+     *
+     * @return Libgdx pixmap texture.
+     */
     Texture getTexture();
 }

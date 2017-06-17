@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -55,12 +54,12 @@ public class SpreadTests {
     @Test
     public void playerSpreadFinished() throws IOException, ClassNotFoundException {
 
-        PlayerSpreadFinished playerSpreadFinished = new PlayerSpreadFinished(PLAYER);
+        PlayerSpreadFinished playerSpreadFinished = new PlayerSpreadFinished();
         oos.writeObject (playerSpreadFinished);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayerSpreadFinished playerSpreadFinished1 =(PlayerSpreadFinished) ois.readObject();
-        assertEquals(playerSpreadFinished1.getPlayername(),PLAYER);
+        //assertEquals(playerSpreadFinished1.getPlayername(),PLAYER);
 
     }
 }

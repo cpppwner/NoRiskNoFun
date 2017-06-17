@@ -18,7 +18,7 @@ public final class TextFieldDescriptor {
     private final Color messageFontColor;
     private final String hintText;
 
-    public TextFieldDescriptor(Builder builder) {
+    private TextFieldDescriptor(Builder builder) {
 
         font = builder.font;
         fontColor = builder.fontColor;

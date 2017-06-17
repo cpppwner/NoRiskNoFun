@@ -2,9 +2,5 @@
 <resources>
 
     <string name="app_name">nrnf</string>
-    <string name="create_game_en">Create Game</string>
-    <string name="join_game_en">Join Game</string>
-    <string name="create_game_de">Spiel erstellen</string>
-    <string name="join_game_de">Spiel beitreten</string>
 
 </resources>

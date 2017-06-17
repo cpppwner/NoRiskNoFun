@@ -10,6 +10,8 @@ public interface AssetLabel extends AssetWidget, Disposable {
 
     /**
      * Get label's name.
+     *
+     * @return Get label's name.
      */
     String getName();
 
@@ -17,6 +19,11 @@ public interface AssetLabel extends AssetWidget, Disposable {
      * Set label's text.
      */
     void setText(String text);
+
+    /**
+     * Set alignment.
+     */
+    void setTextAlignment(int alignment);
 
     /**
      * Set label's background color.

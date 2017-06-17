@@ -1,6 +1,5 @@
 package gmbh.norisknofun.game.client;
 
-import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.network.Session;
 
 /**
@@ -10,46 +9,16 @@ import gmbh.norisknofun.network.Session;
  *     Wait until a new session arrives.
  * </p>
  */
-class ClientConnectingState implements ClientState {
-
-    private final Client client;
+class ClientConnectingState extends ClientStateBase {
 
     ClientConnectingState(Client client) {
-        this.client = client;
-    }
-
-    @Override
-    public void enter() {
-        // nothing to do
-    }
-
-    @Override
-    public void exit() {
-        // nothing to do
-    }
-
-    @Override
-    public void handleOutboundMessage(Message message) {
-
-        throw new IllegalStateException("cannot handle outbound message");
+        super(client);
     }
 
     @Override
     public void handleNewSession(Session newSession) {
 
-        client.setSession(newSession);
-        client.setState(new ClientHandshakeState(client));
-    }
-
-    @Override
-    public void handleSessionClosed(Session closedSession) {
-
-        throw new IllegalStateException("unexpected session closed event");
-    }
-
-    @Override
-    public void handleDataReceived() {
-
-        throw new IllegalStateException("unexpected data received event");
+        setSession(newSession);
+        setNextState(new ClientHandshakeState(getClient()));
     }
 }

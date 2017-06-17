@@ -61,11 +61,12 @@ public class Players implements Serializable{
     }
 
     private int getPlayerIndexByName(String playername){
-        int index=0;
+
+        int index = -1;
         for(int i = 0; i< playerlist.size(); i++){
             if(playerlist.get(i).getPlayerName().equals(playername)){
-                index=i;
-                i= playerlist.size();
+                index = i;
+                break;
             }
         }
         return index;
@@ -78,7 +79,7 @@ public class Players implements Serializable{
         }
 
         int index = getPlayerIndexByName(playername);
-        if(index>= playerlist.size()-1){
+        if(index>= playerlist.size() - 1){
             index=0;
         }else{
             index++;

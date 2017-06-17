@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
 
+import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageDeserializer;
 import gmbh.norisknofun.game.protocol.MessageSerializer;
@@ -13,70 +14,67 @@ import gmbh.norisknofun.network.Session;
 /**
  * This is the state in control when client is connected.
  */
-class ClientConnectedState implements ClientState {
-
-    private final Client client;
+class ClientConnectedState extends ClientStateBase {
 
     ClientConnectedState(Client client) {
 
-        this.client = client;
-    }
-
-    @Override
-    public void enter() {
-
-        // nothing to do here
-    }
-
-    @Override
-    public void exit() {
-
-        // nothing to do here
+        super(client);
     }
 
     @Override
     public void handleOutboundMessage(Message message) {
 
+        if (message instanceof DisconnectClient) {
+            handleDisconnect(((DisconnectClient)message).isTerminateClient());
+            return;
+        }
+
         try {
             byte[] data = new MessageSerializer(message).serialize();
-            client.getSession().write(data);
+            write(data);
         } catch (IOException | ProtocolException e) {
             Gdx.app.error(getClass().getSimpleName(), "Handling outbound message failed", e);
-            client.getSession().terminate(); // terminate the session
+            handleDisconnect(true);
         }
-    }
-
-    @Override
-    public void handleNewSession(Session newSession) {
-
-        throw new IllegalStateException("new session event not expected");
     }
 
     @Override
     public void handleSessionClosed(Session closedSession) {
 
         // make state transition to closed state
-        client.setState(new ClientDisconnectedState(client));
+        setNextState(new ClientDisconnectedState(getClient()));
     }
 
     @Override
     public void handleDataReceived() {
 
-        MessageDeserializer deserializer = new MessageDeserializer(client.getMessageBuffer());
-        if (deserializer.hasMessageToDeserialize()) {
+        System.out.println("ClientConnectedState: Received Data");
+        MessageDeserializer deserializer = new MessageDeserializer(getClient().getMessageBuffer());
+        while (deserializer.hasMessageToDeserialize()) {
             deserializeAndHandleMessage(deserializer);
         }
     }
-
 
     private void deserializeAndHandleMessage(MessageDeserializer deserializer) {
 
         try {
             Message message = deserializer.deserialize();
-            client.distributeInboundMessage(message);
+            System.out.println("Deserialized: " + message.getClass().getName());
+            distributeInboundMessage(message);
         } catch (ProtocolException | IOException e) {
             Gdx.app.error(getClass().getSimpleName(), "Deserialize message failed", e);
-            client.getSession().terminate();
+            handleDisconnect(true);
         }
+    }
+
+    private void handleDisconnect(boolean terminateClient) {
+
+        if (terminateClient) {
+            terminateSession();
+        } else {
+            closeSession();
+        }
+
+        setNextState(new ClientDisconnectedState(getClient()));
     }
 }

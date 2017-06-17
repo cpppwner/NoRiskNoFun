@@ -17,6 +17,7 @@ public class GameDataServer {
     private int[] attackerDiceResult= new int[3];
     private int[] defenderDiceResult = new int[3];
     private Players players;
+    private int currentFigureId = 0;
 
     public GameDataServer() {
         players= new Players();
@@ -144,4 +145,18 @@ public class GameDataServer {
     public boolean isServerFull() {
         return getNumPlayers() == getMaxPlayer();
     }
+
+    public int getCurrentFigureId() {
+        return currentFigureId;
+    }
+
+    public void setCurrentFigureId(int currentFigureId) {
+        this.currentFigureId = currentFigureId;
+    }
+
+    public int nextFigureId() {
+        return currentFigureId++;
+    }
+
+
 }

@@ -103,6 +103,12 @@ class AssetLabelImpl implements AssetLabel {
     }
 
     @Override
+    public void setTextAlignment(int alignment) {
+
+        label.setAlignment(alignment);
+    }
+
+    @Override
     public void setBackgroundColor(Color color) {
 
         // prepare new style

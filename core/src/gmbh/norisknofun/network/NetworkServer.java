@@ -3,6 +3,7 @@ package gmbh.norisknofun.network;
 import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -194,10 +195,13 @@ public class NetworkServer {
     }
 
     private void handleSocketRead(TCPClientSocket clientSocket) {
+
         SessionImpl session = socketSessionMap.get(clientSocket);
-        int numBytesRead;
+        int numBytesRead = 0;
         try {
             numBytesRead = session.doReadFromSocket(clientSocket);
+        } catch (SocketTimeoutException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "socket timed out during socket read", e);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket read", e);
             numBytesRead = -1; // so that session gets terminated
@@ -210,6 +214,15 @@ public class NetworkServer {
         if (numBytesRead > 0) {
             sessionEventHandler.sessionDataReceived(session);
         }
+
+        // TODO remove debugging output
+        /*
+        try {
+            System.out.println("SERVER: SERVER <- CLIENT (" + clientSocket.getRemoteAddress() + "): num bytes " + numBytesRead);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
     }
 
     private void handleWrite(SelectionResult result) {
@@ -221,10 +234,13 @@ public class NetworkServer {
     }
 
     private void handleSocketWrite(TCPClientSocket clientSocket) {
+
         SessionImpl session = socketSessionMap.get(clientSocket);
-        int numBytesWritten;
+        int numBytesWritten = 0;
         try {
             numBytesWritten = session.doWriteToSocket(clientSocket);
+        } catch (SocketTimeoutException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "socket timed out during socket write", e);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket write", e);
             numBytesWritten = -1;
@@ -237,6 +253,15 @@ public class NetworkServer {
         if (numBytesWritten > 0) {
             sessionEventHandler.sessionDataWritten(session);
         }
+
+        // TODO remove debugging output
+        /*
+        try {
+            System.out.println("SERVER: SERVER -> CLIENT (" + clientSocket.getRemoteAddress() + "): num bytes " + numBytesWritten);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
     }
 
     private void terminateSessionForSocket(TCPClientSocket socket) {

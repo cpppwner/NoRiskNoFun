@@ -14,16 +14,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gmbh.norisknofun.GdxTest;
+import gmbh.norisknofun.game.gamemessages.client.ClientConnected;
+import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
+import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageSerializer;
 import gmbh.norisknofun.game.protocol.ProtocolException;
+import gmbh.norisknofun.game.protocol.util.MessageBuffer;
 import gmbh.norisknofun.game.server.MessageBus;
 import gmbh.norisknofun.network.Session;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 /**
  * Integration tests for testing {@link ClientAcceptedState} class.
@@ -59,8 +73,8 @@ public class ClientAcceptedStateTests extends GdxTest {
 
         // then
         verify(messageBusMock, times(1)).registerOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), ArgumentMatchers.any(ClientConnected.class));
         verifyNoMoreInteractions(messageBusMock);
-        verifyZeroInteractions(messageBusMock);
     }
 
     @Test
@@ -74,8 +88,38 @@ public class ClientAcceptedStateTests extends GdxTest {
 
         // then
         verify(messageBusMock, times(1)).unregisterOutboundMessageHandler(client);
+        verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), ArgumentMatchers.any(ClientDisconnected.class));
         verifyNoMoreInteractions(messageBusMock);
-        verifyZeroInteractions(messageBusMock);
+    }
+
+    @Test
+    public void handleOutboundMessageHandlesDisconnectRequestForRegularClose() {
+
+        // given
+        ClientAcceptedState target = new ClientAcceptedState(client);
+
+        // when
+        target.handleOutboundMessage(new DisconnectClient(false));
+
+        // then
+        assertThat(client.getCurrentState(), is(instanceOf(ClientClosedState.class)));
+        verify(sessionMock, times(1)).close();
+        verifyNoMoreInteractions(sessionMock, messageBusMock);
+    }
+
+    @Test
+    public void handleOutboundMessageHandlesDisconnectRequestForTerminate() {
+
+        // given
+        ClientAcceptedState target = new ClientAcceptedState(client);
+
+        // when
+        target.handleOutboundMessage(new DisconnectClient(true));
+
+        // then
+        assertThat(client.getCurrentState(), is(instanceOf(ClientClosedState.class)));
+        verify(sessionMock, times(1)).terminate();
+        verifyNoMoreInteractions(sessionMock, messageBusMock);
     }
 
     @Test
@@ -171,6 +215,26 @@ public class ClientAcceptedStateTests extends GdxTest {
         assertThat(client.getMessageBuffer().length(), is(0));
         assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
         verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), any(TestMessage.class));
+        verifyNoMoreInteractions(messageBusMock);
+        verifyZeroInteractions(sessionMock);
+    }
+
+    @Test
+    public void processDataReceivedMultipleMessages() throws IOException, ProtocolException {
+
+        MessageBuffer buffer = new MessageBuffer();
+        buffer.append(new MessageSerializer(new TestMessage()).serialize());
+        buffer.append(new MessageSerializer(new TestMessage()).serialize());
+        client.processDataReceived(buffer.read(buffer.length()));
+        ClientAcceptedState target = new ClientAcceptedState(client);
+
+        // when
+        target.processDataReceived();
+
+        // then
+        assertThat(client.getMessageBuffer().length(), is(0));
+        assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
+        verify(messageBusMock, times(2)).distributeInboundMessage(eq(client.getId()), any(TestMessage.class));
         verifyNoMoreInteractions(messageBusMock);
         verifyZeroInteractions(sessionMock);
     }

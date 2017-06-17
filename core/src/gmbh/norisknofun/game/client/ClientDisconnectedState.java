@@ -1,43 +1,31 @@
 package gmbh.norisknofun.game.client;
 
+import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.network.Session;
 
 /**
  * State used, when client is disconnected, but was previously connected.
  */
-class ClientDisconnectedState implements ClientState {
-
-    private final Client client;
+class ClientDisconnectedState extends ClientStateBase {
 
     ClientDisconnectedState(Client client) {
 
-        this.client = client;
+        super(client);
     }
 
     @Override
     public void enter() {
 
-        client.setSession(null);
-        client.getMessageBuffer().clear();
-    }
-
-    @Override
-    public void exit() {
-
+        distributeInboundMessage(new ClientDisconnected());
+        setSession(null);
+        clearMessageBuffer();
     }
 
     @Override
     public void handleOutboundMessage(Message message) {
 
-        // nothing to do - don't throw, maybe the game logic did not yet process our special message
-        // see enter();
-    }
-
-    @Override
-    public void handleNewSession(Session newSession) {
-
-        throw new IllegalStateException("Not expecting new session here - huh :/");
+        // nothing to do here
     }
 
     @Override
@@ -50,6 +38,6 @@ class ClientDisconnectedState implements ClientState {
     public void handleDataReceived() {
 
         // pending events, just clear out the message buffer
-        client.getMessageBuffer().clear();
+        clearMessageBuffer();
     }
 }

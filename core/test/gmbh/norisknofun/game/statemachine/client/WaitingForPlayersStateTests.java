@@ -1,19 +1,16 @@
 
 package gmbh.norisknofun.game.statemachine.client;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-
 import org.junit.Before;
 import org.junit.Test;
 
-
-
-import gmbh.norisknofun.assets.AssetFactory;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 import gmbh.norisknofun.game.networkmessages.waitingforplayers.StartGame;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by Katharina on 29.05.2017.

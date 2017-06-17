@@ -4,6 +4,7 @@ package gmbh.norisknofun.network;
 import com.badlogic.gdx.Gdx;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import gmbh.norisknofun.network.socket.SelectionResult;
 import gmbh.norisknofun.network.socket.SocketFactory;
@@ -11,7 +12,7 @@ import gmbh.norisknofun.network.socket.SocketSelector;
 import gmbh.norisknofun.network.socket.TCPClientSocket;
 
 /**
- * Created by philipp on 06.04.2017.
+ * Network client - dealing with low level networking.
  */
 public class NetworkClient {
 
@@ -137,9 +138,11 @@ public class NetworkClient {
 
     private boolean handleRead() {
 
-        int numBytesRead;
+        int numBytesRead = 0;
         try {
             numBytesRead = session.doReadFromSocket(clientSocket);
+        } catch (SocketTimeoutException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "socket timed out during socket read", e);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket read", e);
             numBytesRead = -1;
@@ -149,13 +152,25 @@ public class NetworkClient {
             sessionEventHandler.sessionDataReceived(session);
         }
 
+        // TODO remove debugging output
+        /*
+        try {
+            System.out.println("SERVER: CLIENT <- SERVER (" + clientSocket.getLocalAddress() + "): num bytes " + numBytesRead);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+
         return numBytesRead >= 0;
     }
 
     private boolean handleWrite() {
-        int numBytesWritten;
+
+        int numBytesWritten = 0;
         try {
             numBytesWritten = session.doWriteToSocket(clientSocket);
+        } catch (SocketTimeoutException e) {
+            Gdx.app.log(this.getClass().getSimpleName(), "socket timed out during socket write", e);
         } catch (IOException e) {
             Gdx.app.log(this.getClass().getSimpleName(), "I/O exception during socket write", e);
             numBytesWritten = -1;
@@ -164,6 +179,15 @@ public class NetworkClient {
         if (numBytesWritten > 0) {
             sessionEventHandler.sessionDataWritten(session);
         }
+
+        // TODO remove debugging output
+        /*
+        try {
+            System.out.println("SERVER: CLIENT -> SERVER (" + clientSocket.getLocalAddress() + "): num bytes " + numBytesWritten);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
 
         return numBytesWritten >= 0;
     }

@@ -51,6 +51,7 @@ public class SceneData {
         gameDataServer = new GameDataServer();
         gameDataClient = new GameData();
         gameServices = new GameServices(socketFactory, gameDataServer, gameDataClient);
+        gameDataClient.setMapAsset(assetFactory.createAssetMap("maps/Dummy Two.map")); // fixme: termporarily hardcode map
     }
 
     /**
@@ -202,9 +203,13 @@ public class SceneData {
      */
     public void setMapFilename(String mapFilename) {
 
-        // NOTE: create two instances to avoid race conditions between server & client.
+
         gameDataServer.setMapFilename(mapFilename);
-        gameDataServer.setMapAsset(getAssetFactory().createAssetMap(mapFilename));
+        if (mapFilename != null) {
+            gameDataServer.setMapAsset(getAssetFactory().createAssetMap(mapFilename));
+        } else {
+            gameDataServer.setMapAsset(null);
+        }
     }
 
     /**

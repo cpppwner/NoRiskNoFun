@@ -23,16 +23,6 @@ public class AttackWinnerState extends State {
     }
 
     @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
-    }
-
-    @Override
     public void handleMessage(String senderId, Message message) {
         if(message.getType().equals(ContinueAttack.class)){
             handleDecision((ContinueAttack)message);

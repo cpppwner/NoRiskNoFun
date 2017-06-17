@@ -16,8 +16,15 @@ import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.either;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  * Integration tests for testing the {@link TCPClientSocketImpl}.
@@ -25,6 +32,8 @@ import static org.junit.Assert.*;
 public class TCPClientSocketImplTests {
 
     private static final String HOST = "localhost";
+    private static final String HOST_ADDRESS_IPV4 = "127.0.0.1";
+    private static final String HOST_ADDRESS_IPV6 = "::1";
     private static final int PORT = 27001;
     private static final int SERVER_SOCKET_TIMEOUT_IN_MILLISECONDS = 60 * 1000; // 60 seconds timeout on server side
 
@@ -158,7 +167,7 @@ public class TCPClientSocketImplTests {
 
         assertThat(localAddress, is(notNullValue()));
         assertThat(localAddress, is(instanceOf(InetSocketAddress.class)));
-        assertThat(((InetSocketAddress)localAddress).getHostName(), is(equalTo(HOST)));
+        assertThat(((InetSocketAddress)localAddress).getHostName(), either(is(HOST)).or(is(HOST_ADDRESS_IPV4)).or(is(HOST_ADDRESS_IPV6)));
         assertThat(((InetSocketAddress)localAddress).getPort() > 0, is(true));
         assertThat(((InetSocketAddress)localAddress).getPort() <= 65535, is(true));
     }
@@ -226,13 +235,12 @@ public class TCPClientSocketImplTests {
         assertThat(writeResult, is(equalTo(12)));
 
         // since the socket is also readable but closed, this operation will fail
-        int readResult = 0;
         try {
-            readResult = clientSocket.read(readBuffer);
+            int readResult = clientSocket.read(readBuffer);
+            assertThat(readResult, is(-1));
         } catch (IOException e) {
-            fail("IOException not expected when performing read");
+            // on windows this is thrown
         }
-        assertThat(readResult, is(equalTo(-1)));
 
         assertThat(echoServer.exceptionEncounteredDuringServe, is(nullValue()));
     }

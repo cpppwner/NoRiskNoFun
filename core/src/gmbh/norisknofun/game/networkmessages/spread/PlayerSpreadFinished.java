@@ -19,19 +19,21 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class PlayerSpreadFinished extends BasicMessageImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private  String playername;
-    // Region
 
+    private String currentPlayerName;
 
-    public PlayerSpreadFinished(String playername) {
-        this.playername = playername;
+    public PlayerSpreadFinished() {
     }
 
-    public String getPlayername() {
-        return playername;
+    public PlayerSpreadFinished(String currentPlayerName) {
+        this.currentPlayerName = currentPlayerName;
     }
 
-    public void setPlayername(String playername) {
-        this.playername = playername;
+    public String getCurrentPlayerName() {
+        return currentPlayerName;
+    }
+
+    public void setCurrentPlayerName(String currentPlayerName) {
+        this.currentPlayerName = currentPlayerName;
     }
 }

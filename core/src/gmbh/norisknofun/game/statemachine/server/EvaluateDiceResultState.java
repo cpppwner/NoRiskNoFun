@@ -2,6 +2,7 @@ package gmbh.norisknofun.game.statemachine.server;
 
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceAmount;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceResult;
 import gmbh.norisknofun.game.statemachine.State;
@@ -24,16 +25,6 @@ public class EvaluateDiceResultState extends State {
     }
 
     @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
-    }
-
-    @Override
     public void handleMessage(String senderId, Message message) {
         if(message.getType().equals(DiceResult.class)){
             handleDiceResult(senderId,(DiceResult)message);
@@ -41,8 +32,6 @@ public class EvaluateDiceResultState extends State {
     }
 
     private void handleDiceResult(String senderId, DiceResult message){
-        int winsOfDefender=0;
-        int winsOfAttacker=0;
 
 
         if(getAttackerId().equals(senderId)){
@@ -52,7 +41,7 @@ public class EvaluateDiceResultState extends State {
         }
 
         if(!isEmpty(data.getDefenderDiceResult()) && !isEmpty(data.getAttackerDiceResult())) {
-            int [] result=calculateAttackResult(winsOfAttacker, winsOfDefender);
+            int [] result=calculateAttackResult();
             handleAttackResult(result[0],result[1]);
         }
 
@@ -63,17 +52,24 @@ public class EvaluateDiceResultState extends State {
         data.setAttackingTroops(data.getAttackingTroops()-winsOfDefender);
         data.getDefendersRegion().setTroops(data.getDefendersRegion().getTroops()-winsOfAttacker);
 
-        if(data.getDefendersRegion().getTroops()<=0){
+        if(data.getDefendersRegion().getTroops()<=0){ // if defender lost
+            context.sendMessage(new AttackResult(false,data.getDefendersRegion().getName()),getDefenderId()); // inform defender he lost
+            context.sendMessage(new AttackResult(true,data.getDefendersRegion().getName()),getAttackerId()); // inform attacker he won
+
             attackState.setState(new AttackWinnerState(context, attackState));
-        }else {
+
+        }else { // if attacker lost or still has troops
+            context.sendMessage(new AttackResult(true,data.getDefendersRegion().getName()),getDefenderId()); // inform defender he won
+            context.sendMessage(new AttackResult(false,data.getDefendersRegion().getName()),getAttackerId()); // inform attacker  he lost
             attackState.setState(new AttackLoserState(context,attackState));
         }
 
     }
 
-    private int [] calculateAttackResult(int winsOfAttacker, int winsOfDefender){
+    private int [] calculateAttackResult(){
 
-
+        int winsOfAttacker=0;
+        int winsOfDefender=0;
         int [] defenderDiceResult = data.getDefenderDiceResult();
         int [] attackerDiceResult = data.getAttackerDiceResult();
 
@@ -115,7 +111,7 @@ public class EvaluateDiceResultState extends State {
         DiceAmount diceAmount= new DiceAmount(data.getAttackingTroops());
         context.sendMessage(diceAmount,getAttackerId());
 
-        diceAmount= new DiceAmount(data.getAttackingTroops()<2? 1:2);
+        diceAmount= new DiceAmount(data.getDefendersRegion().getTroops()<2? 1:2);
         context.sendMessage(diceAmount,getDefenderId());
 
     }

@@ -13,9 +13,11 @@ import java.nio.charset.Charset;
 
 import gmbh.norisknofun.game.networkmessages.Message;
 
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for {@link MessageSerializer}.

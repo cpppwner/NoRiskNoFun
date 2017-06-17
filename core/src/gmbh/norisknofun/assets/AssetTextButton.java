@@ -9,6 +9,8 @@ public interface AssetTextButton extends AssetWidget, Disposable {
 
     /**
      * Get text button's name.
+     *
+     * @return Button's name.
      */
     String getName();
 
@@ -32,6 +34,8 @@ public interface AssetTextButton extends AssetWidget, Disposable {
 
     /**
      * Test if the button is enabled.
+     *
+     * @return {@code true} if the button is enabled, {@code false} otherwise.
      */
     boolean isEnabled();
 }

@@ -3,49 +3,67 @@ package gmbh.norisknofun.game;
 import com.badlogic.gdx.graphics.Color;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Created by philipp on 13.06.2017.
+ * Color pool for getting available colors.
  */
-
 public class ColorPool {
 
+    /**
+     * All available colors for a color pool.
+     */
+    static final List<Color> ALL_AVAILABLE_COLORS = Arrays.asList(
+            Color.BLUE,
+            Color.GREEN,
+            Color.RED,
+            Color.ORANGE,
+            Color.YELLOW,
+            Color.CYAN,
+            Color.MAGENTA
+    );
 
-    private static ArrayList<PlayerColor> colorList;
+    /**
+     * The colors that are currently in use.
+     */
+    private final List<Color> usedColors = new ArrayList<>(ALL_AVAILABLE_COLORS.size());
 
-    public ColorPool() {
-        colorList = new ArrayList<PlayerColor>();
-        colorList.add(new PlayerColor(Color.BLUE));
-        colorList.add(new PlayerColor(Color.GREEN));
-        colorList.add(new PlayerColor(Color.RED));
-        colorList.add(new PlayerColor(Color.ORANGE));
-        colorList.add(new PlayerColor(Color.YELLOW));
-        colorList.add(new PlayerColor(Color.CYAN));
-        colorList.add(new PlayerColor(Color.MAGENTA));
-
-    }
-
+    /**
+     * Get next available color from the pool.
+     */
     public Color getNextAvailableColor(){
-        for(PlayerColor pc: colorList){
-            if(pc.available){
-                pc.available=false;
-                return pc.color;
+
+        Color nextAvailable = null;
+        for (Color color : ALL_AVAILABLE_COLORS) {
+            if (!usedColors.contains(color)) {
+                nextAvailable = color;
+                break;
             }
         }
 
-      return null;
-    }
-
-    public void relaseColor(Color color){
-        for(PlayerColor pc: colorList){
-            if(pc.color.equals(color)){
-                pc.available=true;
-            }
+        if (nextAvailable != null) {
+            usedColors.add(nextAvailable);
         }
+
+        return nextAvailable;
     }
 
-    public static ArrayList<PlayerColor> getColorList() {
-        return colorList;
+    /**
+     * Release used color and return it into the pool of available color.
+     */
+    public void releaseColor(Color color) {
+
+        usedColors.remove(color);
     }
 
+    /**
+     * Method to get all used colors.
+     *
+     * @return An umodifiable list containing all colors so far in use.
+     */
+    List<Color> getUsedColors() {
+        return Collections.unmodifiableList(usedColors);
+    }
 }

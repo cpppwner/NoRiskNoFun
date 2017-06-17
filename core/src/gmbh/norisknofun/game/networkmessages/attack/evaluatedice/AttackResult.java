@@ -9,19 +9,31 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class AttackResult extends BasicMessageImpl implements Serializable{
-    private String playername;
+    private boolean won;
+    private String attackedRegion;
     private static final long serialVersionUID = 1L;
 
 
-    public AttackResult(String playername) {
-        this.playername = playername;
+    public AttackResult(boolean won, String attackedRegion) {
+
+        this.won = won;
+        this.attackedRegion=attackedRegion;
     }
 
-    public String getPlayername() {
-        return playername;
+
+    public boolean isWon() {
+        return won;
     }
 
-    public void setPlayername(String playername) {
-        this.playername = playername;
+    public void setWon(boolean won) {
+        this.won = won;
+    }
+
+    public String getAttackedRegion() {
+        return attackedRegion;
+    }
+
+    public void setAttackedRegion(String attackedRegion) {
+        this.attackedRegion = attackedRegion;
     }
 }

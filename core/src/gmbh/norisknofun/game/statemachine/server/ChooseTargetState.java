@@ -24,32 +24,38 @@ public class ChooseTargetState extends State {
 
     }
 
-
-    @Override
-    public void enter() {
-
-    }
-
-    @Override
-    public void exit() {
-
-    }
-
     @Override
     public void handleMessage(String senderId, Message message) {
 
         if(message.getType().equals(NoAttack.class)){
-            context.setState(new MoveTroopsState(context));
+            handleNoAttackMessage(senderId,(NoAttack)message);
         }else if(message.getType().equals(AttackRegion.class)){
-            attackRegion(senderId,(AttackRegion)message);
+            handleAttackRegion(senderId,(AttackRegion)message);
         }else{
             Gdx.app.log("ChooseTargetState","unknown message");
         }
     }
 
-    private void attackRegion(String senderId, AttackRegion message) {
+    private void handleNoAttackMessage(String senderId, NoAttack message){
+        if(data.getCurrentplayer().getId().equals(senderId)){
+
+            context.sendMessage(message,senderId);
+            context.setState(new MoveTroopsState(context));
+        }else {
+            context.sendMessage(new AttackRegionCheck(false,"It's not your turn"));
+        }
+    }
+    private void handleAttackRegion(String senderId, AttackRegion message) {
+
+        if(message.getAttackedRegion()==null
+                || message.getOriginRegion()==null){
+            return ;
+        }
+
+        Gdx.app.log("ChooseTargetState", "Handle Attack Region from " + senderId);
 
         if(checkAttackRegionMessage(senderId, message)){
+                Gdx.app.log("ChooseTargetState", "Attack check successful");
 
                 data.setDefendersRegion(data.getRegionByName(message.getAttackedRegion()));
                 data.setAttackerRegion(data.getRegionByName(message.getOriginRegion()));
@@ -73,13 +79,11 @@ public class ChooseTargetState extends State {
         AssetMap.Region attackedRegion= data.getRegionByName(message.getAttackedRegion());
         AssetMap.Region orginRegion= data.getRegionByName(message.getOriginRegion());
 
-
         if(!data.getCurrentplayer().getId().equals(senderId)){
             check=false;
-            sendAttackRegionCheckMessage(senderId,false,"Its not your turn");
-        }
+            sendAttackRegionCheckMessage(senderId,false,"It's not your turn");
 
-        else if(data.getCurrentplayer().getPlayerName().equals(attackedRegion.getOwner())) {
+        } else if(data.getCurrentplayer().getPlayerName().equals(attackedRegion.getOwner())) {
             check = false;
             sendAttackRegionCheckMessage(senderId,false,"You can't attack your own region");
         }
@@ -95,8 +99,5 @@ public class ChooseTargetState extends State {
         AttackRegionCheck  attackRegionCheckmessage= new AttackRegionCheck(check,errorMessage);
         context.sendMessage(attackRegionCheckmessage,senderId);
     }
-
-
-
 
 }

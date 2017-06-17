@@ -1,11 +1,16 @@
 package gmbh.norisknofun.game;
 
+import com.badlogic.gdx.Gdx;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayersInGame;
 import gmbh.norisknofun.scene.SceneData;
 
 /**
@@ -23,18 +28,20 @@ public class GameData {
      */
     private final Changeable<String> lastError = new Changeable<>();
     private final Changeable<AssetMap> mapAsset = new Changeable<>(null);
-    private Changeable<Message> guiChanges = new Changeable<>();
+    private Changeable<Queue<Message>> guiChanges = new Changeable<>();
 
     private final Player myself = new Player();
     private Player currentPlayer = null;
     private final Changeable<List<Player>> allPlayers = new Changeable<>();
 
     private int[] diceRoll;
+    private int availableDice;
     private int maxNumPlayers;
     private String mapFilename;
 
     public GameData() {
         allPlayers.setValue(new LinkedList<Player>());
+        guiChanges.setValue(new ConcurrentLinkedQueue<Message>());
     }
 
     public void setMapAsset(AssetMap mapAsset) {
@@ -61,7 +68,7 @@ public class GameData {
      * @param message Action the GUI should perform
      */
     public void setGuiChanges(Message message) {
-        guiChanges.setValue(message);
+        guiChanges.getValue().offer(message);
         guiChanges.setChanged();
     }
 
@@ -69,7 +76,7 @@ public class GameData {
      * Get the action the GUI should perform
      * @return GUI Message
      */
-    public Message getGuiChanges() {
+    public Queue<Message> getGuiChanges() {
         return guiChanges.getValue();
     }
 
@@ -143,6 +150,8 @@ public class GameData {
             }
         }
 
+        Gdx.app.log("CurrentPlayer", "New Current Playername = " + newCurrentPlayer.getPlayerName());
+
         this.currentPlayer = newCurrentPlayer;
     }
 
@@ -154,6 +163,18 @@ public class GameData {
 
         allPlayers.getValue().add(player);
         allPlayers.setChanged();
+    }
+
+    public void updateAllPlayers(List<PlayersInGame.Player> players) {
+
+        allPlayers.getValue().clear();
+        for (PlayersInGame.Player player : players) {
+            addPlayer(new Player(player.getName(), "", player.getColor()));
+        }
+    }
+
+    public boolean hasPlayersChanged() {
+        return allPlayers.hasChanged();
     }
 
     public void resetAllPlayersChanged() {
@@ -169,7 +190,28 @@ public class GameData {
         this.mapFilename = mapFilename;
     }
 
+    public String getMapFilename() {
+        return mapFilename;
+    }
+
+
     public void setMaxNumPlayers(int maxNumPlayers) {
         this.maxNumPlayers = maxNumPlayers;
+    }
+
+    public int getMaxNumPlayers() {
+        return maxNumPlayers;
+    }
+
+    public int getAvailableDice() {
+        return availableDice;
+    }
+
+    public boolean isMyTurn(){
+        return myself.getPlayerName().equals(currentPlayer.getPlayerName());
+    }
+
+    public void setAvailableDice(int availableDice) {
+        this.availableDice = availableDice;
     }
 }

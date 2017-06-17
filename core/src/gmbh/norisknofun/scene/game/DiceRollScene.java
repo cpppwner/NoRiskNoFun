@@ -134,25 +134,12 @@ public class DiceRollScene extends SceneBase {
      * Roll all dice and update their results
      */
     private void diceRoll() {
-        Random rnd = new Random();
-        rnd.setSeed(TimeUtils.nanoTime());
+        Random rnd = new Random(TimeUtils.nanoTime());
 
         // generate a random number from 1-6
         for (int i = 0; i < rollResults.length; i++) {
             rollResults[i] = rnd.nextInt(6) + 1;
         }
-    }
-
-    /**
-     * Roll only a single die and update the result
-     *
-     * @param index die to roll
-     */
-    private void diceRoll(int index) {
-        Random rnd = new Random();
-        rnd.setSeed(TimeUtils.nanoTime());
-
-        rollResults[index] = rnd.nextInt(6) + 1;
     }
 
     /**
@@ -178,54 +165,15 @@ public class DiceRollScene extends SceneBase {
     }
 
     /**
-     * Set the images to the roll result of a specific die
-     *
-     * @param index of die and result to update
-     */
-    private void showRollResult(int index) {
-        dieObjects.get(index).setDieNumber(rollResults[index]);
-    }
-
-    /**
-     * Check if player can cheat and do so if it's available.
-     *
-     * @param index index of the die to re-roll
-     */
-    private void tryCheat(int index) {
-        if (cheatsAvailable > 0) {
-            diceRoll(index);
-            showRollResult(index);
-            cheatsAvailable--;
-            cheatLabel.setText(Integer.toString(cheatsAvailable));
-        }
-    }
-
-    /**
      * Set ClickListener to all die.
-     * Used for cheat function. This doesn't work properly in a loop
+     * Used for cheat function.
      */
     private void setDiceClickListener() {
 
-        dieObjects.get(0).addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                tryCheat(0);
-                return true;
-            }
-        });
+        for (int i = 0; i < dieObjects.size(); i++) {
 
-        dieObjects.get(1).addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                tryCheat(1);
-                return true;
-            }
-        });
-
-        dieObjects.get(2).addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                tryCheat(2);
-                return true;
-            }
-        });
+            dieObjects.get(i).addListener(new DieCheatClickListener(i));
+        }
     }
 
 
@@ -273,6 +221,56 @@ public class DiceRollScene extends SceneBase {
         }
 
         super.render(delta);
+    }
+
+    /**
+     * Special click listener, listening for cheats.
+     */
+    private final class DieCheatClickListener extends ClickListener {
+
+        /**
+         * The die index for cheating.
+         */
+        private final int dieIndex;
+
+        /**
+         * Initializer click listener.
+         */
+        private DieCheatClickListener(int dieIndex) {
+            this.dieIndex = dieIndex;
+        }
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            tryCheat(dieIndex);
+            return true;
+        }
+
+        /**
+         * Check if player can cheat and do so if it's available.
+         *
+         * @param index index of the die to re-roll
+         */
+        private void tryCheat(int index) {
+            if (cheatsAvailable > 0) {
+                diceRoll(index);
+                dieObjects.get(index).setDieNumber(rollResults[index]);
+                cheatsAvailable--;
+                cheatLabel.setText(Integer.toString(cheatsAvailable));
+            }
+        }
+
+
+        /**
+         * Roll only a single die and update the result
+         *
+         * @param index die to roll
+         */
+        private void diceRoll(int index) {
+            Random rnd = new Random(TimeUtils.nanoTime());
+
+            rollResults[index] = rnd.nextInt(6) + 1;
+        }
     }
 
 }

@@ -10,9 +10,14 @@ import java.util.LinkedList;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.network.Session;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Tests for testing {@link ClientConnectingState}.
@@ -77,7 +82,7 @@ public class ClientConnectingStateTests {
         ClientConnectingState target = new ClientConnectingState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("cannot handle outbound message");
+        expectedException.expectMessage("unexpected handleOutboundMessage");
 
         // when/then
         target.handleOutboundMessage(mockMessage);
@@ -90,7 +95,7 @@ public class ClientConnectingStateTests {
         ClientConnectingState target = new ClientConnectingState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("unexpected session closed event");
+        expectedException.expectMessage("unexpected handleSessionClosed");
 
         // when/then
         target.handleSessionClosed(mockSession);
@@ -103,7 +108,7 @@ public class ClientConnectingStateTests {
         ClientConnectingState target = new ClientConnectingState(client);
 
         expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("unexpected data received event");
+        expectedException.expectMessage("unexpected handleDataReceived");
 
         // when/then
         target.handleDataReceived();

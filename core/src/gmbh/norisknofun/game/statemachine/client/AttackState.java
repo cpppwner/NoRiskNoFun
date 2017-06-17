@@ -18,7 +18,7 @@ public class AttackState extends State {
         this.context=context;
         Gdx.app.log("ATTACK STATE","ENTERED");
 
-        state= new ChooseTargetState(context);
+       state = new ChooseTroopAmountState(context, this);
     }
     @Override
     public void enter() {
@@ -33,5 +33,17 @@ public class AttackState extends State {
     @Override
     public void handleMessage(String senderId, Message message) {
         state.handleMessage(senderId,message);
+    }
+
+    public void setState(State state){
+        if (state == null) {
+            throw new IllegalArgumentException("state is null");
+        }
+
+        Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
+
+        this.state.exit();
+        this.state = state;
+        this.state.enter();
     }
 }

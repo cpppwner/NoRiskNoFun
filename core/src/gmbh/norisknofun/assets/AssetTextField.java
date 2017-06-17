@@ -9,11 +9,15 @@ public interface AssetTextField extends AssetWidget, Disposable {
 
     /**
      * Get text field's name.
+     *
+     * @return Text field's name.
      */
     String getName();
 
     /**
      * Get the text.
+     *
+     * @return Text currently entered in this text field.
      */
     String getText();
 }

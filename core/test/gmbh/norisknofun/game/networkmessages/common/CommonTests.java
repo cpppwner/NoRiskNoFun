@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -33,7 +31,7 @@ public class CommonTests {
     @Test
     public void moveTroop() throws IOException, ClassNotFoundException {
 
-        MoveTroop moveTroop = new MoveTroop(PLAYER, 10,"dest", "origin");
+        MoveTroop moveTroop = new MoveTroop(PLAYER, 10,"dest", "origin", -1);
         oos.writeObject (moveTroop);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
@@ -77,7 +75,8 @@ public class CommonTests {
     @Test
     public void spawnTroop() throws IOException, ClassNotFoundException{
 
-        SpawnTroop spawnTroop = new SpawnTroop(PLAYER,REGIONNAME);
+        SpawnTroop spawnTroop = new SpawnTroop(REGIONNAME);
+        spawnTroop.setPlayername(PLAYER);
         oos.writeObject (spawnTroop);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);

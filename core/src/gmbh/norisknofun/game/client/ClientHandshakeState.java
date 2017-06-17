@@ -19,18 +19,14 @@ import gmbh.norisknofun.network.Session;
 /**
  * State for the client when the client needs to perform a handshake with the server.
  */
-class ClientHandshakeState implements ClientState {
+class ClientHandshakeState extends ClientStateBase {
 
-    /**
-     * The client - or StateContext in terms of state pattern
-     */
-    private final Client client;
 
     /**
      * Constructor taking the "state context"
      */
     ClientHandshakeState(Client client) {
-        this.client = client;
+        super(client);
     }
 
     @Override
@@ -48,7 +44,7 @@ class ClientHandshakeState implements ClientState {
         Handshake handshake = new Handshake(HandshakeConstants.HANDSHAKE_MAGIC, HandshakeConstants.HANDSHAKE_PROTOCOL_VERSION);
         try {
             byte[] data = new MessageSerializer(handshake).serialize();
-            client.getSession().write(data);
+            write(data);
         } catch (ProtocolException | IOException e) {
             Gdx.app.error(getClass().getSimpleName(), "Failed to send handshake", e);
             terminateClient("Failed to send handshake: " + e.getMessage());
@@ -56,33 +52,16 @@ class ClientHandshakeState implements ClientState {
     }
 
     @Override
-    public void exit() {
-
-        // intentionally left empty, since there is nothing to do here
-    }
-
-    @Override
-    public void handleOutboundMessage(Message message) {
-
-        throw new IllegalStateException("no outbound message excepted here");
-    }
-
-    @Override
-    public void handleNewSession(Session newSession) {
-
-        throw new IllegalStateException("not expecting new session during handshake");
-    }
-
-    @Override
     public void handleSessionClosed(Session closedSession) {
 
-        client.setState(new ClientDisconnectedState(client));
+        distributeInboundMessage(new ClientConnectionRefused("connection closed by server"));
+        setNextState(new ClientDisconnectedState(getClient()));
     }
 
     @Override
     public void handleDataReceived() {
 
-        MessageDeserializer deserializer = new MessageDeserializer(client.getMessageBuffer());
+        MessageDeserializer deserializer = new MessageDeserializer(getClient().getMessageBuffer());
         if (deserializer.hasMessageToDeserialize()) {
             deserializeAndHandleMessage(deserializer);
         }
@@ -107,31 +86,33 @@ class ClientHandshakeState implements ClientState {
 
         if (message instanceof HandshakeRejected) {
             // server rejected the handshake request
-            client.getSession().close();
-            client.distributeInboundMessage(
-                    new ClientConnectionRefused("Handshake rejected by server. Server protocol: "
-                            + ((HandshakeRejected)message).getServerProtocolVersion()));
-            client.setState(new ClientDisconnectedState(client));
-
+            closeClient("Handshake rejected by server. Server protocol: "
+                    + ((HandshakeRejected)message).getServerProtocolVersion());
         } else if (message instanceof HandshakeAccepted) {
 
-            client.distributeInboundMessage(new ClientConnected());
-            client.setState(new ClientConnectedState(client));
+            distributeInboundMessage(new ClientConnected());
+            setNextState(new ClientConnectedState(getClient()));
 
         } else {
 
             // huh - the server talks bogus - get us out of this server
-            client.getSession().close();
-            client.distributeInboundMessage(
-                    new ClientConnectionRefused("Handshake sent wrong message: " + message.getType().getName()));
-            client.setState(new ClientDisconnectedState(client));
+            closeClient("Handshake sent wrong message: " + message.getType().getName());
         }
     }
 
     private void terminateClient(String reason) {
 
-        client.getSession().terminate();
-        client.distributeInboundMessage(new ClientConnectionRefused(reason));
-        client.setState(new ClientDisconnectedState(client));
+        distributeInboundMessage(new ClientConnectionRefused(reason));
+        terminateSession();
+        setNextState(new ClientDisconnectedState(getClient()));
     }
+
+    private void closeClient(String reason) {
+
+        distributeInboundMessage(new ClientConnectionRefused(reason));
+        closeSession();
+        setNextState(new ClientDisconnectedState(getClient()));
+    }
+
+
 }
