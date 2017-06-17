@@ -18,7 +18,7 @@ public class AttackState extends State {
         this.context=context;
         Gdx.app.log("ATTACK STATE","ENTERED");
 
-       setState(new ChooseTroopAmountState(context,this));
+       state = new ChooseTroopAmountState(context, this);
     }
     @Override
     public void enter() {

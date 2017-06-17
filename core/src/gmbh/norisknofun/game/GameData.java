@@ -1,5 +1,7 @@
 package gmbh.norisknofun.game;
 
+import com.badlogic.gdx.Gdx;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -147,6 +149,8 @@ public class GameData {
                 break;
             }
         }
+
+        Gdx.app.log("CurrentPlayer", "New Current Playername = " + newCurrentPlayer.getPlayerName());
 
         this.currentPlayer = newCurrentPlayer;
     }

@@ -20,7 +20,20 @@ public class PlayerSpreadFinished extends BasicMessageImpl implements Serializab
 
     private static final long serialVersionUID = 1L;
 
-    public PlayerSpreadFinished() {
+    private String currentPlayerName;
 
+    public PlayerSpreadFinished() {
+    }
+
+    public PlayerSpreadFinished(String currentPlayerName) {
+        this.currentPlayerName = currentPlayerName;
+    }
+
+    public String getCurrentPlayerName() {
+        return currentPlayerName;
+    }
+
+    public void setCurrentPlayerName(String currentPlayerName) {
+        this.currentPlayerName = currentPlayerName;
     }
 }

@@ -20,7 +20,7 @@ public class SpreadTroopsState extends State {
 
     private ServerContext context;
     private final GameDataServer data;
-    private static final int TROOPS_TO_SPREAD = 100;
+    private static final int TROOPS_TO_SPREAD = 2;
     public SpreadTroopsState(ServerContext context){
 
         this.context=context;
@@ -91,9 +91,9 @@ public class SpreadTroopsState extends State {
             }
         }
         if(!check){
-            setFirstPlayerAsCurrent();
+            data.setCurrentplayer(data.getPlayers().getPlayerlist().get(0).getPlayerName());
             context.setState(new DistributionState(context));
-            context.sendMessage(new PlayerSpreadFinished());
+            context.sendMessage(new PlayerSpreadFinished(context.getGameData().getCurrentplayer().getPlayerName()));
         }
     }
     private void setNextPlayer(){
