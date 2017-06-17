@@ -78,6 +78,7 @@ public final class GameScene extends SceneBase {
         GameObjectMap  gameObjectMap = new GameObjectMap(data.getMapAsset());
         regionMap = gameObjectMap.getRegionMap();
         regionNameMap = gameObjectMap.getRegionNameMap();
+        ownColor = new Color(data.getMyself().getColor());
 
         addSceneObject(gameObjectMap);
         addFiguresToStage();
@@ -85,8 +86,6 @@ public final class GameScene extends SceneBase {
 
         addRollButton();
         initTurnIndicator();
-
-        ownColor = new Color(data.getMyself().getColor());
 
         for (Player player:data.getPlayers()) {
             Gdx.app.log("GameScene", "Player Available: " + player.getPlayerName() + " Color: " + player.getColor());
@@ -137,11 +136,13 @@ public final class GameScene extends SceneBase {
                 if (tappedRegion != actor.getCurrentRegion()) {
 
                     //actor.getCurrentRegion().setTroops(actor.getCurrentRegion().getTroops()-1);
-
-                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), tappedRegion.getName(),actor.getId() ));
+                    Gdx.app.log("Move Troop", "Moving troop: " + actor.getId());
+                    actor.setHighlighted(false);
+                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), tappedRegion.getName(),actor.getId()));
                 }
             } else if (actor.isHighlighted() && !actor.isFirstMove()) { // todo: Temporary. If user moves figure out of region, it will be deleted.
                 sceneData.sendMessageFromGui(new RemoveTroopGui(actor.getCurrentRegion().getName(), 1));
+                actor.setHighlighted(false);
             }
         }
     }
@@ -192,6 +193,7 @@ public final class GameScene extends SceneBase {
 
     private void initTurnIndicator() {
         turnIndicator = new LabelSceneObject(sceneData.createLabel("Your Turn!", Assets.FONT_110PX_WHITE_WITH_BORDER));
+        turnIndicator.setBackgroundColor(ownColor);
         addSceneObject(turnIndicator);
         turnIndicator.setBounds(0, Gdx.graphics.getHeight() - turnIndicator.getHeight(), turnIndicator.getWidth(), turnIndicator.getHeight());
     }
@@ -332,9 +334,14 @@ public final class GameScene extends SceneBase {
         infantry.setFirstMove(false);
         infantry.setCurrentRegion(regionNameMap.get(message.getRegionName()));
 
-        // todo: don't create a new Color object every time
-        //setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
-        setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
+
+        // set color and owner only when the first troop spawns on this region
+        if (region.getOwner().equals("none")) {
+            region.setOwner(data.getCurrentPlayer().getPlayerName());
+            setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
+        }
+        region.updateTroops(1);
+        Gdx.app.log("Region Spawn", region.getTroops() + " Troops on " + region.getName() + " Owner: " + region.getOwner());
 
         figures.add(infantry);
         addSceneObject(infantry);
@@ -370,13 +377,9 @@ public final class GameScene extends SceneBase {
 
         if (message.getType().equals(SpawnTroopGui.class)) {
             Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
-
-            // spawn troop
             spawnNewTroop((SpawnTroopGui) message);
         } else if (message.getType().equals(MoveTroopGui.class)) {
             Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
-
-            // move existing troop
             moveTroop((MoveTroopGui) message);
         } else if (message.getType().equals(RemoveTroopGui.class)) {
             Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
@@ -405,8 +408,7 @@ public final class GameScene extends SceneBase {
             }
 
             // show whose turn it is
-            if (data.getCurrentPlayer().getPlayerName().equals(data.getMyself().getPlayerName())) {
-                turnIndicator.setBackgroundColor(ownColor);
+            if (data.isMyTurn()) {
                 turnIndicator.setVisible(true);
             } else {
                 turnIndicator.setVisible(false);

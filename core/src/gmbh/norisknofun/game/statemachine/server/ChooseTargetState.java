@@ -52,8 +52,10 @@ public class ChooseTargetState extends State {
             return ;
         }
 
+        Gdx.app.log("ChooseTargetState", "Handle Attack Region from " + senderId);
 
         if(checkAttackRegionMessage(senderId, message)){
+                Gdx.app.log("ChooseTargetState", "Attack check successful");
 
                 data.setDefendersRegion(data.getRegionByName(message.getAttackedRegion()));
                 data.setAttackerRegion(data.getRegionByName(message.getOriginRegion()));
@@ -77,7 +79,7 @@ public class ChooseTargetState extends State {
         AssetMap.Region attackedRegion= data.getRegionByName(message.getAttackedRegion());
         AssetMap.Region orginRegion= data.getRegionByName(message.getOriginRegion());
 
-        if(data.getCurrentplayer().getId().equals(senderId)){
+        if(!data.getCurrentplayer().getId().equals(senderId)){
             check=false;
             sendAttackRegionCheckMessage(senderId,false,"It's not your turn");
 
@@ -97,9 +99,5 @@ public class ChooseTargetState extends State {
         AttackRegionCheck  attackRegionCheckmessage= new AttackRegionCheck(check,errorMessage);
         context.sendMessage(attackRegionCheckmessage,senderId);
     }
-
-
-
-
 
 }

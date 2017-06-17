@@ -15,14 +15,14 @@ public class AttackState extends State {
     private State state;
     public AttackState(ServerContext context){
         this.context=context;
-        setState(new ChooseTroopAmountState(context,this));
+        this.state = new ChooseTroopAmountState(context, this);
 
     }
 
     @Override
     public void enter() {
-        state.enter();
 
+        state.enter();
     }
 
     @Override
@@ -41,10 +41,10 @@ public class AttackState extends State {
             throw new IllegalArgumentException("state is null");
         }
 
-        Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
-
         this.state.exit();
         this.state = state;
         this.state.enter();
+
+        Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
     }
 }

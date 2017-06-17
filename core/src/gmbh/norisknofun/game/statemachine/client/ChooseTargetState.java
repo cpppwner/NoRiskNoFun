@@ -3,11 +3,13 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.gamemessages.gui.AttackRegionGui;
+import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.NoAttackGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegion;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegionCheck;
 import gmbh.norisknofun.game.networkmessages.choosetarget.NoAttack;
+import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -29,11 +31,12 @@ public class ChooseTargetState extends State {
         
        if(message.getType().equals(AttackRegionCheck.class)){
            handleAttackRegionCheckMessage((AttackRegionCheck)message);
-        }else if(message.getType().equals(AttackRegionGui.class)){
-           requestAttack((AttackRegionGui)message);
-        }else if(message.getType().equals(NoAttackGui.class)){ //player doesn't want to attack
+        } else if(message.getType().equals(NoAttackGui.class)){ //player doesn't want to attack
            context.sendMessage(new NoAttack());
-       }else {
+       } else if (message.getType().equals(MoveTroopGui.class)) {
+           requestAttack((MoveTroopGui) message);
+       }
+       else {
            Gdx.app.log("Client ChooseTargetState", "unknown message:"+message.getClass().getSimpleName());
         }
     }
@@ -46,8 +49,8 @@ public class ChooseTargetState extends State {
         }
     }
 
-    private void requestAttack(AttackRegionGui message){
-        AttackRegion attackRegion= new AttackRegion(message.getOriginRegion(),message.getAttackedRegion());
+    private void requestAttack(MoveTroopGui message){
+        AttackRegion attackRegion= new AttackRegion(message.getFromRegion(),message.getToRegion());
         context.sendMessage(attackRegion);
     }
 }

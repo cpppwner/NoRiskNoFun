@@ -18,7 +18,7 @@ public class DistributionState extends State {
 
     private ServerContext context;
     private final GameDataServer data;
-    private final int TroopsToSpawn=1;
+    private static final int TROOPS_TO_SPAWN=1;
 
     public DistributionState(ServerContext context){
         this.context=context;
@@ -45,10 +45,15 @@ public class DistributionState extends State {
     private void spawnTroop(String senderId, SpawnTroop message){
 
         if(checkSpawnMessage(senderId,message)){
-            broadcastSpawnTroopMessage(message);
             data.getCurrentplayer().setTroopToSpread(data.getCurrentplayer().getTroopToSpread()-1);
+            broadcastSpawnTroopMessage(message);
+            Gdx.app.log("Distribution State Spawn Troop", "Troops to spread: " + data.getCurrentplayer().getTroopToSpread());
         }
 
+        if(data.getCurrentplayer().getTroopToSpread()<=0) {
+            context.sendMessage(new PlayerSpreadFinished()); // tell client to change state
+            context.setState(new ChooseTargetState(context));
+        }
     }
 
     private boolean checkSpawnMessage(String senderId, SpawnTroop spawnTroop){
@@ -59,11 +64,6 @@ public class DistributionState extends State {
         }else if(!senderId.equals(data.getCurrentplayer().getId())){
             check=false;
             sendSpawnTroopCheckMessage(senderId,"It's not your turn",false);
-
-        }else if(data.getCurrentplayer().getTroopToSpread()<=0){
-            check=false;
-            context.sendMessage(new PlayerSpreadFinished()); // tell client to change state
-            context.setState(new ChooseTargetState(context));
         }
         else if(!data.getRegionByName(spawnTroop.getRegionname()).getOwner().equals(data.getCurrentplayer().getPlayerName())){
             check=false;
@@ -73,8 +73,8 @@ public class DistributionState extends State {
     }
 
     private void addTroopsToPlayer(){
-        data.getCurrentplayer().setTroopToSpread(TroopsToSpawn); // todo how to calculate the reinforcement
-        context.sendMessage(new AddTroops(TroopsToSpawn),data.getCurrentplayer().getId());
+        data.getCurrentplayer().setTroopToSpread(TROOPS_TO_SPAWN); // todo how to calculate the reinforcement
+        context.sendMessage(new AddTroops(TROOPS_TO_SPAWN), data.getCurrentplayer().getId());
     }
 
     private void broadcastSpawnTroopMessage(SpawnTroop message){

@@ -180,7 +180,6 @@ public class SceneData {
      */
     public void setGameHost(boolean gameHost) {
         if (gameHost) {
-            gameServices.setHostIp("127.0.0.1");
             gameServices.setHostingMode();
         } else {
             gameServices.setJoiningMode();

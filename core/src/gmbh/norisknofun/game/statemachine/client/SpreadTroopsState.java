@@ -2,12 +2,15 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
+import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.UpdateCurrentPlayerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
+import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpreadFinished;
 import gmbh.norisknofun.game.statemachine.State;
 
@@ -29,17 +32,31 @@ public class SpreadTroopsState extends State {
 
         if (message.getType().equals(NextPlayer.class)) {
             setNextPlayer(((NextPlayer) message).getPlayername());
-        } else if(message.getType().equals(PlayerSpreadFinished.class)){
-            context.setState(new DistributionState(context));
         } else if (message.getType().equals(SpawnTroop.class)) {
             doSpawnTroop((SpawnTroop) message);
         } else if (message.getType().equals(SpawnTroopCheck.class)) {
             handleSpawnError((SpawnTroopCheck) message);
         } else if (message.getType().equals(SpawnTroopGui.class)) {
             requestSpawn((SpawnTroopGui) message);
+        } else if (message.getType().equals(PlayerSpreadFinished.class)) {
+            stateTransition((PlayerSpreadFinished) message);
         }
         else {
             Gdx.app.log("Client SpreadTroopsState", "unknown message:"+message.getClass().getSimpleName());
+        }
+    }
+
+    /**
+     * Transition to Distribution State if it's your turn,
+     * otherwise go to Waiting State and wait for your turn
+     */
+    private void stateTransition(PlayerSpreadFinished message) {
+        context.getGameData().setCurrentPlayer(message.getCurrentPlayerName());
+        Gdx.app.log("SpreadTroop Transition", "Current Player: " + context.getGameData().getCurrentPlayer().getPlayerName() + " Myself: " + context.getGameData().getMyself().getPlayerName());
+        if (context.getGameData().isMyTurn()) {
+            context.setState(new DistributionState(context));
+        } else {
+            context.setState(new WaitingForNextTurnState(context));
         }
     }
 
