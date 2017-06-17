@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Color;
  */
 public final class ModalDialogDescriptor {
 
+    /** Font descriptor describing title font used by the modal dialog. */
     private final FontDescriptor titleFont;
     private final Color titleFontColor;
     private final String title;
@@ -19,7 +20,7 @@ public final class ModalDialogDescriptor {
     private final Color backgroundColor;
     private final TextButtonDescriptor buttonDescriptor;
 
-    public ModalDialogDescriptor(Builder builder) {
+    private ModalDialogDescriptor(Builder builder) {
 
         titleFont = builder.titleFont;
         titleFontColor = builder.titleFontColor;
