@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import gmbh.norisknofun.GdxTest;
 import gmbh.norisknofun.assets.AssetMap;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -16,11 +17,11 @@ import static org.junit.Assert.assertThat;
  * Created by Katharina on 05.06.17.
  */
 
-public class GameDataTests {
+public class GameDataTests extends GdxTest{
 
     GameData data;
     @Before
-    public void init() {
+    public void initialize() {
         data = new GameData();
     }
 
