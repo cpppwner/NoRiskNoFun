@@ -1,8 +1,10 @@
 package gmbh.norisknofun.game.statemachine.client;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import gmbh.norisknofun.GdxTest;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
@@ -15,7 +17,7 @@ import static org.mockito.Mockito.mock;
  * Created by Katharina on 29.05.2017.
  */
 
-public class SpreadTroopsStateTests {
+public class SpreadTroopsStateTests extends GdxTest {
 
     GameData data;
     ClientContext context;
@@ -42,6 +44,7 @@ public class SpreadTroopsStateTests {
         data.setCurrentPlayer(players[0]);
     }
 
+    @Ignore("GDX Tests are not properly implemented yet")
     @Test
     public void NextPlayerMessageChangeCurrentPlayer() {
         BasicMessageImpl message = new NextPlayer(players[1]);
