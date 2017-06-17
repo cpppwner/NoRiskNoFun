@@ -35,6 +35,8 @@ public final class MainMenuScene extends SceneBase {
 
     /**
      * Construct and initialize main menu scene.
+     *
+     * * @param sceneData Contained class shared amongst scenes.
      */
     public MainMenuScene(SceneData sceneData) {
         super(SceneNames.MAIN_MENU_SCENE, Color.WHITE);

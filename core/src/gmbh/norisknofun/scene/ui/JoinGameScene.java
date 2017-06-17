@@ -44,6 +44,8 @@ public class JoinGameScene extends SceneBase {
 
     /**
      * Construct and initialize main menu scene.
+     *
+     * @param sceneData Contained class shared amongst scenes.
      */
     public JoinGameScene(SceneData sceneData) {
         super(SceneNames.JOIN_GAME_SCENE, Color.WHITE);
