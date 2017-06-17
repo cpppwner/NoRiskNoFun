@@ -50,7 +50,7 @@ class ClientConnectedState extends ClientStateBase {
 
         System.out.println("ClientConnectedState: Received Data");
         MessageDeserializer deserializer = new MessageDeserializer(getClient().getMessageBuffer());
-        if (deserializer.hasMessageToDeserialize()) {
+        while (deserializer.hasMessageToDeserialize()) {
             deserializeAndHandleMessage(deserializer);
         }
     }

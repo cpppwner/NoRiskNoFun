@@ -152,6 +152,12 @@ public class NetworkClient {
             sessionEventHandler.sessionDataReceived(session);
         }
 
+        try {
+            System.out.println("SERVER: CLIENT <- SERVER (" + clientSocket.getLocalAddress() + "): num bytes " + numBytesRead);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return numBytesRead >= 0;
     }
 
@@ -169,6 +175,13 @@ public class NetworkClient {
 
         if (numBytesWritten > 0) {
             sessionEventHandler.sessionDataWritten(session);
+        }
+
+        // TODO remove debugging output
+        try {
+            System.out.println("SERVER: CLIENT -> SERVER (" + clientSocket.getLocalAddress() + "): num bytes " + numBytesWritten);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return numBytesWritten >= 0;

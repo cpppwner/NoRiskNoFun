@@ -64,7 +64,7 @@ final class ClientAcceptedState extends ClientStateBase {
     public void processDataReceived() {
 
         MessageDeserializer deserializer = new MessageDeserializer(context.getMessageBuffer());
-        if (deserializer.hasMessageToDeserialize()) {
+        while (deserializer.hasMessageToDeserialize()) {
             deserializeAndHandleMessage(deserializer);
         }
     }
