@@ -59,7 +59,9 @@ public class GameServices {
 
     private boolean startClient() {
 
+        gameClient.setInitialState();
         return networkClient.connect(hostIp, PORT);
+
     }
 
     public void stopServices() throws InterruptedException {
