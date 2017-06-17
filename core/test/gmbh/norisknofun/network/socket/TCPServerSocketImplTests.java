@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.either;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -27,6 +28,8 @@ import static org.junit.Assert.fail;
 public class TCPServerSocketImplTests {
 
     private static final String HOST = "localhost";
+    private static final String HOST_ADDRESS_IPV4 = "127.0.0.1";
+    private static final String HOST_ADDRESS_IPV6 = "::1";
     private static final int PORT = 27001;
 
     private SocketFactory socketFactory;
@@ -104,7 +107,7 @@ public class TCPServerSocketImplTests {
 
         assertThat(localAddress, is(notNullValue()));
         assertThat(localAddress, is(instanceOf(InetSocketAddress.class)));
-        assertThat(((InetSocketAddress)localAddress).getHostName(), is(equalTo(HOST)));
+        assertThat(((InetSocketAddress)localAddress).getHostName(), either(is(HOST)).or(is(HOST_ADDRESS_IPV4)).or(is(HOST_ADDRESS_IPV6)));
         assertThat(((InetSocketAddress)localAddress).getPort(), is(equalTo(PORT)));
     }
 
