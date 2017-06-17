@@ -9,6 +9,7 @@ import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
+import gmbh.norisknofun.game.networkmessages.spread.PlayerSpreadFinished;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -25,7 +26,8 @@ public class SpreadTroopsState extends State {
         this.context=context;
         data=context.getGameData();
         assignTroopsToPlayer();
-        setCurrentPlayer();
+        setFirstPlayerAsCurrent();
+
     }
 
 
@@ -89,7 +91,9 @@ public class SpreadTroopsState extends State {
             }
         }
         if(!check){
+            setFirstPlayerAsCurrent();
             context.setState(new DistributionState(context));
+            context.sendMessage(new PlayerSpreadFinished());
         }
     }
     private void setNextPlayer(){
@@ -103,7 +107,7 @@ public class SpreadTroopsState extends State {
     /**
      * set the first player as currentplayer
      */
-    private void setCurrentPlayer(){
+    private void setFirstPlayerAsCurrent(){
         data.setCurrentplayer(data.getPlayers().getPlayerlist().get(0).getPlayerName());
         NextPlayer nextPlayer = new NextPlayer(data.getCurrentplayer().getPlayerName());
         context.sendMessage(nextPlayer);
