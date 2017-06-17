@@ -3,6 +3,8 @@ package gmbh.norisknofun.game;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.networkmessages.Message;
@@ -24,7 +26,7 @@ public class GameData {
      */
     private final Changeable<String> lastError = new Changeable<>();
     private final Changeable<AssetMap> mapAsset = new Changeable<>(null);
-    private Changeable<Message> guiChanges = new Changeable<>();
+    private Changeable<Queue<Message>> guiChanges = new Changeable<>();
 
     private final Player myself = new Player();
     private Player currentPlayer = null;
@@ -36,6 +38,7 @@ public class GameData {
 
     public GameData() {
         allPlayers.setValue(new LinkedList<Player>());
+        guiChanges.setValue(new ConcurrentLinkedQueue<Message>());
     }
 
     public void setMapAsset(AssetMap mapAsset) {
@@ -62,7 +65,7 @@ public class GameData {
      * @param message Action the GUI should perform
      */
     public void setGuiChanges(Message message) {
-        guiChanges.setValue(message);
+        guiChanges.getValue().offer(message);
         guiChanges.setChanged();
     }
 
@@ -70,7 +73,7 @@ public class GameData {
      * Get the action the GUI should perform
      * @return GUI Message
      */
-    public Message getGuiChanges() {
+    public Queue<Message> getGuiChanges() {
         return guiChanges.getValue();
     }
 

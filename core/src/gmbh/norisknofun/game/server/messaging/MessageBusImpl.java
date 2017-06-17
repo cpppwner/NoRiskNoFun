@@ -78,12 +78,14 @@ public final class MessageBusImpl implements MessageBus {
     public void distributeOutboundMessage(Message message) {
 
         for (OutboundMessageHandler handler : outboundMessageHandlers) {
+            System.out.println("OutboundMessageHandler distributing: " + message.getClass().getSimpleName());
             handler.handle(message);
         }
     }
 
     @Override
     public void distributeOutboundMessage(String recipientId, Message message) {
+        System.out.println("OutboundMessageHandler distributing: " + message.getClass().getSimpleName() + " to " + recipientId);
 
         OutboundMessageHandler handler = getOutboundMessageHandler(recipientId);
         handler.handle(message);

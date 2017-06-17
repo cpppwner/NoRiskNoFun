@@ -33,6 +33,7 @@ public class ServerContext implements InboundMessageHandler {
         }
 
         Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
+        System.out.println("SERVER: State Transition: " + this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
 
         this.state.exit();
         this.state = state;

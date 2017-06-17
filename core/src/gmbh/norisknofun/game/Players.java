@@ -79,7 +79,7 @@ public class Players implements Serializable{
         }
 
         int index = getPlayerIndexByName(playername);
-        if(index>= playerlist.size()-1){
+        if(index>= playerlist.size() - 1){
             index=0;
         }else{
             index++;

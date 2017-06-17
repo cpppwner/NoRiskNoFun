@@ -15,6 +15,12 @@ public class SpawnTroop extends BasicMessageImpl {
 
     public SpawnTroop(String regionname) {
         this.regionname = regionname;
+        this.playername = "";
+    }
+
+    public SpawnTroop(String regionname, String playername) {
+        this.regionname = regionname;
+        this.playername = playername;
     }
 
 

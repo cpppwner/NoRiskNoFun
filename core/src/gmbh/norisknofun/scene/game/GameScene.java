@@ -18,11 +18,13 @@ import java.util.List;
 import java.util.Map;
 
 import gmbh.norisknofun.assets.AssetMap;
+import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.UpdateCurrentPlayerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -45,15 +47,17 @@ public final class GameScene extends SceneBase {
     private final GameData data;
 
     private LabelSceneObject label;
+    private LabelSceneObject turnIndicator;
 
     private List<Figure> figures = new ArrayList<>();
     private Map<AssetMap.Region, PolygonRegion> regionMap;
     private Map<String, AssetMap.Region> regionNameMap;
-    private AssetMap.Region currentRegion;
+    private AssetMap.Region tappedRegion;
 
+    private Color ownColor;
 
     public GameScene(SceneData sceneData) {
-        super(SceneNames.GAME_SCENE, Color.BLUE);
+        super(SceneNames.GAME_SCENE, Color.DARK_GRAY);
         this.sceneData = sceneData;
         this.data = sceneData.getGameData();
 
@@ -80,10 +84,15 @@ public final class GameScene extends SceneBase {
         addInputListener();
 
         addRollButton();
+        initTurnIndicator();
+
+        ownColor = new Color(data.getMyself().getColor());
 
         for (Player player:data.getPlayers()) {
-            Gdx.app.log("GameScene", "Player Available: " + player.getPlayerName());
+            Gdx.app.log("GameScene", "Player Available: " + player.getPlayerName() + " Color: " + player.getColor());
         }
+
+        Gdx.app.log("GameScene", "Myself: " + data.getMyself().getPlayerName() + " Color: " + data.getMyself().getColor());
     }
 
     @Override
@@ -99,7 +108,7 @@ public final class GameScene extends SceneBase {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                requestMoveActor(x, y);
+                requestTroopAction(x, y);
 
                 return true;
             }
@@ -107,30 +116,29 @@ public final class GameScene extends SceneBase {
         });
     }
 
-
     /**
      * Send a move request to the client state machine via GUI Messages
      * @param x X coordinate of the move
      * @param y Y coordinate of the move
      */
-    private void requestMoveActor(float x, float y) {
+    private void requestTroopAction(float x, float y) {
         for (Figure actor : figures) {
 
             if (actor.isHighlighted() && isPointInRegion(x, y)) {
 
                 // if it's the actor's first move, explicitly set the region
                 if (actor.isFirstMove()) {
-                    sceneData.sendMessageFromGui(new SpawnTroopGui(currentRegion.getName(), x, y,-1)); // id is 0 because we don't need it
+                    sceneData.sendMessageFromGui(new SpawnTroopGui(tappedRegion.getName(), -1)); // id is -1 because we don't need it
                     actor.setHighlighted(false);
                     break;
                 }
 
                 // check if the actor moves out of its current region and set troops accordingly
-                if (currentRegion != actor.getCurrentRegion()) {
+                if (tappedRegion != actor.getCurrentRegion()) {
 
                     //actor.getCurrentRegion().setTroops(actor.getCurrentRegion().getTroops()-1);
 
-                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), currentRegion.getName(),actor.getId() ));
+                    sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), tappedRegion.getName(),actor.getId() ));
                 }
             } else if (actor.isHighlighted() && !actor.isFirstMove()) { // todo: Temporary. If user moves figure out of region, it will be deleted.
                 sceneData.sendMessageFromGui(new RemoveTroopGui(actor.getCurrentRegion().getName(), 1));
@@ -182,9 +190,15 @@ public final class GameScene extends SceneBase {
         return artillery;
     }
 
+    private void initTurnIndicator() {
+        turnIndicator = new LabelSceneObject(sceneData.createLabel("Your Turn!", Assets.FONT_110PX_WHITE_WITH_BORDER));
+        addSceneObject(turnIndicator);
+        turnIndicator.setBounds(0, Gdx.graphics.getHeight() - turnIndicator.getHeight(), turnIndicator.getWidth(), turnIndicator.getHeight());
+    }
+
     /**
      * Checks if two specific coordinates are within a PolygonRegion
-     * and sets currentRegion to this region
+     * and sets tappedRegion to this region
      *
      * @param pointX absolute value of X coordinate
      * @param pointY absolute value of Y coordinate
@@ -193,7 +207,7 @@ public final class GameScene extends SceneBase {
     private boolean isPointInRegion(float pointX, float pointY) {
 
         for (AssetMap.Region region : data.getMapAsset().getRegions()) {
-            currentRegion = region;
+            tappedRegion = region;
             float[] vertices = region.getVertices();
 
             // for Intersector, we have to convert to percentual x/y coordinates. Simply divide by screen width/height
@@ -305,7 +319,7 @@ public final class GameScene extends SceneBase {
     }
 
     /**
-     * Creates a new Infantry on the coordinates specified within the message
+     * Creates a new Infantry on the Region specified within the message
      * @param message GUI Message containing position information
      */
     private void spawnNewTroop(SpawnTroopGui message) {
@@ -318,10 +332,9 @@ public final class GameScene extends SceneBase {
         infantry.setFirstMove(false);
         infantry.setCurrentRegion(regionNameMap.get(message.getRegionName()));
 
-
         // todo: don't create a new Color object every time
         //setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
-        setRegionColor(Color.BROWN, infantry.getCurrentRegion());
+        setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
 
         figures.add(infantry);
         addSceneObject(infantry);
@@ -339,7 +352,7 @@ public final class GameScene extends SceneBase {
             if (actor.getId()==message.getFigureId()) {
                 moveActorToRegion(message.getToRegion(), actor);
                 actor.setCurrentRegion(toRegion);
-                setRegionColor(Color.BROWN, toRegion);
+                setRegionColor(new Color(data.getCurrentPlayer().getColor()), toRegion);
 
                 // update the troop amounts
                 fromRegion.setTroops(fromRegion.getTroops() - 1);
@@ -353,16 +366,26 @@ public final class GameScene extends SceneBase {
      * Check if a flag in GameData has been changed and update the GUI accordingly
      */
     private void handleGuiUpdate() {
-        Message message = data.getGuiChanges();
+        Message message = data.getGuiChanges().poll();
 
         if (message.getType().equals(SpawnTroopGui.class)) {
+            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+
             // spawn troop
-            spawnNewTroop((SpawnTroopGui) data.getGuiChanges());
+            spawnNewTroop((SpawnTroopGui) message);
         } else if (message.getType().equals(MoveTroopGui.class)) {
+            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+
             // move existing troop
             moveTroop((MoveTroopGui) message);
         } else if (message.getType().equals(RemoveTroopGui.class)) {
+            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+
             removeTroop((RemoveTroopGui) message);
+        } else if (message.getType().equals(UpdateCurrentPlayerGui.class)) {
+            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+
+            data.setCurrentPlayer(((UpdateCurrentPlayerGui) message).getCurrentPlayer());
         }
         else {
             Gdx.app.log("GameScene","Unknown Message: " + message.getClass().getSimpleName());
@@ -373,8 +396,30 @@ public final class GameScene extends SceneBase {
     public void render(float delta) {
 
         if (data.hasChanged()) {
-            handleGuiUpdate();
-            data.setChangedFlag(false);
+            while (!data.getGuiChanges().isEmpty()) {
+                handleGuiUpdate();
+            }
+
+            if (data.getGuiChanges().isEmpty()) {
+                data.setChangedFlag(false);
+            }
+
+            // show whose turn it is
+            if (data.getCurrentPlayer().getPlayerName().equals(data.getMyself().getPlayerName())) {
+                turnIndicator.setBackgroundColor(ownColor);
+                turnIndicator.setVisible(true);
+            } else {
+                turnIndicator.setVisible(false);
+            }
+        }
+
+        // check for errors and display popup
+        String error = data.getLastError();
+        if (error != null) {
+            AssetModalDialog dialog = sceneData.createModalDialog(error, Assets.ERROR_DIALOG_DESCRIPTOR);
+                dialog.show(getStage());
+                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
         }
 
         super.render(delta);

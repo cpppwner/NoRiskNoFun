@@ -19,37 +19,31 @@ public class SpreadTroopsState extends State {
 
     private ServerContext context;
     private final GameDataServer data;
+    private static final int TROOPS_TO_SPREAD = 100;
     public SpreadTroopsState(ServerContext context){
 
         this.context=context;
         data=context.getGameData();
         assignTroopsToPlayer();
         setCurrentPlayer();
-
     }
 
 
     @Override
     public void handleMessage(String senderId, Message message) {
 
-
         if (message.getType().equals(SpawnTroop.class)){
             spawnTroopOnRegion(senderId,(SpawnTroop)message);
 
         }
         else{
-            Gdx.app.log("SpreadTroopsState","message unknown");
+            Gdx.app.log("SpreadTroopsState","message unknown: " + message.getClass().getSimpleName());
         }
     }
 
 
     private void spawnTroopOnRegion(String senderId, SpawnTroop message) {
 
-               //no used field should be null or 0
-        if (message.getRegionname() == null
-                ||message.getPlayername()==null) {
-            return;
-        }
         if(checkSpawnMessage(senderId,message)){
 
             assignRegionToPlayer(message);
@@ -57,7 +51,7 @@ public class SpreadTroopsState extends State {
             broadcastSpawnTroopMessage(message);
             setNextPlayer();
             checkTroops(); // when all troops are spread, change state to DistributionState
-            }
+        }
 //        message.setId(data.nextFigureId());
 //        System.out.println("server state figure id:"+message.getId());
 //        context.sendMessage(message);
@@ -65,7 +59,11 @@ public class SpreadTroopsState extends State {
 
     private boolean checkSpawnMessage(String senderId, SpawnTroop message){
         boolean check=true;
-        if(!data.getCurrentplayer().getId().equals(senderId)){  //if message is not from current player
+        //no used field should be null or 0
+        if (message.getRegionname() == null || message.getPlayername()==null) {
+            check = false;
+            sendSpawnTroopCheckMessage(senderId, false, "Name or Region is null");
+        } else if(!data.getCurrentplayer().getId().equals(senderId)){  //if message is not from current player
             check=false;
             sendSpawnTroopCheckMessage(senderId,false,"It's not your turn");
         }else if(data.getCurrentplayer().getTroopToSpread()<=0){ //when player has no troops to spawn
@@ -97,6 +95,7 @@ public class SpreadTroopsState extends State {
     private void setNextPlayer(){
         data.setCurrentplayer(data.getPlayers().getNextPlayername(data.getCurrentplayer().getPlayerName()));
         NextPlayer nextPlayer = new NextPlayer(data.getCurrentplayer().getPlayerName());
+        System.out.println("SERVER: Next Player: " + nextPlayer.getPlayername());
         context.sendMessage(nextPlayer);
 
     }
@@ -111,13 +110,14 @@ public class SpreadTroopsState extends State {
     }
 
     private void assignRegionToPlayer(SpawnTroop message){
-        if(data.getRegionByName(message.getRegionname()).getOwner().equals("none"))
-        data.getRegionByName(message.getRegionname()).setOwner(data.getCurrentplayer().getPlayerName());
+        if(data.getRegionByName(message.getRegionname()).getOwner().equals("none")) {
+            data.getRegionByName(message.getRegionname()).setOwner(data.getCurrentplayer().getPlayerName());
+        }
     }
 
     private void assignTroopsToPlayer(){
         for(Player player: data.getPlayers().getPlayerlist()){
-            player.setTroopToSpread(5);
+            player.setTroopToSpread(TROOPS_TO_SPREAD);
         }
     }
 

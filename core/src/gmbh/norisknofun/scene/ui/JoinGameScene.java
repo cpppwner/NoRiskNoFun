@@ -146,7 +146,7 @@ public class JoinGameScene extends SceneBase {
 //                super.clicked(event, x, y);
 //            }
 
-                sceneData.setHostIp("143.205.193.223");
+                sceneData.setHostIp("192.168.43.10");
             if ( !nameTextField.getText().isEmpty()) {
                 sceneData.setPlayerName(nameTextField.getText());
             } else {

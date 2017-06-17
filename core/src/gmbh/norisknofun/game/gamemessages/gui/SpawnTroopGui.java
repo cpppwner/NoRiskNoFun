@@ -12,10 +12,8 @@ public class SpawnTroopGui extends BasicMessageImpl {
     private float y;
     private int id;
 
-    public SpawnTroopGui(String regionName, float x, float y, int id) {
+    public SpawnTroopGui(String regionName, int id) {
         this.regionName = regionName;
-        this.x = x;
-        this.y = y;
         this.id=id;
     }
 

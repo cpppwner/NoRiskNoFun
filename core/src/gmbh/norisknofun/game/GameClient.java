@@ -57,7 +57,10 @@ class GameClient implements SessionEventHandler {
      */
     void processPendingMessages() {
 
+        //System.out.println("Pending: " + inboundMessageQueue.size());
+
         for (Message message = inboundMessageQueue.poll(); message != null; message = inboundMessageQueue.poll()) {
+            System.out.println("GameClient processing: " + message.getClass().getName());
             clientContext.delegateMessage(message);
         }
     }
