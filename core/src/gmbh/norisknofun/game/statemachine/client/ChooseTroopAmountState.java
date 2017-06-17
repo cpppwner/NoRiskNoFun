@@ -7,6 +7,8 @@ import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.choosetroops.ChooseTroopsAmount;
 import gmbh.norisknofun.game.networkmessages.attack.choosetroops.ChooseTroopsAmountCheck;
 import gmbh.norisknofun.game.statemachine.State;
+import gmbh.norisknofun.scene.SceneManager;
+import gmbh.norisknofun.scene.SceneNames;
 
 /**
  * Created by Katharina on 19.05.2017.
@@ -19,6 +21,7 @@ public class ChooseTroopAmountState extends State {
     public ChooseTroopAmountState(ClientContext context, AttackState state){
         this.context=context;
         this.attackState =state;
+        SceneManager.getInstance().setActiveScene(SceneNames.TROOP_AMOUNT_SCENE);
     }
 
 

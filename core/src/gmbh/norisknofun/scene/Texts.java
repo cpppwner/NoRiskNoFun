@@ -18,6 +18,7 @@ public final class Texts {
     public static final String SERVER_IP_HINT_TEXT = "IP Address";
     public static final String SERVER_IP_LABEL_PREFIX = "Server IP: ";
     public static final String WAITING_LABEL_TEXT = "Waiting...";
+    public static final String CHOOSE_TROOP_AMOUNT = "Choose Troop Amount";
 
     public static final String ERROR_STARTING_GAME_SERVICES = "Failed to start game services";
 
