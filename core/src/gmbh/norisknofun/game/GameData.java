@@ -33,6 +33,7 @@ public class GameData {
     private final Changeable<List<Player>> allPlayers = new Changeable<>();
 
     private int[] diceRoll;
+    private int availableDice;
     private int maxNumPlayers;
     private String mapFilename;
 
@@ -196,5 +197,17 @@ public class GameData {
 
     public int getMaxNumPlayers() {
         return maxNumPlayers;
+    }
+
+    public int getAvailableDice() {
+        return availableDice;
+    }
+
+    public boolean isMyTurn(){
+        return myself.getPlayerName().equals(currentPlayer.getPlayerName());
+    }
+
+    public void setAvailableDice(int availableDice) {
+        this.availableDice = availableDice;
     }
 }

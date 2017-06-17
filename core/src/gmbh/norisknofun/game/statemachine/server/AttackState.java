@@ -1,5 +1,7 @@
 package gmbh.norisknofun.game.statemachine.server;
 
+import com.badlogic.gdx.Gdx;
+
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.statemachine.State;
 
@@ -34,6 +36,15 @@ public class AttackState extends State {
     }
 
     public void setState(State state){
-        this.state=state;
+
+        if (state == null) {
+            throw new IllegalArgumentException("state is null");
+        }
+
+        Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
+
+        this.state.exit();
+        this.state = state;
+        this.state.enter();
     }
 }

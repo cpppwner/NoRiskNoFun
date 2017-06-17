@@ -22,8 +22,9 @@ public class AttackRegion extends BasicMessageImpl implements Serializable{
     private  String attackedRegion;
     private static final long serialVersionUID = 1L;
 
-    public AttackRegion(String regionname) {
-        this.originRegion = regionname;
+    public AttackRegion(String originRegion, String attackedRegion) {
+        this.originRegion = originRegion;
+        this.attackedRegion=attackedRegion;
     }
 
     public String getOriginRegion() {

@@ -21,7 +21,8 @@ public class ChooseTargetTests {
 
     private ByteArrayOutputStream baos;
     private ObjectOutputStream oos;
-    final String REGIONNAME = "Reg1";
+    final String REGION1 = "Reg1";
+    final String REGION2= "Reg2";
 
     @Before
     public void setUp() throws IOException {
@@ -31,12 +32,13 @@ public class ChooseTargetTests {
     @Test
     public void attackRegion() throws IOException, ClassNotFoundException {
 
-        AttackRegion attackRegion = new AttackRegion(REGIONNAME);
+        AttackRegion attackRegion = new AttackRegion(REGION1,REGION2);
         oos.writeObject (attackRegion);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         AttackRegion attackRegion1 =(AttackRegion) ois.readObject();
-        assertEquals(attackRegion1.getOriginRegion(),REGIONNAME);
+        assertEquals(attackRegion1.getOriginRegion(), REGION1);
+        assertEquals(attackRegion.getAttackedRegion(),REGION2);
 
     }
     @Test
