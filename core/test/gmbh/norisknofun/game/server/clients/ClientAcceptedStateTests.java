@@ -20,6 +20,7 @@ import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.protocol.MessageSerializer;
 import gmbh.norisknofun.game.protocol.ProtocolException;
+import gmbh.norisknofun.game.protocol.util.MessageBuffer;
 import gmbh.norisknofun.game.server.MessageBus;
 import gmbh.norisknofun.network.Session;
 
@@ -214,6 +215,26 @@ public class ClientAcceptedStateTests extends GdxTest {
         assertThat(client.getMessageBuffer().length(), is(0));
         assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
         verify(messageBusMock, times(1)).distributeInboundMessage(eq(client.getId()), any(TestMessage.class));
+        verifyNoMoreInteractions(messageBusMock);
+        verifyZeroInteractions(sessionMock);
+    }
+
+    @Test
+    public void processDataReceivedMultipleMessages() throws IOException, ProtocolException {
+
+        MessageBuffer buffer = new MessageBuffer();
+        buffer.append(new MessageSerializer(new TestMessage()).serialize());
+        buffer.append(new MessageSerializer(new TestMessage()).serialize());
+        client.processDataReceived(buffer.read(buffer.length()));
+        ClientAcceptedState target = new ClientAcceptedState(client);
+
+        // when
+        target.processDataReceived();
+
+        // then
+        assertThat(client.getMessageBuffer().length(), is(0));
+        assertThat(client.getCurrentState(), is(sameInstance(clientStateMock)));
+        verify(messageBusMock, times(2)).distributeInboundMessage(eq(client.getId()), any(TestMessage.class));
         verifyNoMoreInteractions(messageBusMock);
         verifyZeroInteractions(sessionMock);
     }

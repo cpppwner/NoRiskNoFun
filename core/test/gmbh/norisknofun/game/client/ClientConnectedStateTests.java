@@ -13,8 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gmbh.norisknofun.GdxTest;
-import gmbh.norisknofun.game.gamemessages.client.ClientConnected;
-import gmbh.norisknofun.game.gamemessages.client.ClientConnectionRefused;
 import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
 import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
@@ -244,8 +242,23 @@ public class ClientConnectedStateTests extends GdxTest {
 
         // then
         assertThat(client.getCurrentState(), is(sameInstance(mockState)));
+        assertThat(client.getMessageBuffer().length(), is(0));
         assertThat(messageQueue.size(), is(1));
         assertThat(messageQueue.get(0), is(instanceOf(SerializableMessage.class)));
+        verifyZeroInteractions(mockSession);
+
+        // and when appending two more messages
+        client.getMessageBuffer().append(data);
+        client.getMessageBuffer().append(data);
+        target.handleDataReceived();
+
+        // then
+        assertThat(client.getCurrentState(), is(sameInstance(mockState)));
+        assertThat(client.getMessageBuffer().length(), is(0));
+        assertThat(messageQueue.size(), is(3));
+        assertThat(messageQueue.get(0), is(instanceOf(SerializableMessage.class)));
+        assertThat(messageQueue.get(1), is(instanceOf(SerializableMessage.class)));
+        assertThat(messageQueue.get(2), is(instanceOf(SerializableMessage.class)));
         verifyZeroInteractions(mockSession);
     }
 
