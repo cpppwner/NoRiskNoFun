@@ -25,7 +25,7 @@ class ClientConnectedState extends ClientStateBase {
     public void handleOutboundMessage(Message message) {
 
         if (message instanceof DisconnectClient) {
-            handleDisconnect((DisconnectClient)message);
+            handleDisconnect(((DisconnectClient)message).isTerminateClient());
             return;
         }
 
@@ -34,19 +34,8 @@ class ClientConnectedState extends ClientStateBase {
             write(data);
         } catch (IOException | ProtocolException e) {
             Gdx.app.error(getClass().getSimpleName(), "Handling outbound message failed", e);
-            terminateSession(); // terminate the session
+            handleDisconnect(true);
         }
-    }
-
-    private void handleDisconnect(DisconnectClient message) {
-
-        if (message.isTerminateClient()) {
-            terminateSession();
-        } else {
-            closeSession();
-        }
-
-        setNextState(new ClientDisconnectedState(getClient()));
     }
 
     @Override
@@ -72,7 +61,18 @@ class ClientConnectedState extends ClientStateBase {
             distributeInboundMessage(message);
         } catch (ProtocolException | IOException e) {
             Gdx.app.error(getClass().getSimpleName(), "Deserialize message failed", e);
-            terminateSession();
+            handleDisconnect(true);
         }
+    }
+
+    private void handleDisconnect(boolean terminateClient) {
+
+        if (terminateClient) {
+            terminateSession();
+        } else {
+            closeSession();
+        }
+
+        setNextState(new ClientDisconnectedState(getClient()));
     }
 }
