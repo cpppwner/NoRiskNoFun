@@ -178,11 +178,13 @@ public class NetworkClient {
         }
 
         // TODO remove debugging output
+        /*
         try {
             System.out.println("SERVER: CLIENT -> SERVER (" + clientSocket.getLocalAddress() + "): num bytes " + numBytesWritten);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 
         return numBytesWritten >= 0;
     }

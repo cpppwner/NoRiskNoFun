@@ -252,11 +252,14 @@ public class NetworkServer {
             sessionEventHandler.sessionDataWritten(session);
         }
 
+        // TODO remove debugging output
+        /*
         try {
             System.out.println("SERVER: SERVER -> CLIENT (" + clientSocket.getRemoteAddress() + "): num bytes " + numBytesWritten);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
     private void terminateSessionForSocket(TCPClientSocket socket) {
