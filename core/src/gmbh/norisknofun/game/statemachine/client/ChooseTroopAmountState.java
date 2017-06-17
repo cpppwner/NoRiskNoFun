@@ -28,7 +28,7 @@ public class ChooseTroopAmountState extends State {
     @Override
     public void handleMessage(String senderId, Message message) {
         if(message.getType().equals(ChooseTroopsAmountCheck.class)){
-           handleChoosTroopAmountCheckMessage((ChooseTroopsAmountCheck)message);
+           handleChooseTroopAmountCheckMessage((ChooseTroopsAmountCheck)message);
         }else if(message.getType().equals(ChooseTroopsAmountGui.class)){
             requestTroopAmount((ChooseTroopsAmountGui) message);
         }else{
@@ -37,7 +37,7 @@ public class ChooseTroopAmountState extends State {
     }
 
 
-    private void handleChoosTroopAmountCheckMessage(ChooseTroopsAmountCheck message){
+    private void handleChooseTroopAmountCheckMessage(ChooseTroopsAmountCheck message){
         if(message.isCheck()){
             attackState.setState(new EvaluateDiceResultState(context, attackState));
         }else{

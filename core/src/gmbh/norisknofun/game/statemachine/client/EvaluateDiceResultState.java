@@ -3,12 +3,14 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.assets.AssetMap;
-import gmbh.norisknofun.game.gamemessages.gui.DiceResultGui;
+import gmbh.norisknofun.game.gamemessages.gui.EvaluateDiceResultGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceAmount;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceResult;
 import gmbh.norisknofun.game.statemachine.State;
+import gmbh.norisknofun.scene.SceneManager;
+import gmbh.norisknofun.scene.SceneNames;
 
 /**
  * Created by Katharina on 19.05.2017.
@@ -27,10 +29,10 @@ public class EvaluateDiceResultState extends State {
         if(message.getType().equals(DiceAmount.class)){
 
             context.getGameData().setAvailableDice(((DiceAmount)message).getAmount());
+            SceneManager.getInstance().setActiveScene(SceneNames.DICE_SCENE);
 
-        }else if(message.getType().equals(DiceResultGui.class)){
-
-            context.sendMessage(new DiceResult(((DiceResultGui)message).getDiceResult()));
+        }else if(message.getType().equals(EvaluateDiceResultGui.class)){
+            context.sendMessage(new DiceResult(context.getGameData().getDiceRoll()));
 
         }else if(message.getType().equals(AttackResult.class)){
 
@@ -54,10 +56,13 @@ public class EvaluateDiceResultState extends State {
             }
         }else { //  I am Defender
            if(!attackResult.isWon()){
-
+                // TODO
            }
            context.setState(new WaitingForNextTurnState(context));
         }
+
+        // switch back to Game Scene after the attack was done
+        SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
     }
 
 }

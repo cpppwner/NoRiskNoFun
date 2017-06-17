@@ -31,13 +31,16 @@ public class GameData {
     private Changeable<Queue<Message>> guiChanges = new Changeable<>();
 
     private final Player myself = new Player();
-    private Player currentPlayer = null;
+    private Player currentPlayer = new Player();
     private final Changeable<List<Player>> allPlayers = new Changeable<>();
 
     private int[] diceRoll;
     private int availableDice;
+    private int cheatsAvailable;
+
     private int maxNumPlayers;
     private String mapFilename;
+
 
     public GameData() {
         allPlayers.setValue(new LinkedList<Player>());
@@ -141,7 +144,7 @@ public class GameData {
 
     public void setCurrentPlayer(String currentPlayer) {
 
-        Player newCurrentPlayer = null;
+        Player newCurrentPlayer = new Player();
 
         for (Player player : allPlayers.getValue()) {
             if (player.getPlayerName().equals(currentPlayer)) {
@@ -213,5 +216,17 @@ public class GameData {
 
     public void setAvailableDice(int availableDice) {
         this.availableDice = availableDice;
+    }
+
+    public int getCheatsAvailable() {
+        return cheatsAvailable;
+    }
+
+    public void setCheatsAvailable(int cheatsAvailable) {
+        this.cheatsAvailable = cheatsAvailable;
+    }
+
+    public void updateCheatsAvailable(int updateCheats) {
+        this.cheatsAvailable += updateCheats;
     }
 }

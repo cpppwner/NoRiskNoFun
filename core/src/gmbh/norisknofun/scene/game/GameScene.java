@@ -84,7 +84,7 @@ public final class GameScene extends SceneBase {
         addFiguresToStage();
         addInputListener();
 
-        addRollButton();
+        // addRollButton();
         initTurnIndicator();
 
         for (Player player:data.getPlayers()) {
