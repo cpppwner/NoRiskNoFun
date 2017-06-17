@@ -107,4 +107,9 @@ class GameClient implements SessionEventHandler {
 
         inboundMessageQueue.add(message);
     }
+
+    void setInitialState() {
+
+        clientContext.resetState();
+    }
 }
