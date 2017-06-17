@@ -216,11 +216,13 @@ public class NetworkServer {
         }
 
         // TODO remove debugging output
+        /*
         try {
             System.out.println("SERVER: SERVER <- CLIENT (" + clientSocket.getRemoteAddress() + "): num bytes " + numBytesRead);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
     private void handleWrite(SelectionResult result) {

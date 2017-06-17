@@ -152,11 +152,14 @@ public class NetworkClient {
             sessionEventHandler.sessionDataReceived(session);
         }
 
+        // TODO remove debugging output
+        /*
         try {
             System.out.println("SERVER: CLIENT <- SERVER (" + clientSocket.getLocalAddress() + "): num bytes " + numBytesRead);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 
         return numBytesRead >= 0;
     }
