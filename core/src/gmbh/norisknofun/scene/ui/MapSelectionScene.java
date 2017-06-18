@@ -23,7 +23,8 @@ import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 public final class MapSelectionScene extends SceneBase {
 
     private static final String MAP_ONE_BUTTON_TEXT = "Map One";
-    private static final String MAP_TWO_BUTTON_TEXT = "Map Two";
+    private static final String MAP_TWO_BUTTON_TEXT = "Styria";
+    private static final String MAP_THREE_BUTTON_TEXT = "Tyrol";
 
     private final SceneData sceneData;
     private final AssetSound buttonPressedSound;
@@ -48,21 +49,27 @@ public final class MapSelectionScene extends SceneBase {
                 sceneData.createTextButton(MAP_ONE_BUTTON_TEXT, Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), buttonPressedSound);
         TextButtonSceneObject buttonMapTwo = new TextButtonSceneObject(
                 sceneData.createTextButton(MAP_TWO_BUTTON_TEXT, Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), buttonPressedSound);
+        TextButtonSceneObject buttonMapThree = new TextButtonSceneObject(
+                sceneData.createTextButton(MAP_THREE_BUTTON_TEXT, Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), buttonPressedSound);
         ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createImageButton(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
 
         buttonMapOne.setBounds(490,500,500,120);
         buttonMapTwo.setBounds(490,250,500,120);
+        buttonMapThree.setBounds(Gdx.graphics.getWidth() / 1.5f, 500, 500, 120);
         backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
 
         buttonMapOne.addListener(new SetSelectedMapClickListener("maps/Dummy One.map"));
         buttonMapOne.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
-        buttonMapTwo.addListener(new SetSelectedMapClickListener("maps/Dummy Two.map"));
+        buttonMapTwo.addListener(new SetSelectedMapClickListener("maps/styria.map"));
         buttonMapTwo.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
+        buttonMapThree.addListener(new SetSelectedMapClickListener("maps/tyrol.map"));
+        buttonMapThree.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
         backButton.addListener(new SetSelectedMapClickListener(null));
         backButton.addListener(new SwitchSceneClickListener(SceneNames.CREATE_GAME_SCENE));
 
         addSceneObject(buttonMapOne);
         addSceneObject(buttonMapTwo);
+        addSceneObject(buttonMapThree);
         addSceneObject(backButton);
     }
 
