@@ -6,7 +6,6 @@ import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.Message;
-import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegion;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegionCheck;
@@ -93,8 +92,12 @@ public class ChooseTargetState extends State {
         AssetMap.Region defenderRegion= data.getRegionByName(message.getDefenderRegion());
         AssetMap.Region attackerRegion= data.getRegionByName(message.getAttackerRegion());
 
+        if (defenderRegion.getOwner().equals("none")) {
+            check = false;
+            sendAttackRegionCheckMessage(senderId, false, "Can't attack a neutral region.");
+        }
         // check if attacker has enough troops on the region
-        if (attackerRegion.getTroops() < 2) {
+        else if (attackerRegion.getTroops() < 2) {
             check = false;
             sendAttackRegionCheckMessage(senderId, false, "Not enough troops on origin region.");
         } else if(!data.getCurrentplayer().getId().equals(senderId)){

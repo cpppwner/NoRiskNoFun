@@ -31,6 +31,8 @@ public class ClientContext  {
         }
 
         Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
+        data.setCurrentStateName(state.getClass().getSimpleName());
+        data.setChangedFlag(true);
 
         this.state.exit();
         this.state=state;

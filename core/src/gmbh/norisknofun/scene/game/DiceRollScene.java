@@ -16,7 +16,6 @@ import gmbh.norisknofun.game.gamemessages.gui.EvaluateDiceResultGui;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
-import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
@@ -48,6 +47,8 @@ public class DiceRollScene extends SceneBase {
 
     @Override
     public void show() {
+        getStage().clear();
+
         dieObjects = new ArrayList<>();
 
         hasBeenShaken = false;
@@ -99,7 +100,6 @@ public class DiceRollScene extends SceneBase {
                 if (!canRoll) {
                     writeRollResult(); // write roll result only now as we're done when we press back
                     // clear stage here as we have to redraw it on next press anyway
-                    getStage().clear();
                     data.setDiceRoll(rollResults);
                     sceneData.sendMessageFromGui(new EvaluateDiceResultGui());
                 }

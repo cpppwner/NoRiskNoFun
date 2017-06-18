@@ -40,6 +40,8 @@ public class GameData {
 
     private int maxNumPlayers;
     private String mapFilename;
+    private String currentState; // simpleName of the currently active state
+    private static final String STATE_NAME_SUFFIX = "State";
 
 
     public GameData() {
@@ -228,5 +230,22 @@ public class GameData {
 
     public void updateCheatsAvailable(int updateCheats) {
         this.cheatsAvailable += updateCheats;
+    }
+
+    /**
+     * Set the name of the current state and remove the suffix "State"
+     * @param currentState Name of the State
+     */
+    public void setCurrentStateName(String currentState) {
+        if (currentState.endsWith(STATE_NAME_SUFFIX)) {
+            this.currentState = currentState.substring(0, currentState.length() - STATE_NAME_SUFFIX.length());
+
+        } else {
+            this.currentState = currentState;
+        }
+    }
+
+    public String getCurrentStateName() {
+        return currentState;
     }
 }

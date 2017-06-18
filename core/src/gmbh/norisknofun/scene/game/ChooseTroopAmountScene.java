@@ -15,13 +15,9 @@ import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.Texts;
 import gmbh.norisknofun.scene.common.BackgroundSceneObject;
-import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.NumericFieldSceneObject;
-import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
-import gmbh.norisknofun.scene.common.TextFieldSceneObject;
-import gmbh.norisknofun.scene.ui.CreateGameScene;
 
 /**
  * Created by pippp on 17.06.2017.
