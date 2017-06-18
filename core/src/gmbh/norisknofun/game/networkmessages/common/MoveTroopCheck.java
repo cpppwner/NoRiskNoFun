@@ -19,22 +19,20 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class MoveTroopCheck extends BasicMessageImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private  String playername;
-    //Troop
-    //region
+    private String errorMessage;
     private  boolean movePossible;
 
-    public MoveTroopCheck(String playername, boolean movePossible) {
-        this.playername = playername;
+    public MoveTroopCheck(boolean movePossible, String errorMessage) {
+       this.errorMessage=errorMessage;
         this.movePossible = movePossible;
     }
 
-    public String getPlayername() {
-        return playername;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setPlayername(String playername) {
-        this.playername = playername;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public boolean isMovePossible() {

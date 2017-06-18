@@ -28,10 +28,12 @@ public class ChooseTroopAmountState extends State {
 
     @Override
     public void handleMessage(String senderId, Message message) {
+        Gdx.app.log("Server ChooseTroopAmount", "Handling message: " + message.getClass().getName());
+
 
         if(message.getType().equals(ChooseTroopsAmount.class)){
             setAttackingTroops(senderId,(ChooseTroopsAmount)message);
-        }else {
+        } else {
             Gdx.app.log("ChooseTroopAmountState","unknown message");
         }
     }

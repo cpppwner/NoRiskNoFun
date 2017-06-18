@@ -24,7 +24,7 @@ class AssetNumericFieldImpl extends AssetTextFieldImpl implements AssetNumericFi
     @Override
     public int getValue() {
 
-        return Integer.parseInt(getText());
+        return getText().equals("")?0:Integer.parseInt(getText());
     }
 
 }

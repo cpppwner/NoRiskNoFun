@@ -31,23 +31,26 @@ public class CommonTests {
     @Test
     public void moveTroop() throws IOException, ClassNotFoundException {
 
-        MoveTroop moveTroop = new MoveTroop(PLAYER, 10,"dest", "origin", -1);
+        MoveTroop moveTroop = new MoveTroop("dest", "origin", -1);
         oos.writeObject (moveTroop);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         MoveTroop moveTroop1 =(MoveTroop) ois.readObject();
-        assertEquals(moveTroop1.getPlayername(),PLAYER);
+        assertEquals(moveTroop1.getFromRegion(),"dest");
+        assertEquals(moveTroop1.getToRegion(),"origin");
+        assertEquals(moveTroop1.getFigureId(),-1);
 
     }
     @Test
     public void moveTroopCheck() throws IOException, ClassNotFoundException {
 
-        MoveTroopCheck moveTroopCheck = new MoveTroopCheck(PLAYER,true);
+        MoveTroopCheck moveTroopCheck = new MoveTroopCheck(true,"hallo");
         oos.writeObject (moveTroopCheck);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         MoveTroopCheck moveTroopCheck1 =(MoveTroopCheck) ois.readObject();
-        assertEquals(moveTroopCheck1.getPlayername(),PLAYER);
+        assertEquals(moveTroopCheck1.getErrorMessage(),"hallo");
+        assertEquals(moveTroopCheck.isMovePossible(),true);
 
     }
     @Test

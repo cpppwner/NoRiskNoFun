@@ -20,7 +20,7 @@ public class SpreadTroopsState extends State {
 
     private ServerContext context;
     private final GameDataServer data;
-    private static final int TROOPS_TO_SPREAD = 2;
+    private static final int TROOPS_TO_SPREAD = 3;
     public SpreadTroopsState(ServerContext context){
 
         this.context=context;
@@ -48,7 +48,7 @@ public class SpreadTroopsState extends State {
 
         if(checkSpawnMessage(senderId,message)){
 
-            assignRegionToPlayer(message);
+            updateRegion(message);
             data.getCurrentplayer().setTroopToSpread(data.getCurrentplayer().getTroopToSpread()-1);
             broadcastSpawnTroopMessage(message);
             setNextPlayer();
@@ -113,10 +113,14 @@ public class SpreadTroopsState extends State {
         context.sendMessage(nextPlayer);
     }
 
-    private void assignRegionToPlayer(SpawnTroop message){
-        if(data.getRegionByName(message.getRegionname()).getOwner().equals("none")) {
-            data.getRegionByName(message.getRegionname()).setOwner(data.getCurrentplayer().getPlayerName());
+    private void updateRegion(SpawnTroop message){
+        AssetMap.Region region = data.getRegionByName(message.getRegionname());
+        if(region.getOwner().equals("none")) {
+            region.setOwner(data.getCurrentplayer().getPlayerName());
         }
+
+        // update the troops on this region
+        region.updateTroops(1);
     }
 
     private void assignTroopsToPlayer(){

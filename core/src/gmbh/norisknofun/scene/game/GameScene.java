@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +32,6 @@ import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
-import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
-import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 import gmbh.norisknofun.scene.game.figures.Artillery;
 import gmbh.norisknofun.scene.game.figures.Cavalry;
 import gmbh.norisknofun.scene.game.figures.Figure;
@@ -46,10 +45,12 @@ public final class GameScene extends SceneBase {
     private final SceneData sceneData;
     private final GameData data;
 
-    private LabelSceneObject label;
+    private LabelSceneObject clickedRegionLabel;
     private LabelSceneObject turnIndicator;
+    private LabelSceneObject currentStateLabel;
 
     private List<Figure> figures = new ArrayList<>();
+    private Map<String, LabelSceneObject> troopIndicators;
     private Map<AssetMap.Region, PolygonRegion> regionMap;
     private Map<String, AssetMap.Region> regionNameMap;
     private AssetMap.Region tappedRegion;
@@ -71,27 +72,30 @@ public final class GameScene extends SceneBase {
     @Override
     public void preload() {
 
-        label = new LabelSceneObject(sceneData.createLabel("Region: ", Assets.FONT_36PX_WHITE_WITH_BORDER));
-        label.setBounds(0, 0, 500, 100);
-        addSceneObject(label);
+        clickedRegionLabel = new LabelSceneObject(sceneData.createLabel("Region: ", Assets.FONT_36PX_WHITE_WITH_BORDER));
+        clickedRegionLabel.setBounds(0, 0, 500, 100);
+        addSceneObject(clickedRegionLabel);
 
         GameObjectMap  gameObjectMap = new GameObjectMap(data.getMapAsset());
         regionMap = gameObjectMap.getRegionMap();
         regionNameMap = gameObjectMap.getRegionNameMap();
+        troopIndicators = new HashMap<>();
         ownColor = new Color(data.getMyself().getColor());
 
         addSceneObject(gameObjectMap);
         addFiguresToStage();
         addInputListener();
 
-        addRollButton();
         initTurnIndicator();
+        initStateIndicator();
+        initTroopIndicators();
 
         for (Player player:data.getPlayers()) {
             Gdx.app.log("GameScene", "Player Available: " + player.getPlayerName() + " Color: " + player.getColor());
         }
 
         Gdx.app.log("GameScene", "Myself: " + data.getMyself().getPlayerName() + " Color: " + data.getMyself().getColor());
+
     }
 
     @Override
@@ -113,6 +117,19 @@ public final class GameScene extends SceneBase {
             }
 
         });
+    }
+
+    /**
+     * Initialize labels indicating the amount of troops on each region
+     */
+    private void initTroopIndicators() {
+        for (AssetMap.Region region : data.getMapAsset().getRegions()) {
+            Vector2 labelPos = calculatePolygonCentroid(region.getVertices());
+            LabelSceneObject label = new LabelSceneObject(sceneData.createLabel("0", Assets.FONT_110PX_WHITE_WITH_BORDER));
+            label.setBounds(labelPos.x * Gdx.graphics.getWidth(), labelPos.y * Gdx.graphics.getHeight(), label.getWidth(), label.getHeight());
+            addSceneObject(label);
+            troopIndicators.put(region.getName(), label);
+        }
     }
 
     /**
@@ -199,6 +216,18 @@ public final class GameScene extends SceneBase {
     }
 
     /**
+     * Indicate which state the player is currently in
+     */
+    private void initStateIndicator() {
+        currentStateLabel = new LabelSceneObject(sceneData.createLabel("Waiting...", Assets.FONT_60PX_WHITE_WITH_BORDER));
+        addSceneObject(currentStateLabel);
+        currentStateLabel.setBounds(Gdx.graphics.getWidth() - currentStateLabel.getWidth() - 200, Gdx.graphics.getHeight() - currentStateLabel.getHeight(), currentStateLabel.getWidth(), currentStateLabel.getHeight());
+    }
+
+
+    /**
+
+    /**
      * Checks if two specific coordinates are within a PolygonRegion
      * and sets tappedRegion to this region
      *
@@ -214,14 +243,13 @@ public final class GameScene extends SceneBase {
 
             // for Intersector, we have to convert to percentual x/y coordinates. Simply divide by screen width/height
             if (Intersector.isPointInPolygon(vertices, 0, vertices.length, pointX / Gdx.graphics.getWidth(), pointY / Gdx.graphics.getHeight())) {
-                label.setText("Region: " + region.getName());
-                //region.setOwner(data.getCurrentPlayer().getPlayerName());
+                clickedRegionLabel.setText("Region: " + region.getName());
 
                 return true;
             }
 
         }
-        label.setText("Region: None");
+        clickedRegionLabel.setText("Region: None");
         return false;
     }
 
@@ -238,17 +266,6 @@ public final class GameScene extends SceneBase {
         Texture regionTexture = new Texture(pix);
         PolygonRegion polygonRegion = regionMap.get(region);
         polygonRegion.getRegion().setTexture(regionTexture);
-    }
-
-    /**
-     * Create a button to switch to the dice roll scene
-     */
-    private void addRollButton() {
-        TextButtonSceneObject rollButton;
-        rollButton = new TextButtonSceneObject(sceneData.createTextButton("Dice Roll", Assets.DICE_CHEATS_TEXT_BUTTON_DESCRIPTOR), null);
-        rollButton.setBounds(1000, 100, 500, 100);
-        rollButton.addListener(new SwitchSceneClickListener(SceneNames.DICE_SCENE));
-        addSceneObject(rollButton);
     }
 
     /**
@@ -302,6 +319,7 @@ public final class GameScene extends SceneBase {
     private void removeFigures(List<Figure> figuresToRemove) {
         for (Figure actor:figuresToRemove) {
             actor.getCurrentRegion().updateTroops(-1);
+            data.setChangedFlag(true);
             figures.remove(actor);
             actor.dispose();
             actor.remove();
@@ -309,11 +327,12 @@ public final class GameScene extends SceneBase {
     }
 
     /**
-     * Remove a specific actor from the game and update the underlying region
+     * Remove a specific Figure from the game and update the underlying region
      * @param actor Actor to remove
      */
     private void removeFigure(Figure actor) {
         actor.getCurrentRegion().updateTroops(-1);
+        data.setChangedFlag(true);
         figures.remove(actor);
         
         actor.dispose();
@@ -329,7 +348,7 @@ public final class GameScene extends SceneBase {
         AssetMap.Region region = regionNameMap.get(message.getRegionName());
         Vector2 troopCoordinates = calculatePolygonCentroid(region.getVertices());
 
-        Infantry infantry = new Infantry((troopCoordinates.x * Gdx.graphics.getWidth()) - 100, (troopCoordinates.y * Gdx.graphics.getHeight()) - 100, 200, 200, message.getId());
+        Infantry infantry = new Infantry((troopCoordinates.x * Gdx.graphics.getWidth()) - 50, (troopCoordinates.y * Gdx.graphics.getHeight()) - 50, 100, 100, message.getId());
         infantry.addTouchListener();
         infantry.setFirstMove(false);
         infantry.setCurrentRegion(regionNameMap.get(message.getRegionName()));
@@ -341,6 +360,7 @@ public final class GameScene extends SceneBase {
             setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
         }
         region.updateTroops(1);
+        data.setChangedFlag(true);
         Gdx.app.log("Region Spawn", region.getTroops() + " Troops on " + region.getName() + " Owner: " + region.getOwner());
 
         figures.add(infantry);
@@ -395,6 +415,30 @@ public final class GameScene extends SceneBase {
         }
     }
 
+    private void checkErrors() {
+        // check for errors and display popup
+        String error = data.getLastError();
+        if (error != null) {
+            AssetModalDialog dialog = sceneData.createModalDialog(error, Assets.ERROR_DIALOG_DESCRIPTOR);
+            dialog.show(getStage());
+            dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+                    getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+        }
+    }
+
+    /**
+     * Update all troop indicators
+     */
+    private void updateTroopIndicators() {
+        LabelSceneObject label;
+        for (AssetMap.Region region : data.getMapAsset().getRegions()) {
+            label = troopIndicators.get(region.getName());
+            label.setText(Integer.toString(region.getTroops()));
+            label.setZIndex(label.getZIndex() + 1);
+
+        }
+    }
+
     @Override
     public void render(float delta) {
 
@@ -413,16 +457,15 @@ public final class GameScene extends SceneBase {
             } else {
                 turnIndicator.setVisible(false);
             }
+
+            // show the current state
+            currentStateLabel.setText(data.getCurrentStateName());
+
+            updateTroopIndicators();
+
         }
 
-        // check for errors and display popup
-        String error = data.getLastError();
-        if (error != null) {
-            AssetModalDialog dialog = sceneData.createModalDialog(error, Assets.ERROR_DIALOG_DESCRIPTOR);
-                dialog.show(getStage());
-                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
-        }
+        checkErrors();
 
         super.render(delta);
     }

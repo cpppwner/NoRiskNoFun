@@ -31,13 +31,19 @@ public class GameData {
     private Changeable<Queue<Message>> guiChanges = new Changeable<>();
 
     private final Player myself = new Player();
-    private Player currentPlayer = null;
+    private Player currentPlayer = new Player();
     private final Changeable<List<Player>> allPlayers = new Changeable<>();
 
     private int[] diceRoll;
     private int availableDice;
+    private int cheatsAvailable;
+
     private int maxNumPlayers;
     private String mapFilename;
+    private String winner;
+    private String currentState; // simpleName of the currently active state
+    private static final String STATE_NAME_SUFFIX = "State";
+
 
     public GameData() {
         allPlayers.setValue(new LinkedList<Player>());
@@ -141,7 +147,7 @@ public class GameData {
 
     public void setCurrentPlayer(String currentPlayer) {
 
-        Player newCurrentPlayer = null;
+        Player newCurrentPlayer = new Player();
 
         for (Player player : allPlayers.getValue()) {
             if (player.getPlayerName().equals(currentPlayer)) {
@@ -213,5 +219,42 @@ public class GameData {
 
     public void setAvailableDice(int availableDice) {
         this.availableDice = availableDice;
+    }
+
+    public int getCheatsAvailable() {
+        return cheatsAvailable;
+    }
+
+    public void setCheatsAvailable(int cheatsAvailable) {
+        this.cheatsAvailable = cheatsAvailable;
+    }
+
+    public void updateCheatsAvailable(int updateCheats) {
+        this.cheatsAvailable += updateCheats;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    /**
+     * Set the name of the current state and remove the suffix "State"
+     * @param currentState Name of the State
+     */
+    public void setCurrentStateName(String currentState) {
+        if (currentState.endsWith(STATE_NAME_SUFFIX)) {
+            this.currentState = currentState.substring(0, currentState.length() - STATE_NAME_SUFFIX.length());
+
+        } else {
+            this.currentState = currentState;
+        }
+    }
+
+    public String getCurrentStateName() {
+        return currentState;
     }
 }

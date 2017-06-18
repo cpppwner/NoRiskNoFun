@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Random;
 
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.gamemessages.gui.EvaluateDiceResultGui;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
-import gmbh.norisknofun.scene.SceneManager;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
@@ -34,11 +34,8 @@ public class DiceRollScene extends SceneBase {
 
     private long lastShakeTime;
     private int[] rollResults = {0, 0, 0};
-    private int cheatsAvailable;
     private boolean hasBeenShaken;
     private boolean canRoll;
-    private int dieAmount = 3;
-
 
     public DiceRollScene(SceneData sceneData) {
         super(SceneNames.DICE_SCENE, Color.BLACK);
@@ -48,15 +45,18 @@ public class DiceRollScene extends SceneBase {
 
     @Override
     public void show() {
+        getStage().clear();
+
         dieObjects = new ArrayList<>();
 
-        cheatsAvailable = 3;
         hasBeenShaken = false;
         canRoll = true;
 
-        initDie(1, 0, 100, 540);
-        initDie(1, 1, 700, 540);
-        initDie(1, 2, 1300, 540);
+        // spawn the correct amount of dice on the correct position
+        for (int i = 0, offset = 100; i < data.getAvailableDice(); i++) {
+            initDie(1, i, offset, 540);
+            offset += 600;
+        }
 
         setDiceClickListener();
 
@@ -94,10 +94,13 @@ public class DiceRollScene extends SceneBase {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                writeRollResult(); // write roll result only now as we're done when we press back
-                // clear stage here as we have to redraw it on next press anyway
-                getStage().clear();
-                SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
+
+                if (!canRoll) {
+                    writeRollResult(); // write roll result only now as we're done when we press back
+                    // clear stage here as we have to redraw it on next press anyway
+                    data.setDiceRoll(rollResults);
+                    sceneData.sendMessageFromGui(new EvaluateDiceResultGui());
+                }
             }
         });
         addSceneObject(backButton);
@@ -110,7 +113,7 @@ public class DiceRollScene extends SceneBase {
      */
     private LabelSceneObject initLabel() {
 
-        return new LabelSceneObject(sceneData.createLabel(Integer.toString(cheatsAvailable), Assets.FONT_36PX_WHITE_WITH_BORDER));
+        return new LabelSceneObject(sceneData.createLabel(Integer.toString(data.getCheatsAvailable()), Assets.FONT_36PX_WHITE_WITH_BORDER));
     }
 
     /**
@@ -124,8 +127,11 @@ public class DiceRollScene extends SceneBase {
         float yGrav = Gdx.input.getAccelerometerY() / GRAVITY_EARTH;
         float zGrav = Gdx.input.getAccelerometerZ() / GRAVITY_EARTH;
 
+        Gdx.app.log("hasShaken()", "xGrav: " + xGrav);
+
         // gForce will be close to 1 when there is no movement.
         float gForce = (float) Math.sqrt((xGrav * xGrav) + (yGrav * yGrav) + (zGrav * zGrav));
+        Gdx.app.log("hasShaken()", "gForce: " + gForce);
 
         return (gForce > SHAKE_GRAVITY_THRESHOLD);
     }
@@ -149,7 +155,7 @@ public class DiceRollScene extends SceneBase {
         Random rnd = new Random();
         rnd.setSeed(TimeUtils.nanoTime());
 
-        for (int i = 0; i < dieAmount; i++) {
+        for (int i = 0; i < data.getAvailableDice(); i++) {
             dieObjects.get(i).setDieNumber(rnd.nextInt(6) + 1);
         }
     }
@@ -159,7 +165,7 @@ public class DiceRollScene extends SceneBase {
      */
     private void showRollResult() {
 
-        for (int i = 0; i < dieAmount; i++) {
+        for (int i = 0; i < data.getAvailableDice(); i++) {
             dieObjects.get(i).setDieNumber(rollResults[i]);
         }
     }
@@ -176,16 +182,6 @@ public class DiceRollScene extends SceneBase {
         }
     }
 
-
-    /**
-     * Set the amount of dice available in the scene.
-     * This changes according to the Risiko rules
-     *
-     * @param dieAmount amount of dice available
-     */
-    public void setDieAmount(int dieAmount) {
-        this.dieAmount = dieAmount;
-    }
 
     /**
      * Write the roll result back to GameData after the roll is done
@@ -252,11 +248,11 @@ public class DiceRollScene extends SceneBase {
          * @param index index of the die to re-roll
          */
         private void tryCheat(int index) {
-            if (cheatsAvailable > 0) {
+            if (data.getCheatsAvailable() > 0) {
                 diceRoll(index);
                 dieObjects.get(index).setDieNumber(rollResults[index]);
-                cheatsAvailable--;
-                cheatLabel.setText(Integer.toString(cheatsAvailable));
+                data.updateCheatsAvailable(-1);
+                cheatLabel.setText(Integer.toString(data.getCheatsAvailable()));
             }
         }
 

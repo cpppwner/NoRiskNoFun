@@ -37,8 +37,8 @@ public class ChooseTargetTests {
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         AttackRegion attackRegion1 =(AttackRegion) ois.readObject();
-        assertEquals(attackRegion1.getOriginRegion(), REGION1);
-        assertEquals(attackRegion.getAttackedRegion(),REGION2);
+        assertEquals(attackRegion1.getAttackerRegion(), REGION1);
+        assertEquals(attackRegion.getDefenderRegion(),REGION2);
 
     }
     @Test

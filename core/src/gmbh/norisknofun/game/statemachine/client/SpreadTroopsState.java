@@ -2,15 +2,12 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.game.GameData;
-import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.UpdateCurrentPlayerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
-import gmbh.norisknofun.game.networkmessages.spread.PlayerSpread;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpreadFinished;
 import gmbh.norisknofun.game.statemachine.State;
 

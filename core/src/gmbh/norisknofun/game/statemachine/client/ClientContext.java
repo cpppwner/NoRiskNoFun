@@ -20,9 +20,8 @@ public class ClientContext  {
     public ClientContext(OutboundMessageHandler outboundMessageHandler, GameData data){
         this.outboundMessageHandler = outboundMessageHandler;
         this.data = data;
-        state = new ConnectingState(this);
-        state.enter();
 
+        resetState();
     }
 
     public void setState(State state) {
@@ -32,6 +31,8 @@ public class ClientContext  {
         }
 
         Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
+        data.setCurrentStateName(state.getClass().getSimpleName());
+        data.setChangedFlag(true);
 
         this.state.exit();
         this.state=state;
@@ -55,5 +56,11 @@ public class ClientContext  {
 
     public GameData getGameData(){
         return data;
+    }
+
+    public void resetState() {
+
+        state = new ConnectingState(this);
+        state.enter();
     }
 }
