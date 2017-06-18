@@ -36,8 +36,6 @@ public class DiceRollScene extends SceneBase {
     private int[] rollResults = {0, 0, 0};
     private boolean hasBeenShaken;
     private boolean canRoll;
-    private int dieAmount;
-
 
     public DiceRollScene(SceneData sceneData) {
         super(SceneNames.DICE_SCENE, Color.BLACK);
@@ -129,8 +127,11 @@ public class DiceRollScene extends SceneBase {
         float yGrav = Gdx.input.getAccelerometerY() / GRAVITY_EARTH;
         float zGrav = Gdx.input.getAccelerometerZ() / GRAVITY_EARTH;
 
+        Gdx.app.log("hasShaken()", "xGrav: " + xGrav);
+
         // gForce will be close to 1 when there is no movement.
         float gForce = (float) Math.sqrt((xGrav * xGrav) + (yGrav * yGrav) + (zGrav * zGrav));
+        Gdx.app.log("hasShaken()", "gForce: " + gForce);
 
         return (gForce > SHAKE_GRAVITY_THRESHOLD);
     }
@@ -154,7 +155,7 @@ public class DiceRollScene extends SceneBase {
         Random rnd = new Random();
         rnd.setSeed(TimeUtils.nanoTime());
 
-        for (int i = 0; i < dieAmount; i++) {
+        for (int i = 0; i < data.getAvailableDice(); i++) {
             dieObjects.get(i).setDieNumber(rnd.nextInt(6) + 1);
         }
     }
@@ -164,7 +165,7 @@ public class DiceRollScene extends SceneBase {
      */
     private void showRollResult() {
 
-        for (int i = 0; i < dieAmount; i++) {
+        for (int i = 0; i < data.getAvailableDice(); i++) {
             dieObjects.get(i).setDieNumber(rollResults[i]);
         }
     }
@@ -181,16 +182,6 @@ public class DiceRollScene extends SceneBase {
         }
     }
 
-
-    /**
-     * Set the amount of dice available in the scene.
-     * This changes according to the Risiko rules
-     *
-     * @param dieAmount amount of dice available
-     */
-    public void setDieAmount(int dieAmount) {
-        this.dieAmount = dieAmount;
-    }
 
     /**
      * Write the roll result back to GameData after the roll is done

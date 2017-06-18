@@ -19,37 +19,18 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class MoveTroop extends BasicMessageImpl implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    private String  playername;
-    private int     troopamount;
+
     private String toRegion;
     private String fromRegion;
     private int figureId;
 
-    public MoveTroop(String playername, int troopamount,  String fromRegion,String toRegion, int id) {
-        this.playername = playername;
-        this.troopamount = troopamount;
+    public MoveTroop( String fromRegion,String toRegion, int id) {
         this.toRegion = toRegion;
         this.fromRegion = fromRegion;
         this.figureId=id;
     }
     public MoveTroop(){
         //to fill the message object via setter
-    }
-
-    public String getPlayername() {
-        return playername;
-    }
-
-    public void setPlayername(String playername) {
-        this.playername = playername;
-    }
-
-    public int getTroopamount() {
-        return troopamount;
-    }
-
-    public void setTroopamount(int troopamount) {
-        this.troopamount = troopamount;
     }
 
     public String getToRegion() {

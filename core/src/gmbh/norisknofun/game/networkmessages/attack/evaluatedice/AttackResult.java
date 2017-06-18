@@ -10,16 +10,17 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 
 public class AttackResult extends BasicMessageImpl implements Serializable{
     private boolean won;
-    private String attackedRegion;
+    private String attackerRegion;
+    private int attackerTroops;
+    private String defenderRegion;
+    private String defenderRegionOwner;
+    private int defenderTroops;
     private static final long serialVersionUID = 1L;
 
 
-    public AttackResult(boolean won, String attackedRegion) {
-
-        this.won = won;
-        this.attackedRegion=attackedRegion;
+    public AttackResult() {
+        // fill via setter
     }
-
 
     public boolean isWon() {
         return won;
@@ -29,11 +30,43 @@ public class AttackResult extends BasicMessageImpl implements Serializable{
         this.won = won;
     }
 
-    public String getAttackedRegion() {
-        return attackedRegion;
+    public String getAttackerRegion() {
+        return attackerRegion;
     }
 
-    public void setAttackedRegion(String attackedRegion) {
-        this.attackedRegion = attackedRegion;
+    public void setAttackerRegion(String attackerRegion) {
+        this.attackerRegion = attackerRegion;
+    }
+
+    public int getAttackerTroops() {
+        return attackerTroops;
+    }
+
+    public void setAttackerTroops(int attackerTroops) {
+        this.attackerTroops = attackerTroops;
+    }
+
+    public String getDefenderRegion() {
+        return defenderRegion;
+    }
+
+    public void setDefenderRegion(String defenderRegion) {
+        this.defenderRegion = defenderRegion;
+    }
+
+    public String getDefenderRegionOwner() {
+        return defenderRegionOwner;
+    }
+
+    public void setDefenderRegionOwner(String defenderRegionOwner) {
+        this.defenderRegionOwner = defenderRegionOwner;
+    }
+
+    public int getDefenderTroops() {
+        return defenderTroops;
+    }
+
+    public void setDefenderTroops(int defenderTroops) {
+        this.defenderTroops = defenderTroops;
     }
 }

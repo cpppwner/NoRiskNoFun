@@ -40,6 +40,7 @@ public class GameData {
 
     private int maxNumPlayers;
     private String mapFilename;
+    private String winner;
     private String currentState; // simpleName of the currently active state
     private static final String STATE_NAME_SUFFIX = "State";
 
@@ -230,6 +231,14 @@ public class GameData {
 
     public void updateCheatsAvailable(int updateCheats) {
         this.cheatsAvailable += updateCheats;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 
     /**

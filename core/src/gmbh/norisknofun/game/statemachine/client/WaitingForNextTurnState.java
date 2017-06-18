@@ -10,6 +10,7 @@ import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.statemachine.State;
 
+
 /**
  * Created by Katharina on 31.05.2017.
  */
@@ -31,9 +32,8 @@ public class WaitingForNextTurnState extends State {
             setNextPlayer(((NextPlayer)message).getPlayername());
         } else if (message.getType().equals(IsAttacked.class)) {
             context.setState(new AttackState(context, false));
-        }
-        else{
-            Gdx.app.log("WaitingForNextTurnState","unknown messgae");
+        }else{
+            Gdx.app.log("WaitingForNextTurnState","unknown messgae:"+message.getType().getSimpleName());
         }
     }
 
@@ -41,7 +41,10 @@ public class WaitingForNextTurnState extends State {
     private void setNextPlayer(String playerName){
         if(playerName!=null){
             data.setCurrentPlayer(playerName);
-            //todo check if nextplayer name is your own player name and change state
+
+            if(data.isMyTurn()){
+                context.setState(new DistributionState(context));
+            }
         }
     }
 }
