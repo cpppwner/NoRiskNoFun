@@ -158,5 +158,16 @@ public class GameDataServer {
         return currentFigureId++;
     }
 
+    public int getNumberOfRegionOwnedByPlayer(String playername){
+        int count=0;
+
+        for (AssetMap.Region region: mapAsset.getRegions()) {
+            if(region.getOwner().equals(playername)){
+                count++;
+            }
+        }
+        return count;
+    }
+
 
 }

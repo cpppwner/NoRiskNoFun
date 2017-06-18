@@ -46,23 +46,40 @@ public class EvaluateDiceResultState extends State {
 
     private void handleAttackResult(AttackResult attackResult){
 
+        updateRegions(attackResult);
         if(context.getGameData().isMyTurn()){ //  I am attacker
-            if(attackResult.isWon()){
-                     AssetMap.Region attackedRegion= context.getGameData().getMapAsset().getRegion(attackResult.getAttackedRegion());
-                     attackedRegion.setOwner(context.getGameData().getMyself().getPlayerName());
-                     attackState.setState(new AttackWinnerState());
-            }else{
-                     attackState.setState(new AttackLoserState());
+            if(attackResult.isWon()) {
+                context.getGameData().setLastError("Congratulations!  \n  you captured region: " + attackResult.getDefenderRegion());
+            }else {
+                context.getGameData().setLastError("You lost!  \n  more luck next time.");
             }
+            context.setState(new ChooseTargetState(context));
         }else { //  I am Defender
-           if(!attackResult.isWon()){
-                // TODO
-           }
-           context.setState(new WaitingForNextTurnState(context));
+            if(attackResult.isWon()) {
+                context.getGameData().setLastError("Congratulations!  \n  you defended region: " + attackResult.getDefenderRegion());
+            }else {
+                context.getGameData().setLastError("Sorry!  \n  you lost region:"+attackResult.getDefenderRegion());
+            }
+            context.setState(new WaitingForNextTurnState(context));
         }
+
 
         // switch back to Game Scene after the attack was done
         SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
     }
 
+    /**
+     * Update Troops on attacker and defender region
+     * if defender lost -> also update region owner
+     * @param message
+     */
+    private void updateRegions(AttackResult message){
+        AssetMap.Region attackerRegion = context.getGameData().getMapAsset().getRegion(message.getAttackerRegion());
+        AssetMap.Region defenderRegion = context.getGameData().getMapAsset().getRegion(message.getDefenderRegion());
+
+        attackerRegion.setTroops(message.getAttackerTroops());
+
+        defenderRegion.setTroops(message.getDefenderTroops());
+        defenderRegion.setOwner(message.getDefenderRegionOwner());
+    }
 }

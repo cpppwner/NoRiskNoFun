@@ -49,20 +49,32 @@ public class EvaluateDiceResultState extends State {
 
     private void handleAttackResult(int winsOfAttacker, int winsOfDefender){
 
-        data.setAttackingTroops(data.getAttackingTroops()-winsOfDefender);
+        data.getAttackerRegion().setTroops(data.getAttackerRegion().getTroops()-winsOfDefender);
         data.getDefendersRegion().setTroops(data.getDefendersRegion().getTroops()-winsOfAttacker);
 
-        if(data.getDefendersRegion().getTroops()<=0){ // if defender lost
-            context.sendMessage(new AttackResult(false,data.getDefendersRegion().getName()),getDefenderId()); // inform defender he lost
-            context.sendMessage(new AttackResult(true,data.getDefendersRegion().getName()),getAttackerId()); // inform attacker he won
-
-            attackState.setState(new AttackWinnerState(context, attackState));
-
-        }else { // if attacker lost or still has troops
-            context.sendMessage(new AttackResult(true,data.getDefendersRegion().getName()),getDefenderId()); // inform defender he won
-            context.sendMessage(new AttackResult(false,data.getDefendersRegion().getName()),getAttackerId()); // inform attacker  he lost
-            attackState.setState(new AttackLoserState(context,attackState));
+        if(data.getDefendersRegion().getTroops()<=0){ // if attacker  has won
+            sendAttackResult(true, getAttackerId());
+            sendAttackResult(false,getDefenderId());
+        }else { // if defender has won
+            sendAttackResult(true,getDefenderId());
+            sendAttackResult(false,getAttackerId());
         }
+
+        context.setState(new ChooseTargetState(context));
+
+    }
+
+
+    private void sendAttackResult(boolean won, String senderId){
+        AttackResult attackResult= new AttackResult();
+
+        attackResult.setAttackerRegion(data.getAttackerRegion().getName());
+        attackResult.setAttackerTroops(data.getAttackerRegion().getTroops());
+        attackResult.setDefenderRegion(data.getDefendersRegion().getName());
+        attackResult.setDefenderTroops(data.getDefendersRegion().getTroops());
+        attackResult.setDefenderRegionOwner(data.getDefendersRegion().getOwner());
+        attackResult.setWon(won);
+        context.sendMessage(attackResult,senderId);
 
     }
 

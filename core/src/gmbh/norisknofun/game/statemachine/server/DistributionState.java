@@ -3,6 +3,9 @@ package gmbh.norisknofun.game.statemachine.server;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameDataServer;
+import gmbh.norisknofun.game.Player;
+import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
+import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
@@ -87,6 +90,16 @@ public class DistributionState extends State {
     }
 
     private void checkIfSomeoneHasWon(){
-        //todo check if someone has won the game
+        int numOfRegion=0;
+        for(Player player: data.getPlayers().getPlayerlist()){
+           numOfRegion=data.getNumberOfRegionOwnedByPlayer(player.getPlayerName());
+            if(numOfRegion==data.getMapAsset().getRegions().size()){
+               sendDisconnectClientMessage();
+            }
+        }
+    }
+
+    private void sendDisconnectClientMessage(){
+        context.sendMessage(new DisconnectClient(true));
     }
 }

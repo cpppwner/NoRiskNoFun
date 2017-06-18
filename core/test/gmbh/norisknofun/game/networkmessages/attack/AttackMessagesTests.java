@@ -16,6 +16,7 @@ import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceAmount;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceResult;
 import gmbh.norisknofun.game.networkmessages.attack.loser.ContinueAttack;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayersInGame;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +30,9 @@ public class AttackMessagesTests {
     private ByteArrayOutputStream baos;
     private ObjectOutputStream oos;
     private  final String ATTACKEREGION = "region1";
+    private final String DEFENDERREGION = "region2";
+    private final String DEFENDERREGIONOWNER = "owner2";
+
 
     @Before
     public void setUp() throws IOException {
@@ -66,12 +70,23 @@ public class AttackMessagesTests {
     @Test
     public void AttackResult() throws IOException, ClassNotFoundException {
 
-        AttackResult attackResult = new AttackResult(true,ATTACKEREGION);
+        AttackResult attackResult = new AttackResult();
+        attackResult.setWon(true);
+        attackResult.setDefenderRegion(DEFENDERREGION);
+        attackResult.setDefenderRegionOwner(DEFENDERREGIONOWNER);
+        attackResult.setDefenderTroops(2);
+        attackResult.setAttackerTroops(1);
+        attackResult.setAttackerRegion(ATTACKEREGION);
+
         oos.writeObject (attackResult);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         AttackResult attackResult1 =(AttackResult) ois.readObject();
-        assertEquals(attackResult1.getAttackedRegion(),  ATTACKEREGION);
+        assertEquals(attackResult1.getAttackerRegion(),  ATTACKEREGION);
+        assertEquals(attackResult1.getAttackerTroops(),  1);
+        assertEquals(attackResult1.getDefenderRegion(),  DEFENDERREGION);
+        assertEquals(attackResult1.getDefenderRegionOwner(),  DEFENDERREGIONOWNER);
+        assertEquals(attackResult1.getDefenderTroops(),  2);
         assertEquals(attackResult.isWon(),true);
 
     }

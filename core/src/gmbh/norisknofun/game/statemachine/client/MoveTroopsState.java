@@ -3,6 +3,7 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
@@ -27,22 +28,31 @@ public class MoveTroopsState extends State {
     public void handleMessage(String senderId, Message message) {
 
         if(message.getType().equals(MoveTroop.class)){
-            // todo interface between statemachine and GUI
+            doMoveTroop((MoveTroop)message);
         }else if(message.getType().equals(MoveTroopCheck.class)){
-            // todo interface between statemachine and GUI
+            context.getGameData().setLastError(((MoveTroopCheck)message).getErrorMessage());
         }else if(message.getType().equals(NextPlayer.class)){
             setNextPlayer(((NextPlayer)message).getPlayername());
 
+        }else if(message.getType().equals(MoveTroopGui.class)){
+            requestMoveTroop((MoveTroopGui)message);
         }
         else {
-            Gdx.app.log("WaitingForPlayers","unknown message");
+            Gdx.app.log("WaitingForPlayers","unknown message"+message.getType().getSimpleName());
         }
     }
 
+    private void requestMoveTroop(MoveTroopGui message){
+        context.sendMessage(new MoveTroop(message.getFromRegion(),message.getToRegion(),message.getFigureId()));
+    }
     private void setNextPlayer(String player){
         if(player!=null) {
             data.setCurrentPlayer(player);
             context.setState(new WaitingForNextTurnState(context));
         }
+    }
+
+    private void doMoveTroop(MoveTroop message) {
+        context.getGameData().setGuiChanges(new MoveTroopGui(message.getFromRegion(),message.getToRegion(),message.getFigureId()));
     }
 }

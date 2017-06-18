@@ -35,33 +35,45 @@ public class MoveTroopsState extends State {
             setNextPlayer();
         }
         else{
-            Gdx.app.log("SpreadTroopsState","message unknown");
+            Gdx.app.log("MoveTroopState","message unknown"+message.getType().getSimpleName());
         }
     }
 
 
     private void moveTroop(String senderId, MoveTroop message){
 
-        if(message.getPlayername().equals(data.getCurrentplayer().getPlayerName())) {
-            AssetMap.Region destinationregion = data.getMapAsset().getRegion(message.getToRegion());
-
-            if (destinationregion.getOwner().equals(message.getPlayername())) { // check if player is owner of selected region
-
-                broadcastMoveTroopsMessage(message);
-
-            } else {
-                sendMoveTroopCheckMessage(senderId, message.getPlayername(),false);
-            }
-        }else{
-            sendMoveTroopCheckMessage(senderId,message.getPlayername(),false);
+        if(message.getFromRegion()==null
+                || message.getToRegion()==null){
+            sendMoveTroopCheckMessage(senderId,false,"From Region or To Region is null");
+            return ;
         }
+         if(checkMoveTroopMessage(senderId,message)) {
+             broadcastMoveTroopsMessage(message);
+         }
+    }
+
+    private boolean checkMoveTroopMessage(String senderId, MoveTroop message){
+        boolean check=true;
+        AssetMap.Region fromRegion= data.getRegionByName(message.getFromRegion());
+        AssetMap.Region toRegion= data.getRegionByName(message.getToRegion());
+        if(!senderId.equals(data.getCurrentplayer().getId())){
+            check=false;
+            sendMoveTroopCheckMessage(senderId,false, "It's not your turn");
+        }else if(!toRegion.getOwner().equals(data.getCurrentplayer().getPlayerName())){
+            check=false;
+            sendMoveTroopCheckMessage(senderId,false,"You can't move troops on enemy region");
+        }else if(fromRegion.getTroops()<2){
+            check=false;
+            sendMoveTroopCheckMessage(senderId,false, "Not enough troops on origin region ");
+        }
+        return check;
     }
 
     private void setNextPlayer(){
 
         data.setNextPlayer();
         broadcastNextPlayerMessage();
-        context.setState(new ChooseTargetState(context));
+        context.setState(new DistributionState(context));
 
     }
 
@@ -71,11 +83,11 @@ public class MoveTroopsState extends State {
     }
 
     private void broadcastMoveTroopsMessage(MoveTroop message){
-        MoveTroop moveTroop = new MoveTroop(message.getPlayername(),message.getTroopamount(),message.getToRegion(),message.getFromRegion(), message.getFigureId());
+        MoveTroop moveTroop = new MoveTroop(message.getFromRegion(),message.getToRegion(), message.getFigureId());
         context.sendMessage(moveTroop); // send to all clients
     }
-    private void sendMoveTroopCheckMessage(String senderId,String  playername, boolean movepossible){
-        MoveTroopCheck response = new MoveTroopCheck(playername,movepossible);
-        context.sendMessage(response,senderId); // todo how to send to specific client
+    private void sendMoveTroopCheckMessage(String senderId, boolean movePossible, String errorMessage){
+        MoveTroopCheck response = new MoveTroopCheck(movePossible,errorMessage );
+        context.sendMessage(response,senderId);
     }
 }

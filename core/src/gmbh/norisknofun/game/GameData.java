@@ -40,6 +40,7 @@ public class GameData {
 
     private int maxNumPlayers;
     private String mapFilename;
+    private String winner;
 
 
     public GameData() {
@@ -228,5 +229,13 @@ public class GameData {
 
     public void updateCheatsAvailable(int updateCheats) {
         this.cheatsAvailable += updateCheats;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 }
