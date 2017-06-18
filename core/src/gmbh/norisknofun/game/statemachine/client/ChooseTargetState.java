@@ -28,6 +28,7 @@ public class ChooseTargetState extends State {
 
     @Override
     public void handleMessage(String senderId, Message message) {
+        Gdx.app.log("Client ChooseTargetState", "Handling message: " + message.getClass().getName());
         
        if(message.getType().equals(AttackRegionCheck.class)){
            handleAttackRegionCheckMessage((AttackRegionCheck)message);
@@ -43,7 +44,7 @@ public class ChooseTargetState extends State {
 
     private void handleAttackRegionCheckMessage(AttackRegionCheck message){
         if(message.isAttackreachable()){
-            context.setState(new AttackState(context));
+            context.setState(new AttackState(context, true));
         }else{
             context.getGameData().setLastError(message.getErrorMessage());
         }

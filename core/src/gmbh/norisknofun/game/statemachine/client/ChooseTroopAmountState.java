@@ -27,6 +27,7 @@ public class ChooseTroopAmountState extends State {
 
     @Override
     public void handleMessage(String senderId, Message message) {
+        Gdx.app.log("Client ChooseTroopAmount", "Handling message: " + message.getClass().getName());
         if(message.getType().equals(ChooseTroopsAmountCheck.class)){
            handleChooseTroopAmountCheckMessage((ChooseTroopsAmountCheck)message);
         }else if(message.getType().equals(ChooseTroopsAmountGui.class)){
@@ -38,6 +39,8 @@ public class ChooseTroopAmountState extends State {
 
 
     private void handleChooseTroopAmountCheckMessage(ChooseTroopsAmountCheck message){
+        Gdx.app.log("Client ChooseTroopAmount", "Received Check: " + message.isCheck());
+
         if(message.isCheck()){
             attackState.setState(new EvaluateDiceResultState(context, attackState));
         }else{

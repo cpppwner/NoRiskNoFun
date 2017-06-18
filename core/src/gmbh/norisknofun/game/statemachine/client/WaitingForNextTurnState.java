@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.statemachine.State;
 
@@ -28,7 +29,10 @@ public class WaitingForNextTurnState extends State {
     public void handleMessage(String senderId, Message message) {
         if(message.getType().equals(NextPlayer.class)){
             setNextPlayer(((NextPlayer)message).getPlayername());
-        }else{
+        } else if (message.getType().equals(IsAttacked.class)) {
+            context.setState(new AttackState(context, false));
+        }
+        else{
             Gdx.app.log("WaitingForNextTurnState","unknown messgae");
         }
     }

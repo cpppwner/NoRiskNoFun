@@ -11,15 +11,19 @@ import gmbh.norisknofun.game.statemachine.State;
 
 public class AttackState extends State {
 
-    private ClientContext context;
     private State state;
 
-    public AttackState(ClientContext context){
-        this.context=context;
+    public AttackState(ClientContext context, boolean isAttacker){
         Gdx.app.log("ATTACK STATE","ENTERED");
 
-       state = new ChooseTroopAmountState(context, this);
+        if (isAttacker) {
+            state = new ChooseTroopAmountState(context, this);
+        } else {
+            state = new EvaluateDiceResultState(context, this);
+        }
     }
+
+
     @Override
     public void enter() {
         state.enter();

@@ -309,7 +309,7 @@ public final class GameScene extends SceneBase {
     }
 
     /**
-     * Remove a specific actor from the game and update the underlying region
+     * Remove a specific Figure from the game and update the underlying region
      * @param actor Actor to remove
      */
     private void removeFigure(Figure actor) {
@@ -395,6 +395,17 @@ public final class GameScene extends SceneBase {
         }
     }
 
+    private void checkErrors() {
+        // check for errors and display popup
+        String error = data.getLastError();
+        if (error != null) {
+            AssetModalDialog dialog = sceneData.createModalDialog(error, Assets.ERROR_DIALOG_DESCRIPTOR);
+            dialog.show(getStage());
+            dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+                    getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+        }
+    }
+
     @Override
     public void render(float delta) {
 
@@ -415,14 +426,7 @@ public final class GameScene extends SceneBase {
             }
         }
 
-        // check for errors and display popup
-        String error = data.getLastError();
-        if (error != null) {
-            AssetModalDialog dialog = sceneData.createModalDialog(error, Assets.ERROR_DIALOG_DESCRIPTOR);
-                dialog.show(getStage());
-                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
-        }
+        checkErrors();
 
         super.render(delta);
     }

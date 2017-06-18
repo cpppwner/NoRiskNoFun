@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameDataServer;
+import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.networkmessages.Message;
+import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
+import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegion;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegionCheck;
 import gmbh.norisknofun.game.networkmessages.choosetarget.NoAttack;
@@ -26,6 +29,8 @@ public class ChooseTargetState extends State {
 
     @Override
     public void handleMessage(String senderId, Message message) {
+        Gdx.app.log("Server ChooseTargetState", "Handling message: " + message.getClass().getName());
+
 
         if(message.getType().equals(NoAttack.class)){
             handleNoAttackMessage(senderId,(NoAttack)message);
@@ -47,8 +52,8 @@ public class ChooseTargetState extends State {
     }
     private void handleAttackRegion(String senderId, AttackRegion message) {
 
-        if(message.getAttackedRegion()==null
-                || message.getOriginRegion()==null){
+        if(message.getDefenderRegion()==null
+                || message.getAttackerRegion()==null){
             return ;
         }
 
@@ -57,12 +62,21 @@ public class ChooseTargetState extends State {
         if(checkAttackRegionMessage(senderId, message)){
                 Gdx.app.log("ChooseTargetState", "Attack check successful");
 
-                data.setDefendersRegion(data.getRegionByName(message.getAttackedRegion()));
-                data.setAttackerRegion(data.getRegionByName(message.getOriginRegion()));
-                sendAttackRegionCheckMessage(senderId,true,"");
+                data.setDefendersRegion(data.getRegionByName(message.getDefenderRegion()));
+                data.setAttackerRegion(data.getRegionByName(message.getAttackerRegion()));
+            notifyPlayers(message, senderId);
                 context.setState(new AttackState(context));
 
         }
+    }
+
+
+    private void notifyPlayers(AttackRegion message, String attackerSenderId) {
+        sendAttackRegionCheckMessage(attackerSenderId,true,""); // notify the attacker
+
+        // notify the defender
+        Player defender = data.getPlayerByName(data.getRegionByName(message.getDefenderRegion()).getOwner());
+        context.sendMessage(new IsAttacked(), defender.getId());
     }
 
     /**
@@ -76,18 +90,22 @@ public class ChooseTargetState extends State {
      */
     private boolean checkAttackRegionMessage(String senderId, AttackRegion message){
         boolean check=true;
-        AssetMap.Region attackedRegion= data.getRegionByName(message.getAttackedRegion());
-        AssetMap.Region orginRegion= data.getRegionByName(message.getOriginRegion());
+        AssetMap.Region defenderRegion= data.getRegionByName(message.getDefenderRegion());
+        AssetMap.Region attackerRegion= data.getRegionByName(message.getAttackerRegion());
 
-        if(!data.getCurrentplayer().getId().equals(senderId)){
+        // check if attacker has enough troops on the region
+        if (attackerRegion.getTroops() < 2) {
+            check = false;
+            sendAttackRegionCheckMessage(senderId, false, "Not enough troops on origin region.");
+        } else if(!data.getCurrentplayer().getId().equals(senderId)){
             check=false;
             sendAttackRegionCheckMessage(senderId,false,"It's not your turn");
 
-        } else if(data.getCurrentplayer().getPlayerName().equals(attackedRegion.getOwner())) {
+        } else if(data.getCurrentplayer().getPlayerName().equals(defenderRegion.getOwner())) {
             check = false;
             sendAttackRegionCheckMessage(senderId,false,"You can't attack your own region");
         }
-        else if(!orginRegion.getNeighbouringRegions().contains(attackedRegion.getName())) {
+        else if(!attackerRegion.getNeighbouringRegions().contains(defenderRegion.getName())) {
             check = false;
             sendAttackRegionCheckMessage(senderId,false,"Not an neighbouring Region");
         }
