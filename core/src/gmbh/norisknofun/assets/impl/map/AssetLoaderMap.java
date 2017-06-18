@@ -9,23 +9,37 @@ import java.io.Reader;
 import java.util.HashSet;
 import java.util.Set;
 
-import gmbh.norisknofun.assets.Asset;
-import gmbh.norisknofun.assets.AssetLoader;
-import gmbh.norisknofun.assets.AssetType;
-
 /**
  * Asset loader for loading game maps.
  */
-public class AssetLoaderMap implements AssetLoader<AssetMap> {
+public final class AssetLoaderMap {
 
-    @Override
-    public AssetType getAssetType() {
-
-        return AssetType.ASSET_TYPE_MAP;
+    /**
+     * Load {@link AssetMapImpl} from given filename.
+     *
+     * <p>
+     *     This method just reads the file contents and forwards to {@link AssetLoaderMap#load(InputStream)}.
+     * </p>
+     *
+     * @param internalPath The internal path from where to load the file.
+     * @return Loaded map or {@code null} if loading failed.
+     */
+    public AssetMapImpl load(String internalPath) {
+        try (InputStream stream = Gdx.files.internal(internalPath).read()) {
+            return load(stream);
+        } catch (Exception e) {
+            Gdx.app.error(AssetLoaderMap.class.getSimpleName(), "Loading map failed", e);
+            return null;
+        }
     }
 
-    @Override
-    public AssetMap load(InputStream stream) {
+    /**
+     * Load {@link AssetMapImpl} from given stream.
+     *
+     * @param stream The stream from which to load the map.
+     * @return Loaded map or {@code null} if loading failed.
+     */
+    AssetMapImpl load(InputStream stream) {
 
         if (stream == null)
             throw new IllegalArgumentException("stream");
@@ -39,11 +53,22 @@ public class AssetLoaderMap implements AssetLoader<AssetMap> {
         }
     }
 
-    private static AssetMap createAsset(GameMap map) {
+    /**
+     * Transform {@link GameMap} to {@link AssetMapImpl} and also do some sanity checks.
+     *
+     * @param map The loaded map.
+     * @return Transformed map asset.
+     */
+    private static AssetMapImpl createAsset(GameMap map) {
         checkMapConsistency(map);
-        return new AssetMap(map);
+        return new AssetMapImpl(map);
     }
 
+    /**
+     * Runs some validation checks on loaded map.
+     *
+     * @param map The map to check for consistency.
+     */
     private static void checkMapConsistency(GameMap map) {
 
         if (map.name == null || map.name.trim().isEmpty())
@@ -66,6 +91,12 @@ public class AssetLoaderMap implements AssetLoader<AssetMap> {
         }
     }
 
+    /**
+     * Check region consistency.
+     *
+     * @param region The region to check.
+     * @param map Loaded map.
+     */
     private static void validateRegionVertices(GameMap.Region region, final GameMap map) {
 
         if (region.vertexIndices.size() < 4)

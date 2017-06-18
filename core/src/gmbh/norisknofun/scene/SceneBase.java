@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Base class for scenes.
@@ -17,6 +21,7 @@ public abstract class SceneBase implements Scene {
 
     private final String sceneName;
     private final Color clearColor;
+    private final List<SceneObject> sceneObjects;
     private final Stage stage;
 
     /**
@@ -28,6 +33,7 @@ public abstract class SceneBase implements Scene {
 
         this.sceneName = sceneName;
         this.clearColor = clearColor;
+        sceneObjects = new LinkedList<>();
         stage = new Stage();
     }
 
@@ -35,6 +41,22 @@ public abstract class SceneBase implements Scene {
     public String getName() {
 
         return sceneName;
+    }
+
+    @Override
+    public void addSceneObject(SceneObject sceneObject) {
+
+        sceneObjects.add(sceneObject);
+        stage.addActor(sceneObject);
+    }
+
+
+    public void addSceneListener(EventListener listener) {
+        stage.addListener(listener);
+    }
+
+    public List<SceneObject> getSceneObjects() {
+        return sceneObjects;
     }
 
     @Override
@@ -46,17 +68,27 @@ public abstract class SceneBase implements Scene {
     public void show() {
 
         Gdx.input.setInputProcessor(stage);
+        for (SceneObject sceneObject : sceneObjects) {
+            sceneObject.show();
+        }
     }
 
     @Override
     public void hide() {
 
         Gdx.input.setInputProcessor(null);
+        for (SceneObject sceneObject : sceneObjects) {
+            sceneObject.hide();
+        }
     }
 
     @Override
     public void resize(int width, int height) {
+
         stage.getViewport().update(width, height, true);
+        for (SceneObject sceneObject : sceneObjects) {
+            sceneObject.resize(width, height);
+        }
     }
 
     @Override
@@ -82,6 +114,9 @@ public abstract class SceneBase implements Scene {
     public void dispose () {
 
         stage.dispose();
+        for (SceneObject sceneObject : sceneObjects) {
+            sceneObject.dispose();
+        }
     }
 
     protected Camera getCamera() {

@@ -1,62 +1,149 @@
 package gmbh.norisknofun.scene.ui;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
-import gmbh.norisknofun.GUI_Test.NoRiskNoFun_GUI_Test;
-import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.assets.AssetSound;
+import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
+import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
+import gmbh.norisknofun.scene.Texts;
+import gmbh.norisknofun.scene.common.BackgroundSceneObject;
+import gmbh.norisknofun.scene.common.ImageButtonSceneObject;
+import gmbh.norisknofun.scene.common.LabelSceneObject;
+import gmbh.norisknofun.scene.common.SwitchSceneClickListener;
+import gmbh.norisknofun.scene.common.TextFieldSceneObject;
 
 /**
- * Created by Sputzi0815 on 24.04.2017.
+ * Scene shown, when the user creates a game.
  */
-
 public class CreateGameScene extends SceneBase {
-    Stage createGame;
-    Texture img;
-    private final GameData data;
 
-    public CreateGameScene(GameData data) {
+    /**
+     * Data class shared amongst the scenes.
+     */
+    private final SceneData sceneData;
 
-        super(SceneNames.CREATE_GAME_SCENE, Color.BLACK);
-        this.data = data;
-        createGame = new Stage();
-        img = new Texture("menu.png");
+    /**
+     * Sound played when buttons are clicked.
+     */
+    private final AssetSound buttonPressedSound;
+
+    private TextFieldSceneObject textField;
+
+    public CreateGameScene(SceneData sceneData) {
+
+        super(SceneNames.CREATE_GAME_SCENE, Color.WHITE);
+        this.sceneData = sceneData;
+        this.buttonPressedSound = sceneData.createSound(Assets.BUTTON_PRESSED_SOUND_FILENAME);
+
+        setBackground();
+        initNameSelection();
+        initImageButtons();
+        initLabel();
+    }
+
+    private void setBackground() {
+
+        addSceneObject(new BackgroundSceneObject(sceneData.getAssetFactory()));
+    }
+
+    private void initNameSelection() {
+
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.SELECT_NAME_LABEL, Assets.FONT_60PX_WHITE_WITH_BORDER));
+        addSceneObject(sceneObject);
+        sceneObject.setBounds(Gdx.graphics.getWidth()/8.0f, Gdx.graphics.getHeight()/2.0f, sceneObject.getWidth(), 125);
+
+        textField = new TextFieldSceneObject(sceneData.createTextField(Assets.NAME_TEXT_FIELD_DESCRIPTOR));
+        textField.setBounds((Gdx.graphics.getWidth()/8.0f)+ sceneObject.getWidth(), Gdx.graphics.getHeight()/2.0f, 500,125);
+        addSceneObject(textField);
+    }
+
+    private void initImageButtons() {
+
+        ImageButtonSceneObject backButton = new ImageButtonSceneObject(sceneData.createImageButton(Assets.BACK_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject twoPlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.TWO_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject threePlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.THREE_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+        ImageButtonSceneObject fourPlayers = new ImageButtonSceneObject(sceneData.createImageButton(Assets.FOUR_PLAYERS_BUTTON_FILENAME), buttonPressedSound);
+
+        backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10f, 275f, 240f);
+        twoPlayers.setBounds(Gdx.graphics.getWidth() / 10.0f, Gdx.graphics.getHeight() / 8.0f, 275.0f, 240f);
+        threePlayers.setBounds(Gdx.graphics.getWidth() / 10.0f + 300.0f, Gdx.graphics.getHeight() / 8.0f,275.0f, 240.0f);
+        fourPlayers.setBounds(Gdx.graphics.getWidth() / 10.0f + 600.0f, Gdx.graphics.getHeight() / 8.0f, 275.0f, 240.0f);
+
+        backButton.addListener(new BackClickListener());
+        twoPlayers.addListener(new ContinueClickListener(2));
+        threePlayers.addListener(new ContinueClickListener(3));
+        fourPlayers.addListener(new ContinueClickListener(4));
+
+        addSceneObject(backButton);
+        addSceneObject(twoPlayers);
+        addSceneObject(threePlayers);
+        addSceneObject(fourPlayers);
+    }
+
+    /**
+     * Initialise the label shown on main menu.
+     */
+    private void initLabel() {
+
+        LabelSceneObject sceneObject = new LabelSceneObject(sceneData.createLabel(Texts.CREATE_GAME, Assets.FONT_110PX_WHITE_WITH_BORDER));
+        addSceneObject(sceneObject);
+        sceneObject.setBounds((Gdx.graphics.getWidth() - sceneObject.getWidth()) / 2.0f,
+                Gdx.graphics.getHeight() - (sceneObject.getHeight() * 2.0f),
+                sceneObject.getWidth(),
+                sceneObject.getHeight());
     }
 
     @Override
-    public void show() {
+    public void dispose() {
 
+        buttonPressedSound.dispose();
+        super.dispose();
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        createGame.getBatch().begin();
-        createGame.getBatch().draw(img,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        createGame.getBatch().end();
-        createGame.draw();
+    private final class BackClickListener extends SwitchSceneClickListener {
+
+        private BackClickListener() {
+            super(SceneNames.MAIN_MENU_SCENE);
+        }
+
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            sceneData.setMaximumNumberOfPlayers(0);
+            super.clicked(event, x, y);
+        }
     }
 
-    @Override
-    public void hide() {
+    private final class ContinueClickListener extends SwitchSceneClickListener {
 
+        private final int numPlayersChosen;
+
+        private ContinueClickListener(int numPlayersChosen) {
+            super(SceneNames.MAP_SELECTION_SCENE);
+            this.numPlayersChosen = numPlayersChosen;
+        }
+
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+
+/*            if (textField.getText() == null || textField.getText().isEmpty()) {
+                AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
+                dialog.show(getStage());
+                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+            } else {
+                sceneData.setPlayerName(textField.getText());
+                sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
+                super.clicked(event, x, y);
+            }*/
+
+
+            sceneData.setPlayerName("PlayerHosting");
+            sceneData.setMaximumNumberOfPlayers(numPlayersChosen);
+            super.clicked(event, x, y);
+        }
     }
-
-    @Override
-    public void dispose(){
-        createGame.dispose();
-        img.dispose();
-    }
-
 }

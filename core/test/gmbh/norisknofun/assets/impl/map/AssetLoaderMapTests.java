@@ -5,31 +5,23 @@ import com.google.gson.Gson;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 import gmbh.norisknofun.GdxTest;
 import gmbh.norisknofun.assets.Asset;
-import gmbh.norisknofun.assets.AssetType;
+import gmbh.norisknofun.assets.AssetMap;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 public class AssetLoaderMapTests extends GdxTest {
 
-    @Test
-    public void getAssetType() {
-
-        // given
-        AssetLoaderMap target = new AssetLoaderMap();
-
-        // when
-        AssetType obtained = target.getAssetType();
-
-        // then
-        assertThat(obtained, is(AssetType.ASSET_TYPE_MAP));
-    }
 
     @Test(expected = IllegalArgumentException.class)
     public void loadingMapWithNullInputStreamThrowsAnException() {
@@ -38,7 +30,7 @@ public class AssetLoaderMapTests extends GdxTest {
         AssetLoaderMap target = new AssetLoaderMap();
 
         // when/then
-        target.load(null);
+        target.load((InputStream)null);
     }
 
     @Test
@@ -248,9 +240,9 @@ public class AssetLoaderMapTests extends GdxTest {
 
         // then
         assertThat(obtained, is(not(nullValue())));
-        assertThat(obtained, is(instanceOf(AssetMap.class)));
+        assertThat(obtained, is(instanceOf(AssetMapImpl.class)));
 
-        AssetMap obtainedMap = (AssetMap)obtained;
+        AssetMapImpl obtainedMap = (AssetMapImpl)obtained;
         assertThat(obtainedMap.getName(), is(map.name));
 
         // validate all regions
