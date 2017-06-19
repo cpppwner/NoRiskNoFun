@@ -18,21 +18,21 @@ public interface AssetLabel extends AssetWidget, Disposable {
     /**
      * Set label's text.
      *
-     * @param text
+     * @param text labeltext
      */
     void setText(String text);
 
     /**
      * Set alignment.
      *
-     * @param alignment
+     * @param alignment alignment you want set
      */
     void setTextAlignment(int alignment);
 
     /**
      * Set label's background color.
      *
-     * @param color
+     * @param color backgroundcolor
      */
     void setBackgroundColor(Color color);
 }

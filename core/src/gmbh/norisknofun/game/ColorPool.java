@@ -55,7 +55,7 @@ public class ColorPool {
     /**
      * Release used color and return it into the pool of available color.
      *
-     * @param color
+     * @param color color to release
      */
     public void releaseColor(Color color) {
 

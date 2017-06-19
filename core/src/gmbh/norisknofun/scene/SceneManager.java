@@ -52,6 +52,8 @@ public class SceneManager implements Disposable {
 
     /**
      * Get the sole instance of {@link SceneManager}.
+     *
+     * @return instance
      */
     public static SceneManager getInstance() {
 
@@ -137,6 +139,8 @@ public class SceneManager implements Disposable {
 
     /**
      * Get the active scene.
+     *
+     * @return Scene
      */
     public Scene getActiveScene() {
 
@@ -145,6 +149,8 @@ public class SceneManager implements Disposable {
 
     /**
      * Get a set containing registered scene names.
+     *
+     * @return set registered names
      */
     public Set<String> getRegisteredScenes() {
 

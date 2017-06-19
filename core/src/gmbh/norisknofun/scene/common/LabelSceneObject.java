@@ -35,7 +35,7 @@ public class LabelSceneObject extends SceneObject {
     @Override
     public void setBounds(float x, float y, float width, float height) {
 
-        label.setBounds(0.0f, 0.0f, width, height);;
+        label.setBounds(0.0f, 0.0f, width, height);
         super.setBounds(x, y, width, height);
     }
 
@@ -55,6 +55,8 @@ public class LabelSceneObject extends SceneObject {
 
     /**
      * Set label's background color.
+     *
+     * @param color Backgroundcolor
      */
     public void setBackgroundColor(Color color) {
 

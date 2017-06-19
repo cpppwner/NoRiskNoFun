@@ -29,7 +29,7 @@ public class TextButtonSceneObject extends SceneObject {
 
     /**
      * Create text button scene object.
-     *
+     * @param textButton The text button which you want create
      * @param sound The sound to play if clicked or null to not play any sound.
      */
     public TextButtonSceneObject(AssetTextButton textButton, AssetSound sound) {
@@ -89,6 +89,8 @@ public class TextButtonSceneObject extends SceneObject {
 
     /**
      * Get a flag indicating whether the button is enabled {@code true} or not {@code false}.
+     *
+     * @return boolean Enabled
      */
     public boolean isEnabled() {
         return textButton.isEnabled();

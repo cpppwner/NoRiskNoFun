@@ -17,6 +17,8 @@ public class NumericFieldSceneObject extends SceneObject {
 
     /**
      * Constructor taking the asset.
+     *
+     *@param numericField {@link AssetNumericField}
      */
     public NumericFieldSceneObject(AssetNumericField numericField) {
 
@@ -35,6 +37,8 @@ public class NumericFieldSceneObject extends SceneObject {
 
     /**
      * Get the numeric value.
+     *
+     * @return int numeric value
      */
     public int getValue() {
         return numericField.getValue();
