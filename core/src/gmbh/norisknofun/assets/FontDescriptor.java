@@ -169,7 +169,9 @@ public final class FontDescriptor {
         /**
          * Set font filename.
          *
+         * @param fontFilename filename
          * @return {@code this}
+         *
          */
         public Builder setFontFilename(String fontFilename) {
             this.fontFilename = fontFilename;
@@ -179,6 +181,7 @@ public final class FontDescriptor {
         /**
          * Set font size in pixels.
          *
+         * @param fontSize fontsize in pixels
          * @return {@code this}
          */
         public Builder setFontSize(int fontSize) {
@@ -188,7 +191,7 @@ public final class FontDescriptor {
 
         /**
          * Set foreground color.
-         *
+         * @param foregroundColor  foreground color
          * @return {@code this}
          */
         public Builder setForegroundColor(Color foregroundColor) {
@@ -199,6 +202,7 @@ public final class FontDescriptor {
         /**
          * Set border width in pixels.
          *
+         * @param borderWidth border width in pixels
          * @return {@code this}
          */
         public Builder setBorderWidth(float borderWidth) {
@@ -207,8 +211,9 @@ public final class FontDescriptor {
         }
 
         /**
-         * Set border color in pixels.
+         * Set border color.
          *
+         * @param borderColor Color
          * @return {@code this}
          */
         public Builder setBorderColor(Color borderColor) {

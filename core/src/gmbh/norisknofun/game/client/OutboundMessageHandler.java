@@ -9,6 +9,8 @@ public interface OutboundMessageHandler {
 
     /**
      * Handle outbound message.
+     *
+     * @param  message message to handle
      */
     void handle(Message message);
 }

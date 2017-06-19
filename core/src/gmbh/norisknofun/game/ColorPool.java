@@ -32,6 +32,8 @@ public class ColorPool {
 
     /**
      * Get next available color from the pool.
+     *
+     * @return available color
      */
     public Color getNextAvailableColor(){
 
@@ -52,6 +54,8 @@ public class ColorPool {
 
     /**
      * Release used color and return it into the pool of available color.
+     *
+     * @param color color to release
      */
     public void releaseColor(Color color) {
 

@@ -15,6 +15,8 @@ public interface SessionEvent {
 
     /**
      * Get session that caused the event.
+     *
+     * @return Session
      */
     Session getSession();
 

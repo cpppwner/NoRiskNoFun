@@ -20,6 +20,7 @@ public class FinishedTurnTest {
 
     private ByteArrayOutputStream baos;
     private ObjectOutputStream oos;
+    private  final String PLAYER = "Player1";
 
 
     @Before
@@ -36,6 +37,14 @@ public class FinishedTurnTest {
         ObjectInputStream ois = new ObjectInputStream (bais);
         FinishTurn finishTurn1 =(FinishTurn) ois.readObject();
         assertEquals(finishTurn1.getType(),FinishTurn.class);
+
+    }
+    @Test
+    public void FinishTurnGetterSetter() throws IOException, ClassNotFoundException {
+
+        FinishTurn finishTurn = new FinishTurn(PLAYER);
+        finishTurn.setPlayerName(PLAYER);
+        assertEquals(finishTurn.getPlayerName(),PLAYER);
 
     }
 }

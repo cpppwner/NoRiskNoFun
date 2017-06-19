@@ -43,6 +43,7 @@ public class SceneData {
      * Initialize SceneData instance.
      *
      * @param assetFactory Factory for creating assets.
+     * @param socketFactory Factory for creating sockets.
      */
     public SceneData(AssetFactory assetFactory, SocketFactory socketFactory) {
 
@@ -56,6 +57,8 @@ public class SceneData {
 
     /**
      * Get the {@link AssetFactory} passed in the constructor.
+     *
+     * @return AssetFactory
      */
     public AssetFactory getAssetFactory() {
 
@@ -66,6 +69,7 @@ public class SceneData {
      * Create a texture asset.
      *
      * @param filename The texture filename.
+     * @return AssetTexture
      */
     public AssetTexture createTexture(String filename) {
 
@@ -76,6 +80,7 @@ public class SceneData {
      * Create a 1x1 pixels pixmap texture with given color.
      *
      * @param color The color used in the pixmap texture.
+     * @return AssetPixmapTexture
      */
     public AssetPixmapTexture createPixmapTexture(Color color) {
 
@@ -86,6 +91,7 @@ public class SceneData {
      * Create a sound asset.
      *
      * @param filename The sound filename.
+     * @return AssetSound
      */
     public AssetSound createSound(String filename) {
 
@@ -97,6 +103,8 @@ public class SceneData {
      *
      * @param text The label text.
      * @param fontDescriptor The label font descriptor.
+     *
+     * @return AssetLabel
      */
     public AssetLabel createLabel(String text, FontDescriptor fontDescriptor) {
 
@@ -192,6 +200,8 @@ public class SceneData {
 
     /**
      * Set maximum number of allowed players - only used when hosting the game.
+     *
+     * @param maximumNumberOfPlayers maximum number
      */
     public void setMaximumNumberOfPlayers(int maximumNumberOfPlayers) {
 
@@ -200,6 +210,8 @@ public class SceneData {
 
     /**
      * Set map filename.
+     *
+     * @param mapFilename Filename
      */
     public void setMapFilename(String mapFilename) {
 
@@ -214,6 +226,8 @@ public class SceneData {
 
     /**
      * Get client game data object.
+     *
+     * @return GameData
      */
     public GameData getGameData() {
         return gameDataClient;

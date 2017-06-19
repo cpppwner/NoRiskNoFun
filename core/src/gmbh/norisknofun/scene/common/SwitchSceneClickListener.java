@@ -17,6 +17,8 @@ public class SwitchSceneClickListener extends ClickListener {
 
     /**
      * Init listener with scene's name to which to switch.
+     *
+     * @param nextSceneName Name
      */
     public SwitchSceneClickListener(String nextSceneName) {
 

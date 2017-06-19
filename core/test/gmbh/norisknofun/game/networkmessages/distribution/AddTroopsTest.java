@@ -39,4 +39,12 @@ public class AddTroopsTest {
         assertEquals(addTroops1.getAmount(),AMOUNT);
 
     }
+    @Test
+    public void addTroopsGetterSetter() throws IOException, ClassNotFoundException {
+
+        AddTroops addTroops = new AddTroops(AMOUNT);
+       addTroops.setAmount(AMOUNT);
+        assertEquals(addTroops.getAmount(),AMOUNT);
+
+    }
 }

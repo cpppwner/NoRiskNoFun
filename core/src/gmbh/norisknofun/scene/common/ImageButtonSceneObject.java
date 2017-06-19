@@ -98,6 +98,7 @@ public class ImageButtonSceneObject extends SceneObject {
 
     /**
      * Get a flag indicating whether the button is enabled {@code true} or not {@code false}.
+     * @return boolean isEnabled()?
      */
     public boolean isEnabled() {
         return imageButton.isEnabled();

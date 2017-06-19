@@ -101,6 +101,8 @@ public class GameData {
     /**
      * Check if there are any GUI actions to perform
      * This will be called by the render thread
+     *
+     * @return boolean hasChanged?
      */
     public boolean hasChanged() {
         return guiChanges.hasChanged();

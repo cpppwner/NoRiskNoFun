@@ -28,6 +28,7 @@ public class WaitingForPlayersTests {
 
     private  final String PLAYER = "Player1";
     private  final String MAP = "map1";
+    private  final String ID="12345";
     private  final int MAXPLAYER = 4;
     private  final int RGB  = 255;
     private final String reason="Player with same Name not allowed";
@@ -58,6 +59,7 @@ public class WaitingForPlayersTests {
         PlayerAccepted playerJoinedCheck = new PlayerAccepted(newPlayer);
         playerJoinedCheck.setMapName(MAP);
         playerJoinedCheck.setMaxNumPlayers(MAXPLAYER);
+        playerJoinedCheck.setPlayerName(PLAYER);
 
         oos.writeObject (playerJoinedCheck);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
@@ -84,13 +86,16 @@ public class WaitingForPlayersTests {
 
     @Test
     public void playersInGame() throws IOException, ClassNotFoundException {
-
-        PlayersInGame playersInGame = new PlayersInGame(new Players());
+        Players players =new Players();
+        players.addPlayer(new Player(PLAYER,ID,RGB));
+        PlayersInGame playersInGame = new PlayersInGame(players);
         oos.writeObject (playersInGame);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayersInGame playersInGame1 =(PlayersInGame) ois.readObject();
-        assertThat(playersInGame1.getAllPlayers().size(), is(0));
+        assertThat(playersInGame1.getAllPlayers().size(), is(1));
+        assertEquals(playersInGame1.getAllPlayers().get(0).getColor(),RGB);
+        assertEquals(playersInGame1.getAllPlayers().get(0).getName(),PLAYER);
 
     }
 
@@ -98,6 +103,7 @@ public class WaitingForPlayersTests {
     public void startGame() throws IOException, ClassNotFoundException {
 
         StartGame startGame = new StartGame(START);
+        startGame.setStartGame(START);
         oos.writeObject (startGame);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
@@ -105,6 +111,20 @@ public class WaitingForPlayersTests {
         assertEquals(startGame1.isStartGame(),START);
 
     }
+    @Test
+    public void playerAcceptedGetterSetter() throws IOException, ClassNotFoundException {
+
+        Player newPlayer = new Player(PLAYER, "", RGB);
+        newPlayer.setId(ID);
+        PlayerAccepted playerJoinedCheck = new PlayerAccepted(newPlayer);
+        assertEquals(playerJoinedCheck.getPlayerId(),  ID);
+
+
+
+    }
+
+
+
 
 
 

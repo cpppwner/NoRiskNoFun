@@ -20,12 +20,15 @@ public interface TCPServerSocket extends Closeable {
 
     /**
      * Get underlying {@link SelectableChannel}.
+     *
+     * @return SelectableChannel
      */
     SelectableChannel getChannel();
 
     /**
      * Get server's local address to which it's bound to.
      *
+     * @return {@link SocketAddress}
      * @throws IOException If an I/O error occurs.
      */
     SocketAddress getLocalAddress() throws IOException;

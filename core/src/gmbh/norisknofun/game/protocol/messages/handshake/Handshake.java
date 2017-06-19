@@ -34,6 +34,8 @@ public class Handshake implements Message, Serializable {
 
     /**
      * Get the protocol magic passed in constructor.
+     *
+     * @return  protocolMagic
      */
     public String getProtocolMagic() {
 
@@ -53,6 +55,8 @@ public class Handshake implements Message, Serializable {
 
     /**
      * Get the protocol version.
+     *
+     * @return  protocolVersion
      */
     public String getProtocolVersion() {
 
