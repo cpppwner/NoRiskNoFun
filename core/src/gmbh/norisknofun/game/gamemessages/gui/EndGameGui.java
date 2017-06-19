@@ -7,5 +7,6 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class EndGameGui extends BasicMessageImpl {
-
+    public EndGameGui() {
+    }
 }

@@ -15,4 +15,7 @@ public class ClientConnected implements Message {
     public Class<? extends Message> getType() {
         return getClass();
     }
+
+    public ClientConnected() {
+    }
 }
