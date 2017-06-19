@@ -7,15 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list id="cd7300c6-a375-4218-9c1e-3d370bdaca9c" name="Default" comment="Try to Merge&#10;" />
-    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="Merge master to StateMachine">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/IsAttacked.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/IsAttacked.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/NoAttack.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/NoAttack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/RemoveTroop.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/RemoveTroop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerRejected.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayerRejected.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayersInGame.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/waitingforplayers/PlayersInGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/choosetarget/ChooseTargetTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/choosetarget/ChooseTargetTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java" />
+    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="SomeMoreTests">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/HandshakeResult.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/HandshakeResult.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.iws" afterPath="$PROJECT_DIR$/repo.iws" />
     </list>
     <ignored path="repo.iws" />
@@ -166,11 +159,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlaySoundClickListener.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlaySoundClickListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/PlaySoundClickListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-108">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="310">
+              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HandshakeResult.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/HandshakeResult.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -191,16 +194,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
               <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NetworkMessagesTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="95" column="9" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -2354,7 +2347,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackLoserState.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackState.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/AttackWinnerState.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/statemachine/client/ChooseTargetState.java" />
@@ -2405,6 +2397,7 @@
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/choosetarget/NoAttack.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/attack/evaluatedice/IsAttacked.java" />
         <option value="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/attack/AttackMessagesTests.java" />
+        <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/HandshakeResult.java" />
       </list>
     </option>
   </component>
@@ -2579,7 +2572,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scene" />
+              <option name="myItemId" value="network" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2605,11 +2598,71 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scene" />
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NoRiskNoFun2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NoRiskNoFun2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="norisknofun" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protocol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NoRiskNoFun2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NoRiskNoFun2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="norisknofun" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protocol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="handshake" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3238,7 +3291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497884122641</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="SomeMoreTests">
+      <created>1497886363699</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1497886363699</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3400,7 +3460,8 @@
     <MESSAGE value="Javadoc Warnings fixed 2" />
     <MESSAGE value="Add some Tests" />
     <MESSAGE value="Merge master to StateMachine" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge master to StateMachine" />
+    <MESSAGE value="SomeMoreTests" />
+    <option name="LAST_COMMIT_MESSAGE" value="SomeMoreTests" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3410,14 +3471,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/AssetMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="96" column="41" selection-start-line="96" selection-start-column="41" selection-end-line="96" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/ColorPool.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -3818,8 +3871,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/PlaySoundClickListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="310">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/HandshakeResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
           <folding />
         </state>
       </provider>

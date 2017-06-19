@@ -30,6 +30,8 @@ abstract class HandshakeResult implements Message, Serializable {
 
     /**
      * Get server's protocol version.
+     *
+     * @return protocol version
      */
     public String getServerProtocolVersion() {
 
