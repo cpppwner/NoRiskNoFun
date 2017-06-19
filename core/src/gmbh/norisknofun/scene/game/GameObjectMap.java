@@ -83,7 +83,7 @@ class GameObjectMap extends SceneObject {
     public void draw (Batch batch, float parentAlpha) {
         batch.end();
 
-        Gdx.gl.glLineWidth(200);
+        Gdx.gl.glLineWidth(10);
 
         for (PolygonRegion region : polygonRegions) {
 

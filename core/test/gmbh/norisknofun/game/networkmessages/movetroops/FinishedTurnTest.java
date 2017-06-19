@@ -30,7 +30,7 @@ public class FinishedTurnTest {
     @Test
     public void FinishTurn() throws IOException, ClassNotFoundException {
 
-        FinishTurn finishTurn = new FinishTurn();
+        FinishTurn finishTurn = new FinishTurn("");
         oos.writeObject (finishTurn);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);

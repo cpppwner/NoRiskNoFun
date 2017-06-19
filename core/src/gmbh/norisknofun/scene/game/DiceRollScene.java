@@ -127,11 +127,8 @@ public class DiceRollScene extends SceneBase {
         float yGrav = Gdx.input.getAccelerometerY() / GRAVITY_EARTH;
         float zGrav = Gdx.input.getAccelerometerZ() / GRAVITY_EARTH;
 
-        Gdx.app.log("hasShaken()", "xGrav: " + xGrav);
-
         // gForce will be close to 1 when there is no movement.
         float gForce = (float) Math.sqrt((xGrav * xGrav) + (yGrav * yGrav) + (zGrav * zGrav));
-        Gdx.app.log("hasShaken()", "gForce: " + gForce);
 
         return (gForce > SHAKE_GRAVITY_THRESHOLD);
     }

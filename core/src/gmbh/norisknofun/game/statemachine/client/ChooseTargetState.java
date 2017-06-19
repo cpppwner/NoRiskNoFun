@@ -3,7 +3,7 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
-import gmbh.norisknofun.game.gamemessages.gui.NoAttackGui;
+import gmbh.norisknofun.game.gamemessages.gui.ActionDoneGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegion;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegionCheck;
@@ -30,10 +30,12 @@ public class ChooseTargetState extends State {
         
        if(message.getType().equals(AttackRegionCheck.class)){
            handleAttackRegionCheckMessage((AttackRegionCheck)message);
-        } else if(message.getType().equals(NoAttackGui.class)){ //player doesn't want to attack
+        } else if(message.getType().equals(ActionDoneGui.class)){ //player doesn't want to attack
            context.sendMessage(new NoAttack());
        } else if (message.getType().equals(MoveTroopGui.class)) {
            requestAttack((MoveTroopGui) message);
+       } else if (message.getType().equals(NoAttack.class)) {
+            context.setState(new MoveTroopsState(context));
        }
        else {
            Gdx.app.log("Client ChooseTargetState", "unknown message:"+message.getClass().getSimpleName());

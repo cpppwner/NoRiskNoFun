@@ -3,11 +3,14 @@ package gmbh.norisknofun.game.statemachine.client;
 import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.gamemessages.gui.ActionDoneGui;
 import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.UpdateCurrentPlayerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.MoveTroopCheck;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
+import gmbh.norisknofun.game.networkmessages.movetroops.FinishTurn;
 import gmbh.norisknofun.game.statemachine.State;
 
 /**
@@ -36,6 +39,11 @@ public class MoveTroopsState extends State {
 
         }else if(message.getType().equals(MoveTroopGui.class)){
             requestMoveTroop((MoveTroopGui)message);
+        } else if (message.getType().equals(ActionDoneGui.class)) {
+            context.sendMessage(new FinishTurn(""));
+
+        } else if (message.getType().equals(FinishTurn.class)) {
+            turnDone((FinishTurn) message);
         }
         else {
             Gdx.app.log("WaitingForPlayers","unknown message"+message.getType().getSimpleName());
@@ -54,5 +62,10 @@ public class MoveTroopsState extends State {
 
     private void doMoveTroop(MoveTroop message) {
         context.getGameData().setGuiChanges(new MoveTroopGui(message.getFromRegion(),message.getToRegion(),message.getFigureId()));
+    }
+
+    private void turnDone(FinishTurn message) {
+        context.setState(new WaitingForNextTurnState(context));
+        data.setGuiChanges(new UpdateCurrentPlayerGui(message.getPlayerName()));
     }
 }

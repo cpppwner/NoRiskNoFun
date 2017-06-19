@@ -1,5 +1,7 @@
 package gmbh.norisknofun.game.statemachine.server;
 
+import com.badlogic.gdx.Gdx;
+
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
@@ -48,22 +50,56 @@ public class EvaluateDiceResultState extends State {
     }
 
     private void handleAttackResult(int winsOfAttacker, int winsOfDefender){
+        Gdx.app.log("Server EvaluateDiceResult", "Attacker Troops: " + data.getAttackerRegion().getTroops() + " Wins: " + winsOfAttacker);
+        Gdx.app.log("Server EvaluateDiceResult", "Defender Troops: " + data.getDefendersRegion().getTroops() + " Wins: " + winsOfDefender);
 
-        data.getAttackerRegion().setTroops(data.getAttackerRegion().getTroops()-winsOfDefender);
+        // all attacking troops will be either killed on lose or moved to new region on win, so subtract getAttackingTroops()
+        data.getAttackerRegion().setTroops(data.getAttackerRegion().getTroops() - data.getAttackingTroops());
         data.getDefendersRegion().setTroops(data.getDefendersRegion().getTroops()-winsOfAttacker);
 
-        if(data.getDefendersRegion().getTroops()<=0){ // if attacker  has won
-            sendAttackResult(true, getAttackerId());
-            sendAttackResult(false,getDefenderId());
-        }else { // if defender has won
-            sendAttackResult(true,getDefenderId());
-            sendAttackResult(false,getAttackerId());
+        int attackerTroopsRemaining = data.getAttackingTroops() - winsOfDefender;
+        int defenderTroopsRemaining = data.getDefendersRegion().getTroops();
+
+        if(defenderTroopsRemaining<=0){ // if attacker has won
+
+            // owner changes on successful attack
+            data.getDefendersRegion().setOwner(data.getPlayerById(getAttackerId()).getPlayerName());
+            // all attacking troops are removed from attacker region, at least one is added to defender region
+            broadcastResult(getAttackerId(), getDefenderId());
+            Gdx.app.log("Server EvaluateDiceResult", "Attacker won.");
+        } else if (attackerTroopsRemaining > 0 && defenderTroopsRemaining > 0) { // attacker won, but defender still has troops
+            data.getAttackerRegion().updateTroops(attackerTroopsRemaining); // add the remaining troops back to the attacker
+            broadcastResult(getAttackerId(), getDefenderId());
+            Gdx.app.log("Server EvaluateDiceResult", "Attacker won, but defender still has troops");
         }
+        else { // if defender has won
+
+            broadcastResult(getDefenderId(), getAttackerId());
+            Gdx.app.log("Server EvaluateDiceResult", "Attacker won.");
+        }
+
+        Gdx.app.log("Server EvaluateDiceResult", "Attacker Region Troops remaining: "
+                + data.getAttackerRegion().getTroops() + ", Owner: "  + data.getAttackerRegion().getOwner());
+        Gdx.app.log("Server EvaluateDiceResult", "Defender Region Troops remaining: "
+                + data.getDefendersRegion().getTroops() + "Owner: " + data.getDefendersRegion().getOwner());
 
         context.setState(new ChooseTargetState(context));
 
     }
 
+    private void broadcastResult(String winnerId, String loserId) {
+        AttackResult attackResult= new AttackResult();
+
+        attackResult.setAttackerRegion(data.getAttackerRegion().getName());
+        attackResult.setAttackerTroops(data.getAttackerRegion().getTroops());
+        attackResult.setDefenderRegion(data.getDefendersRegion().getName());
+        attackResult.setDefenderTroops(data.getDefendersRegion().getTroops());
+        attackResult.setDefenderRegionOwner(data.getDefendersRegion().getOwner());
+        attackResult.setWinnerId(winnerId);
+        attackResult.setLoserId(loserId);
+
+        context.sendMessage(attackResult);
+    }
 
     private void sendAttackResult(boolean won, String senderId){
         AttackResult attackResult= new AttackResult();
