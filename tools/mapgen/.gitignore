@@ -1,0 +1,7 @@
+
+# exclude data directory
+data/
+
+#exclude python compiled files
+*.pyc
+
