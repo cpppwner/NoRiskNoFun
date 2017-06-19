@@ -41,7 +41,8 @@ public class ChooseTroopAmountState extends State {
     private void setAttackingTroops(String senderId, ChooseTroopsAmount message){
 
         if(checkTroopAmountMessage(senderId,message)){
-            shiftTroopsforAttack(senderId,message.getAmount());
+            //shiftTroopsforAttack(senderId,message.getAmount());
+            data.setAttackingTroops(message.getAmount());
             sendChooseTroopsAmountCheckMessage(senderId,true,"");
             sendIsAttackedMessage(); // inform defender to change in EvaluateDiceResultState
 

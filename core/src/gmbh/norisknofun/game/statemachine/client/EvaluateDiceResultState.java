@@ -105,6 +105,10 @@ public class EvaluateDiceResultState extends State {
     private void updateRegions(AttackResult message){
         AssetMap.Region attackerRegion = data.getMapAsset().getRegion(message.getAttackerRegion());
         AssetMap.Region defenderRegion = data.getMapAsset().getRegion(message.getDefenderRegion());
+
+        Gdx.app.log("Client Evaluate", "Troops to remove: " + attackerRegion.getName()+ ": " + (attackerRegion.getTroops() - message.getAttackerTroops()));
+        Gdx.app.log("Client Evaluate", "Troops to remove: " + defenderRegion.getName()+ ": " + (defenderRegion.getTroops() - message.getDefenderTroops()));
+
 /*
         attackerRegion.setTroops(message.getAttackerTroops());
 
@@ -115,9 +119,9 @@ public class EvaluateDiceResultState extends State {
 
         data.setGuiChanges(new RemoveTroopGui(attackerRegion.getName(), attackerRegion.getTroops() - message.getAttackerTroops()));
 
-        Gdx.app.log("EvaluateDiceResultState", "Attacker Region: " + attackerRegion.getName() +
-                ", Troops: " + attackerRegion.getTroops());
-        Gdx.app.log("EvaluateDiceResultState", "Defender Region: " + defenderRegion.getName() +
+        Gdx.app.log("Client EvaluateDiceResultState", "Attacker Region: " + message.getAttackerRegion() +
+                ", Troops: " + message.getAttackerTroops());
+        Gdx.app.log("Client EvaluateDiceResultState", "Defender Region: " + defenderRegion.getName() +
                 ", Troops: " + defenderRegion.getTroops() +
                 ", Owner: " + defenderRegion.getOwner());
 

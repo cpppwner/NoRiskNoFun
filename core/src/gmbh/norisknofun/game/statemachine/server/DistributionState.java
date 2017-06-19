@@ -50,6 +50,7 @@ public class DistributionState extends State {
         if(checkSpawnMessage(senderId,message)){
             data.getCurrentplayer().setTroopToSpread(data.getCurrentplayer().getTroopToSpread()-1);
             data.getRegionByName(message.getRegionname()).updateTroops(1);
+            data.getRegionByName(message.getRegionname()).setOwner(data.getPlayerById(senderId).getPlayerName());
             broadcastSpawnTroopMessage(message);
             Gdx.app.log("Distribution State Spawn Troop", "Troops to spread: " + data.getCurrentplayer().getTroopToSpread());
         }
