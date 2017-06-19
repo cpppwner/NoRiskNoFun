@@ -29,6 +29,7 @@ public class GameData {
     private final Changeable<String> lastError = new Changeable<>();
     private final Changeable<AssetMap> mapAsset = new Changeable<>(null);
     private Changeable<Queue<Message>> guiChanges = new Changeable<>();
+    private int currentActorId;
 
     private final Player myself = new Player();
     private Player currentPlayer = new Player();
@@ -36,7 +37,7 @@ public class GameData {
 
     private int[] diceRoll;
     private int availableDice;
-    private int cheatsAvailable = 3;
+    private int cheatsAvailable;
 
     private int maxNumPlayers;
     private String mapFilename;
@@ -48,6 +49,9 @@ public class GameData {
     public GameData() {
         allPlayers.setValue(new LinkedList<Player>());
         guiChanges.setValue(new ConcurrentLinkedQueue<Message>());
+
+        cheatsAvailable = 3;
+        currentActorId = 1;
     }
 
     public void setMapAsset(AssetMap mapAsset) {
@@ -259,5 +263,17 @@ public class GameData {
 
     public String getCurrentStateName() {
         return currentState;
+    }
+
+    public int getCurrentActorId() {
+        return currentActorId;
+    }
+
+    public void setCurrentActorId(int currentActorId) {
+        this.currentActorId = currentActorId;
+    }
+
+    public int nextActorId() {
+        return currentActorId++;
     }
 }

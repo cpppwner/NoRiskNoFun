@@ -155,7 +155,7 @@ public final class GameScene extends SceneBase {
     }
 
     /**
-     * Send a move request to the client state machine via GUI Messages
+     * Send a move or spawn request to the client state machine via GUI Messages
      * @param x X coordinate of the move
      * @param y Y coordinate of the move
      */
@@ -166,7 +166,10 @@ public final class GameScene extends SceneBase {
 
                 // if it's the actor's first move, explicitly set the region
                 if (actor.isFirstMove()) {
-                    sceneData.sendMessageFromGui(new SpawnTroopGui(tappedRegion.getName(), -1)); // id is -1 because we don't need it
+                    int actorId = data.nextActorId();
+                    Gdx.app.log("Request Spawn", "Requesting Spawn with ID: " + actorId + "(" + data.getCurrentActorId() +")");
+                    sceneData.sendMessageFromGui(new SpawnTroopGui(tappedRegion.getName(), data.getCurrentActorId())); // id is -1 because we don't need it
+
                     actor.setHighlighted(false);
                     break;
                 }
@@ -174,14 +177,14 @@ public final class GameScene extends SceneBase {
                 // check if the actor moves out of its current region and set troops accordingly
                 if (tappedRegion != actor.getCurrentRegion()) {
 
+                    Gdx.app.log("Request Move", "Requesting Move with ID: " + actor.getId());
+
+
                     //actor.getCurrentRegion().setTroops(actor.getCurrentRegion().getTroops()-1);
                     Gdx.app.log("Move Troop", "Moving troop: " + actor.getId());
                     actor.setHighlighted(false);
                     sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), tappedRegion.getName(),actor.getId()));
                 }
-            } else if (actor.isHighlighted() && !actor.isFirstMove()) { // todo: Temporary. If user moves figure out of region, it will be deleted.
-                sceneData.sendMessageFromGui(new RemoveTroopGui(actor.getCurrentRegion().getName(), 1));
-                actor.setHighlighted(false);
             }
         }
     }
@@ -202,7 +205,7 @@ public final class GameScene extends SceneBase {
     private void moveActorToRegion(String region, Figure actor) {
         Vector2 movePosition = calculatePolygonCentroid(regionNameMap.get(region).getVertices());
 
-        actor.addAction(Actions.moveTo(movePosition.x * Gdx.graphics.getWidth(), movePosition.y * Gdx.graphics.getHeight(), 0.2f));
+        actor.addAction(Actions.moveTo(movePosition.x * Gdx.graphics.getWidth() - 50, movePosition.y * Gdx.graphics.getHeight() - 50, 0.2f));
         actor.setHighlighted(false);
     }
 
@@ -375,15 +378,18 @@ public final class GameScene extends SceneBase {
         infantry.setFirstMove(false);
         infantry.setCurrentRegion(regionNameMap.get(message.getRegionName()));
 
+        Gdx.app.log("Spawning", "Actor with ID: " + infantry.getId());
+
 
         // set color and owner only when the first troop spawns on this region
         if (region.getOwner().equals("none")) {
             region.setOwner(data.getCurrentPlayer().getPlayerName());
             setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
         }
+
         region.updateTroops(1);
         data.setChangedFlag(true);
-        Gdx.app.log("Region Spawn", region.getTroops() + " Troops on " + region.getName() + " Owner: " + region.getOwner());
+        data.nextActorId();
 
         figures.add(infantry);
         addSceneObject(infantry);
@@ -391,7 +397,7 @@ public final class GameScene extends SceneBase {
 
     /**
      * Move the highlighted Figures to the position specified in the message
-     * @param message GUI Message containing information about the changes
+     * @param message GUI Message containing information about the move
      */
     private void moveTroop(MoveTroopGui message) {
         AssetMap.Region toRegion = regionNameMap.get(message.getToRegion());
@@ -401,7 +407,6 @@ public final class GameScene extends SceneBase {
             if (actor.getId()==message.getFigureId()) {
                 moveActorToRegion(message.getToRegion(), actor);
                 actor.setCurrentRegion(toRegion);
-                setRegionColor(new Color(data.getCurrentPlayer().getColor()), toRegion);
 
                 // update the troop amounts
                 fromRegion.setTroops(fromRegion.getTroops() - 1);
@@ -412,7 +417,7 @@ public final class GameScene extends SceneBase {
     }
 
     private void updateRegionOwner(UpdateRegionOwnerGui message) {
-        int playerColor = 0;
+        int playerColor = Color.argb8888(Color.WHITE);
         for (Player player : data.getPlayers()) {
             if (player.getPlayerName().equals(message.getNewOwner())) {
                 playerColor = player.getColor();

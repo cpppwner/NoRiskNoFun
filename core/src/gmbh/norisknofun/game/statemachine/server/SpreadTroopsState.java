@@ -130,7 +130,7 @@ public class SpreadTroopsState extends State {
     }
 
     private void broadcastSpawnTroopMessage(SpawnTroop message){
-        SpawnTroop spawnTroop = new SpawnTroop(message.getRegionname());
+        SpawnTroop spawnTroop = new SpawnTroop(message.getRegionname(), message.getId());
         context.sendMessage(spawnTroop); // send to all clients
     }
 

@@ -74,30 +74,6 @@ public class EvaluateDiceResultState extends State {
         SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
     }
 
-/*    private void handleAttackResult(AttackResult attackResult){
-
-        updateRegions(attackResult);
-        if(context.getGameData().isMyTurn()){ //  I am attacker
-            if(attackResult.isWon()) {
-                context.getGameData().setLastError("Congratulations!  \n  you captured region: " + attackResult.getDefenderRegion());
-            }else {
-                context.getGameData().setLastError("You lost!  \n  more luck next time.");
-            }
-            context.setState(new ChooseTargetState(context));
-        }else { //  I am Defender
-            if(attackResult.isWon()) {
-                context.getGameData().setLastError("Congratulations!  \n  you defended region: " + attackResult.getDefenderRegion());
-            }else {
-                context.getGameData().setLastError("Sorry!  \n  you lost region:"+attackResult.getDefenderRegion());
-            }
-            context.setState(new WaitingForNextTurnState(context));
-        }
-
-
-        // switch back to Game Scene after the attack was done
-        SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
-    }*/
-
     /**
      * Update Troops on attacker and defender region
      * if defender lost -> also update region owner
@@ -111,8 +87,8 @@ public class EvaluateDiceResultState extends State {
         Gdx.app.log("Client Evaluate", "Troops to remove: " + defenderRegion.getName()+ ": " + (defenderRegion.getTroops() - message.getDefenderTroops()));
 
 
-        // if difference is negative (e.g. defender had 1 troop, got attacked with 3 -> difference = -2
-        // so 2 troops need to be added
+        // if difference is negative
+        // e.g. defender had 1 troop, got attacked with 3 -> difference = -2, so 2 troops need to be added
         int defenderRegionTroops = defenderRegion.getTroops() - message.getDefenderTroops();
         if (defenderRegionTroops < 0) {
             // spawn the correct amount of troops as an amount can't be set in SpawnTroopGui
