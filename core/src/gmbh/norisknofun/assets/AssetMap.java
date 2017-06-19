@@ -64,12 +64,16 @@ public interface AssetMap extends Asset {
         String getOwner();
 
         /**
-         * Set the player's name who owns the region or null, if no one currently does.
+         * Set the player's name who owns the region or null, if no one currently does.7
+         *
+         * @param newOwner
          */
         void setOwner(String newOwner);
 
         /**
          * Set region's color.
+         *
+         * @param color
          */
         void setColor(Color color);
 
@@ -89,6 +93,8 @@ public interface AssetMap extends Asset {
 
         /**
          * Set number of troops on this region.
+         *
+         * @param amount
          */
         void setTroops(int amount);
 

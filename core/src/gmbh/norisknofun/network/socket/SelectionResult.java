@@ -15,6 +15,7 @@ public interface SelectionResult {
      *     After performing the {@link TCPServerSocket#accept()} operation, call the
      *     {@link SelectionResult#acceptHandled(TCPServerSocket)} method.
      * </p>
+     *  @return Set {@link TCPServerSocket}
      */
     Set<TCPServerSocket> getAcceptableSockets();
 
@@ -24,6 +25,8 @@ public interface SelectionResult {
      * <p>
      *     This method must be called, in order to remove this pending event.
      * </p>
+     *
+     * @param socket {@link TCPClientSocket}
      */
     void acceptHandled(TCPServerSocket socket);
 
@@ -34,6 +37,8 @@ public interface SelectionResult {
      *     After performing the {@link TCPClientSocket#read(ByteBuffer)} ()} operation, call the
      *     {@link SelectionResult#readHandled(TCPClientSocket)} method.
      * </p>
+     *
+     * @return Set {@link TCPClientSocket}
      */
     Set<TCPClientSocket> getReadableSockets();
 
@@ -43,6 +48,8 @@ public interface SelectionResult {
      * <p>
      *     This method must be called, in order to remove this pending event.
      * </p>
+     *
+     * @param socket {@link TCPClientSocket}
      */
     void readHandled(TCPClientSocket socket);
 
@@ -53,6 +60,8 @@ public interface SelectionResult {
      *     After performing the {@link TCPClientSocket#write(ByteBuffer)} ()} operation, call the
      *     {@link SelectionResult#writeHandled(TCPClientSocket)} method.
      * </p>
+     *
+     * @return Set {@link TCPClientSocket}
      */
     Set<TCPClientSocket> getWritableSockets();
 
@@ -62,6 +71,8 @@ public interface SelectionResult {
      * <p>
      *     This method must be called, in order to remove this pending event.
      * </p>
+     *
+     * @param socket {@link TCPClientSocket}
      */
     void writeHandled(TCPClientSocket socket);
 }

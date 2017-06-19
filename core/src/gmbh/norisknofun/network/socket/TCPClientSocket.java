@@ -47,6 +47,8 @@ public interface TCPClientSocket extends Closeable {
 
     /**
      * Get underlying {@link SelectableChannel}.
+     *
+     * @return SelectableChannel
      */
     SelectableChannel getChannel();
 }
