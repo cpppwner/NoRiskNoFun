@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import gmbh.norisknofun.game.Player;
+import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerAccepted;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -60,6 +63,35 @@ public class SpreadTests {
         ObjectInputStream ois = new ObjectInputStream (bais);
         PlayerSpreadFinished playerSpreadFinished1 =(PlayerSpreadFinished) ois.readObject();
         //assertEquals(playerSpreadFinished1.getPlayername(),PLAYER);
+
+    }
+    @Test
+    public void playerSpreadGetterSetter() throws IOException, ClassNotFoundException {
+
+        PlayerSpread playerSpread = new PlayerSpread(PLAYER,true);
+        playerSpread.setPlayername(PLAYER);
+        playerSpread.setPlayersTurn(true);
+        assertEquals(  playerSpread.getPlayername(),  PLAYER);
+        assertEquals(  playerSpread.isPlayersTurn(),  true);
+
+    }
+    @Test
+    public void playerSpreadCheckGetterSetter() throws IOException, ClassNotFoundException {
+
+        PlayerSpreadCheck playerSpreadCheck = new PlayerSpreadCheck(PLAYER,true);
+        playerSpreadCheck.setPlayername(PLAYER);
+        playerSpreadCheck.setCheck(true);
+        assertEquals(  playerSpreadCheck.getPlayername(),  PLAYER);
+        assertEquals(  playerSpreadCheck.isCheck(),  true);
+
+    }
+    @Test
+    public void playerSpreadFinishedGetterSetter() throws IOException, ClassNotFoundException {
+
+        PlayerSpreadFinished playerSpreadFinished = new PlayerSpreadFinished(PLAYER);
+        playerSpreadFinished.setCurrentPlayerName(PLAYER);
+        assertEquals(  playerSpreadFinished.getCurrentPlayerName(),  PLAYER);
+
 
     }
 }

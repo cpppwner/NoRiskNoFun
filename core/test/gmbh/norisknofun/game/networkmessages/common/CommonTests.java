@@ -42,6 +42,18 @@ public class CommonTests {
 
     }
     @Test
+    public void moveTroopGetterSetter() throws IOException, ClassNotFoundException {
+
+        MoveTroop moveTroop = new MoveTroop();
+        moveTroop.setFigureId(-2);
+        moveTroop.setFromRegion("dest2");
+        moveTroop.setToRegion("origin2");
+        assertEquals(moveTroop.getFromRegion(),"dest2");
+        assertEquals(moveTroop.getToRegion(),"origin2");
+        assertEquals(moveTroop.getFigureId(),-2);
+
+    }
+    @Test
     public void moveTroopCheck() throws IOException, ClassNotFoundException {
 
         MoveTroopCheck moveTroopCheck = new MoveTroopCheck(true,"hallo");

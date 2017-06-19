@@ -29,8 +29,9 @@ public class MoveTroop extends BasicMessageImpl implements Serializable{
         this.fromRegion = fromRegion;
         this.figureId=id;
     }
-    public MoveTroop(){
-        //to fill the message object via setter
+
+    public MoveTroop() {
+
     }
 
     public String getToRegion() {

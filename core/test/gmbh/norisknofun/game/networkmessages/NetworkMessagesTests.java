@@ -24,6 +24,8 @@ public class NetworkMessagesTests {
     private ByteArrayOutputStream baos;
     private ObjectOutputStream oos;
     final String PLAYER = "Player1";
+    final int DICE_RESULT = 6;
+    final int TROOPS = 2;
 
     @Before
     public void setUp() throws IOException {
@@ -63,6 +65,32 @@ public class NetworkMessagesTests {
         ObjectInputStream ois = new ObjectInputStream (bais);
         Dice dice1 =(Dice) ois.readObject();
         assertEquals(dice1.getPlayername(),  PLAYER);
+
+    }
+
+    @Test
+    public void diceGetterSetter() throws IOException, ClassNotFoundException {
+
+        Dice dice = new Dice(PLAYER,10,6);
+
+        dice.setPlayername(PLAYER);
+        dice.setAmountofTroops(TROOPS);
+        dice.setDiceResult(DICE_RESULT);
+        assertEquals(dice.getPlayername(),  PLAYER);
+        assertEquals(dice.getAmountofTroops(),  TROOPS);
+        assertEquals(dice.getDiceResult(),  DICE_RESULT);
+
+    }
+    @Test
+    public void endGameetterSetter() throws IOException, ClassNotFoundException {
+
+        EndGame endGame = new EndGame(PLAYER,true);
+
+        endGame.setGameend(true);
+        endGame.setWinner(PLAYER);
+        assertEquals(endGame.getWinner(),  PLAYER);
+        assertEquals(endGame.isGameend(),  true);
+
 
     }
     @Test
