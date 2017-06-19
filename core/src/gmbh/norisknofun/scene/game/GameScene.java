@@ -28,6 +28,7 @@ import gmbh.norisknofun.game.gamemessages.gui.ActionDoneGui;
 import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.UpdateCurrentPlayerGui;
+import gmbh.norisknofun.game.gamemessages.gui.UpdateRegionOwnerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -410,6 +411,17 @@ public final class GameScene extends SceneBase {
         }
     }
 
+    private void updateRegionOwner(UpdateRegionOwnerGui message) {
+        int playerColor = 0;
+        for (Player player : data.getPlayers()) {
+            if (player.getPlayerName().equals(message.getNewOwner())) {
+                playerColor = player.getColor();
+            }
+        }
+        regionNameMap.get(message.getRegionName()).setOwner(message.getNewOwner());
+        setRegionColor(new Color(playerColor), regionNameMap.get(message.getRegionName()));
+    }
+
     /**
      * Check if a flag in GameData has been changed and update the GUI accordingly
      */
@@ -430,6 +442,8 @@ public final class GameScene extends SceneBase {
             Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
 
             data.setCurrentPlayer(((UpdateCurrentPlayerGui) message).getCurrentPlayer());
+        } else if (message.getType().equals(UpdateRegionOwnerGui.class)) {
+            updateRegionOwner((UpdateRegionOwnerGui) message);
         }
         else {
             Gdx.app.log("GameScene","Unknown Message: " + message.getClass().getSimpleName());

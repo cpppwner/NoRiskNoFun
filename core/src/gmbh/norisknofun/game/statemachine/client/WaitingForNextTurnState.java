@@ -4,10 +4,14 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.UpdateRegionOwnerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
+import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.statemachine.State;
 
 
@@ -34,20 +38,33 @@ public class WaitingForNextTurnState extends State {
             context.setState(new AttackState(context, false));
         } else if (message.getType().equals(AttackResult.class)) { // react on broadcast attack result as we have to update the regions
             updateRegions((AttackResult)message);
+        } else if (message.getType().equals(SpawnTroop.class)) {
+            doSpawnTroop((SpawnTroop) message);
         }
         else{
             Gdx.app.log("WaitingForNextTurnState","unknown messgae:"+message.getType().getSimpleName());
         }
     }
 
+    private void doSpawnTroop(SpawnTroop message) {
+        context.getGameData().setGuiChanges(new SpawnTroopGui(message.getRegionname(), message.getId()));
+    }
+
     private void updateRegions(AttackResult message) {
         AssetMap.Region attackerRegion = context.getGameData().getMapAsset().getRegion(message.getAttackerRegion());
         AssetMap.Region defenderRegion = context.getGameData().getMapAsset().getRegion(message.getDefenderRegion());
 
-        attackerRegion.setTroops(message.getAttackerTroops());
+/*        attackerRegion.setTroops(message.getAttackerTroops());
 
         defenderRegion.setTroops(message.getDefenderTroops());
-        defenderRegion.setOwner(message.getDefenderRegionOwner());
+        defenderRegion.setOwner(message.getDefenderRegionOwner());*/
+
+        data.setGuiChanges(new RemoveTroopGui(defenderRegion.getName(), defenderRegion.getTroops() - message.getDefenderTroops()));
+        data.setGuiChanges(new UpdateRegionOwnerGui(defenderRegion.getName(), message.getDefenderRegionOwner()));
+
+        data.setGuiChanges(new RemoveTroopGui(attackerRegion.getName(), attackerRegion.getTroops() - message.getAttackerTroops()));
+
+
 
         Gdx.app.log("EvaluateDiceResultState", "Attacker Region: " + attackerRegion.getName() +
                 ", Troops: " + attackerRegion.getTroops());

@@ -49,6 +49,7 @@ public class DistributionState extends State {
 
         if(checkSpawnMessage(senderId,message)){
             data.getCurrentplayer().setTroopToSpread(data.getCurrentplayer().getTroopToSpread()-1);
+            data.getRegionByName(message.getRegionname()).updateTroops(1);
             broadcastSpawnTroopMessage(message);
             Gdx.app.log("Distribution State Spawn Troop", "Troops to spread: " + data.getCurrentplayer().getTroopToSpread());
         }
@@ -68,7 +69,8 @@ public class DistributionState extends State {
             check=false;
             sendSpawnTroopCheckMessage(senderId,"It's not your turn",false);
         }
-        else if(!data.getRegionByName(spawnTroop.getRegionname()).getOwner().equals(data.getCurrentplayer().getPlayerName())){
+        else if(!data.getRegionByName(spawnTroop.getRegionname()).getOwner().equals("none") &&
+                !data.getRegionByName(spawnTroop.getRegionname()).getOwner().equals(data.getCurrentplayer().getPlayerName())){
             check=false;
             sendSpawnTroopCheckMessage(senderId,"that is not your region",false);
         }
