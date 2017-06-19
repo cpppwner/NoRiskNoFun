@@ -38,7 +38,7 @@ public class ClientTest {
     public void DisconnectClient() {
 
         DisconnectClient disconnectClient = new DisconnectClient(true);
-        assertEquals(disconnectClient.getType(),DisconnectClient.class);
+        assertEquals(disconnectClient.getClass(),DisconnectClient.class);
         assertEquals(disconnectClient.isTerminateClient(),true);
     }
 }

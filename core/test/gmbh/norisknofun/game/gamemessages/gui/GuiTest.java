@@ -84,10 +84,10 @@ public class GuiTest {
         spawnTroopGui.setId(ID);
         spawnTroopGui.setX(AMOUNT);
         spawnTroopGui.setY(new Float(1));
-        assertEquals(spawnTroopGui.getY(),1 );
+        assertEquals(spawnTroopGui.getY(),1,0 );
         assertEquals(spawnTroopGui.getRegionName(),  ATTACKEREGION);
         assertEquals(spawnTroopGui.getId(),  ID);
-        assertEquals(spawnTroopGui.getX(),  AMOUNT);
+        assertEquals(spawnTroopGui.getX(),  AMOUNT,0);
 
 
     }
