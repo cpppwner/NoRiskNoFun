@@ -159,11 +159,9 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NoRiskNoFun.iml" filepath="$PROJECT_DIR$/NoRiskNoFun.iml" />
-      <module fileurl="file://$PROJECT_DIR$/NoRiskNoFun1.iml" filepath="$PROJECT_DIR$/NoRiskNoFun1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NoRiskNoFun2.iml" filepath="$PROJECT_DIR$/NoRiskNoFun2.iml" />
       <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/repo.iml" filepath="$PROJECT_DIR$/repo.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
@@ -185,17 +183,10 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
-    <library name="android-android-25">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-25/android.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
     <library name="animated-vector-drawable-25.3.1">
       <CLASSES>
-        <root url="file://$USER_HOME$/.android/build-cache/7d982bcd59e881699b39cca600313360ac9a2b41/output/res" />
-        <root url="jar://$USER_HOME$/.android/build-cache/7d982bcd59e881699b39cca600313360ac9a2b41/output/jars/classes.jar!/" />
+        <root url="jar://$USER_HOME$/.android/build-cache/7f857a236a7cc9788b7a1b881b33cc980b433117/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/7f857a236a7cc9788b7a1b881b33cc980b433117/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -204,8 +195,8 @@
     </library>
     <library name="appcompat-v7-25.3.1">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.android/build-cache/b7c79a3722f14535c146e9168bef7956b0e09894/output/jars/classes.jar!/" />
-        <root url="file://$USER_HOME$/.android/build-cache/b7c79a3722f14535c146e9168bef7956b0e09894/output/res" />
+        <root url="file://$USER_HOME$/.android/build-cache/ea6eabe4bdb5eafd9aebcf3022b48aef284bd5da/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/ea6eabe4bdb5eafd9aebcf3022b48aef284bd5da/output/jars/classes.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -248,8 +239,8 @@
     </library>
     <library name="espresso-core-2.2.2">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.android/build-cache/d267b6e009f045a1b91dc59ddd1e34d5012e6dce/output/jars/classes.jar!/" />
-        <root url="file://$USER_HOME$/.android/build-cache/d267b6e009f045a1b91dc59ddd1e34d5012e6dce/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/d43239311bcfc8b33aa61123122a596e288f9564/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/d43239311bcfc8b33aa61123122a596e288f9564/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -258,8 +249,8 @@
     </library>
     <library name="espresso-idling-resource-2.2.2">
       <CLASSES>
-        <root url="file://$USER_HOME$/.android/build-cache/da24403c3882916d66aadec03808f86dcbc11a7a/output/res" />
-        <root url="jar://$USER_HOME$/.android/build-cache/da24403c3882916d66aadec03808f86dcbc11a7a/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/3fd32ed13329c3708cd5824b08c922df66431fcd/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/3fd32ed13329c3708cd5824b08c922df66431fcd/output/jars/classes.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -268,8 +259,8 @@
     </library>
     <library name="exposed-instrumentation-api-publish-0.5">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.android/build-cache/2214742d0997d42792f8a4bc19f715aeb4601d66/output/jars/classes.jar!/" />
-        <root url="file://$USER_HOME$/.android/build-cache/2214742d0997d42792f8a4bc19f715aeb4601d66/output/res" />
+        <root url="file://$USER_HOME$/.android/build-cache/cb0b62988a4f0c44e5520fefa084fb7080484fe4/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/cb0b62988a4f0c44e5520fefa084fb7080484fe4/output/jars/classes.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -436,8 +427,8 @@
         <root url="jar://$PROJECT_DIR$/android/build/intermediates/exploded-aar/com.android.support.test/rules/0.5/annotations.zip!/" />
       </ANNOTATIONS>
       <CLASSES>
-        <root url="file://$USER_HOME$/.android/build-cache/7e3976e95fb5e805619e8148f6e0e1af226c4466/output/res" />
-        <root url="jar://$USER_HOME$/.android/build-cache/7e3976e95fb5e805619e8148f6e0e1af226c4466/output/jars/classes.jar!/" />
+        <root url="jar://$USER_HOME$/.android/build-cache/13ff1fbf6766fd4734e1a40e2f0f219affc58b53/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/13ff1fbf6766fd4734e1a40e2f0f219affc58b53/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -449,8 +440,8 @@
         <root url="jar://$PROJECT_DIR$/android/build/intermediates/exploded-aar/com.android.support.test/runner/0.5/annotations.zip!/" />
       </ANNOTATIONS>
       <CLASSES>
-        <root url="file://$USER_HOME$/.android/build-cache/c7a6ad3991af2313e2c7e458afe58a7a4a4d1dfc/output/res" />
-        <root url="jar://$USER_HOME$/.android/build-cache/c7a6ad3991af2313e2c7e458afe58a7a4a4d1dfc/output/jars/classes.jar!/" />
+        <root url="jar://$USER_HOME$/.android/build-cache/4c25118dc670e2a1a36b828562d9eb87cc0495d5/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/4c25118dc670e2a1a36b828562d9eb87cc0495d5/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -459,7 +450,7 @@
     </library>
     <library name="support-annotations-25.3.1">
       <CLASSES>
-        <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar!/" />
+        <root url="jar://C:/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -468,8 +459,8 @@
     </library>
     <library name="support-compat-25.3.1">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.android/build-cache/5604e75d069347711b90f5249ee94280c1aaf49a/output/jars/classes.jar!/" />
-        <root url="file://$USER_HOME$/.android/build-cache/5604e75d069347711b90f5249ee94280c1aaf49a/output/res" />
+        <root url="file://$USER_HOME$/.android/build-cache/84bd7727722507e74c0b9f46e984ef28613f9006/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/84bd7727722507e74c0b9f46e984ef28613f9006/output/jars/classes.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -478,8 +469,8 @@
     </library>
     <library name="support-core-ui-25.3.1">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.android/build-cache/55b91723e0c4288b55242fe2d49c22b00262556a/output/jars/classes.jar!/" />
-        <root url="file://$USER_HOME$/.android/build-cache/55b91723e0c4288b55242fe2d49c22b00262556a/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/d1b5480e569a355d14be45250c176d9d09e9b688/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/d1b5480e569a355d14be45250c176d9d09e9b688/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -488,8 +479,8 @@
     </library>
     <library name="support-core-utils-25.3.1">
       <CLASSES>
-        <root url="file://$USER_HOME$/.android/build-cache/71bf50fb3f5e0030a9a51b36eb7014455d66953d/output/res" />
-        <root url="jar://$USER_HOME$/.android/build-cache/71bf50fb3f5e0030a9a51b36eb7014455d66953d/output/jars/classes.jar!/" />
+        <root url="jar://$USER_HOME$/.android/build-cache/23942822ce653111aaa467d94f450567d9281a10/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/23942822ce653111aaa467d94f450567d9281a10/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -498,8 +489,8 @@
     </library>
     <library name="support-fragment-25.3.1">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.android/build-cache/817a4b786e5c194317ff78d592ccafa9381089b8/output/jars/classes.jar!/" />
-        <root url="file://$USER_HOME$/.android/build-cache/817a4b786e5c194317ff78d592ccafa9381089b8/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/d58f726d4289ac4133eba2c4e2d8d5215e56a770/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/d58f726d4289ac4133eba2c4e2d8d5215e56a770/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -508,8 +499,8 @@
     </library>
     <library name="support-media-compat-25.3.1">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.android/build-cache/297429c1ad59f402c2fa7a162b399c51fdfc7bbe/output/jars/classes.jar!/" />
-        <root url="file://$USER_HOME$/.android/build-cache/297429c1ad59f402c2fa7a162b399c51fdfc7bbe/output/res" />
+        <root url="file://$USER_HOME$/.android/build-cache/c8647c9c9d4d834733ef8062a0daefc8648a0700/output/res" />
+        <root url="jar://$USER_HOME$/.android/build-cache/c8647c9c9d4d834733ef8062a0daefc8648a0700/output/jars/classes.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -518,16 +509,16 @@
     </library>
     <library name="support-v4-25.3.1">
       <CLASSES>
-        <root url="file://$USER_HOME$/.android/build-cache/df6b2cb83cca50ea990903dc4f32fce32e8b1667/output/res" />
-        <root url="jar://$USER_HOME$/.android/build-cache/df6b2cb83cca50ea990903dc4f32fce32e8b1667/output/jars/classes.jar!/" />
+        <root url="jar://$USER_HOME$/.android/build-cache/280bdda5054571284b98d54fb98c50d11f2d9aa2/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/280bdda5054571284b98d54fb98c50d11f2d9aa2/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
     <library name="support-vector-drawable-25.3.1">
       <CLASSES>
-        <root url="file://$USER_HOME$/.android/build-cache/75f1091082824b2d31745466caad429f38a2f289/output/res" />
-        <root url="jar://$USER_HOME$/.android/build-cache/75f1091082824b2d31745466caad429f38a2f289/output/jars/classes.jar!/" />
+        <root url="jar://$USER_HOME$/.android/build-cache/7c64a8e5b08319222a2c606097fa4b9d4e526fd2/output/jars/classes.jar!/" />
+        <root url="file://$USER_HOME$/.android/build-cache/7c64a8e5b08319222a2c606097fa4b9d4e526fd2/output/res" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
