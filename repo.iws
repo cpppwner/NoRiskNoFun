@@ -7,14 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list id="cd7300c6-a375-4218-9c1e-3d370bdaca9c" name="Default" comment="Try to Merge&#10;" />
-    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="Javadoc Warnings fixed 2">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroop.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/NetworkMessagesTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/movetroops/FinishedTurnTest.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/movetroops/FinishedTurnTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/spread/SpreadTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/spread/SpreadTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/waitingforplayers/WaitingForPlayersTests.java" afterPath="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/waitingforplayers/WaitingForPlayersTests.java" />
+    <list default="true" id="250a6753-9412-404d-84d0-ff5ad3871ac4" name="New changelist" comment="Add some Tests">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/FontDescriptor.java" afterPath="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/FontDescriptor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo.iws" afterPath="$PROJECT_DIR$/repo.iws" />
     </list>
     <ignored path="repo.iws" />
@@ -129,7 +123,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MoveTroop.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MoveTroop.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroop.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
@@ -148,6 +142,26 @@
                 <element signature="e#1112#1113#0" expanded="true" />
                 <element signature="e#1152#1153#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Handshake.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/Handshake.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="726">
+              <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FontDescriptor.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/FontDescriptor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="215" column="35" selection-start-line="215" selection-start-column="35" selection-end-line="215" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2325,7 +2339,6 @@
         <option value="$PROJECT_DIR$/repo.ipr" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/scene/common/ImageButtonSceneObject.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/Asset.java" />
-        <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/FontDescriptor.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameData.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/Handshake.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/server/networking/SessionEvent.java" />
@@ -2351,6 +2364,7 @@
         <option value="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/distribution/AddTroopsTest.java" />
         <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/game/networkmessages/common/MoveTroop.java" />
         <option value="$PROJECT_DIR$/core/test/gmbh/norisknofun/game/networkmessages/common/CommonTests.java" />
+        <option value="$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/FontDescriptor.java" />
       </list>
     </option>
   </component>
@@ -2656,7 +2670,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="networkmessages" />
+              <option name="myItemId" value="protocol" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2689,8 +2703,30 @@
               <option name="myItemId" value="networkmessages" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="NoRiskNoFun2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NoRiskNoFun2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="norisknofun" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3304,7 +3340,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497881741953</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add some Tests">
+      <created>1497883810876</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1497883810876</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3355,7 +3398,7 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262662" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32979977" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17293233" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17293233" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3464,7 +3507,8 @@
     <MESSAGE value="Merged StateMachine" />
     <MESSAGE value="Javadoc Warnings fixed 1" />
     <MESSAGE value="Javadoc Warnings fixed 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc Warnings fixed 2" />
+    <MESSAGE value="Add some Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add some Tests" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3527,26 +3571,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/FontDescriptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="108" column="16" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/GameData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="104" column="34" selection-start-line="104" selection-start-column="34" selection-end-line="104" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/Handshake.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -3886,6 +3914,22 @@
             <element signature="e#1112#1113#0" expanded="true" />
             <element signature="e#1152#1153#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/game/protocol/messages/handshake/Handshake.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/gmbh/norisknofun/assets/FontDescriptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="215" column="35" selection-start-line="215" selection-start-column="35" selection-end-line="215" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
