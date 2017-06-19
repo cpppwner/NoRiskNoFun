@@ -6,6 +6,7 @@ import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.gamemessages.gui.EvaluateDiceResultGui;
 import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.UpdateRegionOwnerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
@@ -105,19 +106,29 @@ public class EvaluateDiceResultState extends State {
     private void updateRegions(AttackResult message){
         AssetMap.Region attackerRegion = data.getMapAsset().getRegion(message.getAttackerRegion());
         AssetMap.Region defenderRegion = data.getMapAsset().getRegion(message.getDefenderRegion());
-/*
-        attackerRegion.setTroops(message.getAttackerTroops());
 
-        defenderRegion.setTroops(message.getDefenderTroops());
-        defenderRegion.setOwner(message.getDefenderRegionOwner());*/
-        data.setGuiChanges(new RemoveTroopGui(defenderRegion.getName(), defenderRegion.getTroops() - message.getDefenderTroops()));
+        Gdx.app.log("Client Evaluate", "Troops to remove: " + attackerRegion.getName()+ ": " + (attackerRegion.getTroops() - message.getAttackerTroops()));
+        Gdx.app.log("Client Evaluate", "Troops to remove: " + defenderRegion.getName()+ ": " + (defenderRegion.getTroops() - message.getDefenderTroops()));
+
+
+        // if difference is negative (e.g. defender had 1 troop, got attacked with 3 -> difference = -2
+        // so 2 troops need to be added
+        int defenderRegionTroops = defenderRegion.getTroops() - message.getDefenderTroops();
+        if (defenderRegionTroops < 0) {
+            // spawn the correct amount of troops as an amount can't be set in SpawnTroopGui
+            for (int i = 0; i < Math.abs(defenderRegionTroops); i++) {
+                data.setGuiChanges(new SpawnTroopGui(defenderRegion.getName(), 1000));
+            }
+        } else  {
+            data.setGuiChanges(new RemoveTroopGui(defenderRegion.getName(), defenderRegion.getTroops() - message.getDefenderTroops()));
+        }
         data.setGuiChanges(new UpdateRegionOwnerGui(defenderRegion.getName(), message.getDefenderRegionOwner()));
 
         data.setGuiChanges(new RemoveTroopGui(attackerRegion.getName(), attackerRegion.getTroops() - message.getAttackerTroops()));
 
-        Gdx.app.log("EvaluateDiceResultState", "Attacker Region: " + attackerRegion.getName() +
-                ", Troops: " + attackerRegion.getTroops());
-        Gdx.app.log("EvaluateDiceResultState", "Defender Region: " + defenderRegion.getName() +
+        Gdx.app.log("Client EvaluateDiceResultState", "Attacker Region: " + message.getAttackerRegion() +
+                ", Troops: " + message.getAttackerTroops());
+        Gdx.app.log("Client EvaluateDiceResultState", "Defender Region: " + defenderRegion.getName() +
                 ", Troops: " + defenderRegion.getTroops() +
                 ", Owner: " + defenderRegion.getOwner());
 

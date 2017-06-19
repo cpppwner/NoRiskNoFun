@@ -215,12 +215,13 @@ public class GameData {
         return availableDice;
     }
 
-    public boolean isMyTurn(){
-        return myself.getPlayerName().equals(currentPlayer.getPlayerName());
+    public void setAvailableDice(int availableDice) {
+        Gdx.app.log("GameData", "Setting Available Dice: " + availableDice);
+        this.availableDice = availableDice;
     }
 
-    public void setAvailableDice(int availableDice) {
-        this.availableDice = availableDice;
+    public boolean isMyTurn(){
+        return myself.getPlayerName().equals(currentPlayer.getPlayerName());
     }
 
     public int getCheatsAvailable() {

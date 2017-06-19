@@ -1,6 +1,9 @@
 package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
+
+import java.util.Arrays;
 
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.networkmessages.Message;
@@ -34,15 +37,22 @@ public class EvaluateDiceResultState extends State {
     }
 
     private void handleDiceResult(String senderId, DiceResult message){
+        Gdx.app.log("Server EvaluateDiceResult", "Handling Dice Result");
 
 
         if(getAttackerId().equals(senderId)){
+            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Attacker" + message.getDiceResults().toString());
+
             data.setAttackerDiceResult(message.getDiceResults());
         }else if(getDefenderId().equals(senderId)){
+            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Defender: " + message.getDiceResults().toString());
+
             data.setDefenderDiceResult(message.getDiceResults());
         }
 
         if(!isEmpty(data.getDefenderDiceResult()) && !isEmpty(data.getAttackerDiceResult())) {
+            Gdx.app.log("Server EvaluateDiceResult", "Results not empty");
+
             int [] result=calculateAttackResult();
             handleAttackResult(result[0],result[1]);
         }
@@ -54,8 +64,8 @@ public class EvaluateDiceResultState extends State {
         Gdx.app.log("Server EvaluateDiceResult", "Defender Troops: " + data.getDefendersRegion().getTroops() + " Wins: " + winsOfDefender);
 
         // all attacking troops will be either killed on lose or moved to new region on win, so subtract getAttackingTroops()
-        data.getAttackerRegion().setTroops(data.getAttackerRegion().getTroops() - data.getAttackingTroops());
-        data.getDefendersRegion().setTroops(data.getDefendersRegion().getTroops()-winsOfAttacker);
+        data.getAttackerRegion().updateTroops(-data.getAttackingTroops());
+        data.getDefendersRegion().updateTroops(-winsOfAttacker);
 
         int attackerTroopsRemaining = data.getAttackingTroops() - winsOfDefender;
         int defenderTroopsRemaining = data.getDefendersRegion().getTroops();
@@ -65,6 +75,7 @@ public class EvaluateDiceResultState extends State {
             // owner changes on successful attack
             data.getDefendersRegion().setOwner(data.getPlayerById(getAttackerId()).getPlayerName());
             // all attacking troops are removed from attacker region, at least one is added to defender region
+            data.getDefendersRegion().setTroops(attackerTroopsRemaining);
             broadcastResult(getAttackerId(), getDefenderId());
             Gdx.app.log("Server EvaluateDiceResult", "Attacker won.");
         } else if (attackerTroopsRemaining > 0 && defenderTroopsRemaining > 0) { // attacker won, but defender still has troops
@@ -73,7 +84,7 @@ public class EvaluateDiceResultState extends State {
             Gdx.app.log("Server EvaluateDiceResult", "Attacker won, but defender still has troops");
         }
         else { // if defender has won
-
+            data.getAttackerRegion().updateTroops(data.getAttackingTroops() - winsOfDefender);
             broadcastResult(getDefenderId(), getAttackerId());
             Gdx.app.log("Server EvaluateDiceResult", "Attacker won.");
         }
@@ -121,13 +132,22 @@ public class EvaluateDiceResultState extends State {
         int [] defenderDiceResult = data.getDefenderDiceResult();
         int [] attackerDiceResult = data.getAttackerDiceResult();
 
+        Gdx.app.log("Server CalculateResult", "Attacker: " + Arrays.toString(attackerDiceResult));
+        Gdx.app.log("Server CalculateResult", "Defender: " + Arrays.toString(defenderDiceResult));
 
-          while (!isEmpty(defenderDiceResult) && !isEmpty(attackerDiceResult)){
-              if(getMaxValue(attackerDiceResult)>getMaxValue(defenderDiceResult)){
-                  winsOfAttacker++;
-              }else {
-                  winsOfDefender++;
-              }
+
+        while (!isEmpty(defenderDiceResult) && !isEmpty(attackerDiceResult)){
+            Gdx.app.log("Server CalculateResult", "None empty");
+
+            if(getMaxValue(attackerDiceResult)>getMaxValue(defenderDiceResult)){
+                winsOfAttacker++;
+                Gdx.app.log("Server CalculateResult", "Attacker won: " + winsOfAttacker);
+
+            }else {
+                winsOfDefender++;
+                Gdx.app.log("Server CalculateResult", "Defender won: " + winsOfDefender);
+
+            }
           }
         return new int[]{winsOfAttacker,winsOfDefender};
     }
@@ -142,6 +162,8 @@ public class EvaluateDiceResultState extends State {
             }
         }
         dice[index]=0;
+        Gdx.app.log("Server CalculateResult", "Max: " + result +", Index: " + index);
+
         return result;
     }
 
@@ -159,7 +181,7 @@ public class EvaluateDiceResultState extends State {
         DiceAmount diceAmount= new DiceAmount(data.getAttackingTroops());
         context.sendMessage(diceAmount,getAttackerId());
 
-        diceAmount= new DiceAmount(data.getDefendersRegion().getTroops()<2? 1:2);
+        diceAmount= new DiceAmount(data.getDefendersRegion().getTroops()<2 ? 1:2);
         context.sendMessage(diceAmount,getDefenderId());
 
     }
