@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
 import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
+import gmbh.norisknofun.game.gamemessages.gui.ActionDoneGui;
 import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.UpdateCurrentPlayerGui;
@@ -32,6 +34,7 @@ import gmbh.norisknofun.scene.SceneBase;
 import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
+import gmbh.norisknofun.scene.common.TextButtonSceneObject;
 import gmbh.norisknofun.scene.game.figures.Artillery;
 import gmbh.norisknofun.scene.game.figures.Cavalry;
 import gmbh.norisknofun.scene.game.figures.Figure;
@@ -48,6 +51,8 @@ public final class GameScene extends SceneBase {
     private LabelSceneObject clickedRegionLabel;
     private LabelSceneObject turnIndicator;
     private LabelSceneObject currentStateLabel;
+    TextButtonSceneObject doneButton;
+
 
     private List<Figure> figures = new ArrayList<>();
     private Map<String, LabelSceneObject> troopIndicators;
@@ -89,6 +94,7 @@ public final class GameScene extends SceneBase {
         initTurnIndicator();
         initStateIndicator();
         initTroopIndicators();
+        initDoneButton();
 
         for (Player player:data.getPlayers()) {
             Gdx.app.log("GameScene", "Player Available: " + player.getPlayerName() + " Color: " + player.getColor());
@@ -130,6 +136,21 @@ public final class GameScene extends SceneBase {
             addSceneObject(label);
             troopIndicators.put(region.getName(), label);
         }
+    }
+
+    private void initDoneButton() {
+        doneButton = new TextButtonSceneObject(sceneData.createTextButton("Skip", Assets.DEFAULT_TEXT_BUTTON_DESCRIPTOR), null);
+        doneButton.setBounds(Gdx.graphics.getWidth() - doneButton.getWidth(), 0, 200, 100);
+        doneButton.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                sceneData.sendMessageFromGui(new ActionDoneGui());
+            }
+        });
+        addSceneObject(doneButton);
+        doneButton.setVisible(false); // only show when Player is in ChooseTargetState
     }
 
     /**
@@ -462,6 +483,12 @@ public final class GameScene extends SceneBase {
             currentStateLabel.setText(data.getCurrentStateName());
 
             updateTroopIndicators();
+
+            if (data.getCurrentStateName().equals("ChooseTarget") || data.getCurrentStateName().equals("MoveTroops")) {
+                doneButton.setVisible(true);
+            } else {
+                doneButton.setVisible(false);
+            }
 
         }
 

@@ -43,28 +43,29 @@ public class ChooseTargetState extends State {
     private void handleNoAttackMessage(String senderId, NoAttack message){
         if(data.getCurrentplayer().getId().equals(senderId)){
 
-            context.sendMessage(message,senderId);
+            context.sendMessage(message, senderId);
             context.setState(new MoveTroopsState(context));
         }else {
-            context.sendMessage(new AttackRegionCheck(false,"It's not your turn"));
+            context.sendMessage(new AttackRegionCheck(false,"It's not your turn"), senderId);
         }
     }
     private void handleAttackRegion(String senderId, AttackRegion message) {
 
         if(message.getDefenderRegion()==null
                 || message.getAttackerRegion()==null){
-            return ;
+            context.sendMessage(new AttackRegionCheck(false, "Attacker or Defender Region was null."), senderId);
+            return;
         }
 
         Gdx.app.log("ChooseTargetState", "Handle Attack Region from " + senderId);
 
         if(checkAttackRegionMessage(senderId, message)){
-                Gdx.app.log("ChooseTargetState", "Attack check successful");
+            Gdx.app.log("ChooseTargetState", "Attack check successful");
 
-                data.setDefendersRegion(data.getRegionByName(message.getDefenderRegion()));
-                data.setAttackerRegion(data.getRegionByName(message.getAttackerRegion()));
+            data.setDefendersRegion(data.getRegionByName(message.getDefenderRegion()));
+            data.setAttackerRegion(data.getRegionByName(message.getAttackerRegion()));
             notifyPlayers(message, senderId);
-                context.setState(new AttackState(context));
+            context.setState(new AttackState(context));
 
         }
     }

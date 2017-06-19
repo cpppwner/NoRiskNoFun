@@ -15,6 +15,9 @@ public class AttackResult extends BasicMessageImpl implements Serializable{
     private String defenderRegion;
     private String defenderRegionOwner;
     private int defenderTroops;
+    private String winnerId;
+    private String loserId;
+
     private static final long serialVersionUID = 1L;
 
 
@@ -68,5 +71,21 @@ public class AttackResult extends BasicMessageImpl implements Serializable{
 
     public void setDefenderTroops(int defenderTroops) {
         this.defenderTroops = defenderTroops;
+    }
+
+    public String getWinnerId() {
+        return winnerId;
+    }
+
+    public void setWinnerId(String winnerId) {
+        this.winnerId = winnerId;
+    }
+
+    public String getLoserId() {
+        return loserId;
+    }
+
+    public void setLoserId(String loserId) {
+        this.loserId = loserId;
     }
 }

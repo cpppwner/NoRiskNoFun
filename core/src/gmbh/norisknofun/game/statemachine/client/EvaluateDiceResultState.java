@@ -43,8 +43,31 @@ public class EvaluateDiceResultState extends State {
         }
     }
 
-
     private void handleAttackResult(AttackResult attackResult){
+
+        updateRegions(attackResult);
+        if(context.getGameData().isMyTurn()){ //  I am attacker
+            if(attackResult.getWinnerId().equals(context.getGameData().getMyself().getId())) {
+                context.getGameData().setLastError("Congratulations!  \n  you captured region: " + attackResult.getDefenderRegion());
+            }else {
+                context.getGameData().setLastError("You lost!  \n  more luck next time.");
+            }
+            context.setState(new ChooseTargetState(context));
+        }else { //  I am Defender
+            if(attackResult.getWinnerId().equals(context.getGameData().getMyself().getId())) {
+                context.getGameData().setLastError("Congratulations!  \n  you defended region: " + attackResult.getDefenderRegion());
+            }else {
+                context.getGameData().setLastError("Sorry!  \n  you lost region:"+attackResult.getDefenderRegion());
+            }
+            context.setState(new WaitingForNextTurnState(context));
+        }
+
+
+        // switch back to Game Scene after the attack was done
+        SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
+    }
+
+/*    private void handleAttackResult(AttackResult attackResult){
 
         updateRegions(attackResult);
         if(context.getGameData().isMyTurn()){ //  I am attacker
@@ -66,7 +89,7 @@ public class EvaluateDiceResultState extends State {
 
         // switch back to Game Scene after the attack was done
         SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);
-    }
+    }*/
 
     /**
      * Update Troops on attacker and defender region
@@ -81,5 +104,12 @@ public class EvaluateDiceResultState extends State {
 
         defenderRegion.setTroops(message.getDefenderTroops());
         defenderRegion.setOwner(message.getDefenderRegionOwner());
+
+        Gdx.app.log("EvaluateDiceResultState", "Attacker Region: " + attackerRegion.getName() +
+                ", Troops: " + attackerRegion.getTroops());
+        Gdx.app.log("EvaluateDiceResultState", "Defender Region: " + defenderRegion.getName() +
+                ", Troops: " + defenderRegion.getTroops() +
+                ", Owner: " + defenderRegion.getOwner());
+
     }
 }

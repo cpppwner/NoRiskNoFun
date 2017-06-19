@@ -53,17 +53,36 @@ public class EvaluateDiceResultState extends State {
         data.getDefendersRegion().setTroops(data.getDefendersRegion().getTroops()-winsOfAttacker);
 
         if(data.getDefendersRegion().getTroops()<=0){ // if attacker  has won
-            sendAttackResult(true, getAttackerId());
-            sendAttackResult(false,getDefenderId());
+            /*sendAttackResult(true, getAttackerId());
+            sendAttackResult(false,getDefenderId());*/
+            broadcastResult(getAttackerId(), getDefenderId());
         }else { // if defender has won
-            sendAttackResult(true,getDefenderId());
-            sendAttackResult(false,getAttackerId());
+/*            sendAttackResult(true,getDefenderId());
+            sendAttackResult(false,getAttackerId());*/
+            broadcastResult(getDefenderId(), getAttackerId());
         }
+
+        // also notify all other clients about the result
+        //TODO: Combine attacker and defender result in this this broadcast
+
 
         context.setState(new ChooseTargetState(context));
 
     }
 
+    private void broadcastResult(String winnerId, String loserId) {
+        AttackResult attackResult= new AttackResult();
+
+        attackResult.setAttackerRegion(data.getAttackerRegion().getName());
+        attackResult.setAttackerTroops(data.getAttackerRegion().getTroops());
+        attackResult.setDefenderRegion(data.getDefendersRegion().getName());
+        attackResult.setDefenderTroops(data.getDefendersRegion().getTroops());
+        attackResult.setDefenderRegionOwner(data.getDefendersRegion().getOwner());
+        attackResult.setWinnerId(winnerId);
+        attackResult.setLoserId(loserId);
+
+        context.sendMessage(attackResult);
+    }
 
     private void sendAttackResult(boolean won, String senderId){
         AttackResult attackResult= new AttackResult();

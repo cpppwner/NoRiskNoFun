@@ -36,7 +36,7 @@ public class GameData {
 
     private int[] diceRoll;
     private int availableDice;
-    private int cheatsAvailable;
+    private int cheatsAvailable = 3;
 
     private int maxNumPlayers;
     private String mapFilename;
