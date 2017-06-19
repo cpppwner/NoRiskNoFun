@@ -51,8 +51,8 @@ public class WaitingForNextTurnState extends State {
     }
 
     private void updateRegions(AttackResult message) {
-        AssetMap.Region attackerRegion = context.getGameData().getMapAsset().getRegion(message.getAttackerRegion());
-        AssetMap.Region defenderRegion = context.getGameData().getMapAsset().getRegion(message.getDefenderRegion());
+        AssetMap.Region attackerRegion = data.getMapAsset().getRegion(message.getAttackerRegion());
+        AssetMap.Region defenderRegion = data.getMapAsset().getRegion(message.getDefenderRegion());
 
 /*        attackerRegion.setTroops(message.getAttackerTroops());
 
