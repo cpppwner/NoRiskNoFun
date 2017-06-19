@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.game.GameDataServer;
 import gmbh.norisknofun.game.Player;
-import gmbh.norisknofun.game.gamemessages.client.ClientDisconnected;
 import gmbh.norisknofun.game.gamemessages.client.DisconnectClient;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
@@ -84,7 +83,8 @@ public class DistributionState extends State {
     }
 
     private void broadcastSpawnTroopMessage(SpawnTroop message){
-        SpawnTroop spawnTroop = new SpawnTroop(message.getRegionname());
+        Gdx.app.log("Distribution Spawn", "Spawning Troop with ID: " + data.getCurrentFigureId());
+        SpawnTroop spawnTroop = new SpawnTroop(message.getRegionname(), data.nextFigureId());
         context.sendMessage(spawnTroop); // send to all clients
     }
     private void sendSpawnTroopCheckMessage(String senderId, String errormessage, boolean movepossible){

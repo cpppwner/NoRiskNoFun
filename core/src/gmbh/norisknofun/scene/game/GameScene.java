@@ -166,9 +166,8 @@ public final class GameScene extends SceneBase {
 
                 // if it's the actor's first move, explicitly set the region
                 if (actor.isFirstMove()) {
-                    int actorId = data.nextActorId();
-                    Gdx.app.log("Request Spawn", "Requesting Spawn with ID: " + actorId + "(" + data.getCurrentActorId() +")");
-                    sceneData.sendMessageFromGui(new SpawnTroopGui(tappedRegion.getName(), data.getCurrentActorId())); // id is -1 because we don't need it
+                    Gdx.app.log("Request Spawn", "Requesting Spawn" );
+                    sceneData.sendMessageFromGui(new SpawnTroopGui(tappedRegion.getName()));
 
                     actor.setHighlighted(false);
                     break;
@@ -179,9 +178,6 @@ public final class GameScene extends SceneBase {
 
                     Gdx.app.log("Request Move", "Requesting Move with ID: " + actor.getId());
 
-
-                    //actor.getCurrentRegion().setTroops(actor.getCurrentRegion().getTroops()-1);
-                    Gdx.app.log("Move Troop", "Moving troop: " + actor.getId());
                     actor.setHighlighted(false);
                     sceneData.sendMessageFromGui(new MoveTroopGui(actor.getCurrentRegion().getName(), tappedRegion.getName(),actor.getId()));
                 }
@@ -389,14 +385,13 @@ public final class GameScene extends SceneBase {
 
         region.updateTroops(1);
         data.setChangedFlag(true);
-        data.nextActorId();
 
         figures.add(infantry);
         addSceneObject(infantry);
     }
 
     /**
-     * Move the highlighted Figures to the position specified in the message
+     * Move the specified Figures to the position given in the message
      * @param message GUI Message containing information about the move
      */
     private void moveTroop(MoveTroopGui message) {
@@ -474,8 +469,6 @@ public final class GameScene extends SceneBase {
         for (AssetMap.Region region : data.getMapAsset().getRegions()) {
             label = troopIndicators.get(region.getName());
             label.setText(Integer.toString(region.getTroops()));
-            label.setZIndex(label.getZIndex() + 1);
-
         }
     }
 

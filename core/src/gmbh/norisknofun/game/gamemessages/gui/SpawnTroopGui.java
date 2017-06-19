@@ -17,6 +17,11 @@ public class SpawnTroopGui extends BasicMessageImpl {
         this.id=id;
     }
 
+    public SpawnTroopGui(String regionName) {
+        this.regionName = regionName;
+        this.id = -1;
+    }
+
     public String getRegionName() {
         return regionName;
     }
