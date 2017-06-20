@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
+import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.assets.AssetSound;
 import gmbh.norisknofun.scene.Assets;
 import gmbh.norisknofun.scene.SceneBase;
@@ -128,31 +129,23 @@ public class JoinGameScene extends SceneBase {
 
         @Override
         public void clicked(InputEvent event, float x, float y) {
-//            if (nameTextField.getText() == null || nameTextField.getText().isEmpty()) {
-//                AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
-//                dialog.show(getStage());
-//                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-//                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
-//            } else if (hostTextField.getText() == null || hostTextField.getText().isEmpty()) {
-//                AssetModalDialog dialog = sceneData.createModalDialog("IP is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
-//                dialog.show(getStage());
-//                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-//                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
-//            }
-//            else{
-//
-//                sceneData.setHostIp(hostTextField.getText());
-//                sceneData.setPlayerName(nameTextField.getText());
-//                super.clicked(event, x, y);
-//            }
-
-                sceneData.setHostIp("192.168.0.3");
-            if ( !nameTextField.getText().isEmpty()) {
-                sceneData.setPlayerName(nameTextField.getText());
-            } else {
-                sceneData.setPlayerName("PlayerJoining");
+            if (nameTextField.getText() == null || nameTextField.getText().isEmpty()) {
+                AssetModalDialog dialog = sceneData.createModalDialog("Name is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
+                dialog.show(getStage());
+                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+            } else if (hostTextField.getText() == null || hostTextField.getText().isEmpty()) {
+                AssetModalDialog dialog = sceneData.createModalDialog("IP is not given", Assets.ERROR_DIALOG_DESCRIPTOR);
+                dialog.show(getStage());
+                dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
+                        getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
             }
-            super.clicked(event, x, y);
+            else{
+
+                sceneData.setHostIp(hostTextField.getText());
+                sceneData.setPlayerName(nameTextField.getText());
+                super.clicked(event, x, y);
+            }
         }
     }
 }
