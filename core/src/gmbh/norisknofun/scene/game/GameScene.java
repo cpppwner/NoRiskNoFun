@@ -23,8 +23,8 @@ import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.assets.AssetModalDialog;
 import gmbh.norisknofun.game.GameData;
 import gmbh.norisknofun.game.Player;
-import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.ActionDoneGui;
+import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.UpdateCurrentPlayerGui;
@@ -36,8 +36,6 @@ import gmbh.norisknofun.scene.SceneData;
 import gmbh.norisknofun.scene.SceneNames;
 import gmbh.norisknofun.scene.common.LabelSceneObject;
 import gmbh.norisknofun.scene.common.TextButtonSceneObject;
-import gmbh.norisknofun.scene.game.figures.Artillery;
-import gmbh.norisknofun.scene.game.figures.Cavalry;
 import gmbh.norisknofun.scene.game.figures.Figure;
 import gmbh.norisknofun.scene.game.figures.Infantry;
 
