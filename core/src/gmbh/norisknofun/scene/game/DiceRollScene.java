@@ -55,9 +55,8 @@ public class DiceRollScene extends SceneBase {
         canRoll = true;
 
         // spawn the correct amount of dice on the correct position
-        for (int i = 0, offset = 100; i < data.getAvailableDice(); i++) {
+        for (int i = 0, offset = 100; i < data.getAvailableDice(); i++, offset += 600) {
             initDie(1, i, offset, 540);
-            offset += 600;
         }
 
         setDiceClickListener();

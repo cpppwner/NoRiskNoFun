@@ -44,6 +44,9 @@ import gmbh.norisknofun.scene.game.figures.Infantry;
  */
 public final class GameScene extends SceneBase {
 
+    private static final String CHOOSE_TARGET_STATE_NAME = "ChooseTarget";
+    private static final String MOVE_TROOPS_STATE_NAME = "MoveTroops";
+
     private final SceneData sceneData;
     private final GameData data;
 
@@ -274,17 +277,16 @@ public final class GameScene extends SceneBase {
         List<Figure> figuresToRemove = new LinkedList<>(); // use a separate list to avoid ConcurrentModificationException on figures list
 
         for (Figure actor : figures) {
-            if (actor.getId() == -1) { // one of the three default figures. ignore
-                continue;
-            }
-            if (amount <= 0) { // stop if the correct actors have been removed
-                break;
-            }
+            if (actor.getId() != -1) { // one of the three default figures. ignore
+                if (amount <= 0) { // stop if the correct actors have been removed
+                    break;
+                }
 
-            // remove actor if it's on the same region
-            if (actor.getCurrentRegion().getName().equals(message.getRegionName())) {
-                figuresToRemove.add(actor);
-                amount--;
+                // remove actor if it's on the same region
+                if (actor.getCurrentRegion().getName().equals(message.getRegionName())) {
+                    figuresToRemove.add(actor);
+                    amount--;
+                }
             }
         }
 
@@ -336,7 +338,7 @@ public final class GameScene extends SceneBase {
 
 
         // set color and owner only when the first troop spawns on this region
-        if (region.getOwner().equals("none")) {
+        if (region.getOwner().equals(Player.NULL_PLAYERNAME)) {
             region.setOwner(data.getCurrentPlayer().getPlayerName());
             setRegionColor(new Color(data.getCurrentPlayer().getColor()), infantry.getCurrentRegion());
         }
@@ -447,7 +449,7 @@ public final class GameScene extends SceneBase {
 
             updateTroopIndicators();
 
-            if (data.getCurrentStateName().equals("ChooseTarget") || data.getCurrentStateName().equals("MoveTroops")) {
+            if (data.getCurrentStateName().equals(CHOOSE_TARGET_STATE_NAME) || data.getCurrentStateName().equals(MOVE_TROOPS_STATE_NAME)) {
                 doneButton.setVisible(true);
             } else {
                 doneButton.setVisible(false);
