@@ -117,4 +117,9 @@ public class Client implements OutboundMessageHandler, SessionEventHandler {
 
         this.inboundMessageQueue.add(message);
     }
+
+    public void resetState() {
+
+        setInitialState();
+    }
 }
