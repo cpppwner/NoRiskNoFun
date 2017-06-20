@@ -81,7 +81,7 @@ class DistributionState extends State {
     }
 
     private void addTroopsToPlayer(){
-        data.getCurrentplayer().setTroopToSpread(TROOPS_TO_SPAWN); // todo how to calculate the reinforcement
+        data.getCurrentplayer().setTroopToSpread(TROOPS_TO_SPAWN);
         context.sendMessage(new AddTroops(TROOPS_TO_SPAWN), data.getCurrentplayer().getId());
     }
 

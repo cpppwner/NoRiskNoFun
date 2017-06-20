@@ -2,9 +2,6 @@ package gmbh.norisknofun.game.gamemessages.client;
 
 import org.junit.Test;
 
-
-import gmbh.norisknofun.game.gamemessages.gui.StartGameClicked;
-
 import static org.junit.Assert.assertEquals;
 
 /**

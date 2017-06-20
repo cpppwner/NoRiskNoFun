@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import gmbh.norisknofun.game.Player;
-import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayerAccepted;
-
 import static org.junit.Assert.assertEquals;
 
 /**

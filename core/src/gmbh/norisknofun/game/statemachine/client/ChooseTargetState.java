@@ -2,8 +2,8 @@ package gmbh.norisknofun.game.statemachine.client;
 
 import com.badlogic.gdx.Gdx;
 
-import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.ActionDoneGui;
+import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegion;
 import gmbh.norisknofun.game.networkmessages.choosetarget.AttackRegionCheck;

@@ -291,7 +291,6 @@ public final class GameScene extends SceneBase {
         removeFigures(figuresToRemove);
 
         if (amount != 0) {
-            // todo: something wrong, there weren't enough troops on the region
             Gdx.app.log(getClass().getSimpleName(), "Couldn't remove all requested troops");
         }
     }
@@ -388,18 +387,12 @@ public final class GameScene extends SceneBase {
         Message message = data.getGuiChanges().poll();
 
         if (message.getType().equals(SpawnTroopGui.class)) {
-            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
             spawnNewTroop((SpawnTroopGui) message);
         } else if (message.getType().equals(MoveTroopGui.class)) {
-            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
             moveTroop((MoveTroopGui) message);
         } else if (message.getType().equals(RemoveTroopGui.class)) {
-            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
-
             removeTroop((RemoveTroopGui) message);
         } else if (message.getType().equals(UpdateCurrentPlayerGui.class)) {
-            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
-
             data.setCurrentPlayer(((UpdateCurrentPlayerGui) message).getCurrentPlayer());
         } else if (message.getType().equals(UpdateRegionOwnerGui.class)) {
             updateRegionOwner((UpdateRegionOwnerGui) message);
