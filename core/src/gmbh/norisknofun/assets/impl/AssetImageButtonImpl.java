@@ -3,6 +3,7 @@ package gmbh.norisknofun.assets.impl;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -82,12 +83,12 @@ class AssetImageButtonImpl implements AssetImageButton {
 
     @Override
     public void setDisabled() {
-        imageButton.setDisabled(true);
+        imageButton.setTouchable(Touchable.disabled);
     }
 
     @Override
     public void setEnabled() {
-        imageButton.setDisabled(false);
+        imageButton.setTouchable(Touchable.enabled);
     }
 
     @Override
