@@ -56,9 +56,13 @@ public class LobbyScene extends SceneBase{
         this.buttonPressedSound = sceneData.createSound(Assets.BUTTON_PRESSED_SOUND_FILENAME);
 
         setBackground();
+        initLabel();
+    }
+
+    @Override
+    public void preload() {
         initImageButtons();
         initHostIpLabel();
-        initLabel();
     }
 
     private void setBackground() {
