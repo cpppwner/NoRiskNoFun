@@ -46,7 +46,7 @@ class ChooseTroopAmountState extends State {
             sendChooseTroopsAmountCheckMessage(senderId,true,"");
             sendIsAttackedMessage(); // inform defender to change in EvaluateDiceResultState
 
-            attackState.setState(new EvaluateDiceResultState(context,attackState));
+            attackState.setState(new EvaluateDiceResultState(context));
         }
     }
 

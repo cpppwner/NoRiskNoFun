@@ -45,7 +45,7 @@ class ChooseTroopAmountState extends State {
         Gdx.app.log("Client ChooseTroopAmount", "Received Check: " + message.isCheck());
 
         if(message.isCheck()){
-            attackState.setState(new EvaluateDiceResultState(context, attackState));
+            attackState.setState(new EvaluateDiceResultState(context));
         }else{
             context.getGameData().setLastError(message.getErrormessage());
         }

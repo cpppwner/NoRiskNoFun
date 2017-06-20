@@ -19,7 +19,7 @@ public class AttackState extends State {
         if (isAttacker) {
             state = new ChooseTroopAmountState(context, this);
         } else {
-            state = new EvaluateDiceResultState(context, this);
+            state = new EvaluateDiceResultState(context);
         }
     }
 
