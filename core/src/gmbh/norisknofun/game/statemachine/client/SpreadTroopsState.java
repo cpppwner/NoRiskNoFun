@@ -48,7 +48,8 @@ public class SpreadTroopsState extends State {
      * otherwise go to Waiting State and wait for your turn
      */
     private void stateTransition(PlayerSpreadFinished message) {
-        context.getGameData().setCurrentPlayer(message.getCurrentPlayerName());
+        //context.getGameData().setCurrentPlayer(message.getCurrentPlayerName());
+        context.getGameData().setGuiChanges(new UpdateCurrentPlayerGui(message.getCurrentPlayerName()));
         Gdx.app.log("SpreadTroop Transition", "Current Player: " + context.getGameData().getCurrentPlayer().getPlayerName() + " Myself: " + context.getGameData().getMyself().getPlayerName());
         if (context.getGameData().isMyTurn()) {
             context.setState(new DistributionState(context));
