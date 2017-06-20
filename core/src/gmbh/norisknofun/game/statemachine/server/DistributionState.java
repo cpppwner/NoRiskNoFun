@@ -97,7 +97,7 @@ class DistributionState extends State {
     }
 
     private void checkIfSomeoneHasWon(){
-        int numOfRegion=0;
+        int numOfRegion;
         for(Player player: data.getPlayers().getPlayerlist()){
            numOfRegion=data.getNumberOfRegionOwnedByPlayer(player.getPlayerName());
             if(numOfRegion==data.getMapAsset().getRegions().size()){

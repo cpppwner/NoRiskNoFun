@@ -9,7 +9,6 @@ import gmbh.norisknofun.game.networkmessages.common.SpawnTroopCheck;
 import gmbh.norisknofun.game.networkmessages.distribution.AddTroops;
 import gmbh.norisknofun.game.networkmessages.spread.PlayerSpreadFinished;
 import gmbh.norisknofun.game.statemachine.State;
-//import gmbh.norisknofun.network.Client;
 
 /**
  * Created by Katharina on 19.05.2017.

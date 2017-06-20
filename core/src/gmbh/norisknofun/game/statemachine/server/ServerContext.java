@@ -70,4 +70,8 @@ public class ServerContext implements InboundMessageHandler {
         state.handleMessage(senderId, message);
 
     }
+
+    public void reset() {
+        this.state=new WaitingForPlayersState(this);
+    }
 }

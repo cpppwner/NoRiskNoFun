@@ -58,6 +58,7 @@ class GameServer {
             return false;
         }
 
+        serverContext.reset();
         gameServerThread.start();
 
         return true;
@@ -79,7 +80,7 @@ class GameServer {
         clients.closeAll();
     }
 
-    synchronized boolean isRunning() {
+    private synchronized boolean isRunning() {
 
         return gameServerThread.isAlive();
     }
