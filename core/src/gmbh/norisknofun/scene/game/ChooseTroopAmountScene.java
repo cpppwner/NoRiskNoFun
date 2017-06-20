@@ -82,9 +82,6 @@ public class ChooseTroopAmountScene extends SceneBase {
 
     private final class ContinueClickListener extends ClickListener {
 
-        private ContinueClickListener() {
-        }
-
         @Override
         public void clicked(InputEvent event, float x, float y) {
 

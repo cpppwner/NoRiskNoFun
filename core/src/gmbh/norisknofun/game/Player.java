@@ -7,6 +7,8 @@ package gmbh.norisknofun.game;
 
 public class Player {
 
+    public static final String NULL_PLAYERNAME = "none";
+
     private String playername="";
     private boolean ishost=false;
     private int troopToSpread =0;

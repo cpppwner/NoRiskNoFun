@@ -9,5 +9,6 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
 public class EvaluateDiceResultGui extends BasicMessageImpl{
 
     public EvaluateDiceResultGui(){
+        super();
     }
 }

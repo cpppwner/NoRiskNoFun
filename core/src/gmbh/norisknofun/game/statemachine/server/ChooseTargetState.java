@@ -93,7 +93,7 @@ class ChooseTargetState extends State {
         AssetMap.Region defenderRegion= data.getRegionByName(message.getDefenderRegion());
         AssetMap.Region attackerRegion= data.getRegionByName(message.getAttackerRegion());
 
-        if (defenderRegion.getOwner().equals("none")) {
+        if (defenderRegion.getOwner().equals(Player.NULL_PLAYERNAME)) {
             check = false;
             sendAttackRegionCheckMessage(senderId, false, "Can't attack a neutral region.");
         } else if (!attackerRegion.getOwner().equals(data.getCurrentplayer().getPlayerName())) {

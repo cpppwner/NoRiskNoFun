@@ -33,8 +33,6 @@ public class EndGameScene extends SceneBase {
         this.sceneData = sceneData;
         this.data = sceneData.getGameData();
         this.buttonPressedSound = sceneData.createSound(Assets.BUTTON_PRESSED_SOUND_FILENAME);
-
-
     }
 
     @Override
@@ -76,16 +74,11 @@ public class EndGameScene extends SceneBase {
 
     private final class ContinueClickListener extends ClickListener {
 
-        private ContinueClickListener() {
-        }
-
         @Override
         public void clicked(InputEvent event, float x, float y) {
 
-
-                sceneData.sendMessageFromGui(new EndGameGui());
+            sceneData.sendMessageFromGui(new EndGameGui());
             Gdx.app.log("EndGameScene","clicked on OK Button");
-
             super.clicked(event, x, y);
         }
 
@@ -104,13 +97,12 @@ public class EndGameScene extends SceneBase {
 
     @Override
     public void show(){
-//        if(data.getWinner().equals(data.getMyself().getPlayerName())){
-//            sceneObject.setText("You won°!");
-//        } else{
-//            sceneObject.setText("You lost!");
-//        }
+        if(data.getWinner().equals(data.getMyself().getPlayerName())){
+            sceneObject.setText("You won°!");
+        } else{
+            sceneObject.setText("You lost!");
+        }
 
-        sceneObject.setText("You won!");
         super.show();
 
     }

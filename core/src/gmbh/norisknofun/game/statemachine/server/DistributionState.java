@@ -72,7 +72,7 @@ class DistributionState extends State {
             check=false;
             sendSpawnTroopCheckMessage(senderId,"It's not your turn",false);
         }
-        else if(!data.getRegionByName(spawnTroop.getRegionname()).getOwner().equals("none") &&
+        else if(!data.getRegionByName(spawnTroop.getRegionname()).getOwner().equals(Player.NULL_PLAYERNAME) &&
                 !data.getRegionByName(spawnTroop.getRegionname()).getOwner().equals(data.getCurrentplayer().getPlayerName())){
             check=false;
             sendSpawnTroopCheckMessage(senderId,"that is not your region",false);
