@@ -47,6 +47,8 @@ public class DiceRollScene extends SceneBase {
     public void show() {
         getStage().clear();
 
+        resetDiceResults();
+
         dieObjects = new ArrayList<>();
 
         hasBeenShaken = false;
@@ -66,6 +68,13 @@ public class DiceRollScene extends SceneBase {
         initBackButton();
 
         super.show();
+    }
+
+    private void resetDiceResults() {
+
+        for (int i = 0; i < rollResults.length; i++) {
+            rollResults[i] = 0;
+        }
     }
 
     /**
