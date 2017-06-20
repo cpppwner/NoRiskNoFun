@@ -96,6 +96,9 @@ class ChooseTargetState extends State {
         if (defenderRegion.getOwner().equals("none")) {
             check = false;
             sendAttackRegionCheckMessage(senderId, false, "Can't attack a neutral region.");
+        } else if (!attackerRegion.getOwner().equals(data.getCurrentplayer().getPlayerName())) {
+            check = false;
+            sendAttackRegionCheckMessage(senderId, false, "Not your region.");
         }
         // check if attacker has enough troops on the region
         else if (attackerRegion.getTroops() < 2) {
