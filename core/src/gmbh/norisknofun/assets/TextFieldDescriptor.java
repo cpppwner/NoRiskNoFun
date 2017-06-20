@@ -1,6 +1,7 @@
 package gmbh.norisknofun.assets;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 /**
  * Container class abstracting some parameters for creating text fields.
@@ -70,11 +71,19 @@ public final class TextFieldDescriptor {
 
         TextFieldDescriptor other = (TextFieldDescriptor)o;
 
-        return font.equals(other.font)
-                && fontColor.equals(other.fontColor)
-                && messageFont.equals(other.messageFont)
-                && messageFontColor.equals(other.messageFontColor)
+        return equalFontParameters(other)
+                && equalMessageFontParameters(other)
                 && hintText.equals(other.hintText);
+    }
+
+    private boolean equalFontParameters(TextFieldDescriptor other) {
+
+        return font.equals(other.font) && fontColor.equals(other.fontColor);
+    }
+
+    private boolean equalMessageFontParameters(TextFieldDescriptor other) {
+
+        return messageFont.equals(other.messageFont) && messageFontColor.equals(other.messageFontColor);
     }
 
     public static final class Builder {

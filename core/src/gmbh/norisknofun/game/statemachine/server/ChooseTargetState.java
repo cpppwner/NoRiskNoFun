@@ -28,7 +28,7 @@ class ChooseTargetState extends State {
 
     @Override
     public void handleMessage(String senderId, Message message) {
-        Gdx.app.log("Server ChooseTargetState", "Handling message: " + message.getClass().getName());
+        Gdx.app.log(getClass().getSimpleName(), "Handling message: " + message.getClass().getName());
 
 
         if(message.getType().equals(NoAttack.class)){
@@ -36,7 +36,7 @@ class ChooseTargetState extends State {
         }else if(message.getType().equals(AttackRegion.class)){
             handleAttackRegion(senderId,(AttackRegion)message);
         }else{
-            Gdx.app.log("ChooseTargetState","unknown message");
+            Gdx.app.log(getClass().getSimpleName(),"unknown message");
         }
     }
 
@@ -57,10 +57,10 @@ class ChooseTargetState extends State {
             return;
         }
 
-        Gdx.app.log("ChooseTargetState", "Handle Attack Region from " + senderId);
+        Gdx.app.log(getClass().getSimpleName(), "Handle Attack Region from " + senderId);
 
         if(checkAttackRegionMessage(senderId, message)){
-            Gdx.app.log("ChooseTargetState", "Attack check successful");
+            Gdx.app.log(getClass().getSimpleName(), "Attack check successful");
 
             data.setDefendersRegion(data.getRegionByName(message.getDefenderRegion()));
             data.setAttackerRegion(data.getRegionByName(message.getAttackerRegion()));

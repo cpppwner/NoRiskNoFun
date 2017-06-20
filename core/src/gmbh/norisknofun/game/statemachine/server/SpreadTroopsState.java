@@ -18,6 +18,8 @@ import gmbh.norisknofun.game.statemachine.State;
 
 public class SpreadTroopsState extends State {
 
+    private static final String NO_OWNER_NAME = "none";
+
     private ServerContext context;
     private final GameDataServer data;
     private static final int TROOPS_TO_SPREAD = 3;
@@ -70,7 +72,7 @@ public class SpreadTroopsState extends State {
         } else if (data.getCurrentplayer().getTroopToSpread() <= 0) { //when player has no troops to spawn
             check = false;
             sendSpawnTroopCheckMessage(senderId, false, "You already spawned all your troops");
-        } else if (!data.getRegionByName(message.getRegionname()).getOwner().equals("none")
+        } else if (!data.getRegionByName(message.getRegionname()).getOwner().equals(NO_OWNER_NAME)
                 && !data.getRegionByName(message.getRegionname()).getOwner().equals(data.getCurrentplayer().getPlayerName())) { // if region is enemy region
             check = false;
             sendSpawnTroopCheckMessage(senderId, false, "You can't spawn on this region");
@@ -114,7 +116,7 @@ public class SpreadTroopsState extends State {
 
     private void updateRegion(SpawnTroop message) {
         AssetMap.Region region = data.getRegionByName(message.getRegionname());
-        if (region.getOwner().equals("none")) {
+        if (region.getOwner().equals(NO_OWNER_NAME)) {
             region.setOwner(data.getCurrentplayer().getPlayerName());
         }
 

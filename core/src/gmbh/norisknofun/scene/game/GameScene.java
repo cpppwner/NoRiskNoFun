@@ -98,19 +98,13 @@ public final class GameScene extends SceneBase {
         initDoneButton();
 
         for (Player player:data.getPlayers()) {
-            Gdx.app.log("GameScene", "Player Available: " + player.getPlayerName() + " Color: " + player.getColor());
+            Gdx.app.log(getClass().getSimpleName(), "Player Available: " + player.getPlayerName() + " Color: " + player.getColor());
         }
 
-        Gdx.app.log("GameScene", "Myself: " + data.getMyself().getPlayerName() + " Color: " + data.getMyself().getColor());
+        Gdx.app.log(getClass().getSimpleName(), "Myself: " + data.getMyself().getPlayerName() + " Color: " + data.getMyself().getColor());
 
     }
 
-    @Override
-    public void show() {
-        // make sure the stage is not drawn again when coming back from another scene
-
-        super.show();
-    }
 
     private void addInputListener() {
         addSceneListener(new InputListener() {
@@ -185,19 +179,6 @@ public final class GameScene extends SceneBase {
         }
     }
 
-
-    /**
-     * Move a specific figure to given coordinates
-     *
-     * @param x Coordinate
-     * @param y Coordinate
-     * @param actor Figure to move
-     */
-    private void moveActor(float x, float y, Figure actor) {
-        actor.addAction(Actions.moveTo(x - (actor.getWidth() / 2), y - (actor.getHeight() / 2), 0.2f));
-        actor.setHighlighted(false); // remove highlight after move
-    }
-
     private void moveActorToRegion(String region, Figure actor) {
         Vector2 movePosition = calculatePolygonCentroid(regionNameMap.get(region).getVertices());
 
@@ -211,22 +192,6 @@ public final class GameScene extends SceneBase {
 
         figures.add(infantry);
         return infantry;
-    }
-
-    private Cavalry createCavalry() {
-        Cavalry cavalry = new Cavalry(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.1f, 200, 200, -1);
-        cavalry.addTouchListener();
-
-        figures.add(cavalry);
-        return cavalry;
-    }
-
-    private Artillery createArtillery() {
-        Artillery artillery = new Artillery(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getHeight() * 0.1f, 200, 200, -1);
-        artillery.addTouchListener();
-
-        figures.add(artillery);
-        return artillery;
     }
 
     private void initTurnIndicator() {
@@ -329,7 +294,7 @@ public final class GameScene extends SceneBase {
 
         if (amount != 0) {
             // todo: something wrong, there weren't enough troops on the region
-            Gdx.app.log("GameScene", "Couldn't remove all requested troops");
+            Gdx.app.log(getClass().getSimpleName(), "Couldn't remove all requested troops");
         }
     }
 
@@ -339,11 +304,7 @@ public final class GameScene extends SceneBase {
      */
     private void removeFigures(List<Figure> figuresToRemove) {
         for (Figure actor:figuresToRemove) {
-            actor.getCurrentRegion().updateTroops(-1);
-            data.setChangedFlag(true);
-            figures.remove(actor);
-            actor.dispose();
-            actor.remove();
+            removeFigure(actor);
         }
     }
 
@@ -355,7 +316,7 @@ public final class GameScene extends SceneBase {
         actor.getCurrentRegion().updateTroops(-1);
         data.setChangedFlag(true);
         figures.remove(actor);
-        
+
         actor.dispose();
         actor.remove();
     }
@@ -429,24 +390,24 @@ public final class GameScene extends SceneBase {
         Message message = data.getGuiChanges().poll();
 
         if (message.getType().equals(SpawnTroopGui.class)) {
-            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
             spawnNewTroop((SpawnTroopGui) message);
         } else if (message.getType().equals(MoveTroopGui.class)) {
-            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
             moveTroop((MoveTroopGui) message);
         } else if (message.getType().equals(RemoveTroopGui.class)) {
-            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
 
             removeTroop((RemoveTroopGui) message);
         } else if (message.getType().equals(UpdateCurrentPlayerGui.class)) {
-            Gdx.app.log("GameScene","Received: " + message.getClass().getSimpleName());
+            Gdx.app.log(getClass().getSimpleName(),"Received: " + message.getClass().getSimpleName());
 
             data.setCurrentPlayer(((UpdateCurrentPlayerGui) message).getCurrentPlayer());
         } else if (message.getType().equals(UpdateRegionOwnerGui.class)) {
             updateRegionOwner((UpdateRegionOwnerGui) message);
         }
         else {
-            Gdx.app.log("GameScene","Unknown Message: " + message.getClass().getSimpleName());
+            Gdx.app.log(getClass().getSimpleName(),"Unknown Message: " + message.getClass().getSimpleName());
         }
     }
 
