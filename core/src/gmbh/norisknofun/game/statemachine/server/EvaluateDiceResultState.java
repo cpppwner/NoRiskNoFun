@@ -1,7 +1,6 @@
 package gmbh.norisknofun.game.statemachine.server;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
 
 import java.util.Arrays;
 
@@ -17,6 +16,9 @@ import gmbh.norisknofun.game.statemachine.State;
  */
 
 class EvaluateDiceResultState extends State {
+
+    private static final String LOG_TAG_EVALUATE_RESULT_NAME = "Server EvaluateDiceResult";
+    private static final String LOG_TAG_CALCULATE_RESULT_NAME = "Server CalculateResult";
 
     private final ServerContext context;
     private final GameDataServer data;
@@ -39,21 +41,21 @@ class EvaluateDiceResultState extends State {
     }
 
     private void handleDiceResult(String senderId, DiceResult message){
-        Gdx.app.log("Server EvaluateDiceResult", "Handling Dice Result");
+        Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Handling Dice Result");
 
 
         if(getAttackerId().equals(senderId)){
-            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Attacker" + Arrays.toString(message.getDiceResults()));
+            Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Setting result of Attacker" + Arrays.toString(message.getDiceResults()));
 
             data.setAttackerDiceResult(message.getDiceResults());
         }else if(getDefenderId().equals(senderId)){
-            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Defender: " + Arrays.toString(message.getDiceResults()));
+            Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Setting result of Defender: " + Arrays.toString(message.getDiceResults()));
 
             data.setDefenderDiceResult(message.getDiceResults());
         }
 
         if(!isEmpty(data.getDefenderDiceResult()) && !isEmpty(data.getAttackerDiceResult())) {
-            Gdx.app.log("Server EvaluateDiceResult", "Results not empty");
+            Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Results not empty");
 
             int [] result=calculateAttackResult();
             handleAttackResult(result[0],result[1]);
@@ -62,8 +64,8 @@ class EvaluateDiceResultState extends State {
     }
 
     private void handleAttackResult(int winsOfAttacker, int winsOfDefender){
-        Gdx.app.log("Server EvaluateDiceResult", "Attacker Troops: " + data.getAttackerRegion().getTroops() + " Wins: " + winsOfAttacker);
-        Gdx.app.log("Server EvaluateDiceResult", "Defender Troops: " + data.getDefendersRegion().getTroops() + " Wins: " + winsOfDefender);
+        Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Attacker Troops: " + data.getAttackerRegion().getTroops() + " Wins: " + winsOfAttacker);
+        Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Defender Troops: " + data.getDefendersRegion().getTroops() + " Wins: " + winsOfDefender);
 
         // all attacking troops will be either killed on lose or moved to new region on win, so subtract getAttackingTroops()
         data.getAttackerRegion().updateTroops(-data.getAttackingTroops());
@@ -79,21 +81,21 @@ class EvaluateDiceResultState extends State {
             // all attacking troops are removed from attacker region, at least one is added to defender region
             data.getDefendersRegion().setTroops(attackerTroopsRemaining);
             broadcastResult(getAttackerId(), getDefenderId());
-            Gdx.app.log("Server EvaluateDiceResult", "Attacker won.");
+            Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Attacker won.");
         } else if (attackerTroopsRemaining > 0 && defenderTroopsRemaining > 0) { // attacker won, but defender still has troops
             data.getAttackerRegion().updateTroops(attackerTroopsRemaining); // add the remaining troops back to the attacker
             broadcastResult(getAttackerId(), getDefenderId());
-            Gdx.app.log("Server EvaluateDiceResult", "Attacker won, but defender still has troops");
+            Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Attacker won, but defender still has troops");
         }
         else { // if defender has won
             data.getAttackerRegion().updateTroops(data.getAttackingTroops() - winsOfDefender);
             broadcastResult(getDefenderId(), getAttackerId());
-            Gdx.app.log("Server EvaluateDiceResult", "Attacker won.");
+            Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Attacker won.");
         }
 
-        Gdx.app.log("Server EvaluateDiceResult", "Attacker Region Troops remaining: "
+        Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Attacker Region Troops remaining: "
                 + data.getAttackerRegion().getTroops() + ", Owner: "  + data.getAttackerRegion().getOwner());
-        Gdx.app.log("Server EvaluateDiceResult", "Defender Region Troops remaining: "
+        Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Defender Region Troops remaining: "
                 + data.getDefendersRegion().getTroops() + "Owner: " + data.getDefendersRegion().getOwner());
 
         context.setState(new ChooseTargetState(context));
@@ -121,20 +123,20 @@ class EvaluateDiceResultState extends State {
         int [] defenderDiceResult = data.getDefenderDiceResult();
         int [] attackerDiceResult = data.getAttackerDiceResult();
 
-        Gdx.app.log("Server CalculateResult", "Attacker: " + Arrays.toString(attackerDiceResult));
-        Gdx.app.log("Server CalculateResult", "Defender: " + Arrays.toString(defenderDiceResult));
+        Gdx.app.log(LOG_TAG_CALCULATE_RESULT_NAME, "Attacker: " + Arrays.toString(attackerDiceResult));
+        Gdx.app.log(LOG_TAG_CALCULATE_RESULT_NAME, "Defender: " + Arrays.toString(defenderDiceResult));
 
 
         while (!isEmpty(defenderDiceResult) && !isEmpty(attackerDiceResult)){
-            Gdx.app.log("Server CalculateResult", "None empty");
+            Gdx.app.log(LOG_TAG_CALCULATE_RESULT_NAME, "None empty");
 
             if(getMaxValue(attackerDiceResult)>getMaxValue(defenderDiceResult)){
                 winsOfAttacker++;
-                Gdx.app.log("Server CalculateResult", "Attacker won: " + winsOfAttacker);
+                Gdx.app.log(LOG_TAG_CALCULATE_RESULT_NAME, "Attacker won: " + winsOfAttacker);
 
             }else {
                 winsOfDefender++;
-                Gdx.app.log("Server CalculateResult", "Defender won: " + winsOfDefender);
+                Gdx.app.log(LOG_TAG_CALCULATE_RESULT_NAME, "Defender won: " + winsOfDefender);
 
             }
           }
@@ -151,7 +153,7 @@ class EvaluateDiceResultState extends State {
             }
         }
         dice[index]=0;
-        Gdx.app.log("Server CalculateResult", "Max: " + result +", Index: " + index);
+        Gdx.app.log(LOG_TAG_CALCULATE_RESULT_NAME, "Max: " + result +", Index: " + index);
 
         return result;
     }
