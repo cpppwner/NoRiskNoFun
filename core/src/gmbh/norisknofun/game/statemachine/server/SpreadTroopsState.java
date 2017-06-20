@@ -93,8 +93,8 @@ public class SpreadTroopsState extends State {
         }
         if (!check) {
             data.setCurrentplayer(data.getPlayers().getPlayerlist().get(0).getPlayerName());
-            context.setState(new DistributionState(context));
             context.sendMessage(new PlayerSpreadFinished(context.getGameData().getCurrentplayer().getPlayerName()));
+            context.setState(new DistributionState(context));
         }
     }
 
