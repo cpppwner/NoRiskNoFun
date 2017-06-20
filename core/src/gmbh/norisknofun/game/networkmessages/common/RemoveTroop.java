@@ -13,6 +13,10 @@ public class RemoveTroop extends BasicMessageImpl implements Serializable {
     private int amount;
     private String region;
 
+    public RemoveTroop() {
+
+    }
+
     public int getAmount() {
         return amount;
     }

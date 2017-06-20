@@ -7,6 +7,6 @@ import gmbh.norisknofun.game.networkmessages.BasicMessageImpl;
  */
 
 public class ActionDoneGui extends BasicMessageImpl {
-
-
+    public ActionDoneGui() {
+    }
 }

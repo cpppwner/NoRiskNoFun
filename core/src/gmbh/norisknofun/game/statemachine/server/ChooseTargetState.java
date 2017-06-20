@@ -111,7 +111,7 @@ public class ChooseTargetState extends State {
         }
         else if(!attackerRegion.getNeighbouringRegions().contains(defenderRegion.getName())) {
             check = false;
-            sendAttackRegionCheckMessage(senderId,false,"Not an neighbouring Region");
+            sendAttackRegionCheckMessage(senderId,false,"Not a neighbouring Region");
         }
 
         return check;

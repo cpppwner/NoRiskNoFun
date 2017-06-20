@@ -140,7 +140,7 @@ public class DiceRollScene extends SceneBase {
         Random rnd = new Random(TimeUtils.nanoTime());
 
         // generate a random number from 1-6
-        for (int i = 0; i < rollResults.length; i++) {
+        for (int i = 0; i < data.getAvailableDice(); i++) {
             rollResults[i] = rnd.nextInt(6) + 1;
         }
     }

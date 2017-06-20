@@ -7,7 +7,11 @@ import gmbh.norisknofun.game.networkmessages.Message;
  */
 public class StartGameClicked implements Message {
 
+    public StartGameClicked() {
+    }
+
     @Override
+
     public Class<? extends Message> getType() {
         return getClass();
     }

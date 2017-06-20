@@ -96,7 +96,7 @@ class GameObjectMap extends SceneObject {
 
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-            shapeRenderer.setColor(1.0f, 0.0f, 0.0f, 1.0f);
+            shapeRenderer.setColor(Color.BROWN);
             shapeRenderer.polyline(line.getTransformedVertices());
             shapeRenderer.end();
         }

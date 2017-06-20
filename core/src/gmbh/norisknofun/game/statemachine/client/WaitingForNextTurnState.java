@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 
 import gmbh.norisknofun.assets.AssetMap;
 import gmbh.norisknofun.game.GameData;
+import gmbh.norisknofun.game.gamemessages.gui.MoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.RemoveTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.SpawnTroopGui;
 import gmbh.norisknofun.game.gamemessages.gui.UpdateRegionOwnerGui;
 import gmbh.norisknofun.game.networkmessages.Message;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
+import gmbh.norisknofun.game.networkmessages.common.MoveTroop;
 import gmbh.norisknofun.game.networkmessages.common.NextPlayer;
 import gmbh.norisknofun.game.networkmessages.common.SpawnTroop;
 import gmbh.norisknofun.game.statemachine.State;
@@ -40,10 +42,16 @@ public class WaitingForNextTurnState extends State {
             updateRegions((AttackResult)message);
         } else if (message.getType().equals(SpawnTroop.class)) {
             doSpawnTroop((SpawnTroop) message);
+        } else if (message.getType().equals(MoveTroop.class)) {
+            doMoveTroop((MoveTroop) message);
         }
         else{
             Gdx.app.log("WaitingForNextTurnState","unknown messgae:"+message.getType().getSimpleName());
         }
+    }
+
+    private void doMoveTroop(MoveTroop message) {
+        context.getGameData().setGuiChanges(new MoveTroopGui(message.getFromRegion(),message.getToRegion(),message.getFigureId()));
     }
 
     private void doSpawnTroop(SpawnTroop message) {

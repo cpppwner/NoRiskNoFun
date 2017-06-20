@@ -130,7 +130,8 @@ public class SpreadTroopsState extends State {
     }
 
     private void broadcastSpawnTroopMessage(SpawnTroop message){
-        SpawnTroop spawnTroop = new SpawnTroop(message.getRegionname());
+        Gdx.app.log("Server SpawnTroop", "Spawning Troop with ID: " + data.getCurrentFigureId());
+        SpawnTroop spawnTroop = new SpawnTroop(message.getRegionname(), data.nextFigureId());
         context.sendMessage(spawnTroop); // send to all clients
     }
 

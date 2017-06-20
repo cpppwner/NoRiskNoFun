@@ -36,7 +36,7 @@ public class GameData {
 
     private int[] diceRoll;
     private int availableDice;
-    private int cheatsAvailable = 3;
+    private int cheatsAvailable;
 
     private int maxNumPlayers;
     private String mapFilename;
@@ -48,6 +48,8 @@ public class GameData {
     public GameData() {
         allPlayers.setValue(new LinkedList<Player>());
         guiChanges.setValue(new ConcurrentLinkedQueue<Message>());
+
+        cheatsAvailable = 3;
     }
 
     public void setMapAsset(AssetMap mapAsset) {
@@ -215,12 +217,13 @@ public class GameData {
         return availableDice;
     }
 
-    public boolean isMyTurn(){
-        return myself.getPlayerName().equals(currentPlayer.getPlayerName());
+    public void setAvailableDice(int availableDice) {
+        Gdx.app.log("GameData", "Setting Available Dice: " + availableDice);
+        this.availableDice = availableDice;
     }
 
-    public void setAvailableDice(int availableDice) {
-        this.availableDice = availableDice;
+    public boolean isMyTurn(){
+        return myself.getPlayerName().equals(currentPlayer.getPlayerName());
     }
 
     public int getCheatsAvailable() {
@@ -259,4 +262,5 @@ public class GameData {
     public String getCurrentStateName() {
         return currentState;
     }
+
 }

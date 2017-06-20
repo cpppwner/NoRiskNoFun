@@ -45,10 +45,12 @@ public class MoveTroopsState extends State {
         if(message.getFromRegion()==null
                 || message.getToRegion()==null){
             sendMoveTroopCheckMessage(senderId,false,"From Region or To Region is null");
-            return ;
+            return;
         }
          if(checkMoveTroopMessage(senderId,message)) {
-             broadcastMoveTroopsMessage(message);
+            data.getRegionByName(message.getFromRegion()).updateTroops(-1);
+            data.getRegionByName(message.getToRegion()).updateTroops(1);
+            broadcastMoveTroopsMessage(message);
          }
     }
 
@@ -84,6 +86,7 @@ public class MoveTroopsState extends State {
 
     private void broadcastMoveTroopsMessage(MoveTroop message){
         MoveTroop moveTroop = new MoveTroop(message.getFromRegion(),message.getToRegion(), message.getFigureId());
+
         context.sendMessage(moveTroop); // send to all clients
     }
     private void sendMoveTroopCheckMessage(String senderId, boolean movePossible, String errorMessage){

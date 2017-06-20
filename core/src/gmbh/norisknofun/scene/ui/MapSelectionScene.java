@@ -22,7 +22,7 @@ import gmbh.norisknofun.scene.common.TextButtonSceneObject;
  */
 public final class MapSelectionScene extends SceneBase {
 
-    private static final String MAP_ONE_BUTTON_TEXT = "Map One";
+    private static final String MAP_ONE_BUTTON_TEXT = "Carinthia";
     private static final String MAP_TWO_BUTTON_TEXT = "Styria";
     private static final String MAP_THREE_BUTTON_TEXT = "Tyrol";
 
@@ -58,7 +58,7 @@ public final class MapSelectionScene extends SceneBase {
         buttonMapThree.setBounds(Gdx.graphics.getWidth() / 1.5f, 500, 500, 120);
         backButton.setBounds(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 10.0f, 275f, 240f);
 
-        buttonMapOne.addListener(new SetSelectedMapClickListener("maps/Dummy One.map"));
+        buttonMapOne.addListener(new SetSelectedMapClickListener("maps/carinthia.map"));
         buttonMapOne.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));
         buttonMapTwo.addListener(new SetSelectedMapClickListener("maps/styria.map"));
         buttonMapTwo.addListener(new SwitchSceneClickListener(SceneNames.LOBBY_SCENE));

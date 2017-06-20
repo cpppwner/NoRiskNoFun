@@ -15,8 +15,8 @@ import gmbh.norisknofun.game.networkmessages.attack.choosetroops.ChooseTroopsAmo
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.AttackResult;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceAmount;
 import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.DiceResult;
+import gmbh.norisknofun.game.networkmessages.attack.evaluatedice.IsAttacked;
 import gmbh.norisknofun.game.networkmessages.attack.loser.ContinueAttack;
-import gmbh.norisknofun.game.networkmessages.waitingforplayers.PlayersInGame;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,6 +32,8 @@ public class AttackMessagesTests {
     private  final String ATTACKEREGION = "region1";
     private final String DEFENDERREGION = "region2";
     private final String DEFENDERREGIONOWNER = "owner2";
+    private  final String ERRORMESSAGE = "ERROR";
+    private  final String ID="12345";
 
 
     @Before
@@ -44,6 +46,7 @@ public class AttackMessagesTests {
 
 
         ChooseTroopsAmount chooseTroopsAmount = new ChooseTroopsAmount(6);
+        chooseTroopsAmount.setAmount(6);
         oos.writeObject (chooseTroopsAmount);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
@@ -59,6 +62,7 @@ public class AttackMessagesTests {
 
 
         ChooseTroopsAmountCheck chooseTroopsAmountCheck = new ChooseTroopsAmountCheck(true,"");
+
         oos.writeObject (chooseTroopsAmountCheck);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
@@ -94,30 +98,25 @@ public class AttackMessagesTests {
     public void DiceAmount() throws IOException, ClassNotFoundException {
 
         DiceAmount diceAmount = new DiceAmount(10);
+        diceAmount.setAmount(10);
         oos.writeObject (diceAmount);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         DiceAmount diceAmount1 =(DiceAmount) ois.readObject();
         assertEquals(diceAmount1.getAmount(),  10);
 
-
-
-
     }
     @Test
     public void DiceResult() throws IOException, ClassNotFoundException {
 
-
-
         int[] arr = {10,1,1};
         DiceResult diceResult = new DiceResult(arr);
+        diceResult.setDiceResults(arr);
         oos.writeObject (diceResult);
         ByteArrayInputStream bais = new ByteArrayInputStream (baos.toByteArray ());
         ObjectInputStream ois = new ObjectInputStream (bais);
         DiceResult diceResult1 =(DiceResult) ois.readObject();
         assertEquals(diceResult1.getDiceResults()[0],  10);
-
-
 
     }
     @Test
@@ -130,10 +129,43 @@ public class AttackMessagesTests {
         ContinueAttack continueAttack1 =(ContinueAttack) ois.readObject();
         assertEquals(continueAttack1.isDecision(), true);
 
+    }
 
+    @Test
+    public void ContinueAttackGetterSetter() throws IOException, ClassNotFoundException {
 
+        ContinueAttack continueAttack = new ContinueAttack(true);
+        continueAttack.setDecision(true);
+        assertEquals(continueAttack.isDecision(), true);
 
     }
+    @Test
+    public void isAttackedGetterSetter() throws IOException, ClassNotFoundException {
+
+        IsAttacked isAttacked = new IsAttacked();
+
+    }
+    @Test
+    public void AttackResultGetterSetter() throws IOException, ClassNotFoundException {
+
+        AttackResult attackResult = new AttackResult();
+        attackResult.setWinnerId(ID);
+        attackResult.setLoserId(ID);
+        assertEquals(attackResult.getWinnerId(), ID);
+        assertEquals(attackResult.getLoserId(), ID);
+
+    }
+    @Test
+    public void ChooseTroopsAmountCheckGetterSetter() throws IOException, ClassNotFoundException {
+
+        ChooseTroopsAmountCheck chooseTroopsAmountCheck = new ChooseTroopsAmountCheck(true,"");
+        chooseTroopsAmountCheck.setCheck(true);
+        chooseTroopsAmountCheck.setErrormessage(ERRORMESSAGE);
+        assertEquals(chooseTroopsAmountCheck.isCheck(), true);
+        assertEquals(chooseTroopsAmountCheck.getErrormessage(), ERRORMESSAGE);
+
+    }
+
 
 
 

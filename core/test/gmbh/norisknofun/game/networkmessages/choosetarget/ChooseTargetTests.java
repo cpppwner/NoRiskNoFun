@@ -23,6 +23,7 @@ public class ChooseTargetTests {
     private ObjectOutputStream oos;
     final String REGION1 = "Reg1";
     final String REGION2= "Reg2";
+    private  final String ERRORMESSAGE = "ERROR";
 
     @Before
     public void setUp() throws IOException {
@@ -61,6 +62,33 @@ public class ChooseTargetTests {
         ObjectInputStream ois = new ObjectInputStream (bais);
         NoAttack noAttack1 =(NoAttack) ois.readObject();
         assertEquals(noAttack1.getType(),  NoAttack.class);
+
+    }
+    @Test
+    public void attackRegionGetterSetter() throws IOException, ClassNotFoundException {
+
+        AttackRegion attackRegion = new AttackRegion(REGION1,REGION2);
+        attackRegion.setAttackerRegion(REGION1);
+        attackRegion.setDefenderRegion(REGION2);
+        assertEquals(attackRegion.getAttackerRegion(), REGION1);
+        assertEquals(attackRegion.getDefenderRegion(),REGION2);
+
+    }
+    @Test
+    public void attackRegionCheckGetterSetter() throws IOException, ClassNotFoundException {
+
+        AttackRegionCheck attackRegionCheck = new AttackRegionCheck(true,"");
+        attackRegionCheck.setAttackreachable(true);
+        attackRegionCheck.setErrorMessage(ERRORMESSAGE);
+        assertEquals(attackRegionCheck.isAttackreachable(), true);
+        assertEquals(attackRegionCheck.getErrorMessage(),ERRORMESSAGE);
+
+    }
+    @Test
+    public void noAttackGetterSetter() throws IOException, ClassNotFoundException {
+
+        NoAttack noAttack = new NoAttack();
+
 
     }
 }
