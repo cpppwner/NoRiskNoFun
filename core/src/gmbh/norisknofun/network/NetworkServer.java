@@ -214,15 +214,6 @@ public class NetworkServer {
         if (numBytesRead > 0) {
             sessionEventHandler.sessionDataReceived(session);
         }
-
-        // TODO remove debugging output
-        /*
-        try {
-            System.out.println("SERVER: SERVER <- CLIENT (" + clientSocket.getRemoteAddress() + "): num bytes " + numBytesRead);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     private void handleWrite(SelectionResult result) {
@@ -253,15 +244,6 @@ public class NetworkServer {
         if (numBytesWritten > 0) {
             sessionEventHandler.sessionDataWritten(session);
         }
-
-        // TODO remove debugging output
-        /*
-        try {
-            System.out.println("SERVER: SERVER -> CLIENT (" + clientSocket.getRemoteAddress() + "): num bytes " + numBytesWritten);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     private void terminateSessionForSocket(TCPClientSocket socket) {
@@ -288,7 +270,7 @@ public class NetworkServer {
         serverThread.join();
     }
 
-    public synchronized boolean isRunning() {
+    private synchronized boolean isRunning() {
 
         return serverThread != null && serverThread.isAlive();
     }

@@ -48,7 +48,6 @@ class ClientConnectedState extends ClientStateBase {
     @Override
     public void handleDataReceived() {
 
-        System.out.println("ClientConnectedState: Received Data");
         MessageDeserializer deserializer = new MessageDeserializer(getClient().getMessageBuffer());
         while (deserializer.hasMessageToDeserialize()) {
             deserializeAndHandleMessage(deserializer);
@@ -59,7 +58,6 @@ class ClientConnectedState extends ClientStateBase {
 
         try {
             Message message = deserializer.deserialize();
-            System.out.println("Deserialized: " + message.getClass().getName());
             distributeInboundMessage(message);
         } catch (ProtocolException | IOException e) {
             Gdx.app.error(getClass().getSimpleName(), "Deserialize message failed", e);

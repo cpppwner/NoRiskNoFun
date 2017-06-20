@@ -88,7 +88,6 @@ public class Client implements OutboundMessageHandler, SessionEventHandler {
 
     void setState(ClientState nextState) {
 
-        System.out.println("Client: State: " + nextState.getClass().getName());
         state.exit();
         state = nextState;
         state.enter();
@@ -116,7 +115,6 @@ public class Client implements OutboundMessageHandler, SessionEventHandler {
 
     void distributeInboundMessage(Message message) {
 
-        System.out.println("inbound message " + message.getClass().getName());
         this.inboundMessageQueue.add(message);
     }
 }

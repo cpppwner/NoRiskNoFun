@@ -56,9 +56,6 @@ public class SpreadTroopsState extends State {
             setNextPlayer();
             checkTroops(); // when all troops are spread, change state to DistributionState
         }
-//        message.setId(data.nextFigureId());
-//        System.out.println("server state figure id:"+message.getId());
-//        context.sendMessage(message);
     }
 
     private boolean checkSpawnMessage(String senderId, SpawnTroop message) {
@@ -102,7 +99,6 @@ public class SpreadTroopsState extends State {
     private void setNextPlayer() {
         data.setCurrentplayer(data.getPlayers().getNextPlayername(data.getCurrentplayer().getPlayerName()));
         NextPlayer nextPlayer = new NextPlayer(data.getCurrentplayer().getPlayerName());
-        System.out.println("SERVER: Next Player: " + nextPlayer.getPlayername());
         context.sendMessage(nextPlayer);
 
     }

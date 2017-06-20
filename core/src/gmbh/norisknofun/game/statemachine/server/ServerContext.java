@@ -33,7 +33,6 @@ public class ServerContext implements InboundMessageHandler {
         }
 
         Gdx.app.log(getClass().getSimpleName(), this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
-        System.out.println("SERVER: State Transition: " + this.state.getClass().getSimpleName() + " -> " + state.getClass().getSimpleName());
 
         this.state.exit();
         this.state = state;
@@ -47,11 +46,6 @@ public class ServerContext implements InboundMessageHandler {
     public void sendMessage(Message message){
 
        messageBus.distributeOutboundMessage(message);
-
-        // send message via message bus
-        // either via messageBus.distributeOutboundMessage(message); --> to send it to all clients
-        // or via messageBus.distributeOutboundMessage(id, message); --> to send it to the client with id only
-
     }
 
     public void sendMessage(Message message, String id){
@@ -64,11 +58,7 @@ public class ServerContext implements InboundMessageHandler {
 
     @Override
     public void handle(String senderId, Message message) {
-        //  delegate this message to the appropriate state
-        // note the senderId is a unique identifier identifying the client who sent the message
-        // senderId is equal to Client#getId() method
         state.handleMessage(senderId, message);
-
     }
 
     public void reset() {
