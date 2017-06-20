@@ -21,12 +21,12 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 31.05.2017.
  */
 
-public class WaitingForNextTurnState extends State {
+class WaitingForNextTurnState extends State {
 
-    private ClientContext context;
+    private final ClientContext context;
     private final GameData data;
 
-    public WaitingForNextTurnState(ClientContext context){
+    WaitingForNextTurnState(ClientContext context){
         this.context=context;
         this.data=context.getGameData();
     }
@@ -61,11 +61,6 @@ public class WaitingForNextTurnState extends State {
     private void updateRegions(AttackResult message) {
         AssetMap.Region attackerRegion = data.getMapAsset().getRegion(message.getAttackerRegion());
         AssetMap.Region defenderRegion = data.getMapAsset().getRegion(message.getDefenderRegion());
-
-/*        attackerRegion.setTroops(message.getAttackerTroops());
-
-        defenderRegion.setTroops(message.getDefenderTroops());
-        defenderRegion.setOwner(message.getDefenderRegionOwner());*/
 
         data.setGuiChanges(new RemoveTroopGui(defenderRegion.getName(), defenderRegion.getTroops() - message.getDefenderTroops()));
         data.setGuiChanges(new UpdateRegionOwnerGui(defenderRegion.getName(), message.getDefenderRegionOwner()));

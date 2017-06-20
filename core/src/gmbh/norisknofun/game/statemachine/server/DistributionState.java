@@ -16,15 +16,19 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 17.05.2017.
  */
 
-public class DistributionState extends State {
+class DistributionState extends State {
 
-    private ServerContext context;
+    private final ServerContext context;
     private final GameDataServer data;
     private static final int TROOPS_TO_SPAWN=1;
 
-    public DistributionState(ServerContext context){
+    DistributionState(ServerContext context){
         this.context=context;
         this.data=this.context.getGameData();
+    }
+
+    @Override
+    public void enter() {
         addTroopsToPlayer();
         checkIfSomeoneHasWon();
     }

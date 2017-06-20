@@ -15,11 +15,11 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class MoveTroopsState extends State {
+class MoveTroopsState extends State {
 
-    private ServerContext context;
+    private final ServerContext context;
     private final GameDataServer data;
-    public MoveTroopsState(ServerContext context){
+    MoveTroopsState(ServerContext context){
 
 
         this.context=context;

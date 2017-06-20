@@ -14,12 +14,12 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class ChooseTroopAmountState extends State {
+class ChooseTroopAmountState extends State {
 
-    private ServerContext context;
+    private final ServerContext context;
     private AttackState attackState;
     private final GameDataServer  data;
-    public ChooseTroopAmountState(ServerContext context, AttackState attackState){
+    ChooseTroopAmountState(ServerContext context, AttackState attackState){
         this.context=context;
         this.attackState=attackState;
         this.data=context.getGameData();

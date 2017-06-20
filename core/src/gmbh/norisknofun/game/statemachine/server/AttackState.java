@@ -9,11 +9,11 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class AttackState extends State {
+class AttackState extends State {
 
-    private ServerContext context;
+    private final ServerContext context;
     private State state;
-    public AttackState(ServerContext context){
+    AttackState(ServerContext context){
         this.context=context;
         this.state = new ChooseTroopAmountState(context, this);
 

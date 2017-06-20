@@ -14,12 +14,12 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 19.05.2017.
  */
 
-public class ChooseTargetState extends State {
+class ChooseTargetState extends State {
 
-    private ClientContext context;
+    private final ClientContext context;
 
 
-    public ChooseTargetState(ClientContext context){
+    ChooseTargetState(ClientContext context){
         this.context=context;
     }
 

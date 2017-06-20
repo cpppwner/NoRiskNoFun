@@ -17,7 +17,7 @@ import gmbh.norisknofun.scene.SceneNames;
 public class EndGameState extends State {
 
 
-    private ServerContext context;
+    private final ServerContext context;
     private final GameDataServer data;
 
 

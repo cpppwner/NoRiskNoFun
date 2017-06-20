@@ -17,7 +17,7 @@ import gmbh.norisknofun.game.statemachine.State;
 
 public class SpreadTroopsState extends State {
 
-    private ClientContext context;
+    private final ClientContext context;
 
     public SpreadTroopsState(ClientContext context) {
         this.context = context;

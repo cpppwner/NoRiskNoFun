@@ -16,16 +16,18 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class EvaluateDiceResultState extends State {
+class EvaluateDiceResultState extends State {
 
-    private ServerContext context;
-    private AttackState attackState;
+    private final ServerContext context;
     private final GameDataServer data;
-    public EvaluateDiceResultState(ServerContext context, AttackState state){
+    EvaluateDiceResultState(ServerContext context){
 
         this.context=context;
         this.data=this.context.getGameData();
-        this.attackState=state;
+    }
+
+    @Override
+    public void enter() {
         sendDiceAmountToPlayers();
     }
 
@@ -41,11 +43,11 @@ public class EvaluateDiceResultState extends State {
 
 
         if(getAttackerId().equals(senderId)){
-            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Attacker" + message.getDiceResults().toString());
+            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Attacker" + Arrays.toString(message.getDiceResults()));
 
             data.setAttackerDiceResult(message.getDiceResults());
         }else if(getDefenderId().equals(senderId)){
-            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Defender: " + message.getDiceResults().toString());
+            Gdx.app.log("Server EvaluateDiceResult", "Setting result of Defender: " + Arrays.toString(message.getDiceResults()));
 
             data.setDefenderDiceResult(message.getDiceResults());
         }
@@ -112,19 +114,6 @@ public class EvaluateDiceResultState extends State {
         context.sendMessage(attackResult);
     }
 
-    private void sendAttackResult(boolean won, String senderId){
-        AttackResult attackResult= new AttackResult();
-
-        attackResult.setAttackerRegion(data.getAttackerRegion().getName());
-        attackResult.setAttackerTroops(data.getAttackerRegion().getTroops());
-        attackResult.setDefenderRegion(data.getDefendersRegion().getName());
-        attackResult.setDefenderTroops(data.getDefendersRegion().getTroops());
-        attackResult.setDefenderRegionOwner(data.getDefendersRegion().getOwner());
-        attackResult.setWon(won);
-        context.sendMessage(attackResult,senderId);
-
-    }
-
     private int [] calculateAttackResult(){
 
         int winsOfAttacker=0;
@@ -169,9 +158,9 @@ public class EvaluateDiceResultState extends State {
 
     private boolean isEmpty(int [] dice){
         boolean check=true;
-        for(int i=0; i<dice.length; i++){
-            if(dice[i]!=0){
-                check=false;
+        for (int aDice : dice) {
+            if (aDice != 0) {
+                check = false;
             }
         }
         return check;

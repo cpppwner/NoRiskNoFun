@@ -16,11 +16,11 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by pippp on 15.05.2017.
  */
 
-public class ChooseTargetState extends State {
+class ChooseTargetState extends State {
 
-    private ServerContext context;
+    private final ServerContext context;
     private final GameDataServer data;
-    public ChooseTargetState(ServerContext context){
+    ChooseTargetState(ServerContext context){
         this.context=context;
         this.data=context.getGameData();
 

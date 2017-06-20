@@ -17,12 +17,12 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 19.05.2017.
  */
 
-public class MoveTroopsState extends State {
+class MoveTroopsState extends State {
 
-    private ClientContext context;
+    private final ClientContext context;
     private final GameData data;
 
-    public MoveTroopsState(ClientContext context){
+    MoveTroopsState(ClientContext context){
         this.context=context;
         data=this.context.getGameData();
     }

@@ -14,16 +14,19 @@ import gmbh.norisknofun.scene.SceneNames;
  * Created by Katharina on 19.05.2017.
  */
 
-public class ChooseTroopAmountState extends State {
+class ChooseTroopAmountState extends State {
 
-    private ClientContext context;
-    private AttackState attackState;
-    public ChooseTroopAmountState(ClientContext context, AttackState state){
+    private final ClientContext context;
+    private final AttackState attackState;
+    ChooseTroopAmountState(ClientContext context, AttackState state){
         this.context=context;
         this.attackState =state;
-        SceneManager.getInstance().setActiveScene(SceneNames.TROOP_AMOUNT_SCENE);
     }
 
+    @Override
+    public void enter() {
+        SceneManager.getInstance().setActiveScene(SceneNames.TROOP_AMOUNT_SCENE);
+    }
 
     @Override
     public void handleMessage(String senderId, Message message) {

@@ -20,15 +20,13 @@ import gmbh.norisknofun.scene.SceneNames;
  * Created by Katharina on 19.05.2017.
  */
 
-public class EvaluateDiceResultState extends State {
+class EvaluateDiceResultState extends State {
 
-    private ClientContext context;
-    private AttackState attackState;
+    private final ClientContext context;
     private final GameData data;
 
-    public EvaluateDiceResultState(ClientContext context, AttackState state){
+    EvaluateDiceResultState(ClientContext context){
         this.context=context;
-        this.attackState=state;
         this.data = context.getGameData();
     }
     @Override
