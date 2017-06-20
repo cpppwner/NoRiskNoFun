@@ -107,7 +107,7 @@ public class Assets {
             .setBackgroundColor(Color.DARK_GRAY)
             .setButtonDescriptor(DEFAULT_TEXT_BUTTON_DESCRIPTOR)
             .setMessageFont(FONT_60PX_RED_WITH_BORDER)
-            .setTitle(Texts.ERROR_DIALOG_TITLE)
+            .setTitle("")
             .setTitleFont(FONT_60PX_BLACK_NO_BORDER)
             .setTitleFontColor(Color.BLACK)
             .build();
