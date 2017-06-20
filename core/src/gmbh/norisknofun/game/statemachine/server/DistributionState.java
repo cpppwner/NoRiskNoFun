@@ -43,8 +43,7 @@ class DistributionState extends State {
                 Gdx.app.log("Client DistributionState", "unknown message:"+message.getClass().getSimpleName());
             }
         }catch (Exception e){
-
-            Gdx.app.error("DistributionState",e.getMessage());
+            Gdx.app.error("DistributionState",e.getMessage(),e);
         }
     }
 

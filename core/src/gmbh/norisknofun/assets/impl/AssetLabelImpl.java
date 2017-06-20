@@ -15,7 +15,7 @@ import gmbh.norisknofun.assets.FontDescriptor;
  */
 class AssetLabelImpl implements AssetLabel {
 
-    private static Color DEFAULT_BACKGROUND_COLOR = new Color(0f, 0f, 0f, 0f);
+    private static final Color DEFAULT_BACKGROUND_COLOR = new Color(0f, 0f, 0f, 0f);
 
     /**
      * Low level asset cache.

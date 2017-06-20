@@ -11,10 +11,8 @@ import gmbh.norisknofun.game.statemachine.State;
 
 class AttackState extends State {
 
-    private final ServerContext context;
     private State state;
     AttackState(ServerContext context){
-        this.context=context;
         this.state = new ChooseTroopAmountState(context, this);
 
     }

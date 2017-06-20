@@ -9,11 +9,11 @@ import gmbh.norisknofun.game.statemachine.State;
  * Created by Katharina on 19.05.2017.
  */
 
-public class AttackState extends State {
+class AttackState extends State {
 
     private State state;
 
-    public AttackState(ClientContext context, boolean isAttacker){
+    AttackState(ClientContext context, boolean isAttacker){
         Gdx.app.log("ATTACK STATE","ENTERED");
 
         if (isAttacker) {
