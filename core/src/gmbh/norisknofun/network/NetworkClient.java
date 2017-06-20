@@ -184,7 +184,7 @@ public class NetworkClient {
         clientThread.join();
     }
 
-    private synchronized boolean isRunning() {
+    synchronized boolean isRunning() {
 
         return clientThread != null && clientThread.isAlive();
     }

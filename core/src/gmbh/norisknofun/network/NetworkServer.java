@@ -270,7 +270,7 @@ public class NetworkServer {
         serverThread.join();
     }
 
-    private synchronized boolean isRunning() {
+    synchronized boolean isRunning() {
 
         return serverThread != null && serverThread.isAlive();
     }
