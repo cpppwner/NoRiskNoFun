@@ -51,7 +51,8 @@ public class SpreadTroopsState extends State {
         //context.getGameData().setCurrentPlayer(message.getCurrentPlayerName());
         context.getGameData().setGuiChanges(new UpdateCurrentPlayerGui(message.getCurrentPlayerName()));
         Gdx.app.log("SpreadTroop Transition", "Current Player: " + context.getGameData().getCurrentPlayer().getPlayerName() + " Myself: " + context.getGameData().getMyself().getPlayerName());
-        if (context.getGameData().isMyTurn()) {
+
+        if (context.getGameData().getMyself().getPlayerName().equals(message.getCurrentPlayerName())) {
             context.setState(new DistributionState(context));
         } else {
             context.setState(new WaitingForNextTurnState(context));
