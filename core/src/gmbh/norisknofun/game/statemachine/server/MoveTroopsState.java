@@ -66,7 +66,10 @@ class MoveTroopsState extends State {
             sendMoveTroopCheckMessage(senderId,false,"You can't move troops on enemy region");
         }else if(fromRegion.getTroops()<2){
             check=false;
-            sendMoveTroopCheckMessage(senderId,false, "Not enough troops on origin region ");
+            sendMoveTroopCheckMessage(senderId,false, "Not enough troops on origin region.");
+        } else if (!fromRegion.getNeighbouringRegions().contains(toRegion.getName())) {
+            check = false;
+            sendMoveTroopCheckMessage(senderId, false, "Not a neighboring region.");
         }
         return check;
     }
