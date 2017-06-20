@@ -96,23 +96,21 @@ public class ChooseTroopAmountScene extends SceneBase {
             super.clicked(event, x, y);
         }
 
-        private void showDialog(String message){
-            AssetModalDialog dialog = sceneData.createModalDialog(message, Assets.ERROR_DIALOG_DESCRIPTOR);
-            dialog.show(getStage());
-            dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-                    getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
-        }
+
     }
 
     private void checkErrors() {
         // check for errors and display popup
         String error = data.getLastError();
         if (error != null) {
-            AssetModalDialog dialog = sceneData.createModalDialog(error, Assets.ERROR_DIALOG_DESCRIPTOR);
-            dialog.show(getStage());
-            dialog.setBounds(getStage().getWidth() / 4.0f, getStage().getHeight() / 4.0f,
-                    getStage().getWidth() / 2.0f, getStage().getHeight() / 2.0f);
+            showDialog(error);
         }
+    }
+
+    private void showDialog(String message){
+        AssetModalDialog dialog = sceneData.createModalDialog(message, Assets.ERROR_DIALOG_DESCRIPTOR);
+        dialog.show(getStage());
+        dialog.setBounds(0f, 0f, getStage().getWidth(), getStage().getHeight());
     }
 
     @Override
