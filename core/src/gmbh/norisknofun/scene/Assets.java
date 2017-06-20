@@ -104,7 +104,7 @@ public class Assets {
 
     // modal error dialog
     public static final ModalDialogDescriptor ERROR_DIALOG_DESCRIPTOR = new ModalDialogDescriptor.Builder()
-            .setBackgroundColor(Color.DARK_GRAY)
+            .setBackgroundColor(new Color(0xbfbfbf80))
             .setButtonDescriptor(DEFAULT_TEXT_BUTTON_DESCRIPTOR)
             .setMessageFont(FONT_60PX_RED_WITH_BORDER)
             .setTitle("")
