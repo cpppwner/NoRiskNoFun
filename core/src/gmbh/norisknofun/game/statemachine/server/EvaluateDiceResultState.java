@@ -59,6 +59,8 @@ class EvaluateDiceResultState extends State {
 
             int [] result=calculateAttackResult();
             handleAttackResult(result[0],result[1]);
+
+            resetResults();
         }
 
     }
@@ -175,6 +177,13 @@ class EvaluateDiceResultState extends State {
         diceAmount= new DiceAmount(data.getDefendersRegion().getTroops()<2 ? 1:2);
         context.sendMessage(diceAmount,getDefenderId());
 
+    }
+
+    private void resetResults() {
+        for (int i = 0; i < data.getAttackerDiceResult().length; i++) {
+            data.getAttackerDiceResult()[i] = 0;
+            data.getDefenderDiceResult()[i] = 0;
+        }
     }
 
     private String getDefenderId(){

@@ -105,8 +105,6 @@ public class DiceRollScene extends SceneBase {
 
                 if (!canRoll) {
                     writeRollResult(); // write roll result only now as we're done when we press back
-                    // clear stage here as we have to redraw it on next press anyway
-                    data.setDiceRoll(rollResults);
                     sceneData.sendMessageFromGui(new EvaluateDiceResultGui());
                 }
             }
@@ -258,6 +256,7 @@ public class DiceRollScene extends SceneBase {
                 dieObjects.get(index).setDieNumber(rollResults[index]);
                 data.updateCheatsAvailable(-1);
                 cheatLabel.setText(Integer.toString(data.getCheatsAvailable()));
+                Gdx.app.log("DiceRoll Cheating", "Dice " + index + " Result: " + rollResults[index]);
             }
         }
 
