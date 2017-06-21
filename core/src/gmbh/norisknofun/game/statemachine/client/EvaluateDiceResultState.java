@@ -51,22 +51,28 @@ class EvaluateDiceResultState extends State {
     private void handleAttackResult(AttackResult attackResult){
 
         updateRegions(attackResult);
-        if(context.getGameData().isMyTurn()){ //  I am attacker
+        if (attackResult.getWinnerId().equals("")) { // partial win
+            data.setLastError("Both lost troops, but the region\nhasn't been captured yet");
+            if (data.isMyTurn()) {
+                context.setState(new ChooseTargetState(context));
+            } else {
+                context.setState(new WaitingForNextTurnState(context));
+            }
+        } else if(context.getGameData().isMyTurn()){ //  I am attacker
             if(attackResult.getWinnerId().equals(context.getGameData().getMyself().getId())) {
-                data.setLastError("Congratulations!  \n  you captured region: " + attackResult.getDefenderRegion());
+                data.setLastError("Congratulations!  \n  you captured " + attackResult.getDefenderRegion());
             }else {
                 data.setLastError("You lost!  \n  more luck next time.");
             }
             context.setState(new ChooseTargetState(context));
-        }else { //  I am Defender
+        } else { //  I am Defender
             if(attackResult.getWinnerId().equals(context.getGameData().getMyself().getId())) {
-                data.setLastError("Congratulations!  \n  you defended region: " + attackResult.getDefenderRegion());
+                data.setLastError("Congratulations!  \n  you defended " + attackResult.getDefenderRegion());
             }else {
-                data.setLastError("Sorry!  \n  you lost region: "+attackResult.getDefenderRegion());
+                data.setLastError("Sorry!  \n  you lost "+attackResult.getDefenderRegion());
             }
             context.setState(new WaitingForNextTurnState(context));
         }
-
 
         // switch back to Game Scene after the attack was done
         SceneManager.getInstance().setActiveScene(SceneNames.GAME_SCENE);

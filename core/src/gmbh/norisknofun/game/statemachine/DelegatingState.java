@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import gmbh.norisknofun.game.networkmessages.Message;
 
 /**
- * Created by user on 20.06.17.
+ * A State used to enter other states
  */
 
 public abstract class DelegatingState extends State {

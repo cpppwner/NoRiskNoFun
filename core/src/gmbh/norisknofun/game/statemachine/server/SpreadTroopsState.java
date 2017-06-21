@@ -22,7 +22,7 @@ public class SpreadTroopsState extends State {
 
     private ServerContext context;
     private final GameDataServer data;
-    private static final int TROOPS_TO_SPREAD = 3;
+    private static final int TROOPS_TO_SPREAD = 5;
 
     public SpreadTroopsState(ServerContext context) {
 

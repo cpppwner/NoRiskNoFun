@@ -20,7 +20,7 @@ class DistributionState extends State {
 
     private final ServerContext context;
     private final GameDataServer data;
-    private static final int TROOPS_TO_SPAWN=1;
+    private static final int TROOPS_TO_SPAWN=3;
 
     DistributionState(ServerContext context){
         this.context=context;

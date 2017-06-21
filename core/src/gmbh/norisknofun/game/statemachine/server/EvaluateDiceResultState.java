@@ -84,7 +84,7 @@ class EvaluateDiceResultState extends State {
             Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Attacker won.");
         } else if (attackerTroopsRemaining > 0 && defenderTroopsRemaining > 0) { // attacker won, but defender still has troops
             data.getAttackerRegion().updateTroops(attackerTroopsRemaining); // add the remaining troops back to the attacker
-            broadcastResult(getAttackerId(), getDefenderId());
+            broadcastResult("", "");
             Gdx.app.log(LOG_TAG_EVALUATE_RESULT_NAME, "Attacker won, but defender still has troops");
         }
         else { // if defender has won
