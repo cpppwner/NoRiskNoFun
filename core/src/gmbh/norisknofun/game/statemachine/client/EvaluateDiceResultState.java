@@ -51,7 +51,7 @@ class EvaluateDiceResultState extends State {
     private void handleAttackResult(AttackResult attackResult){
 
         updateRegions(attackResult);
-        if (attackResult.getWinnerId().equals("")) { // partial win
+        if (attackResult.getWinnerId().isEmpty()) { // partial win
             data.setLastError("Both lost troops, but the region\nhasn't been captured yet");
             if (data.isMyTurn()) {
                 context.setState(new ChooseTargetState(context));
